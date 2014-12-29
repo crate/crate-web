@@ -1,0 +1,73 @@
+title: A Dozen Intel NUCs in a Shoebox
+link: https://crate.io/blog/intel-nuc-shoebox/
+author: Jodok Batlogg
+description: This summer we've built a portable datacenter to demo Crate.IO on commodity hardware. A lot of people are asking us how we did it, what the specs of the cluster are. Time to write a blogpost.
+created: 2014/09/11 10:02:15
+post_name: intel-nuc-shoebox
+status: publish
+post_type: post
+tags: intel nuc, amsterdam, hardware, cluster
+category: news
+
+
+This summer we've built a portable datacenter to demo Crate on commodity hardware. A lot of people are asking us how we did it, what the specs of the cluster are, ... time to write a blogpost!
+
+![](https://crate.io/wp-content/uploads/2014/09/IMG-1090.jpg)
+
+(replacing the clunky power supplies with one single supply) 
+
+## Why We Built a NUC Cluster
+
+We wanted to create a cluster that is portable, where we can show people what Crate is doing. It’s always pretty hard to explain software just by looking at a screen. It makes it much easier if you have something to show to people.
+
+Crate stands for simplicity, for the ease of use. Also Crate is very easy to install and highly horizontal scalable. This means you can use lots of commodity hardware and build a really huge cluster with it.
+
+Initially we wanted to build our cluster on Raspberry PIs and show the failure tolerance by blowing up some of them. The advantage is, that they are really cheap (they cost between 30 and 50 Euros), but unfortunately they are not very powerful. Crate would run on them, but it would probably take 20 seconds for it to start.
+
+<iframe width="827" height="480" src="//www.youtube.com/embed/tes5tkn-Mzg" frameborder="0" allowfullscreen></iframe>
+
+(1min install, Demo of fault tolerance)
+
+This was not what we wanted, so we decided to go for some more powerful hardware – the Intel NUCs. The Intel NUCs come in a box, which is not very sexy. I mean they look ok, however we needed something more cool than to have these boring boxes around. Simply spoken, we wanted to build something which is a little more rough and where people can see the real hardware. So we took the Intel NUCs out of their cages and build them together in a custom way.
+ 
+
+## Characteristics of an Intel NUC
+
+There are two versions of the Intel NUCs: we're using the [D54250WYK](http://www.intel.com/content/www/us/en/nuc/nuc-kit-d54250wyk.html) with an Intel i5 processor. There's also an i3 version available. It has two expansion ports - one for a mSATA drive and one for e.g. an Wifi Chip. We added a fast solid state disk (Intel 530) and 2 bars of Kingston RAM with 8 GB each.
+
+<iframe width="827" height="480" src="//www.youtube.com/embed/tes5tkn-Mzg" frameborder="0" allowfullscreen></iframe>
+
+### Our Configuration
+
+Prices excluding VAT:
+
+  * Intel NUC BOXD54250WYK2 Intel i5, 4250U (€ 257)
+  * 2x 8GB Kingston ValueRAM, KVR16LS11/8 (€ 148)
+  * Intel SSD 530, 120GB (SSDMCEAW120A401) (€ 73)
+  * Netgear Gigabit Switch GS105GE (€ 16)
+
+![IMG_0926](https://crate.io/wp-content/uploads/2014/09/IMG-0926-225x300.jpg)
+
+Often people ask us on how many nodes Crate should run. We basically recommend to run Crate on at least 3 nodes. In case that one node fails, you still have two more available.  When we built our NUC cluster we decided to use 4 nodes so that the cluster is more like a cube.
+
+In total we’ve build 3 “racks” with 4 Nodes each. 12 nodes in total. That means 192GB of RAM, 48 Cores, and 1.4TB SSD with in total around 288k IOPS read and almost up to 1Million IOPS write!
+
+We take our cluster to exhibitions and trade shows around the world. We found out, that people from everywhere really love our cluster :)
+
+
+## The First Trip: Amsterdam
+
+A benchmark which I really want to mention here was this year in Amsterdam. When first presented our cluster at The Next Web conference and at the Kings of Code Hack Battle, the fun already started at security control :) Probably too many wires ...
+
+![IMG_0991](/wp-content/uploads/2014/09/IMG-0991-225x300.jpg)
+
+![IMG_0992](https://crate.io/wp-content/uploads/2014/09/IMG-0992-225x300.jpg)
+
+We indexed one billion records on 8 machines! The indexing speed was around 60.000 records/s ([gist of driver python script](https://gist.github.com/jodok/38aaaf5826211d5eef8b))
+
+![IMG_0987](https://crate.io/wp-content/uploads/2014/09/IMG-09871-225x300.jpg)
+
+![IMG_0983](https://crate.io/wp-content/uploads/2014/09/IMG-0983-300x300.jpg)
+
+... and yes, we made it to the TOP10 startups of the Boost Competition!
+

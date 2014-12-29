@@ -1,0 +1,47 @@
+title: Crate Cube
+description: The Crate Cube is a condensed miniaturized cluster that we’ve custom built to allow you to try out Crate without having to download or install anything!
+
+{% extends "base.html" %}
+
+{% block body %}
+<div class="jumbotron">
+  <div class="container">
+    <h1><i class="fa fa-cube"></i> Crate Cube</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h2>What is the Crate Cube?</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <p>The Crate Cube is a condensed miniaturized cluster that we’ve custom built to allow you to try out Crate without having to download or install anything! The video above shows two Crate Cubes running in an 8-node cluster configuration with Crate pre-installed in our sophisticated data broom closet*. Just click the orange button below to open the Crate Admin Console where you can explore the cluster and run queries against the sample data. The cluster is populated with tweets from the Twitter firehose which are contained in a table named “tweets”. If you click the “Console” button in the left column, you’ll be able to enter SQL queries on the data. For example, to see how many tweets are in the data store, run:</p>
+      <pre>select count(*) from tweets;</pre>
+      <p>Give a few queries a try and see how easy it is to query the distributed and auto-sharded data store with SQL.</p>
+
+      <p><i>* Hopefully the cleaning staff doesn’t turn out the light!</i></p>
+      <p><a href="https://play.crate.io/admin" class="btn btn-success"><i class="fa fa-dashboard"></i> Open Admin-Dashboard</a></p>
+
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <p>This is our Crate Cube. Get more <a href="{% url '/blog/intel-nuc-shoebox.html' %}">information here</a>.</p>
+      <div class="thumbnail">
+        <img data-src="holder.js/100%x200" />
+      </div>
+      <div class="thumbnail">
+        <img data-src="holder.js/100%x200" />
+      </div>
+      <div class="thumbnail">
+        <img data-src="holder.js/100%x200" />
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,86 @@
+title: Docs
+description: Crate server and client documentation.
+
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1>Crate Docs</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h2 id="server-docs">Server Documentation</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="well">
+        <h3><i class="fa fa-graduation-cap"></i> Current Manual</h3>
+        <p><a class="btn btn-primary" href="/docs/stable/">Read Manual &raquo;</a></p>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="well">
+        <h3><i class="fa fa-question"></i> Frequently Asked Questions</h3>
+        <p><a class="btn btn-primary" href="{% url '/faq.html' %}">Read FAQs &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h2 id="client-docs">Client Documentation</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-sm-6">
+      <h3>Python</h3>
+      <div class="well">
+        <p><a href="/docs/projects/crate-python/stable/">Python</a> Client and SQLAlchemy integration.</p>
+        <p><a href="/docs/projects/crash/stable/">CraSh</a> &#8211; the Crate Shell written in Python</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <h3>Ruby</h3>
+      <div class="well">
+        <p><a href="http://www.rubydoc.info/gems/crate_ruby/frames">Ruby</a> Client</p>
+        <p><a href="http://www.rubydoc.info/gems/activerecord-crate-adapter/frames">ActiveRecord</a> Adapter</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <h3>Java</h3>
+      <div class="well">
+        <p><a href="/docs/projects/crate-java/stable/">Java</a> Client</p>
+        <p><a href="/docs/projects/crate-jdbc/stable/">JDBC</a> Driver</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <h3>PHP</h3>
+      <div class="well">
+        <p><a href="https://github.com/crate/crate-pdo/blob/master/README.rst">PDO</a> Driver</p>
+        <p><a href="https://github.com/crate/crate-dbal/blob/master/README.rst">DBAL</a> Driver &#8211; a Doctrine Database Abstraction Layer</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h2 id="tutorials-examples">Tutorials &amp; Examples</h2>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

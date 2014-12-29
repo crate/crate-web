@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block body %}
+<!-- post header -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h1 class="">{{ title }}</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- post body -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="post-content" id="crate-blog-post">
+        {{ body }}
+      </div>
+
+      <hr />
+      <h4 class="text-center">Did you like this post? Read more!</h4>
+      <ul class="pager">
+        <li class="{% if not prev_post %}disabled{% endif%}"><a href="{{ prev_post.url }}">&laquo; Older</a></li>
+        <li class="{% if not next_post %}disabled{% endif%}"><a href="{{ next_post.url }}">Newer &raquo;</a></li>
+      </ul>
+
+    </div>
+    <div class="col-sm-4">
+      <div class="">
+        <table class="table">
+          {% if author %}
+          <tr>
+            <td><i class="fa fa-user"></i></td>
+            <td>{{ author }}</td>
+          </tr>
+          {% endif %}
+          {% if date %}
+          <tr>
+            <td><i class="fa fa-calendar"></i></td>
+            <td>{{ date|date }}</td>
+          </tr>
+          {% endif %}
+          {% if tags %}
+          <tr>
+            <td><i class="fa fa-tag"></i></td>
+            <td>{{ tags|join:", " }}</td>
+          </tr>
+          {% endif %}
+          {% if category %}
+          <tr>
+            <td><i class="fa fa-newspaper-o"></i></td>
+            <td>{{ category }}</td>
+          </tr>
+          {% endif %}
+        </table>
+      </div>
+      <h3>Read More</h3>
+      <table class="table">
+        {% if prev_post %}
+        <tr>
+          <td><a href="{{ prev_post.url }}">{{ prev_post.title }}</a></td>
+        </tr>
+        {% endif%}
+        {% if next_post %}
+        <tr>
+          <td><a href="{{ next_post.url }}">{{ next_post.title }}</a></td>
+        </tr>
+        {% endif%}
+      </table>
+
+      <hr />
+
+      <p class="socialmedia">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-dnt="true" data-related="CrateIO" data-size="large">Tweet</a>
+        <a href="https://twitter.com/CrateIO" class="twitter-follow-button" data-show-count="false" data-dnt="true" data-size="large">Follow @CrateIO</a>
+      </p>
+      <p class="socialmedia">
+        <div class="fb-share-button" data-href="https://www.facebook.com/cratedata" data-layout="button"></div>
+        <div class="fb-follow" data-href="https://www.facebook.com/cratedata" data-colorscheme="light" data-layout="button" data-show-faces="false"></div>
+      </p>
+
+    </div>
+  </div>
+</div>
+<!-- post footer -->
+{% endblock %}

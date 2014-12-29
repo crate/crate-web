@@ -1,0 +1,30 @@
+title: How we chose the Facebook Presto SQL Parser for Crate.IO
+link: https://crate.io/blog/choosingfacebookpresto/
+author: Bernd Dorn
+description: Presto's codebase, especially after working with the Derby parser, was like experiencing time travel.
+created: 2014/06/04 20:27:27
+post_name: choosingfacebookpresto
+status: publish
+tags: akiban, facebook presto, sql parser
+category: news
+
+![DMC](/media/Delorean_dmc12_rear1.jpg)
+
+Crate is an elastic SQL Data Store. We created it to provide a quick and powerful massively scalable backend for data intensive (or analytics) apps.
+
+One of our early design choices was to use SQL as the interface language. As we started implementing it, we decided to not re-invent the wheel by writing our own SQL parser from scratch and began looking for a viable open source project with a permissive license, which could provide a parser package we can use. It wasn't simple to find.
+
+We thought of factoring out the Derby parser from the Apache Derby project, and then stumbled upon the Akiban SQL Parser. FoundationDB just took over the project and made it a sub-project of their product. This gave us the confidence that the project is still actively developed and probably will be in the future.
+
+Yet after a while we discovered that the Derby code did not use "modern" Java features (such as generics) which made the code difficult to reuse. Another issue was the internal mapping of statements with a lot of integer constants and maps thereof; this was very difficult to extend and maintain. However, Derby isn’t to blame for its codebase - it has been a database solution for Java since the early days, and is therefore under constraints such as backwards compatibility etc. Crate.IO only supports Java 7 and later, which allowed us to use all recent Java additions in our code.
+
+We started hunting for other parser solutions. The search was over when Facebook open sourced their Presto project, in late 2013. [Facebook Presto](http://prestodb.io/) is a distributed query engine for big data. It was made to enable running fast interactive queries against large data sets.
+
+Presto's codebase, especially after working with the Derby parser, was like experiencing time travel. Once we stepped out of our [DeLorean](http://en.wikipedia.org/wiki/DeLorean_DMC-12), we immediately saw what a modern SQL-Parser looks like. For us, the main points in favor of the [Presto](http://prestodb.io/) switch were: 
+
+* [ANTLRv3](http://www.antlr3.org/) is used as parser generator. The grammar syntax is much easier to grasp than the one from [JavaCC](https://javacc.java.net/) which is used by Derby.
+* [Java Generics](http://en.wikipedia.org/wiki/Generics_in_Java) are used all over the place, which leads to less repeated code that is more understandable.
+* [Presto](http://prestodb.io/) was developed in a modular way. It is a good example of developers thinking through separation of concerns.
+* Derby uses dynamic class loading in order to get various implementations at runtime. This fact already led to class loading exceptions in the Akiban parser as we tried to extend it. There are string constants around that point to class names that are no longer available.
+
+Currently we've only integrated the Presto parser by copying it into our project. But we hope to find the time to contribute our changes to the upstream Presto project.

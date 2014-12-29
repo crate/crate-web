@@ -1,0 +1,73 @@
+title: Partitioned Tables Bug (Updated)
+link: https://crate.io/blog/partitioned-tables-bug/
+author: Spanky
+description: 
+created: 2014/10/02 12:12:43
+post_name: partitioned-tables-bug
+status: publish
+post_type: post
+tags: bugfix, partitioned tables
+category: developer-news
+
+
+**Update (2014-10-03)**
+
+The dev team is making good progress on fixing the issue, however we need to make sure that all edge-cases are covered and are currently in the process of extensively testing various scenarios. Stay tuned - we will keep you informed on this Blog about the progress. 
+
+---
+
+It is extremely important for us here at Crate.IO to be completely upfront and transparent, especially when we encounter bugs. Normally the bugs we encounter are in functionality or features and won’t impact integrity, but when we come across a bug that can negatively affect our customers or their data, we will be as proactive as possible in notifying you. If you have any questions, concerns, or would like to talk with us about this, don’t hesitate to [contact us directly](/about/contact/). 
+
+## Who’s Affected
+
+Today while reproducing an error reported to us we uncovered a particularly nasty bug that can be triggered in two ways. The good news is that if you aren’t using our Partitioned Tables feature, you’re not affected. All versions after 0.42.x are affected.  As of this writing, the latest version is 0.44.x and we are writing and preparing to release hotfixes for versions 0.42.x and 0.43.x as well. If you’re using Partitioned Tables in a version earlier than this, please [contact us](/about/contact/) and we can provide you with a fix or assist you in migrating to an unaffected version. 
+
+## How the Bugs are Triggered
+
+### \#1: Delete where clause references missing column
+
+If you perform a DELETE query on a partitioned table, and the query references a column that doesn't exist in the schema, all of the partitions of that table (and contained data) are deleted. The table itself will remain. This would most likely occur if there was a typo in the column name, or the column name was dynamically generated, in a script for example.
+
+**EXAMPLE:**
+
+    DELETE FROM TABLE t WHERE foo='1';
+
+In this example if there is no column `'foo'`, all data in table `'t'` will be deleted. 
+
+### \#2: Delete matches no values
+
+If you perform a `DELETE` query on a partitioned table, and there is no match for the value in the `WHERE` clause, all of the partitions of that table (and contained data) are deleted. The table itself will remain. This can be caused by running the same query twice, since the second time, the value will not be found.
+
+**EXAMPLE:**
+
+    DELETE FROM TABLE t WHERE foo='1';
+
+In this example if the data in column `'foo'` contains no values matching `'1'`, all data in table `'t'` will be deleted. As you can see, if you ran this query twice, the first time all values `'1'` will be deleted. The second time, there will be no matches. 
+
+### \#3: Update where clause references missing column
+
+If you perform an UPDATE query on a partitioned table, and the query references a column that doesn't exist in the schema, all of the values that in that column will be updated with the value. This would most likely occur if there was a typo in the column name, or the column name was dynamically generated, in a script for example. 
+
+**EXAMPLE:**
+
+    UPDATE t SET foo='1' WHERE bar='baz';
+
+If the column `'bar'` does not exist in the schema of table `'t'`, all of the values in the column `'foo'` will be set to `'1'`.
+
+### \#4: Update matches no values in where clause
+
+If you perform a UPDATE query on a partitioned table, and there is no match for the value in the WHERE clause, all of the values in that column will be updated.
+
+**EXAMPLE:**
+
+    UPDATE t SET foo='1' WHERE bar='baz';
+
+If the column `'bar'` does not match any values `'baz'` in table `'t'`, all of the values in the column `'foo'` will be set to `'1'`.
+
+## Summary
+
+All versions **`0.42.x` and later** are affected.
+
+Only those using Partitioned Tables are potentially affected, and only if you perform the types of queries outlined above. We expect to have a hotfix released as soon as possible for affected versions `0.42.x`-`0.44.x`.
+
+Again, do not hesitate to [contact us](/about/contact/) with any questions or concerns and thanks for using Crate. We’d love to hear from you!

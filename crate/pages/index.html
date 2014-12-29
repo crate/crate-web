@@ -1,0 +1,142 @@
+title: Your Elastic Data Store
+excerpt: We solve your data scaling problems and make administration a breeze. Easy to scale, simple to use.
+
+{% extends "base.html" %}
+
+{% block title %}CRATE{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+  <div class="container">
+    <h1>CRATE <small>Think Elastic!</small></h1>
+    <p>We solve your data scaling problems and make administration a breeze. Easy to scale, simple to use.</p>
+    <p>
+      <a href="{% url '/overview.html' %}" class="btn btn-primary">What is Crate?</a>
+      <a href="{% url '/download.html' %}" class="btn btn-success">Try it!</a>
+    </p>
+  </div>
+</div>
+
+<div class="feature">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-1.png' %}" />
+        <h3>Powerful</h3>
+        <p>Crate is a powerful, complete backend solution for tabular data, semi-structured records, and binary objects (BLOBs).</p>
+      </div>
+      <div class="col-sm-4">
+        <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-2.png' %}" />
+        <h3>Sub-second, super-fast.</h3>
+        <p>Crate is highly available and offers massively parallel access in real-time, enabling sub-second responses on billions of records.</p>
+      </div>
+      <div class="col-sm-4">
+        <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-3.png' %}" />
+        <h3>Easy to scale. Simple to use.</h3>
+        <p>Adding nodes on commodity hardware or in the cloud is as simple as a single command in your terminal.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="feature feature-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="feature-header">
+          <h2><i class="fa fa-compass"></i> Key Features</h2>
+        </div>
+        <ul class="lead">
+          <li>ease of use</li>
+          <li>SQL interface via HTTP endpoint</li>
+          <li>reliable due to its distributed design</li>
+          <li>elastic / horizontally scalable</li>
+          <li>resilient (self healing) due to automatic sharding and replication</li>
+          <li>highly optimized query engine for distributed group by queries</li>
+          <li>builtin super fast fulltext search</li>
+          <li>builtin blob storage via HTTP endpoint</li>
+          <li>shared nothing architecture means no SPOF</li>
+          <li>web based administration interface</li>
+        </ul>
+        <p class="text-center"><a href="{% url '/overview.html' %}" class="btn btn-default"><i class="fa fa-compass"></i> Read more!</a></p>
+      </div>
+      <div class="col-sm-6">
+        <div class="feature-header">
+          <h2><i class="fa fa-github"></i> Open Source</h2>
+          <p class="lead">The Crate Data open source project was launched in 2013 and today presents the simplest and most powerful option for any developer building a data intensive application. Crate Technology is the company responsible for keeping the momentum behind the Crate project. Crate remains 100% open.</p>
+          <p class="text-center"><a href="https://github.com/crate/crate" class="btn btn-default"><i class="fa fa-github"></i> Browse source on Github!</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="feature">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="feature-header">
+          <h2>Use Cases</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="feature-header">
+          <h3>Well Suited</h3>
+        </div>
+        <ul class="lead">
+          <li>storing high volume of "low value" data, such as for IoT applications</li>
+          <li>semistructured/dynamic data</li>
+          <li>operational datastore for web applications that require powerful fulltext search</li>
+          <li>elastic datastore for dynamic startups</li>
+          <li>backend for real time analytics and business intelligence</li>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <div class="feature-header">
+          <h3>Not Well Suited</h3>
+        </div>
+        <ul class="lead">
+          <li>systems that require strong transactional consistency, such as banking or accounting</li>
+          <li>strong relational data</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="feature feature-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="feature-header">
+          <h2>News</h2>
+        </div>
+        <ul class="list-unstyled">
+          {% for post in posts|slice:":4" %}
+          <li>
+            <h3><a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title|title }}</a></h3>
+            <p class="excerpt">
+              {{ post.raw_body|markdown|striptags|truncatewords:30 }}
+            </p>
+            <p><a href="{{ post.url }}" title="Read more" class="btn btn-default btn-sm">Read more &raquo;</a></p>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <div class="feature-header">
+          <h2>Twitter</h2>
+        </div>
+        <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/CrateIO" data-widget-id="552733000019218432">Tweets by @CrateIO</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

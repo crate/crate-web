@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <p class="small">Open Position at Crate.IO</p>
+        <h1>{{ title }}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="job-description">
+        {% filter markdown %}
+        {% block description %}
+        {% endblock %}
+        {% endfilter %}
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <h3>Job Profile</h3>
+      <table class="table">
+          <tr>
+            <td>Team or role:</td>
+            <td>{{ role }}</td>
+          </tr>
+          <tr>
+            <td>Job type:</td>
+            <td>{{ type }}</td>
+          </tr>
+          <tr>
+            <td>Last updated:</td>
+            <td>{{ updated }}</td>
+          </tr>
+          <tr>
+            <td>Job location(s):</td>
+            <td>{{ location }}</td>
+          </tr>
+      </table>
+      <p><a class="btn btn-success" href="mailto:jobs@crate.io?subject={{ title|escapejs }}">Apply now!</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

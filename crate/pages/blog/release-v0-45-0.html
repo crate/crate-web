@@ -1,0 +1,30 @@
+title: Release: Crate 0.45.0 (Testing)
+link: https://crate.io/blog/release-v0-45-0/
+author: Spanky
+description: Crate Release 0.45.0
+created: 2014/10/20 22:11:52
+post_name: release-v0-45-0
+status: publish
+post_type: post
+tags: crate, release, testing
+category: developer-news
+
+CrateIO is pleased to announce our latest release, Crate version `0.45.0` (testing). As always, you can find a summary of changes in the [CHANGES.txt](https://github.com/crate/crate/blob/master/CHANGES.txt) file in our GitHub repository. We strive to make updating to our latest releases seamless and straightforward. If you find this to not be the case, please don't hesitate to [contact us](/about/contact/) and let us know. 
+
+**This release introduces a few new features related to scalar functions, type conversion, and column comparison.**
+
+## Details
+
+**Some new features were added:**
+
+    NEW: Support explicit type conversion using cast expression.
+    NEW: All scalar functions can now be used in the WHERE clause in SELECT statements and they may be nested without limitations. In addition it is now possible to compare one scalar function to another.
+    NEW: Added support to compare one column with another in the WHERE clause for SELECT statements.
+    NEW: Implemented regular expression scalar functions and query operator.
+    NEW: Support for accessing items in an array. Please refer to the ``Crate SQL -> Querying Crate -> Retrieving Data -> Object Arrays`` documentation section for details and limitations.
+    NEW: Renamed NullType to UndefinedType in order to avoid confusion about its usage.
+    
+That’s all we have to report today, see you next release!
+
+_~Spanky & the CrateIO Team_
+
