@@ -1,0 +1,1 @@
+{{ news_json|json_dump|safe }}

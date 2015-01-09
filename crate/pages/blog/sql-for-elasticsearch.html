@@ -1,0 +1,65 @@
+title: SQL For ElasticSearch
+link: https://crate.io/blog/sql-for-elasticsearch/
+author: Spanky
+description: 
+created: 2014/09/30 10:21:13
+post_name: sql-for-elasticsearch
+status: publish
+post_type: post
+tags: aggregations, elasticsearch, sql
+category: news
+
+
+![SQL for ElasticSearch](https://crate.io/wp-content/uploads/2014/09/sql.jpg)
+
+When we started Crate.IO, we understood the power of Elasticsearch for searching through mountains of data. We wanted to leverage that power and use the core technology as a database, but we also wanted to make using it very simple. What better way to give developers access to such a powerful system than to use something that’s familiar, battle-tested, and straightforward: SQL!
+
+While this may seem strange in a NoSQL buzzword-filled landscape, really what NoSQL is about is getting away from an underlying table-based “columns and rows” data storage model that doesn’t scale well to “big data”. There’s nothing wrong with the query language itself, but even today it is rare to see the two decoupled. This is what we’ve done at CrateIO: decoupled the query language (SQL) from the traditional RDBMS and applied it instead to a Lucene index-based data store.
+
+Obviously, this presents some challenges and that’s exactly what we’re solving here at CrateIO. Elasticsearch provides an excellent interface to access the underlying Lucene indexes, as well as a fabulous distributed model with replication, sharding, and healing, but in order to use it you need to use their Lucene-like query syntax. While there’s nothing inherently wrong with this, it isn’t geared towards a database mentality but instead a search mentality. So while adding the SQL layer was the easy part, we also wanted to solve some other issues that arise. Let’s go over them.
+
+
+## UPDATE & INSERT by Query
+
+When you think of SQL, you probably immediately think of `SELECT * FROM foo WHERE`, etc. It is reasonable then, to think that in database you’d have access to at least the most common types of action, like `UPDATE` and `INSERT`. Well, in an Elasticsearch/Lucene type of system, which is not at all structured like a common RDBMS, these operations aren’t available any longer. For example, with Elasticsearch you can only update a single document at a time using the `_id` field.
+
+With Crate, you can use any standard `UPDATE` + `WHERE` query and all of the matching documents will be updated as you would expect. So now you can use a common SQL query to update all matching records in one command.
+
+The same goes for `INSERT` queries, which is not supported by Elasticsearch out-of-the-box. With Elasticsearch you can index documents which is the equivalent to a simple SQL `INSERT`, but with Crate you can `INSERT` the results of a `SELECT` query. You can also use this to restructure table data, rename a field, change a field’s data type or convert a normal table into a partitioned one.
+
+
+## (Auto) Partitioned Tables
+
+With Crate, each table translates to a Lucene index and, by the nature of Elasticsearch, this means each table (index) is automatically sharded and replicated across the cluster. Crate offers the ability to define circumstances when to create new tables based on values in your data. We call this a partitioned table, a concept borrowed from Hive. For example, you can tell Crate: every time there is a new (distinct) value in the column “City”, make that into its own partition. Since this partition is really just an index, it is sharded and replicated as usual. To accomplish this one would use a `CREATE TABLE` statement like so: 
+
+    CREATE TABLE ... PARTITIONED BY (column, ...)
+
+This features can help ease administration and allows you to optimize how the data is stored as well as retrieved. Once you’ve defined your settings, you can rest assured knowing that your partitions are being automatically created and replicated.
+
+_(Keep in mind that with Crate we mostly talk about data in terms of tables, and the concept of indices are managed by Elasticsearch. Here, we are using both terms to explain how the process works for Crate’s partitioned tables.)_
+
+## Distributed Accurate Aggregations
+
+Due to the way data is sharded and distributed by Elasticsearch into Lucene indices, it is difficult to determine cardinality (the number of distinct values in a set) of a value, for example, determining the number of unique values in a field called “username” in a table of blog posts. In a traditional table/column/row database, this would be a `COUNT`/`GROUP BY` query, and you would either iterate over all of the values and count the unique values (or it might already be cached by the system).
+
+For example, with a MySQL database, you might write: 
+
+    SELECT username, COUNT(*) FROM posts GROUP BY username ORDER BY 2 desc;
+
+Elasticsearch can do this, but it uses what is called the [HyperLogLog Algorithm](http://antirez.com/news/75) (HLL) to statistically calculate an answer. This result may not be 100% accurate, but it saves a lot of compute time. Redis also uses this algorithm.
+
+Since `COUNT`/`GROUP BY` is a staple of SQL, Crate has worked to solve this problem, and here’s a breakdown of how we did it. Normally in a query, the request is sent to one node in the cluster who then asks the other nodes to perform the query and report back. In a COUNT/GROUP BY scenarios this might potentially overwhelm the requesting node with an overwhelming number of responses, thus the need for HLL. What Crate has done is build a distribution layer atop this process to redistribute the responses for processing.
+
+Essentially the request is sent to all nodes as usual, but the responses are fed through this distribution layer. Each node hashes the values that were returned from the query and distributes each row (with all the values) to the other nodes based on the hash value. This way every node reduces its distinct part of the data down to a single value, since it knows that no other node has data with the same values. Once all of the hash values have been counted across the cluster, the results are sent back to the requesting node for final processing as usual. This results in the final returned payload being much more reasonable to process than if all of the nodes had returned the all of the raw values (possibly billions!) to the one node. In the Crate scenario, all of the nodes participate in distributing the workload for calculating the result, spreading the load across the cluster and reducing the impact on any one node. You can think of it as a distributed map/reduce job.
+
+By approaching the problem this way, Crate can deliver 100% accurate results for `COUNT`/`GROUP BY` type queries, as one would expect with a SQL query to a RDBMS. 
+
+## Import/Export
+
+When backing up an Elasticsearch instance, you are basically copying the underlying Lucene indexes in their native form. While it’s possible to introspect the data, this structure is cumbersome and unfamiliar to most. Crate, on the other hand, allows you to export your data in JSON format so you can easily access the values and process them how you see fit. This is implemented using the `COPY FROM`/ `COPY TO` SQL statement. Each node will output JSON files for all of the master shards it knows about. It is recommended you export these all to a shared location or to Amazon S3 to make collecting them easiest.
+
+Of course, you can just as easily import these files into another instance. One interesting feature is that if a `COPY FROM` query is initiated from a shared resource, say S3, the cluster understands this and distributes the incoming JSON files across all of the nodes. This avoids accidental duplication of data and allows all of the nodes to start importing data simultaneously.
+
+Please don’t hesitate to [contact us](/about/contact/) if you have any questions.
+
+Would you like to learn more about Crate? [Follow us on Twitter](http://cr8.is/1ppXLzf) or [download Crate](https://crate.io/download/) today and try it for yourself!

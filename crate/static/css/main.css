@@ -1,0 +1,57 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.float-right {
+    float: right;
+    clear: right;
+}
+
+.float-left {
+    float: left;
+    clear: left;
+}
+
+#crate-blog-post img {
+    border: 1px solid #dfd7ca;
+    padding: 2px;
+    max-width: 100%;
+}
+
+footer.footer {
+    padding: 60px 0 20px;
+}
+.footer .panel {
+    font-size: 13px;
+}
+
+.jumbotron {
+    margin-bottom: 0px;
+}
+
+.feature {
+    padding: 40px 0;
+}
+
+.feature-dark {
+    background-color: #f8f5f0;
+}
+
+.feature-header h1,
+.feature-header h2,
+.feature-header h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    padding: 16px 15px;
+}
+
+.navbar-brand > img {
+    height: 30px;
+}
+
+.cloud-box {
+    height: 120px;
+}

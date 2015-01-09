@@ -1,0 +1,106 @@
+title: Using Crate As a BLOB Store
+link: https://crate.io/blog/using-crate-as-a-blobstore/
+author: Jodok Batlogg
+description: 
+created: 2014/07/02 18:15:27
+post_name: using-crate-as-a-blobstore
+status: publish
+post_type: post
+tags: blob, blob storage, crate, python
+category: news
+
+
+Crate provides BLOB storage so you can persistently store and retrieve BLOB – typically pictures, videos or large unstructured files, providing a fully distributed cluster solution for BLOB storage. Using Crate, the disk space of all available nodes (whether commodity hardware or cloud computing resources) is compiled into one system with multiple distributed nodes – and all data is accessible from every node.
+
+BLOB storage is a great way to store content and serve it through an application – be it analytics, a social networks or a storage service.
+
+BLOBs are typically defined as binary large objects; since BLOB are binary, they do not conform to the conventional data types stored in databases and are therefore stored separately. Images are the best example.
+
+Crate frees developers from the need to “glue” several technologies together to store documents, blobs and support real-time search. Rather than using one open-source system to store and serve blobs (GridFS, Rados or HDFS) together with an open source database for structured data, Crate provides a unified data store. It is possible, however, to use Crate for blob storage alone, as a blobstore.
+
+Crate replicates and shards BLOBs just like it does for any other data. One of the great things about Crate is is the automatic sharding and replication, which saves datastore administration work. Additionally, other solutions use different sharding and replication rules for BLOBs than for the “regular” data in the datastore, creating inconsistencies and more moving parts to track. Crate applies the same replication and sharding to both the blob store and the other data, simplifying the work required for the data store as a whole.
+
+Here are some things you should know about using Crate with BLOBs:
+
+
+## 1. Creating a BLOB Table
+
+Before you add a blob to Crate, a blob table must be created.  Using the Crate Shell, CraSh, you can issue a SQL statement as follows: 
+
+        
+    sh$ crash -c "create blob table myblobs clustered into 3 shards with (number_of_replicas=1)"
+    CREATE OK (... sec)
+
+You can see that the replication number here was pre-set to 1. To alter a blob table use the `ALTER BLOB TABLE` clause. 
+    
+    
+    sh$ crash -c "alter blob table myblobs set (number_of_replicas=3)"
+    ALTER OK (... sec)
+
+In this example blobs are managed under the `/_blobs/myblobs` endpoint.
+
+## 2. Uploading BLOBs
+
+To upload a blob the sha1 hash of the blob has to be known upfront. This is the  id of the new blob. Here’s a python one-liner that computes the shasum: 
+    
+    
+    sh$ python -c 'import hashlib;print(hashlib.sha1("contents".encode("utf-8")).hexdigest())'
+    4a756ca07e9487f482465a99e8286abc86ba4dc7
+
+The blob can now be uploaded by issuing a `PUT` request: 
+    
+    
+    sh$ curl -isSX PUT '127.0.0.1:4200/_blobs/myblobs/4a756ca07e9487f482465a99e8286abc86ba4dc7' -d 'contents'
+    HTTP/1.1 201 Created
+    Content-Length: 0
+
+## 3. Listing & Querying BLOBs
+
+To list all blobs inside a blob table a `SELECT` statement can be used: 
+    
+    
+    sh$ crash -c "select digest, last_modified from blob.myblobs"
+    +------------------------------------------+---------------+
+    | digest                                   | last_modified |
+    +------------------------------------------+---------------+
+    | 4a756ca07e9487f482465a99e8286abc86ba4dc7 | ...           |
+    +------------------------------------------+---------------+
+    SELECT 1 row in set (... sec)
+
+E.g. if you want to get the number of BLOBs that have been uploaded in the last 24 hours you can count by last_modified (assuming the current timestamp is 1404134357383). 
+    
+    
+    sh$ crash -c "select count(*) as num_blobs from blob.myblobs where last_modified > 1404134357383-86400000"
+    +-----------+
+    | num_blobs |
+    +-----------+
+    |    162873 |
+    +-----------+
+    SELECT 1 row in set (... sec)
+
+## 4. Downloading BLOBs
+
+Blobs are downloaded through a `GET` request. 
+    
+    
+    sh$ curl -sS '127.0.0.1:4200/_blobs/myblobs/4a756ca07e9487f482465a99e8286abc86ba4dc7'
+    contents
+
+Since blobs are sharded,  not every node in a given cluster has all BLOBs. If the `GET` request has been sent to a node that doesn’t contain the requested file it will respond with a `307 Temporary Redirect` which will lead to a node that does contain the file. To determine if a blob exists without downloading it, a `HEAD` request can be used.
+
+## 5. Deleting BLOBs
+
+To delete a blob simply use a `DELETE` request: 
+    
+    
+    sh$ curl -isS -XDELETE '127.0.0.1:4200/_blobs/myblobs/4a756ca07e9487f482465a99e8286abc86ba4dc7'
+    HTTP/1.1 204 No Content
+    Content-Length: 0
+
+You can delete a blob table by using the following in the Crate Shell. 
+    
+    
+    sh$ crash -c "drop blob table myblobs"
+    DROP OK (... sec)
+
+

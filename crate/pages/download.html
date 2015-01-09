@@ -1,0 +1,309 @@
+title: Download
+description: Download Crate
+stable_version: 0.45.6
+stable_version_date: December 16th, 2014
+testing_version: 0.46.1
+
+{% extends "base.html" %}
+
+{% block body %}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Download Crate</h1>
+    <div class="row">
+      <div class="col-md-8 col-sm-6">
+        <p>Latest stable release: {{ stable_version }}<br />{{ stable_version_date }}</p>
+        <div class="btn-group">
+          <a href="" class="btn btn-primary"><i class="fa fa-download"></i> Download {{ stable_version }}</a>
+          <a aria-expanded="false" href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a target="_blank" href="https://cdn.crate.io/downloads/releases/crate-{{ stable_version }}.tar.gz">.tar.gz</a></li>
+            <li><a target="_blank" href="https://github.com/crate/crate/blob/{{ stable_version }}/CHANGES.txt">Release Notes</a></li>
+            <li><a target="_blank" href="https://github.com/crate/crate/tree/{{ stable_version }}">Source</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <p>Try it!</p>
+        <pre>bash -c "$(curl -L try.crate.io)"</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="feature">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-sm-6">
+        <h2><i class="fa fa-download"></i> Get</h2>
+        <form class="well form-horizontal">
+          <fieldset>
+            <legend>Latest Stable Release</legend>
+            <p>Version <strong>{{ stable_version }}</strong><br /><small>released on {{ stable_version_date }}</small></p>
+            <div class="form-group">
+              <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+              <div class="col-lg-10">
+                <input id="downloadEmail" type="email" placeholder="your.name@example.com" class="form-control" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Download .tar.gz</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+	<h3>Testing/Unstable Releases</h3>
+        <p>Testing builds of Crate should be used for testing upcoming new features only and should not be used in production. <a href="https://cdn.crate.io/downloads/releases/crate-{{ testing_version }}.tar.gz" target="_blank">Crate Testing Release</a></p>
+        <p>Nightly builds of Crate are provided for testing purposes only. You can download the latest builds <a href="https://cdn.crate.io/downloads/releases/nightly/" target="_blank">here</a>.</p>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <h2><i class="fa fa-flask"></i> Try</h2>
+        <p>Use our easy one-step command to launch Crate in a sandboxed environment: Hint: Launch it on two or more machine in the same network :)</p>
+        <pre>bash -c "$(curl -L try.crate.io)"</pre>
+        <p>Insert your data or play around with the live Twitter stream as sample data. (Requires Java 7 on OS X or Linux. Step-by-step instructions available).</p>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <h2><i class="fa fa-terminal"></i> Play</h2>
+        <p>We built a Crate Cube – a condensed miniaturized cluster – to allow you to try out Crate without having to download or install anything.</p>
+        <p><a href="https://play.crate.io/admin/" class="btn btn-primary"><i class="fa fa-dashboard"></i> Open Admin-Dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h2>Install Crate For Production</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-6">
+      <h3>Easy Install</h3>
+      <p>If you want to install Crate onto your Linux System, we recommend to use our prebuilt packages. Right now we support RedHat Enterprise Linux 6 and compatible distributions as well as Ubuntu and Arch Linux. Let our 1-step installer configure the appropriate package repository and install Crate:</p>
+      <pre>bash -c "$(curl -L install.crate.io)"</pre>
+      <p>After downloading, and installing, the Crate service will be started and Crate will listen on Port 4200.</p>
+    </div>
+    <div class="col-lg-6 col-md-6">
+      <h3>Step-By-Step Instructions</h3>
+
+      <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#docker" aria-controls="docker" role="tab" data-toggle="tab">Docker</a></li>
+          <li role="presentation" class=""><a href="#yum" aria-controls="yum" role="tab" data-toggle="tab">RHEL/YUM</a></li>
+          <li role="presentation" class=""><a href="#ubuntu" aria-controls="ubuntu" role="tab" data-toggle="tab">Ubuntu</a></li>
+          <li role="presentation" class=""><a href="#debian" aria-controls="debian" role="tab" data-toggle="tab">Debian</a></li>
+          <li role="presentation" class=""><a href="#archlinux" aria-controls="archlinux" role="tab" data-toggle="tab">Arch Linux</a></li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="docker">
+            <h3>Docker Image</h3>
+            <p>We host our Docker images for Crate Data on Docker&#8217;s own <a href="https://registry.hub.docker.com/u/crate/crate/">Docker Hub Registry</a>. After installing <a href="http://www.docker.com">Docker</a> you can pull the latest image simply by:</p>
+            <pre>docker pull crate/crate:latest</pre>
+            <p>To pull an image with a certain Crate version you can do:</p>
+            <pre>docker pull crate/crate:X.Y.Z</pre>
+            <p>where X.Y.Z is the version number of Crate. There are Docker images available from version 0.41.4 For further information please refer to the <a href="https://github.com/crate/docker-crate/">docker-crate</a> Github repository.</p>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="yum">
+            <h3>YUM Repository</h3>
+            <p>The Crate Team maintains the official YUM repositories for RPM-based releases. It is supported on Linux Distributions such as RedHat Enterprise Linux 6, CentOS 6 or Scientific Linux 6.</p>
+            <h4>How to enable the CRATE YUM repository</h4>
+            <p>All CRATE packages are signed with GPG. To verify the packages the public key must be installed to the system. After that, you can install the .rpm containing the YUM repository definition on your system.</p>
+            <pre>sudo rpm --import https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate
+sudo rpm -Uvh https://cdn.crate.io/downloads/yum/6/x86_64/crate-release-6.5-1.noarch.rpm
+Retrieving https://cdn.crate.io/downloads/yum/6/x86_64/crate-release-6.5-1.noarch.rpm
+Preparing...                ########################################### [100%]
+   1:crate-release          ########################################### [100%]</pre>
+            <p>Make sure you are allowed to sudo. You can verify the GPG key, the installation of the repository and get details about available packages:</p>
+            <pre>rpm -qa gpg* | grep gpg-pubkey-06f6eaeb-52cbcb20
+gpg-pubkey-06f6eaeb-52cbcb20
+
+yum repolist | grep crate
+repo id  repo name                                       status
+crate    CRATE Packages for Enterprise Linux 6 - x86_64       2
+
+yum info crate
+Available Packages
+Name        : crate
+Arch        : x86_64
+Version     : ...
+Release     : 1
+Size        : 42 M
+Repo        : crate
+Summary     : A shared nothing, fully searchable document oriented cluster datastore
+URL         : https://crate.io/</pre>
+            <h4>Testing/Unstable Releases</h4>
+            <p>The Crate Testing repository is disabled by default. It contains development builds and is frequently updated. The packages are waiting for feedback from testers as to their functionality and stability. Packages in this repository will come and go during the development period, so it should not be left enabled or used on production systems. If you want to enable the Testing repo on your server, set <code>enabled=1</code> in <code>/etc/yum.repos.d/crate.repo</code></p>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="ubuntu">
+            <h3>Ubuntu Personal Package Archive (PPA)</h3>
+            <p>We build packages for the Ubuntu versions Lucid Lync, Saucy Salamander and Precise Pangolin. They are available on our Launchpad page. To enable the Repository on your machine simply add the PPA:</p>
+            <pre>sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:crate/stable
+sudo apt-get update
+sudo apt-get install crate</pre>
+            <h4>Testing/Unstable Releases</h4>
+            <p>The Crate Testing Repository contains development builds and is frequently updated. The packages are waiting for feedback from testers as to their functionality and stability. Packages in this repository will come and go during the development period, so it should not be left enabled or used on production systems. To enable the Testing Repository on your machine add the PPA:</p>
+            <pre>sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:crate/testing
+sudo apt-get update
+sudo apt-get install crate</pre>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="debian">
+            <h3>APT Repository</h3>
+            <p>We provide Debian packages for the Wheezy distribution (7.x). They are hosted on our own repository.</p>
+            <p>Installing Crate from our repository requires just a few steps:</p>
+            <pre># install https support for apt
+sudo apt get install apt-transport-https
+# download and install gpg key
+wget https://cdn.crate.io/downloads/apt/DEB-GPG-KEY-crate
+sudo apt-key add DEB-GPG-KEY-crate
+# add repository to sources
+echo "
+deb https://cdn.crate.io/downloads/apt/stable/ wheezy main
+deb-src https://cdn.crate.io/downloads/apt/stable/ wheezy main" >> /etc/apt/sources.list
+# update sources and install crate
+sudo apt-get update
+sudo apt-get install crate</pre>
+            <h4>Testing/Unstable Releases</h4>
+            <p>Testing releases of Crate are also available for Debian. Use the following source URLs:</p>
+            <pre>deb https://cdn.crate.io/downloads/apt/testing/ wheezy main
+deb-src https://cdn.crate.io/downloads/apt/testing/ wheezy main</pre>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="archlinux">
+            <h3>Arch Linux Arch User Repository (AUR)</h3>
+            <p>Since some of the Crate developers use Arch Linux, we also publish our buildfiles for <a href="https://aur.archlinux.org/packages/crate/">Arch Linux AUR</a>. Installing packages from the AUR is a relatively simple process (Full instructions are available on the Arch Linux <a href="https://wiki.archlinux.org/index.php/AUR_User_Guidelines">Wiki</a>).
+              Make sure build base-devel is installed (<code>pacman -S --needed base-devel</code>)</p>
+            <pre>mkdir ~/builds
+cd ~/builds
+curl -O https://aur.archlinux.org/packages/cr/crate/crate.tar.gz
+tar xzvf crate.tar.gz
+cd crate</pre>
+            <p>Build and install the package:</p>
+            <pre>makepkg -si</pre>
+            <p><a href="https://wiki.archlinux.org/index.php/AUR_Helpers">AUR Helpers</a> add seamless access to the AUR. They vary in their features but can ease in searching, fetching, building, and installing from PKGBUILDs found in the AUR. All of these scripts can be found in the AUR.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h2>Clients &amp; Utilities</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-lg-4 col-sm-6">
+      <p class="text-center">
+        <img src="{% static '/static/images/lang-java.png' %}" alt="Java" />
+      </p>
+      <p>Our Java distributions are hosted on Bintray and available through JCenter. <strong>Note that the JDBC driver requires Crate 0.38.0 or newer.</strong></p>
+      <ul>
+        <li>Crate Java Driver (<a href="https://bintray.com/crate/crate/crate-client/view">crate-client</a>) <a href="https://crate.io/docs/projects/crate-java/stable/">Documentation</a></li>
+        <li>Crate JDBC Driver (<a href="https://bintray.com/crate/crate/crate-jdbc/view">crate-jdbc</a>) <a href="https://crate.io/docs/projects/crate-jdbc/stable/">Documentation</a></li>
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-6">
+      <p class="text-center">
+        <img src="{% static '/static/images/lang-python.png' %}" alt="Python" />
+      </p>
+      <p>Our Python projects are hosted on Python Packaging Index (PyPI):</p>
+      <ul>
+        <li>Crate <a href="https://pypi.python.org/pypi/crate">Python Client</a> (including SQLAlchemy Integration)</li>
+        <li>Crate Shell (<a href="https://pypi.python.org/pypi/crash">CraSh</a>)</li>
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-6">
+      <p class="text-center">
+        <img src="{% static '/static/images/lang-ruby.gif' %}" alt="Ruby" />
+      </p>
+      <p>Our Ruby distributions are hosted on RubyGems. The initial Ruby driver and Activerecord adapter were written by <a href="https://twitter.com/corck">Christoph Klocker</a>.</p>
+      <ul>
+        <li>CrateRuby (<a href="http://rubygems.org/gems/crate_ruby">RubyGems</a>, <a href="https://github.com/crate/crate_ruby">Github</a>)</li>
+        <li>Activerecord Crate Adapter (<a href="https://rubygems.org/gems/activerecord-crate-adapter">RubyGems</a>, <a href="https://github.com/crate/activerecord-crate-adapter">Github</a>)</li>
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-6">
+      <p class="text-center">
+        <img src="{% static '/static/images/lang-php.png' %}" alt="PHP" />
+      </p>
+      <p>Our PHP packages are hosted on <a href="http://packagist.org/">Packagist</a>. There are a <a href="http://www.php.net/manual/en/intro.pdo.php">PDO</a> driver and a <a href="http://www.doctrine-project.org/projects/dbal.html">DBAL</a> Driver that depends on the PDO driver.</p>
+      <ul>
+        <li>Crate PDO (<a href="https://packagist.org/packages/crate/crate-pdo">Packagist</a>, <a href="http://github.com/crate/crate-pdo">Github</a>)</li>
+        <li>Crate DBAL (<a href="https://packagist.org/packages/crate/crate-dbal">Packagist</a>, <a href="http://github.com/crate/crate-dbal">Github</a>)</li>
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-6">
+      <p class="text-center">
+        <img src="{% static '/static/images/lang-nodejs.png' %}" alt="Node.js" />
+      </p>
+      <p>There are several drivers for Node.js written by community distributors. They are available via <a title="Node Package Manager" href="https://www.npmjs.com/">npm</a>.</p>
+      <ul>
+        <li>node-crate by @megastef (<a href="https://www.npmjs.com/package/node-crate">npm</a>, <a title="megastef/node-crate" href="https://github.com/megastef/node-crate">Github</a>)</li>
+        <li>crate-connect by @herenow (<a href="https://www.npmjs.com/package/crate-connect">npm</a>, <a title="herenow/crate-connect" href="https://github.com/herenow/crate-connect">Github</a>)</li>
+        <li>cratejs by @herenow (<a href="https://www.npmjs.com/package/cratejs">npm</a>, <a title="herenow/cratejs" href="https://github.com/herenow/cratejs">Github</a>)</li>
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-6">
+      <p class="text-center">
+        <img src="{% static '/static/images/lang-erlang.png' %}" alt="Erlang" />
+      </p>
+      <p>Craterl is a full-blown Crate Erlang client written by <a title="@matthias_wahl" href="https://twitter.com/matthias_wahl">Matthias Wahl</a>. Craterl brings full SQL support including parameters and bulk operations, full BLOB support, for GET, PUT, DELETE and HEAD requests.</p>
+      <ul>
+        <li>craterl (<a title="crate/craterl" href="https://github.com/crate/craterl">Github</a>)</li>
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-6">
+      <p class="text-center">
+        <img src="{% static '/static/images/lang-mono.png' %}" alt="Mono/.NET" />
+      </p>
+      <p>crate-mono is a Mono/.NET client driver implementing the ADO.NET interface for Crate written by <a href="https://twitter.com/mfussenegger">Mathias Fussenegger</a>.</p>
+      <ul>
+        <li>crate-mono (<a title="mfussenegger/crate-mono" href="https://github.com/mfussenegger/crate-mono">Github</a>)</li>
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-6">
+      <p class="text-center">
+        <img src="{% static '/static/images/lang-go.jpg' %}" alt="Go" />
+      </p>
+      <p><a title="@herenow" href="https://github.com/herenow">herenow</a> wrote a Golang driver for Crate that implements the Go sql interface package.</p>
+      <ul>
+        <li>go-crate (<a title="herenow/go-crate" href="https://github.com/herenow/go-crate">Github</a>)</li>
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-6">
+      <p class="text-center">
+        <img src="{% static '/static/images/lang-vim.png' %}" alt="dbext.vim" />
+      </p>
+      <p><a title="@mfussenegger" href="https://twitter.com/mfussenegger">Mathias Fussenegger</a> forked dbext to support Crate.</p>
+      <ul>
+        <li>dbext.vim (<a title="mfussenegger/dbext.vim" href="https://github.com/mfussenegger/dbext.vim">Github</a>)</li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

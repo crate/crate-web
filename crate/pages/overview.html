@@ -1,0 +1,133 @@
+title: Overview
+description: Crate is revolutionizing the way you build scalable backends for web scale applications. Instead of nailing together different services to build your backend data store and wondering how to scale when your data grows from millions to billions, Crate offers the simplicity and scalability you need from the outset.
+
+{% extends "base.html" %}
+
+{% block body %}
+<div class="jumbotron">
+  <div class="container">
+    <h1>What is Crate?</h1>
+    <p>Crate is revolutionizing the way you build scalable backends for web scale applications. Instead of nailing together different services to build your backend data store and wondering how to scale when your data grows from millions to billions, Crate offers the simplicity and scalability you need from the outset.</p>
+  </div>
+</div>
+
+<div class="feature">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <p class="lead">Crate is a distributed data store. Simply install Crate directly on your application servers and make the big centralized database a thing of the past. Crate takes care of synchronization, sharding, scaling, and replication even for mammoth data sets. If a node becomes unavailable, Crate self-heals and rebalances the cluster automatically.</p>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <p class="lead">Our guiding principle is simplicity. Crate is simple to set up, scale, and query in real time using SQL. Crate can be installed in the cloud, or using on-premise commodity hardware.  Use our Docker image to simplify installations across your entire cluster.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h2>Scalable. Simple. Fast.</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <img class="img-responsive thumbnail" src="{% static '/static/images/crate-architecture.jpg' %}" />
+    </div>
+    <div class="col-sm-6">
+      <p>Crate is a distributed system that runs on one machine or a cluster of machines. Crate comes in one complete install package. It includes solid established open source components (Presto, Elasticsearch, Lucene, Netty) and extends those with added core functionality like read/write support, SQL language, dashboard and query console.</p>
+      <p>All nodes in a Crate Cluster are equal, a shared-nothing architecture. That makes configuration really easy. Furthermore, Crate is able to utilize all cluster resources for all functions if needed.</p>
+      <p>On each node, the Handler Side component receives client requests and processes them. After parsing, SQL queries are analyzed and executed in a distributed manner. To calculate the final result, remote nodes collect intermediate results and merge them in the next phase. To make BLOB delivery even faster, nodes are able to stream results directly as well.</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="page-header">
+        <h2>Crate vs. A Zoo of Technologies</h2>
+      </div>
+
+      <p>Crate.IO has built a new breed of database to serve today’s mammoth data needs. Based on the familiar SQL syntax, Crate combines high availability, resiliency, and scalability in a distributed design that allows you to query mountains of data in realtime, not batches. It is also 100 % open source. We built it so developers with a data intensive back-end won’t need to “glue” several technologies together to store documents, blobs and support real-time search. We also wanted to help developers avoid the manual work associated with tuning, sharding, replication and other operations required to keep a large de-normalized data store in good shape. We wanted a simple, failure-tolerant and massively scalable data store anyone can use, on a single machine, many machines or on the cloud.</p>
+
+      <p>A data store for data-intensive apps would need to be persistent, horizontally scalable and support these five requirements:</p>
+      <p>(1) <strong>store documents</strong>, (2) <strong>blobs</strong>, (3) <strong>find them</strong> again (4) <strong>run queries</strong> (analytics) and (5) allow making straightforward <strong>changes to the data structure</strong> if needed.</p>
+      <p>This is where the medley of technologies comes in. Couldn’t developers just glue together several technologies and get at the same results? Here are some examples:</p>
+      <ul>
+        <li><strong>MongoDB + ElasticSearch + GridFS</strong><br />
+          GridFS would support blob storage, ElasticSearch the search and MongoDB would do the rest. Making data structure changes may be difficult though and scaling and multi node environments may be difficult to manage.</li>
+        <li><strong>Riak + Solr + Rados</strong><br />
+          Rados for blob storage, Solr for searches and Riak for the rest. This is very similar to the first option and likewise shares its issues.</li>
+        <li><strong>CouchDb (document store and analystics) + ElasticSearch (search) + HDFS (blob storage, archiving) + Hadoop (analytics and changes)</strong><br />
+          This solution would exhibit many of the issues associated with Hadoop and with its suitability for heavy read and write workloads.</li>
+      </ul>
+
+      <p>Let’s see how Crate deals with these 5 requirements, while also supporting a self-healing and self-configuring data store.</p>
+      <ol>
+        <li><strong>Storing Documents</strong><br />
+          Crate.IO stores documents through the built in functionality of Lucene and ElasticSearch. Crate adds dump/restore functionality for major version upgrades which brings point-in-time-recovery to the next level.</li>
+        <li><strong>Storing Blobs</strong><br />
+          Blob storage is done transparently, using the Crate blob implementation, which is built on the elasticsearch cluster semantics for distribution, replication and allocation. It simply stores blobs directly on the user-space filesystem.</li>
+        <li><strong>Finding Documents</strong><br />
+          Crate uses Elasticsearch for search – that’s pretty much the best there is for speed.</li>
+        <li><strong>Real time data analytics using SQL</strong><br />
+          Crate.IO enables real time data analytics using SQL through the distributed query analyzer, planner and execution engine. This adds advanced grouping and sorting functionality to provide SQL like “group by … having ..” and “order by” functionality. Think of Map/Reduce, but in real-time.</li>
+        <li><strong>Making changes without re-doing everything</strong><br />
+          Remember the good old days when restructuring an entire relational database was possible by using a single SQL script? Crate implements that functionality by borrowing the ability to put the result of a query directly into one or more indexes. This requirement becomes even more eminent on document based databases, where data is often stored in a highly denormalized format.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h2>Requirements</h2>
+      </div>
+      <ul>
+        <li>Linux, Mac OS X or Windows</li>
+        <li>Java 7</li>
+        <li>Python (for the command line client)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h2>Clients and Tools</h2>
+      </div>
+      <p>Crate is shipping with a built-in Administration Interface. The Command Line interface (Crate Shell – CraSh) allows interactive queries. Crate’s Python client is most advanced and features SQLAlchemy integration.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h2>Screenshots from the Administration Interface</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4 col-sm-6">
+      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-1.png' %}" />
+    </div>
+    <div class="col-lg-4 col-sm-6">
+      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-2.png' %}" />
+    </div>
+    <div class="col-lg-4 col-sm-6">
+      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-3.png' %}" />
+    </div>
+    <div class="col-lg-4 col-sm-6">
+      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-4.png' %}" />
+    </div>
+    <div class="col-lg-4 col-sm-6">
+      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-5.png' %}" />
+    </div>
+  </div>
+</div>
+{% endblock %}

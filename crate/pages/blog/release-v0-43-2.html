@@ -1,0 +1,35 @@
+title: Release v0.43.2
+link: https://crate.io/blog/release-v0-43-2/
+author: spanky
+description: 
+post_id: 3167
+created: 2014/09/23 13:58:21
+created_gmt: 2014/09/23 13:58:21
+comment_status: open
+post_name: release-v0-43-2
+status: publish
+post_type: post
+
+CrateIO is pleased to announce our latest release, Crate version `0.43.2`.  As always, you can find a summary of changes in the [CHANGES.txt](https://github.com/crate/crate/blob/master/CHANGES.txt) file in our GitHub repository. We strive to make updating to our latest releases seamless and straightforward. If you find this to not be the case, please don't hesitate to [contact us](/about/contact/) and let us know. 
+
+**Mostly a maintenance release, a few items were fixed, no new features were added, nothing was deprecated, and no backwards-compatibility issues were introduced.**
+
+## Details
+
+**Let’s go over what's been fixed:**
+
+    FIXED: Change the type of "information_schema.table_constraints.constraint_name" to array of string <https://github.com/crate/crate/pull/1176> The type of this property was changed from a String type to an Array (of Strings) to allow for multiple values.
+    FIXED: Properly return elements of object arrays in system tables like sys.nodes.fs['data']['path']
+    FIXED: Filtering on system column "_score" is only valid when using a ">=" comparison operator, throw error if used otherwise. <https://github.com/crate/crate/pull/1164>
+
+**Broken/Incompatibilities:**
+
+Sometimes, we have to change things that break stuff or make mistakes.  Sometimes this is due to changes in 3rd party dependencies but either way, we'll always keep you informed if something had to be changed. 
+
+1. BREAKING IF UPGRADING FROM 0.42:
+The sub-folder in which blobs are saved by default has accidentally been changed with 0.42, this change is now being reverted. For users upgrading from 0.42 this means that they have to move the directories "tmp" and "var" from the shared folders to subfolder named "blobs". Users who upgrade from a version prior to 0.42 can upgrade without worries.
+
+
+That’s all we have to report today, see you next release!
+
+_~Spanky & the CrateIO Team_

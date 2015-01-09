@@ -1,0 +1,197 @@
+title: Crate & Google Compute Engine (GCE)
+description: We love using the Google Compute Engine resources here at Crate.IO
+logo: /static/images/gce-logo.png
+
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h1>{{ title }}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+
+      <p>We love using the Google Compute Engine resources here at Crate.IO.</p>
+      <p>We've done quite a few Proof of Concepts using the platform.
+        We're currently running <a href="https://play.crate.io">play.crate.io</a> there,
+        a public instance of Crate that lets you experiment with it without
+        having to download or install anything. Our current work involves using
+        Docker or Docker on CoreOS, but you don't have to use either.</p>
+      <p>If your GCE instances are running regular operating systems like Ubuntu,
+        you can just use APT (or similar) or however you handle your configuration
+        management (Puppet, SaltStack, Chef, et al.)</p>
+      <p>CoreOS just makes cluster node discovery easy and Docker containers
+        provide excellent isolation and easy installation.</p>
+
+      {% filter markdown %}
+## Getting Started
+
+We assume that you've already got your local `gcloud` environment up and running.
+If not, visit: <https://cloud.google.com/compute/docs/gcloud-compute> First you'll need to build a cluster of GCE instances and the associated resources they require: 
+
+* Network
+* Firewall rules
+* Disks
+* Machine type
+
+**Please note:** in the following commands you cannot use the {1..3} substitution syntax, it’ll throw an error.  This means you’ll have to run the command three times using 1 then 2, then 3.
+
+First we'll create a Crate demo network with the proper firewall rules:
+
+    $ gcloud compute networks create demo
+
+    $ gcloud compute firewall-rules create demo-internal \
+      --network demo \
+      --source-ranges 10.240.0.0/16 \
+      --allow tcp udp icmp
+
+    $ gcloud compute firewall-rules create demo-external \
+      --network demo \
+      --source-ranges 0.0.0.0/0 \
+      --allow tcp:22 tcp:80 tcp:4200
+
+Then we'll create some disks used to store Crate's data: 
+
+    $ gcloud compute disks create demo-ssd-${1..3} \
+      --project YOUR_PROJECT_NAME \
+      --zone us-central1-a \
+      --size 50GB \
+      --type pd-ssd
+
+And finally we'll create the instances that will run Crate: 
+
+    $ gcloud compute instances create demo-${1..3} \
+      --project YOUR_PROJECT_NAME \
+      --zone us-central1-a \
+      --image ubuntu-14-04 \
+      --disk name=demo-ssd-${1..3} \
+      --machine-type n1-standard-8 \
+      --boot-disk-size 10GB \
+      --network demo
+
+It's important to note that the machine type you choose should have at least 32GB of RAM.  The default heap size for Crate is 16GB, and should never take up more than half of the RAM available on the instance.  No one machine type fits this perfectly, so you can use any of the following: 
+
+* n1-standard-8 (30GB RAM w/8 cores)
+* n1-highmem-4 (26GB RAM w/4 cores)
+* n1-highmem-8 (52GB RAM w/8 cores)
+
+When you're done you should have 3 instances named "demo-x" using the "demo" network and the SSD disks that were set up.  Please note that you'll have to manually mount the disks, or script that to be done during setup. Now you're ready to install Crate.  You can do this any number of ways (tarball, APT, Docker, etc.) and we recommend using Docker simply for the ease it provides. 
+
+### Installing via APT
+
+To install on Ubuntu, you can simply run: 
+
+    $ sudo apt-get install python-software-properties
+    $ sudo add-apt-repository ppa:crate/stable
+    $ sudo apt-get update
+    $ sudo apt-get install crate
+
+And Crate should be ready to go.  You'll need to do this on each instance. 
+
+### Installing with Docker
+
+First make sure Docker is installed: 
+
+    $ sudo apt-get install docker.io
+
+Then install Crate's official Docker container: 
+
+    $ sudo docker run crate
+
+Now Crate should be running in a container on your instance.  Again, repeat for each instance. 
+
+## Installing using CoreOS and Docker
+
+If you want to install CoreOS on your instances, it can take a few extra steps to get set up, but then you gain some benefits from using CoreOS.  Create the networks and disks as before, but when it comes to building the instances, you'll pass in a YAML file that outlines the steps CoreOS should take while installing. First, generate a new token for each unique cluster using: <https://discovery.etcd.io/new>.  This will give you a token you'll need to put into the YAML file so all nodes register themselves and are then discoverable. Here is a sample YAML file for Crate, CoreOS, and Docker.  Be sure to add the Discovery token as well as your username and public key:
+
+    #cloud-config
+    coreos:
+      update:
+        reboot-strategy: off
+      etcd:
+        # generate a new token for each unique cluster from https://discovery.etcd.io/new
+        discovery: https://discovery.etcd.io/YOUR_DISCOVERY_TOKEN_HERE
+        # multi-region and multi-cloud deployments need to use $public_ipv4
+        addr: $private_ipv4:4001
+        peer-addr: $private_ipv4:7001
+      units:
+        - name: etcd.service
+        command: start
+        - name: fleet.service
+        command: start
+        - name: docker.service
+        command: start
+        - name: docker-pull-crate.service
+        command: start
+        content: |
+          [Unit]
+          Description=Pull the latest Crate Docker Image
+          After=docker.service
+          [Service]
+          Type=oneshot
+          ExecStart=/usr/bin/docker pull crate:latest
+        - name: format-data1.service
+        command: start
+        content: |
+          [Unit]
+          Description=Format SSD
+          Before=mnt-data1.mount
+          [Service]
+          Type=oneshot
+          ExecStartPre=/usr/bin/mkdir -p /mnt/data1
+          ExecStart=/usr/sbin/mkfs.ext3 -F /dev/sdb
+        - name: mnt-data1.mount
+        command: start
+        content: |
+          [Unit]
+          Description=Mount SSD
+          Requires=format-data1.service
+          After=format-data1.service
+          Before=docker.service
+          [Mount]
+          What=/dev/sdb
+          Where=/mnt/data1
+      ssh_authorized_keys:
+        - ssh-dss YOUR_PUBLIC_KEY_HERE
+      users:
+        - name: YOUR_DESIRED_USERNAME
+        coreos-ssh-import-github: YOUR_GITHUB_ID
+      groups:
+        - sudo
+        - docker
+
+### Building the instances
+
+Now that you've got your `cloud-config.yaml` file ready, you can start up the instances.  In the same directory as this file (or provide the proper path to it) you can do: 
+
+    $ gcloud compute instances create demo-${1..3} \
+      --project YOUR_PROJECT_NAME \
+      --zone us-standard1-a \
+      --image coreos \
+      --disk name=demo-ssd-${1..3} \
+      --machine-type n1-standard-8 \
+      --boot-disk-size 10GB \
+      --network demo \
+      --metadata-from-file user-data=cloud-config.yaml
+
+      {% endfilter %}
+
+    </div>
+    <div class="col-sm-4">
+      <img class="img-responsive" src="{% static logo %}" />
+      <hr />
+      <h3>More Cloud Templates</h3>
+      <ul>
+        <li><a href="{% url '/cloud/aws.html' %}">Crate &amp; Amazon Web Services</a></li>
+        <li><a href="{% url '/cloud/softlayer.html' %}">Crate &amp; IBM Softlayer</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

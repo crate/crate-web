@@ -1,0 +1,30 @@
+title: Page Not Found
+
+{% extends "base.html" %}
+
+{% block body %}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Uh! This page does not exist.</h1>
+    <p>Nothing to worry about. You can either go back to <a href="/?ref=404">our homepage</a> or look at this random animated kitten gif for a while ...</p>
+  </div>
+</div>
+
+<div class="feature">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <p><a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a></p>
+        <p class="small">Powered by <a href="http://thecatapi.com" target="_blank" rel="nofollow">The Cat API</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+ (function($){
+   ga('send', 'event', 'error', '404', location.pathname, 1);
+ }(jQuery));
+</script>
+{% endblock %}
+
