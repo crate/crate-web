@@ -27,12 +27,12 @@ title: Blog
       </ul>
     </div>
     <div class="col-sm-4">
-      <h3><i class="fa fa-rss"></i> RSS</h3>
-      <p>Subscribe to the RSS feed and never miss any updates.</p>
-      <p><a href="/feed/" class="btn btn-sm btn-success">Subscribe now!</a></p>
-      <h3><i class="fa fa-paper-plane"></i> Newsletter</h3>
-      <p>Subscribe to our monthly newsletter announcing new features, events, and Crate community news.</p>
-      <p><a href="{% url '/newsletter.html' %}" class="btn btn-sm btn-success">Subscribe now!</a></p>
+      <div class="well well-sm">
+        <h3><i class="fa fa-rss"></i> RSS</h3>
+        <p>Subscribe to the RSS feed and never miss any updates.</p>
+        <p><a href="/feed/" class="btn btn-sm btn-success">Subscribe now!</a></p>
+      </div>
+      {% include "mailchimp-small.html" %}
     </div>
   </div>
 

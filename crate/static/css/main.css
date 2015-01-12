@@ -19,7 +19,8 @@
 }
 
 footer.footer {
-    padding: 60px 0 20px;
+    padding: 40px 0 0 0;
+    margin: 40px 0 0 0;
 }
 .footer .panel {
     font-size: 13px;
@@ -55,3 +56,10 @@ footer.footer {
 .cloud-box {
     height: 120px;
 }
+
+.fa-large {
+    display: block;
+    font-size: 48px;
+    padding: 12px;
+}
+
