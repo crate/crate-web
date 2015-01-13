@@ -25,10 +25,11 @@ DEVELOPER_NEWS_JSON = []
 CONFIG = {}
 
 add_to_builtins('web.filters')
+add_to_builtins('web.tags')
 
 
 def filterPosts(posts, categ):
-    return filter(lambda x: x.get('category') == categ, posts)
+    return filter(lambda x: categ in x.get('category'), posts)
 
 
 def preBuild(site):
@@ -60,7 +61,8 @@ def preBuild(site):
             postContext['path'] = page.path
             postContext['date'] = parseDate(headers.get('date') or headers.get('created'))
             postContext['url'] = page.absolute_final_url
-            postContext['tags'] = headers.get('tags') and headers['tags'].split(',') or []
+            postContext['tags'] = headers.get('tags') and [h.strip() for h in headers['tags'].split(',')] or []
+            postContext['category'] = headers.get('category') and [h.strip() for h in headers['category'].split(',')] or []
             POSTS.append(postContext)
 
     # Sort the posts by date
@@ -73,8 +75,8 @@ def preBuild(site):
         if i+1 in indexes: POSTS[i]['prev_post'] = POSTS[i+1]
         if i-1 in indexes: POSTS[i]['next_post'] = POSTS[i-1]
 
-    NEWS_JSON = toDict(filterPosts(POSTS, 'news'))
-    DEVELOPER_NEWS_JSON = toDict(filterPosts(POSTS, 'developer-news'))
+    NEWS_JSON = toDict(CONFIG, filterPosts(POSTS, 'news'))
+    DEVELOPER_NEWS_JSON = toDict(CONFIG, filterPosts(POSTS, 'developernews'))
 
 
 def preBuildPage(site, page, context, data):
