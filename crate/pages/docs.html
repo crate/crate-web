@@ -23,15 +23,15 @@ description: Crate server and client documentation.
   </div>
   <div class="row">
     <div class="col-sm-6">
-      <div class="well">
-        <h3><i class="fa fa-graduation-cap"></i> Current Manual</h3>
-        <p><a class="btn btn-primary" href="/docs/stable/">Read Manual &raquo;</a></p>
+      <div class="well text-center">
+        <i class="fa fa-large fa-graduation-cap"></i>
+        <h3><a href="/docs/stable/">Current Manual</a></h3>
       </div>
     </div>
     <div class="col-sm-6">
-      <div class="well">
-        <h3><i class="fa fa-question"></i> Frequently Asked Questions</h3>
-        <p><a class="btn btn-primary" href="{% url '/faq.html' %}">Read FAQs &raquo;</a></p>
+      <div class="well text-center">
+        <i class="fa fa-large fa-question"></i>
+        <h3><a href="{% url '/faq.html' %}">Frequently Asked Questions</a></h3>
       </div>
     </div>
   </div>
@@ -46,31 +46,23 @@ description: Crate server and client documentation.
   <div class="row">
     <div class="col-md-3 col-sm-6">
       <h3>Python</h3>
-      <div class="well">
         <p><a href="/docs/projects/crate-python/stable/">Python</a> Client and SQLAlchemy integration.</p>
         <p><a href="/docs/projects/crash/stable/">CraSh</a> &#8211; the Crate Shell written in Python</p>
-      </div>
     </div>
     <div class="col-md-3 col-sm-6">
       <h3>Ruby</h3>
-      <div class="well">
         <p><a href="http://www.rubydoc.info/gems/crate_ruby/frames">Ruby</a> Client</p>
         <p><a href="http://www.rubydoc.info/gems/activerecord-crate-adapter/frames">ActiveRecord</a> Adapter</p>
-      </div>
     </div>
     <div class="col-md-3 col-sm-6">
       <h3>Java</h3>
-      <div class="well">
         <p><a href="/docs/projects/crate-java/stable/">Java</a> Client</p>
         <p><a href="/docs/projects/crate-jdbc/stable/">JDBC</a> Driver</p>
-      </div>
     </div>
     <div class="col-md-3 col-sm-6">
       <h3>PHP</h3>
-      <div class="well">
         <p><a href="https://github.com/crate/crate-pdo/blob/master/README.rst">PDO</a> Driver</p>
         <p><a href="https://github.com/crate/crate-dbal/blob/master/README.rst">DBAL</a> Driver &#8211; a Doctrine Database Abstraction Layer</p>
-      </div>
     </div>
   </div>
 
@@ -79,6 +71,26 @@ description: Crate server and client documentation.
       <div class="page-header">
         <h2 id="tutorials-examples">Tutorials &amp; Examples</h2>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Crate in the Cloud</h3>
+      <p>Learn how to run your Crate cluster in the cloud using
+        <a href="{% url '/cloud/aws.html' %}" title="Amazon Webservices">Amazon Webservices</a>,
+        <a href="{% url '/cloud/gce.html' %}" title="Google Compute Engine">Google Compute Engine</a>,
+        or <a href="{% url '/cloud/softlayer.html' %}" title="IBM Softlayer">IBM Softlayer</a>.</p>
+      <p><a class="btn btn-sm btn-default" href="{% url '/cloud.html' %}">More &raquo;</a></p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Best Practice</h3>
+      <p>A collection of best practice examples how to use Crate Data in the wild.</p>
+      <p><a class="btn btn-sm btn-default" href="https://crate.io/docs/stable/best_practice/index.html">More &raquo;</a></p>
+    </div>
+    <div class="col-sm-4">
+      <h3>lovely.microblog</h3>
+      <p>How to build an iOS app with a scalable web backend (Pyramid + Crate).</p>
+      <p><a class="btn btn-sm btn-default" href="https://github.com/lovelysystems/lovely.microblog">More &raquo;</a></p>
     </div>
   </div>
 
