@@ -36,19 +36,22 @@ testing_version: 0.46.1
     <div class="row">
       <div class="col-md-4 col-sm-6">
         <h2><i class="fa fa-download"></i> Get</h2>
-        <form class="well form-horizontal">
+        <form class="well form-horizontal" id="form-download"
+              data-url="https://cdn.crate.io/downloads/releases/crate-{{ stable_version }}.tar.gz"
+              data-required="false">
           <fieldset>
             <legend>Latest Stable Release</legend>
             <p>Version <strong>{{ stable_version }}</strong><br /><small>released on {{ stable_version_date }}</small></p>
-            <div class="form-group">
+            <div class="form-group form-group-email">
               <label for="inputEmail" class="col-lg-2 control-label">Email</label>
               <div class="col-lg-10">
-                <input id="downloadEmail" type="email" placeholder="your.name@example.com" class="form-control" />
+                <input name="email" id="download-email" type="email" placeholder="your.name@example.com" class="form-control" />
+                <span class="small text-danger hide">Please provide a valid email address.</span>
               </div>
             </div>
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
-                <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Download .tar.gz</button>
+                <button type="submit" class="btn btn-success" id="download-main"><i class="fa fa-download"></i> Download .tar.gz</button>
               </div>
             </div>
           </fieldset>
