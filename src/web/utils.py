@@ -20,14 +20,15 @@ logger = logging.getLogger(__name__)
 HEADER_RE = r'(\w+)\:\s([\S\s]*)\n'
 
 
-def toDict(posts):
+def toDict(conf, posts):
+    site = conf.get('site', '')
     return [dict(
         id = hashlib.md5(x['url']).hexdigest(),
         title = x['title'],
         date = x['date'],
         tags = x['tags'],
-        permalink = 'https://crate.io{0}'.format(x['url']),
-        # content = markdown(force_unicode(x['raw_body']), safe_mode=True),
+        category = x['category'],
+        permalink = '{0}{1}'.format(site, x['url']),
         content = u'',
         excerpt = Truncator(strip_tags(markdown(force_unicode(x['raw_body']), safe_mode=True))).words(25),
         author = x['author'],
