@@ -1,0 +1,87 @@
+title: Überblick
+description: Crate ist ein Datenspeicher mit den Vorteilen einer NoSQL-Dokument-Datenbank mit leistungsfähiger Suche (Elasticsearch als Library enthalten) und dabei wird SQL unterstützt.
+
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h1>Crate: Verteilter Data Store mit SQL</h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h2>Leicht zu skalieren. Einfach. Schnell.</h2>
+      <p><strong>Crate basiert auf einer Shared-Nothing-Architektur und ist ein vollständig durchsuchbarer, dokumentenorientierter Data Store: ein schnelles, leistungsstarkes und massiv skalierbares Backend für hochverfügbare, datenintensive Anwendungen, wie Mobile- und Webapps, Internet of Things oder Echtzeit-Analysen.</strong></p>
+      <p><strong>Crate.IO ist 100% Open Source.</strong></p>
+      <p><strong>Crate ist ein Datenspeicher mit den Vorteilen einer NoSQL-Dokument-Datenbank mit leistungsfähiger Suche (Elasticsearch als Library enthalten) und dabei wird SQL unterstützt.</strong></p>
+
+      <h2>Leistungsstark &amp; schnell</h2>
+      <p>Crate.IO ist ein leistungsfähiges Backend für tabellarische Daten, semi-strukturierten Datensätze und binäre Objekt (BLOBs). Es ist hoch verfügbar und bietet in Echtzeit massiv parallelen Zugriff, und damit Antwortzeiten in Millisekunden, auch Milliarden von Datensätzen.</p>
+
+      <h2>Zero Administration</h2>
+      <p>Alle Knoten in einem Crate Cluster sind identisch. Das Hinzufügen oder Entfernen von Knoten (auf Standard Hardware oder in der Cloud) ist einfach, weil Crate dies automatisch erledigt. Ein Crate Daten-Cluster konfiguriert sich selbst und verfügt bei Wegfall von Knoten über eine automatische Wiederherstellung der Integrität bzw. der frei konfigurierbaren Replikas.</p>
+
+      <h2>Warum Crate?</h2>
+      <p>Crate ist eine skalierbare Echtzeit-Lösung die Daten hochverfügbar bereit stellt und große Kosten-und Effizienzvorteile bietet. Crate.IO kombiniert relationales SQL (zB MySQL) mit NoSQL (zB MongoDB) und integrierter Suche (Lucene / Elasticsearch) und hat damit eine einzigartige Position eingenommen</p>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <img class="thumbnail img-responsive" src="{% static '/static/images/crate-architecture.jpg' %}" />
+    </div>
+    <div class="col-sm-6">
+      <h3>HOCH VERFÜGBARE SHARED-NOTHING-ARCHITEKTUR</h3>
+
+      <h3>SCHNELL UND EINFACH ZU BEDIENEN</h3>
+      <p>Verwenden Sie SQL um gleichzeitig zu lesen und zu schreiben mit Reaktionszeiten unter einer Sekunde.</p>
+
+      <h3>HOHE VERFÜGBARKEIT</h3>
+      <p>Crate Cluster sind persistent und belastbar. Ausgefallenen Knoten werden automatisch entfernt und Replikationen erneuert. Neue Knoten werden automatisch hinzugefügt und erhöhen die Performance sowie die Verfügbarkeit.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+
+
+      <h2>CRATE versus einem Technologie-Mix</h2>
+      <p>Crate wurde entwickelt, so dass Entwickler mit einem datenintensiven Back-End nicht mehrere Technologien zusammenmischen müssen, um Tabellen, Dokumente und Blobs zu speichern und Echtzeit-Volltextsuche zu haben.</p>
+      <p>Wir vereinfachen für Entwicklern die manuelle Arbeit mit Tuning, Sharding, Replikation und anderen Operationen, die erforderlich sind um einen große de-normalisierte Datenspeicher zu betreiben. Wir wollten einen einfachen, fehlertoleranten und massiv skalierbaren Data Store, den jeder benutzen kann egal ob er auf einer einzigen Maschine, vielen Maschinen oder in der Cloud läuft.</p>
+      <p>Ein Data Store für datenintensive Anwendungen muss persistent, horizontal skalierbar und hochverfügbar sein und dabei diese fünf Anforderungen erfüllen:</p>
+      <p>(1) speichern von Dokumenten (Json), (2) Blobs, (3) Suche (4) Ausführen von Abfragen (Analytik) und (5) einfache Änderungen an der Datenstruktur zu ermöglichen.</p>
+      <p>Aber könnten Entwickler nicht mehrere Technologien zusammenkleben und gleiche Ergebnisse erhalten? Hier sind einige Beispiele:</p>
+      <ul>
+        <li>MongoDB + ElasticSearch + GridFS. GridFS als BLOB-Speicher, ElasticSearch für die Suche und MongoDB für den Rest. Dies macht Datenstruktur Veränderungen schwierig sein, Skalierung und Multiknoten-Umgebungen werden schwierig zu verwalten sein.</li>
+        <li>Riak + Solr + Rados. Rados als BLOB-Speicher, Solr für die Suche und für den Rest Riak. Dies ist sehr ähnlich zu der ersten Option und ebenfalls die möglichen Probleme.</li>
+        <li>CouchDB (document store und analytics) + ElasticSearch (Suche) + HDFS (BLOB-Speicher, Archivierung) + Hadoop (Analytik und Changes). Diese Lösung würde einige der Probleme mit Hadoop aufzeigen, speziell die fehlende Eignung für massive Workloads bei gleichzeitigem lesen und schreiben.</li>
+      </ul>
+      <p>Wie geht Crate.IO nun mit diesen 5-Anforderungen um, bei gleichzeitiger Unterstützung von Zero-Configuration und Self-healing.</p>
+      <p><strong>1. Speichern von Dokumenten </strong><br />
+        Crate speichert Dokumente mittels der integrierten Funktionalität von Lucene und ElasticSearch. Crate ergänzt dies mit Dump / Restore-Funktionalität für große Versions-Upgrades.<br />
+        <strong>2. BLOBs speichern</strong><br />
+        Die Blob Speicherung erfolgt transparent mit der Crate Blob Implementierung, welche auf den Elasticsearch Cluster Semantiken für die Verteilung, Replikation und Zuordnung aufbaut. Es speichert die Blobs direkt auf dem User-Space-Dateisystem.<br />
+        <strong>3. Suche nach Dokumenten </strong><br />
+        Crate verwendet Elasticsearch für die Suche &#8211; das ist so ziemlich das Beste für hohe Geschwindigkeiten.<br />
+        <strong>4. Echtzeit-Datenanalyse mit SQL </strong><br />
+        Crate ermöglicht Echtzeit-Datenanalyse unter Verwendung von SQL durch den verteilten Query Analyzer, Planer und Execution-Engine. Zusätzlich bietet Crate erweiterte Funktionalitäten bei Gruppierung und Sortierung, um eine SQL-ähnliche  Funktionalität für &#8220;group by &#8230; having ..&#8221; und &#8220;order by&#8221; zur Verfügung zu stellen. Man kann sich das wie Map / Reduce vorstellen, aber in Echtzeit.<br />
+        <strong>5. Änderungen machen, ohne alles wieder zu tun </strong><br />
+        Man erinnere sich an die guten alten Zeiten, als die Umstrukturierung einer ganzen relationalen Datenbank noch durch die Verwendung eines einzigen SQL-Skripts möglich war? Crate implementiert diese Funktionalität durch die Möglichkeit, das Ergebnis einer Abfrage direkt in einen oder mehrere Indizes zu schreiben. Diese Anforderung wird noch bedeutender in document-based Datenbanken, in denen Daten oft in einem hochgradig denormalisierten Format gespeichert werden.</p>
+
+      <h2>Anforderungen</h2>
+      <p>Linux, Mac OS X oder Windows<br />
+        Java 7<br />
+        Python</p>
+      <h2>Clients und Tools</h2>
+      <p>Crate stellt ein eine integrierte Administrationsoberfläche zu Verfügung. Das Command Line Interface (Crate Shell &#8211; CraSh) ermöglicht interaktive Abfragen direkt in der Console. Der Crate Python-Client ist weit fortgeschritten und verfügt über eine SQLAlchemy Integration. Weiters gibts einen Ruby Client, Node.js Client, Java Nativeclient und JDBC Treiber, PDO und DBAL Treiber.</p>
+      <p><a class="btn btn-lg btn-success" href="{% url '/download.html' %}">Crate herunterladen</a></p>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
