@@ -4,14 +4,13 @@
 __docformat__ = "reStructuredText"
 
 import json
+import datetime
 
 from django.template.base import Library
 from django.utils.safestring import mark_safe
 
 register = Library()
 
-import json
-import datetime
 
 class DateTimeJSONEncoder(json.JSONEncoder):
     """Encoder for datetime objects"""
