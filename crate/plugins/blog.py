@@ -25,6 +25,7 @@ DEVELOPER_NEWS_JSON = []
 CONFIG = {}
 
 add_to_builtins('web.filters')
+add_to_builtins('web.tags')
 
 
 def filterPosts(posts, categ):
