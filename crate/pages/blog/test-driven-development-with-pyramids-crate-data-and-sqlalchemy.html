@@ -18,11 +18,11 @@ This blog post is a recap of a [tutorial](https://ep2014.europython.eu/en/schedu
   * [SQLAlchemy](http://www.sqlalchemy.org/) as the ORM
 
 To follow and try out the example in this post you will need to use a Mac OS or Linux operating system and have Python 3.4 and Java 7 installed. Basic Python skills and knowledge in web technologies should be present. Before we start, you'd probably like to checkout the sample app. 
-    
-    
-    git clone https://github.com/dobe/ep2014tutorial
-    cd ep2014tutorial
-    
+
+```sh
+git clone https://github.com/dobe/ep2014tutorial
+cd ep2014tutorial
+```
 
 ## Creating a Full-Stack Development Sandbox
 
@@ -33,14 +33,16 @@ One of the many things we like about Python is the ability to create sandboxed e
 This is exactly what we want when we combine multiple components in a single full-stack environment. Essentially, there are 2 commands to be remembered to bootstrap and build our environment: 
     
     
-    python3.4 bootstrap.py
-    bin/buildout
-    
+```sh
+python3.4 bootstrap.py
+bin/buildout
+```
 
 The `bootstrap.py` file is included in this project, but for your own projects you can obtain it via: 
     
-    
-    wget http://downloads.buildout.org/2/bootstrap.py
+```sh
+wget http://downloads.buildout.org/2/bootstrap.py
+```
 
 The buildout command will then install/build all requirements for the projects. Before we do so, let's look at the configuration file for buildout: the `buildout.cfg` located at project root. 
 
@@ -48,72 +50,73 @@ The buildout command will then install/build all requirements for the projects. 
 
 Each section in the `buildout.cfg` describes a part that needs to be built for the project. Although some of you might be familiar with buildout configurations I want to point out quickly what each section does. 
     
-    
-    [buildout]
-    extends = versions.cfg
-    develop = .
-    parts = test
-            crate-cmd
-            scripts
-    versions = versions
-    show-picked-versions = true
-    
+```cfg
+[buildout]
+extends = versions.cfg
+develop = .
+parts = test
+        crate-cmd
+        scripts
+versions = versions
+show-picked-versions = true
+```
 
 The first part of the configuration is always the `[buildout]` part which defines what parts are built, what versions of Python packages should be used and where the packages can be found. For our sample app we require the test suite, the crate command and the scripts section. 
-    
-    
-    [scripts]
-    recipe = zc.recipe.egg:script
-    relative-paths = true
-    scripts = app
-    eggs = ep2014tutorial
-    initialization =
-      import sys
-      sys.argv[1:1] = ['${buildout:directory}/etc/app.ini']
-    
+
+```cfg
+[scripts]
+recipe = zc.recipe.egg:script
+relative-paths = true
+scripts = app
+eggs = ep2014tutorial
+initialization =
+  import sys
+  sys.argv[1:1] = ['${buildout:directory}/etc/app.ini']
+```
 
 The scripts section defines the startup script for the Pyramid app. It generates an executable called app in the bin directory of the project using the entry point specified by the `console_scripts` key in `setup.py` You can take a look at the bin/app script which is just an ordinary executable Python file to find out how the other options in this section are used. At the end of this post we will use the script to start the app and see it in action. 
-    
-    
-    [test]
-    relative-paths = true
-    recipe = zc.recipe.testrunner
-    defaults = ['--auto-color']
-    eggs = ep2014tutorial[test]
-    
+
+```cfg
+[test]
+relative-paths = true
+recipe = zc.recipe.testrunner
+defaults = ['--auto-color']
+eggs = ep2014tutorial[test]
+```
 
 The zc.recipe.testrunner recipe will do everything necessary to setup the test runner for us. We just specify the eggs to be used and the coloured output. Done. Note here, that we use the test extras of the ep2014tutorial egg so the `crate[test]` extras are loaded as dependencies (see Test Layer). 
-    
-    
-    [crate]
-    recipe = hexagonit.recipe.download
-    url = https://cdn.crate.io/downloads/releases/crate-0.40.2.tar.gz
-    strip-top-level-dir = true
-    
+
+```cfg
+[crate]
+recipe = hexagonit.recipe.download
+url = https://cdn.crate.io/downloads/releases/crate-0.40.2.tar.gz
+strip-top-level-dir = true
+```
 
 The [crate] directive is responsible for downloading the Crate binary and extract it into the parts folder. You may recognise, that this section is not listed of the parts option of the buildout section. This is because it is a dependency of the next section ... 
-    
-    
-    [crate-cmd]
-    recipe = collective.recipe.template
-    output = ${buildout:bin-directory}/crate
-    mode = 755
-    inline =
-      #!/bin/bash
-      ${crate:location}/bin/crate -Des.config='${crate-yml:output}' $@
+
+```cfg
+[crate-cmd]
+recipe = collective.recipe.template
+output = ${buildout:bin-directory}/crate
+mode = 755
+inline =
+  #!/bin/bash
+  ${crate:location}/bin/crate -Des.config='${crate-yml:output}' $@
+```
 
 To conveniently start the Crate binary that is downloaded somewhere in the parts folder of the project, the [crate-cmd] generates a crate script inside the bin directory, referencing the original location of the Crate executable and adding the path to the `crate.yml` as a permanent argument. However any other command line arguments may be passed. 
-    
-    
-    [crate-yml]
-    recipe = collective.recipe.template
-    output = ${buildout:directory}/etc/crate.yml
-    inline =
-      path:
-        logs: ${buildout:directory}/var/logs
-        data: ${buildout:directory}/var/crate
-      cluster.name: tutorial
-    
+
+```cfg
+[crate-yml]
+recipe = collective.recipe.template
+output = ${buildout:directory}/etc/crate.yml
+inline =
+  path:
+    logs: ${buildout:directory}/var/logs
+    data: ${buildout:directory}/var/crate
+  cluster.name: tutorial
+```
 
 This section is also only referenced from the `[crate-cmd]` section. It will write the `crate.yml` configuration file that is required for Crate. If you haven't run the buildout command yet, you should do it now. With a single command we are set up and ready to code in a sandboxed full-stack environment. 
 
@@ -122,86 +125,93 @@ This section is also only referenced from the `[crate-cmd]` section. It will wri
 Now that our environment is ready we can start developing our application. 
 
 #### Relevant Files
-    
-    
+
     src/ep2014tutorial/tests.py
     src/ep2014tutorial/probe_status.rst
     src/ep2014tutorial/views.rst
     src/ep2014tutorial/testing/
     src/ep2014tutorial/testing/__init__.py
     bin/test
-    
 
 ### Runner, Layer, Suite
 
 Integration tests consist of 3 components: the test runner, test layers and test suites. The **test runner** is responsible for parsing and evaluating tests. We use the Zope testrunner as described previously in this post. A **test layer** is the setup of an environment in which tests run in. The crate Python package does include its own test layer that we can use for our own tests. This requirement is specified in `setup.py`
-    
-    
-    setup(
-        ...
-        extras_require=dict(
-            test=['crate[test]', 'webtest']
-        ),
-        ...
-    )
-    
+
+```py
+setup(
+    ...
+    extras_require=dict(
+        test=['crate[test]', 'webtest']
+    ),
+    ...
+)
+```
 
 In the ep2014tutorial.testing module we can import and instantiate a reusable test layer instance. 
-    
-    
-    from crate.testing.layer import CrateLayer
-    crate_layer = CrateLayer('crate',
-                             crate_home=crate_path(),
-                             port=44200)
-    
+
+```py
+from crate.testing.layer import CrateLayer
+crate_layer = CrateLayer('crate',
+                         crate_home=crate_path(),
+                         port=44200)
+```
 
 A **test suite** is a collection of doctest files with their test parameters, e.g. what layer it should use. The suite is created in the tests.py file. 
-    
-    
-    def test_suite():
-        suites = (
-            create_suite('probe_status.rst', layer=testing.crate_layer),
-            create_suite('views.rst', layer=testing.crate_layer),
-        )
-        return unittest.TestSuite(suites)
-    
+
+```py
+def test_suite():
+    suites = (
+        create_suite('probe_status.rst', layer=testing.crate_layer),
+        create_suite('views.rst', layer=testing.crate_layer),
+    )
+    return unittest.TestSuite(suites)
+```
 
 The functions `setUp` and `tearDown` are called before and after running a test suite to create and destroy the test environment. 
-    
-    
-    setup(
-        ...
-        extras_require=dict(
-            test=['crate[test]', 'webtest']
-        ),
-        ...
-    )
+
+```py
+setup(
+    ...
+    extras_require=dict(
+        test=['crate[test]', 'webtest']
+    ),
+    ...
+)
+```
 
 In the `ep2014tutorial.testing` module we can import and instantiate a reusable test layer instance.
 
-    from crate.testing.layer import CrateLayer
-    crate_layer = CrateLayer('crate',
-                             crate_home=crate_path(),
-                             port=44200)
+```py
+from crate.testing.layer import CrateLayer
+crate_layer = CrateLayer('crate',
+                         crate_home=crate_path(),
+                         port=44200)
+```
 
 A **test suite** is a collection of doctest files with their test parameters, e.g. what layer it should use. The suite is created in the `tests.py` file.
 
-    def test_suite():
-        suites = (
-            create_suite('probe_status.rst', layer=testing.crate_layer),
-            create_suite('views.rst', layer=testing.crate_layer),
-        )
-        return unittest.TestSuite(suites)
+```py
+def test_suite():
+    suites = (
+        create_suite('probe_status.rst', layer=testing.crate_layer),
+        create_suite('views.rst', layer=testing.crate_layer),
+    )
+    return unittest.TestSuite(suites)
+```
 
 The functions setUp and tearDown are called before and after running a test suite to create and destroy the test environment.
 
-    def setUp():
-        ...
+```py
+def setUp():
+    ...
+```
 
 The setUp method for example includes creating the test client, setting the global test variable and creating the table layout for the database using the `CREATE TABLE` statement in `schema.sql` (the schema matches with the model described later on).
 
-    def tearDown():
-        ...
+```py
+def tearDown():
+    ...
+```
 
 To clean the database when tests are finished the relevant tables are dropped in the `tearDown` method.
 
@@ -219,24 +229,30 @@ Our application stores tweets and exposes the latest ones in JSON format on a gi
 
 First example: There are no tweets in the database yet, so the result must be an empty array.
 
-    >>> pprint(app.get('/latest').json)
-    []
+```pycon
+>>> pprint(app.get('/latest').json)
+[]
+```
 
 Second example: Create a new Tweet instance and store it in the database (using SQLAlchemy).
 
-    >>> from ep2014tutorial import model
-    >>> model.DBSession.add(model.Tweet(
-    ...              id='1',
-    ...              created_at=datetime(2014, 7, 23, 14, 0, 0),
-    ...              text='tweet1',
-    ...              source='test'
-    ... ))
-    refresh()
+```pycon
+>>> from ep2014tutorial import model
+>>> model.DBSession.add(model.Tweet(
+...              id='1',
+...              created_at=datetime(2014, 7, 23, 14, 0, 0),
+...              text='tweet1',
+...              source='test'
+... ))
+>>> refresh()
+```
 
 Calling the endpoint again, we must receive a JSON array with a single item.
 
-    >>> pprint(app.get('/latest').json)
-    [{'created_at': '2014-07-23T14:00:00', 'id': '1', 'text': 'tweet1'}]
+```pycon
+>>> pprint(app.get('/latest').json)
+[{'created_at': '2014-07-23T14:00:00', 'id': '1', 'text': 'tweet1'}]
+```
 
 There are two more tests in views.rst that you can look at. Listing them all would exceed the scope of this post. However, I hope you got the idea. Now we do have tests for our application without writing the implementation yet!
 
@@ -255,42 +271,45 @@ In a recent blog post we wrote about how to use Crate with SQLAlchemy in Python 
 
 ### The Model
 
-    class Tweet(Base):
+```py
+class Tweet(Base):
+
+    __tablename__ = 'tweets'
  
-        __tablename__ = 'tweets'
-     
-        id = Column(String, primary_key=True)
-        created_at = Column(DateTime)
-        text = Column(String)
-        source = Column(String)
-        retweeted = Column(Boolean)
-        user = Column(Object)
- 
-        def __json__(self, request):
-            # provide the Tweet as a JSON serializable dict
-            res = dict(id=self.id,
-                text=self.text,
-                created_at=self.created_at.isoformat()
-            )
-            userId = self.user and self.user.get('id')
-            if userId:
-                res['user'] = userId
-            return res
+    id = Column(String, primary_key=True)
+    created_at = Column(DateTime)
+    text = Column(String)
+    source = Column(String)
+    retweeted = Column(Boolean)
+    user = Column(Object)
+
+    def __json__(self, request):
+        # provide the Tweet as a JSON serializable dict
+        res = dict(id=self.id,
+            text=self.text,
+            created_at=self.created_at.isoformat()
+        )
+        userId = self.user and self.user.get('id')
+        if userId:
+            res['user'] = userId
+        return res
+```
 
 Our application uses a single model `Tweets` which inherits from the SQLAlchemy Base.
 
 The Pyramids app factory initializes the database session and binds the engine to the Base.
 
-    def app_factory(global_config, **settings):
-        ...
-        db_init(config)
- 
-    def db_init(config):
-        settings = config.get_settings()
-        engine = engine_from_config(settings, 'sqlalchemy.')
-        DBSession.configure(bind=engine)
-        Base.metadata.bind = engine
-    
+```py
+def app_factory(global_config, **settings):
+    ...
+    db_init(config)
+
+def db_init(config):
+    settings = config.get_settings()
+    engine = engine_from_config(settings, 'sqlalchemy.')
+    DBSession.configure(bind=engine)
+    Base.metadata.bind = engine
+```
 
 ## The Views
 
@@ -298,30 +317,33 @@ Views and their routing live inside `views.py`.
 
 To create a view we define a method `latest_tweets` and use the Pyramids decorator `@view_config` with the appropriate route name.
 
-    @view_config(route_name='latest')
-    def latest_tweets(request, request_method='GET'):
-        return []
-
+```py
+@view_config(route_name='latest')
+def latest_tweets(request, request_method='GET'):
+    return []
+```
 
 Additionally we have to add a route and a renderer for the view so we can return a simple object in the view code instead of a response object.
 
-    def includeme(config):
-        config.add_route("latest", "/latest")
-        config.add_renderer(None, JSON(indent=4))
-
+```py
+def includeme(config):
+    config.add_route("latest", "/latest")
+    config.add_renderer(None, JSON(indent=4))
+```
 
 The `includeme()` method is called within the app factory where `ep2014tutorial.views` is added to the configurator.
 
 Now the logic for obtaining the limit parameter from the URL and the database access can be added. `list()` will resolve and execute the SQL statement built with the SQLAlchemy ORM and return a list of Tweet objects. In order to make this list JSON serialisable we added the `__json__` method to the Tweets class.
 
-
-    @view_config(route_name='latest')
-    def latest_tweets(request, request_method='GET'):
-        limit = int(request.GET.get('limit', 10))
-        query = DBSession.query(Tweet).order_by(
-            Tweet.created_at.desc(), Tweet.id.desc()
-        ).limit(limit)
-        return list(query)
+```py
+@view_config(route_name='latest')
+def latest_tweets(request, request_method='GET'):
+    limit = int(request.GET.get('limit', 10))
+    query = DBSession.query(Tweet).order_by(
+        Tweet.created_at.desc(), Tweet.id.desc()
+    ).limit(limit)
+    return list(query)
+```
 
 There is a second view in the sample application, too. However, the process is exactly the same as with the latest_tweets view and it is up to you to try it out.
 
@@ -329,20 +351,24 @@ There is a second view in the sample application, too. However, the process is e
 
 We briefly looked at the app_factory method that is used by Pyramid already when we looked at how the model is connected with the database engine.
 
-    def app_factory(global_config, **settings):
-        config = Configurator(settings=settings)
-        config.include('ep2014tutorial.views')
-        config.scan('ep2014tutorial.views')
-        db_init(config)
-        return config.make_wsgi_app()
+```py
+def app_factory(global_config, **settings):
+    config = Configurator(settings=settings)
+    config.include('ep2014tutorial.views')
+    config.scan('ep2014tutorial.views')
+    db_init(config)
+    return config.make_wsgi_app()
+```
 
 he app factory returns a WSGI application with the base configuration defined in the `etc/app.ini` file and enriched with the routing and view from the `ep2014tutorial.views` module.
 
-    [app:main]
-    use = egg:ep2014tutorial
-    crate.hosts = localhost:4200
-    crate.echo = True
-    sqlalchemy.url = crate://localhost:4200
+```cfg
+[app:main]
+use = egg:ep2014tutorial
+crate.hosts = localhost:4200
+crate.echo = True
+sqlalchemy.url = crate://localhost:4200
+```
 
 The same configuration is also used to start the test server for the test environment.
 
@@ -357,16 +383,18 @@ To simulate the deployment of the application you can checkout the same Github e
 
 However, if you don’t have a second machine, you can checkout the project twice and run the app and Crate on different ports, e.g. the app on `8080` and `8081` and Crate on `4200` and `4201`. You simply need to change the `app.ini` file to:
 
-    [app:main]
-    use = egg:ep2014tutorial
-    crate.hosts = localhost:4201
-    crate.echo = True
-    sqlalchemy.url = crate://localhost:4201
- 
-    [server:main]
-    use = egg:waitress
-    port = 8081
-    host = 127.0.0.1
+```cfg
+[app:main]
+use = egg:ep2014tutorial
+crate.hosts = localhost:4201
+crate.echo = True
+sqlalchemy.url = crate://localhost:4201
+
+[server:main]
+use = egg:waitress
+port = 8081
+host = 127.0.0.1
+```
 
 If you want you can even put an NGINX load balancer in front using both instances as upstream servers.
 

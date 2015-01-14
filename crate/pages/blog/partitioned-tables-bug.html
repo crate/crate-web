@@ -30,7 +30,9 @@ If you perform a DELETE query on a partitioned table, and the query references a
 
 **EXAMPLE:**
 
-    DELETE FROM TABLE t WHERE foo='1';
+```sql
+DELETE FROM TABLE t WHERE foo='1';
+```
 
 In this example if there is no column `'foo'`, all data in table `'t'` will be deleted. 
 
@@ -40,7 +42,9 @@ If you perform a `DELETE` query on a partitioned table, and there is no match fo
 
 **EXAMPLE:**
 
-    DELETE FROM TABLE t WHERE foo='1';
+```sql
+DELETE FROM TABLE t WHERE foo='1';
+```
 
 In this example if the data in column `'foo'` contains no values matching `'1'`, all data in table `'t'` will be deleted. As you can see, if you ran this query twice, the first time all values `'1'` will be deleted. The second time, there will be no matches. 
 
@@ -50,7 +54,9 @@ If you perform an UPDATE query on a partitioned table, and the query references 
 
 **EXAMPLE:**
 
-    UPDATE t SET foo='1' WHERE bar='baz';
+```sql
+UPDATE t SET foo='1' WHERE bar='baz';
+```
 
 If the column `'bar'` does not exist in the schema of table `'t'`, all of the values in the column `'foo'` will be set to `'1'`.
 
@@ -60,7 +66,9 @@ If you perform a UPDATE query on a partitioned table, and there is no match for 
 
 **EXAMPLE:**
 
-    UPDATE t SET foo='1' WHERE bar='baz';
+```sql
+UPDATE t SET foo='1' WHERE bar='baz';
+```
 
 If the column `'bar'` does not match any values `'baz'` in table `'t'`, all of the values in the column `'foo'` will be set to `'1'`.
 

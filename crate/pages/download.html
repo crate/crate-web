@@ -1,5 +1,5 @@
 title: Download
-description: Download Crate
+description: Download the latest version of Crate server, clients and utilities.
 stable_version: 0.45.6
 stable_version_date: December 16th, 2014
 testing_version: 0.46.1
@@ -24,13 +24,12 @@ testing_version: 0.46.1
         </div>
       </div>
       <div class="col-md-4 col-sm-6">
-        <p>Try it!</p>
-        <pre>bash -c "$(curl -L try.crate.io)"</pre>
       </div>
     </div>
   </div>
 </div>
 
+<!-- get, try, play -->
 <div class="feature">
   <div class="container">
     <div class="row">
@@ -76,12 +75,14 @@ testing_version: 0.46.1
 </div>
 
 
+<!-- install for production -->
+<div class="feature feature-dark">
 <div class="container">
 
   <div class="row">
     <div class="col-lg-12">
       <div class="page-header">
-        <h2>Install Crate For Production</h2>
+        <h2>Install Crate for Production</h2>
       </div>
     </div>
   </div>
@@ -90,7 +91,7 @@ testing_version: 0.46.1
     <div class="col-lg-6 col-md-6">
       <h3>Easy Install</h3>
       <p>If you want to install Crate onto your Linux System, we recommend to use our prebuilt packages. Right now we support RedHat Enterprise Linux 6 and compatible distributions as well as Ubuntu and Arch Linux. Let our 1-step installer configure the appropriate package repository and install Crate:</p>
-      <pre>bash -c "$(curl -L install.crate.io)"</pre>
+      <pre class="lang-bash auto">bash -c "$(curl -L install.crate.io)"</pre>
       <p>After downloading, and installing, the Crate service will be started and Crate will listen on Port 4200.</p>
     </div>
     <div class="col-lg-6 col-md-6">
@@ -197,7 +198,9 @@ cd crate</pre>
     </div>
   </div>
 </div>
+</div>
 
+<!-- clients & utilities -->
 <div class="container">
 
   <div class="row">
@@ -210,7 +213,7 @@ cd crate</pre>
 
   <div class="row">
 
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-6 client-info">
       <p class="text-center">
         <img src="{% static '/static/images/lang-java.png' %}" alt="Java" />
       </p>
@@ -221,7 +224,7 @@ cd crate</pre>
       </ul>
     </div>
 
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-6 client-info">
       <p class="text-center">
         <img src="{% static '/static/images/lang-python.png' %}" alt="Python" />
       </p>
@@ -232,7 +235,7 @@ cd crate</pre>
       </ul>
     </div>
 
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-6 client-info">
       <p class="text-center">
         <img src="{% static '/static/images/lang-ruby.gif' %}" alt="Ruby" />
       </p>
@@ -243,7 +246,7 @@ cd crate</pre>
       </ul>
     </div>
 
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-6 client-info">
       <p class="text-center">
         <img src="{% static '/static/images/lang-php.png' %}" alt="PHP" />
       </p>
@@ -254,7 +257,18 @@ cd crate</pre>
       </ul>
     </div>
 
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-6 client-info">
+      <p class="text-center">
+        <img src="{% static '/static/images/lang-scala.png' %}" alt="Scala" />
+      </p>
+      <p><a href="https://github.com/alexanderjarvis">Alexander Jarvis</a> (TravelAI) has written a Scala driver and Play plugin for Crate.</p>
+      <ul>
+        <li>Crate Scala (<a href="https://github.com/alexanderjarvis/crate-scala">Github</a>)</li>
+        <li>Play Crate (<a href="https://github.com/alexanderjarvis/play-crate">Github</a>)</li>
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-6 client-info">
       <p class="text-center">
         <img src="{% static '/static/images/lang-nodejs.png' %}" alt="Node.js" />
       </p>
@@ -266,7 +280,7 @@ cd crate</pre>
       </ul>
     </div>
 
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-6 client-info">
       <p class="text-center">
         <img src="{% static '/static/images/lang-erlang.png' %}" alt="Erlang" />
       </p>
@@ -276,7 +290,7 @@ cd crate</pre>
       </ul>
     </div>
 
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-6 client-info">
       <p class="text-center">
         <img src="{% static '/static/images/lang-mono.png' %}" alt="Mono/.NET" />
       </p>
@@ -286,7 +300,7 @@ cd crate</pre>
       </ul>
     </div>
 
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-6 client-info">
       <p class="text-center">
         <img src="{% static '/static/images/lang-go.jpg' %}" alt="Go" />
       </p>
@@ -296,7 +310,7 @@ cd crate</pre>
       </ul>
     </div>
 
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-6 client-info">
       <p class="text-center">
         <img src="{% static '/static/images/lang-vim.png' %}" alt="dbext.vim" />
       </p>

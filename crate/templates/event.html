@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h1>{{ title }}</h1>
+      </div>
+      <p class="text-muted">
+        <i class="fa fa-calendar"></i> {{ date_from|date }}{% if date_from|date != date_to|date %} &mdash; {{ date_to|date }}{% endif %}
+        {% if date_from|time != date_to|time %}<i class="fa fa-clock-o"></i> {{ date_from|time }} - {{ date_to|time }}{% endif %}</p>
+      <hr />
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      {{ body }}
+      <hr />
+      <p class="text-muted small">Please contact <a href="mailto:office@crate.io?subject={{ title|escapejs }}">office@crate.io</a> if you want to find out more!</p>
+    </div>
+    <div class="col-sm-4">
+      {% if image %}
+      <p><img class="img-responsive" src="{% media image %}" /></p>
+      <hr />
+      {% endif %}
+      <ul class="list-unstyled">
+        <li><i class="fa fa-map-marker"></i> {{ location }}</li>
+        <li><i class="fa fa-globe"></i> <a href="{{ link }}" rel="no-follow">Event Site</a></li>
+        {% if talk %}
+        <li><i class="fa fa-file-o"></i> <a href="{{ talk }}" rel="no-follow">Talk</a></li>
+        {% endif %}
+      </ul>
+      <hr />
+      <p><a href="{% url '/events.html' %}">More events &raquo;</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}
