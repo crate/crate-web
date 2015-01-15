@@ -63,3 +63,29 @@ footer.footer {
     padding: 12px;
 }
 
+.event-logo {
+    padding-top: 20px;
+}
+
+.client-info {
+    height: 290px;
+}
+
+.client-info > p.text-center {
+    height: 90px;
+}
+
+.youtube-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+
+.youtube-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

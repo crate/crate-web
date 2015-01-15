@@ -24,3 +24,16 @@ class DateTimeJSONEncoder(json.JSONEncoder):
 @register.filter(is_safe=True)
 def json_dump(value):
     return json.dumps(value, indent=2, cls=DateTimeJSONEncoder)
+
+@register.filter(is_safe=True)
+def filter_by_category(items, needle):
+    return filter(lambda x: needle in x['category'], items)
+
+@register.filter(is_safe=True)
+def filter_by_tag(items, needle):
+    return filter(lambda x: needle in x['tags'], items)
+
+@register.filter(is_safe=True)
+def filter_by_author(items, author):
+    return filter(lambda x: author == x['author'], items)
+

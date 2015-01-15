@@ -12,7 +12,7 @@ from markdown2 import markdown
 
 from django.template import Context
 from django.template.base import Library
-from django.template.loader import get_template, add_to_builtins
+from django.template.loader import get_template
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 
@@ -23,9 +23,6 @@ POSTS = []
 NEWS_JSON = []
 DEVELOPER_NEWS_JSON = []
 CONFIG = {}
-
-add_to_builtins('web.filters')
-add_to_builtins('web.tags')
 
 
 def filterPosts(posts, categ):
