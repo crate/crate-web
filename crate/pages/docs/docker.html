@@ -1,0 +1,62 @@
+title: Install with Docker
+
+{% extends "doc.html" %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <p class="lead">Crate is ideal for containerized environments such as <a href="https://docker.com">Docker</a>.
+        You can get your own cluster running within minutes. Easy as cake!</p>
+
+      <p>We host the Docker images for Crate on Docker&#8217;s own
+        <a href="https://registry.hub.docker.com/_/crate/">Docker Hub Registry</a>.
+        After <a href="http://docs.docker.com">installing Docker</a> you can pull the latest image:</p>
+      <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">pull</span> <span class="ni">crate</span></pre>
+      <p>To pull an image with a certain Crate version you can do:</p>
+      <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">pull</span> <span class="ni">crate:X.Y.Z</span></pre>
+      <p>where <code>X.Y.Z</code> is the version number of Crate. Alternatively you can use `latest` to get the latest stable version.</p>
+      <p>There are Docker images available from version <code>0.41.4</code>.
+        For further information please refer to the <a href="https://github.com/crate/docker-crate/">docker-crate</a> Github repository.</p>
+
+      <h2>Using The Crate Docker Image</h2>
+      <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-d</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="o">-p</span> <span class="m">4300:4300</span> <span class="ni">crate:latest</span></pre>
+      <h3>Attach persistent data directory</h3>
+      <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-d</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="o">-p</span> <span class="m">4300:4300</span> <span class="o">-v</span> <span class="m">&lt;data-dir&gt;:/data</span> <span class="ni">crate</span></pre>
+      <h3>Use custom Crate configuration</h3>
+      <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-d</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="o">-p</span> <span class="m">4300:4300</span> <span class="ni">crate</span> <span class="m">crate</span> <span class="o">-D</span><span class="m">es.config=/path/to/crate.yml</span></pre>
+      <p>Any configuration settings may be specified upon startup using the <code>-D</code> option prefix.
+        For example, configuring the cluster name by using system properties will work this way::</p>
+      <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-d</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="o">-p</span> <span class="m">4300:4300</span> <span class="ni">crate</span> <span class="m">crate</span> <span class="o">-D</span><span class="m">es.cluster.name=cluster</span></pre>
+      <p>For further configuration options please refer to the
+        <a href="/docs/stable/configuration.html">Configuration</a> section of the online documentation.</p>
+      <h3>Environment</h3>
+      <p>To set environment variables for Crate Data you need to use the <code>--env</code> option when starting
+        the docker image.</p>
+      <p>For example, setting the heap size:</p>
+      <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-d</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="o">-p</span> <span class="m">4300:4300</span> <span class="o">--env</span> <span class="m">CRATE_HEAP_SIZE=32g</span> <span class="ni">crate</span></pre>
+
+      <h2>Multicast</h2>
+      <p>Crate uses multicast for node discovery by default. However, Docker does only support multicast on the same
+        host. This means that nodes that are started on the same host will discover each other automatically,
+        but nodes that are started on different hosts need unicast enabled.</p>
+      <p>You can enable unicast in your custom <code>crate.yml</code>.
+        See also: <a href="{% url '/blog/using-crate-in-multinode-setup.html' %}">Using Crate Data in a Multi Node Setup</a>.</p>
+      <p>Due to its architecture, Crate publishes the host it runs on for discovery within the cluster. Since
+        the address of the host inside the docker container differs from the actual host the docker image is
+        running on, you need to tell Crate to publish the address of the docker host for discovery.</p>
+      <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-d</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="o">-p</span> <span class="m">4300:4300</span> <span class="ni">crate</span> <span class="m">crate</span> <span class="o">-D</span><span class="m">es.network.publish_host=host1.example.com</span></pre>
+      <p>If you change the transport port from the default <code>4300</code> to something else, you also need to pass
+        the publish port to Crate.</p>
+      <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-d</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="o">-p</span> <span class="m">4321:4300</span> <span class="ni">crate</span> <span class="m">crate</span> <span class="o">-D</span><span class="m">es.transport.publish_port=4321</span></pre>
+
+      <h2>Further Reading</h2>
+      <ul>
+        <li><a href="http://weaveblog.com/2015/01/07/crate-with-docker-weave/">Crate with Docker &amp; Weave</a></li>
+        <li><a href="{% url '/docs/cloud/gce.html' %}">Crate &amp; Google Compute Engine</a></li>
+      </ul>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,18 +1,10 @@
-title: FAQs
-description: Crate Frequently Asked Questions
+title: Frequently Asked Questions
+description: Frequently Asked Questions about Crate
 
-{% extends "base.html" %}
+{% extends "doc.html" %}
 
 {% block body %}
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>Frequently Asked Questions (FAQs)</h1>
-      </div>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-sm-8">
 
@@ -21,7 +13,7 @@ description: Crate Frequently Asked Questions
       <hr />
 
       <h3>Q: How do I install Crate?</h3>
-      <p>Crate is easy to install. Visit the <a href="{% url '/download.html' %}">Download</a> page for instructions.</p>
+      <p>Crate is easy to install. Visit the <a href="{% url '/docs.html' %}">Download</a> page for instructions.</p>
       <hr />
 
       <h3>Q: What do I need to consider when setting up a Crate cluster?</h3>
@@ -43,7 +35,7 @@ description: Crate Frequently Asked Questions
       <hr />
 
       <h3>Q: What drivers are there that I can use in my application?</h3>
-      <p>Crate has drivers in several programming languages. Check out the <a href="{% url '/download.html' %}">Download page</a> for a complete list of libraries.</p>
+      <p>Crate has drivers in several programming languages. Check out the <a href="{% url '/docs.html' %}">Download page</a> for a complete list of libraries.</p>
       <hr />
 
       <h3>Q: What is the best way to migrate my data from MongoDB to Crate?</h3>
@@ -71,7 +63,7 @@ description: Crate Frequently Asked Questions
     <div class="col-sm-4">
       <div class="well">
         <h3>Still Questions?</h3>
-        <p>Get in contact via IRC #crate on <a href="http://irc.freenode.net">freenode.net</a>, <a href="http://github.com/crate/crate">Github</a> or <a href="http://stackoverflow.com/tags/crate/">Stackoverflow</a>.</p>
+        <p>Get in contact via IRC <a href="http://webchat.freenode.net/?channels=crate">#crate</a> on freenode.net, <a href="http://github.com/crate/crate">Github</a> or <a href="http://stackoverflow.com/tags/crate/">Stackoverflow</a>.</p>
       </div>
     </div>
   </div>

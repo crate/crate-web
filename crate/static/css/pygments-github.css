@@ -1,4 +1,5 @@
-.codehilite code { font-family: Consolas, Menlo, Courier, monospace; }
+.codehilite code,
+pre.codehilite { font-family: Consolas, Menlo, Courier, monospace; }
 .hll { background-color: #ffffcc }
 .c { color: #999988; font-style: italic } /* Comment */
 .err { color: #a61717; background-color: #e3d2d2 } /* Error */
@@ -24,8 +25,8 @@
 .kp { color: #a71d5d; font-weight: bold } /* Keyword.Pseudo */
 .kr { color: #a71d5d; font-weight: bold } /* Keyword.Reserved */
 .kt { color: #a71d5d; font-weight: bold } /* Keyword.Type */
-.m { color: #009999 } /* Literal.Number */
-.s { color: #d01040 } /* Literal.String */
+.m { color: #0086b3 } /* Literal.Number */
+.s { color: #df5000 } /* Literal.String */
 .n  { color: #333333 } /* Name. */
 .na { color: #008080 } /* Name.Attribute */
 .nb { color: #0086B3 } /* Name.Builtin */
@@ -64,4 +65,3 @@
 
 .l-Scalar-Plain { color: #63a35c }
 .p-Indicator { color: #df5000 }
-

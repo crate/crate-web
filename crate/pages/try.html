@@ -1,0 +1,51 @@
+title: Try Crate
+description: Try Crate from your browser, no installation needed. The Crate Cube is a condensed miniaturized cluster that demonstrates the speed Crate runs SQL queries
+
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h1>Try Crate</h1>
+      </div>
+      <p class="lead">Get your hands dirty with our Crate Cube!</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-8">
+
+      <p><img class="img-responsive" src="{% media '/media/1409/001-Computer.jpg' %}" /></p>
+      <p>The Crate Cube is a condensed miniaturized cluster that we’ve custom built to allow you to try out Crate without having to download or install anything!
+        The image above shows three Crate Cubes running in an 12-node cluster configuration with Crate pre-installed in our sophisticated data broom closet*.
+        Just click the green button below to open the Crate Admin Console where you can explore the cluster and run queries against the sample data.
+        The cluster is populated with tweets from the Twitter firehose which are contained in a table named “tweets”.
+        If you click the “Console” button in the left column, you’ll be able to enter SQL queries on the data.
+        For example, to see how many tweets are in the data store, run:</p>
+      <pre class="hl lang-sql">SELECT COUNT(*) FROM tweets;</pre>
+      <p>Give a few queries a try and see how easy it is to query the distributed and auto-sharded data store with SQL.</p>
+      <p class="text-center"><a href="https://play.crate.io/admin" class="btn btn-success btn-lg"><i class="fa fa-dashboard"></i> Open Admin-Dashboard</a></p>
+      <hr />
+      <p class="small text-muted"><i>* Hopefully the cleaning staff doesn’t turn off the light!</i></p>
+
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <p class="h4">Want to use Crate in production?</p>
+      <p><a class="btn btn-default" href="{% url '/docs.html' %}"><i class="fa fa-flask"></i> Install Crate</a></p>
+      <hr />
+      <p class="h4">Our Crate Cube</p>
+      <p>Get more <a href="{% url '/blog/intel-nuc-shoebox.html' %}">information here</a>.</p>
+      <img class="img-responsive thumbnail" src="{% media '/media/1409/IMG-0926.jpg' %}" />
+      <img class="img-responsive thumbnail" src="{% media '/media/1409/IMG-0991.jpg' %}" />
+      <img class="img-responsive thumbnail" src="{% media '/media/1409/IMG-0992.jpg' %}" />
+      <img class="img-responsive thumbnail" src="{% media '/media/1409/IMG-0987.jpg' %}" />
+      <img class="img-responsive thumbnail" src="{% media '/media/1409/IMG-0983.jpg' %}" />
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+

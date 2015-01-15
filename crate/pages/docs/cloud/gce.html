@@ -2,17 +2,10 @@ title: Crate & Google Compute Engine (GCE)
 description: We love using the Google Compute Engine resources here at Crate.IO
 logo: /static/images/gce-logo.png
 
-{% extends "base.html" %}
+{% extends "doc.html" %}
 
 {% block body %}
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>{{ title }}</h1>
-      </div>
-    </div>
-  </div>
   <div class="row">
     <div class="col-sm-8">
 
@@ -312,11 +305,7 @@ There you have it!  You can see that there are 3 Crate nodes running in this clu
     <div class="col-sm-4">
       <img class="img-responsive" src="{% static logo %}" />
       <hr />
-      <h3>More Cloud Templates</h3>
-      <ul>
-        <li><a href="{% url '/cloud/aws.html' %}">Crate &amp; Amazon Web Services</a></li>
-        <li><a href="{% url '/cloud/softlayer.html' %}">Crate &amp; IBM Softlayer</a></li>
-      </ul>
+      {% include "cloud-template-list.html" %}
     </div>
   </div>
 </div>

@@ -1,72 +1,80 @@
-<footer class="footer navbar-default">
+<footer class="footer">
       <div class="container">
         <div class="row">
-          <div class="col-sm-3 col-xs-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">Company</div>
-              <div class="panel-body">
-                <ul class="list-unstyled">
-                  <li><a href="{% url '/about/index.html' %}" title="">About</a></li>
-                  <li><a href="{% url '/about/team.html' %}" title="">Team</a></li>
-                  <li><a href="{% url '/jobs.html' %}" title="">Jobs</a></li>
-                  <li><a href="{% url '/blog.html' %}" title="">News</a></li>
-                  <li><a href="{% url '/download/pricing.html' %}" title="">Pricing</a></li>
-                  <li><a href="{% url '/about/contact.html' %}" title="">Contact Us</a></li>
-                </ul>
-              </div>
+          <div class="col-sm-2 col-xs-4 col-md-2">
+            <p class="h4">Company</p>
+            <ul class="list-unstyled footer-link">
+              <li><a href="{% url '/about/index.html' %}" title="About">About</a></li>
+              <li><a href="{% url '/about/team.html' %}" title="Team">Team</a></li>
+              <li><a href="{% url '/jobs.html' %}" title="Jobs">Jobs</a></li>
+              <li><a href="{% url '/blog.html' %}" title="Blog">Blog</a></li>
+              <li><a href="{% url '/events.html' %}" title="Events">Events</a></li>
+              <li><a href="{% url '/about/contact.html' %}" title="Contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-2 col-xs-4 col-md-2">
+            <p class="h4">Open Source</p>
+            <ul class="list-unstyled footer-link">
+              <li><a href="{% url '/community.html' %}" title="Community">Community</a></li>
+              <li><a href="{% url '/community/contribute.html' %}" title="Contribute">Contribute</a></li>
+              <li><a target="_blank" href="https://github.com/crate" title="Github">Github</a></li>
+            </ul>
+            <p class="h4">Enterprise</p>
+            <ul class="list-unstyled footer-link">
+              <li><a href="{% url '/download/pricing.html' %}" title="Pricing">Pricing</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-2 col-xs-4 col-md-2 col-lg-4">
+            <p class="h4">Legal</p>
+            <ul class="list-unstyled footer-link">
+              <li><a href="{% url '/legal/trademarks.html' %}" title="Trademark">Trademark Guidelines</a></li>
+              <li><a href="{% url '/legal/privacy.html' %}" title="Privacy Policy">Privacy Policy</a></li>
+              <li><a href="{% url '/legal/terms-of-service.html' %}" title="Terms of Service">Terms of Service</a></li>
+              <li><a href="{% url '/legal/license.html' %}" title="License">License</a></li>
+              <li><a href="{% url '/legal/notice.html' %}" title="Notice">Notice</a></li>
+              <li><a href="{% url '/legal/imprint.html' %}" title="Imprint">Imprint</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-xs-12 col-md-6 col-lg-4">
+            <p class="h4">Connect</p>
+            <div class="footer-link">
+              <table style="width:100%;">
+                <tr>
+                  <td><a rel="nofollow" href="https://twitter.com/CrateIO"><i class="fa fa-twitter"></i> Twitter</a></td>
+                  <td><a rel="nofollow" href="https://fb.me/cratedata"><i class="fa fa-facebook"></i> Facebook</a></td>
+                  <td><a rel="nofollow" href="https://plus.google.com/105774977111118486356/"><i class="fa fa-google"></i> Google+</a></td>
+                </tr>
+                <tr>
+                  <td><a rel="nofollow" href="https://www.linkedin.com/company/crate-technology-gmbh"><i class="fa fa-linkedin"></i> LinkedIn</a></td>
+                  <td><a rel="nofollow" href="https://www.youtube.com/user/CrateIO"><i class="fa fa-youtube"></i> YouTube</a></td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+            <p>&nbsp;</p>
+            <p class="h4">Newsletter</p>
+            <div class="footer-link">
+              {% include "mailchimp-simple.html" %}
             </div>
           </div>
-          <div class="col-sm-3 col-xs-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">Community</div>
-              <div class="panel-body">
-                <ul class="list-unstyled">
-                  <li><a href="{% url '/community.html' %}" title="">Community</a></li>
-                  <li><a href="{% url '/events.html' %}" title="">Events</a></li>
-                  <li><a href="{% url '/community/contribute.html' %}" title="">Contribute</a></li>
-                  <li><a target="_blank" href="https://github.com/crate" title="">Github</a></li>
-                  <li><a target="_blank" href="http://stackoverflow.com/questions/tagged/crate" title="">Stackoverflow</a></li>
-                  <li><a target="_blank" href="http://webchat.freenode.net/?channels=crate" title="">IRC Channel</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 col-xs-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">Languages</div>
-              <div class="panel-body">
-                <ul class="list-unstyled">
-                  <li><a href="{% url '/zh-cn/overview.html' %}" title="Chinese">Chinese</a></li>
-                  <li><a href="{% url '/fr/overview.html' %}" title="French">French</a></li>
-                  <li><a href="{% url '/de/overview.html' %}" title="German">German</a></li>
-                  <li><a href="{% url '/it/overview.html' %}" title="Italian">Italian</a></li>
-                  <li><a href="{% url '/ja/overview.html' %}" title="Japanese">Japanese</a></li>
-                  <li><a href="{% url '/ru/overview.html' %}" title="Russian">Russian</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 col-xs-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">Legal</div>
-              <div class="panel-body">
-                <ul class="list-unstyled">
-                  <li><a href="{% url '/legal/trademarks.html' %}" title="">Trademark Guidelines</a></li>
-                  <li><a href="{% url '/legal/privacy.html' %}" title="">Privacy Policy</a></li>
-                  <li><a href="{% url '/legal/terms-of-service.html' %}" title="">Terms of Service</a></li>
-                  <li><a href="{% url '/legal/license.html' %}" title="">License</a></li>
-                  <li><a href="{% url '/legal/notice.html' %}" title="">Notice</a></li>
-                  <li><a href="{% url '/legal/imprint.html' %}" title="">Imprint</a></li>
-                </ul>
-              </div>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+        <p class="h4">Languages</p>
+        <p><a class="footer-link" href="{% url '/zh-cn/overview.html' %}" title="Chinese">Chinese</a>
+          <a class="footer-link" href="{% url '/fr/overview.html' %}" title="French">French</a>
+          <a class="footer-link" href="{% url '/de/overview.html' %}" title="German">German</a>
+          <a class="footer-link" href="{% url '/it/overview.html' %}" title="Italian">Italian</a>
+          <a class="footer-link" href="{% url '/ja/overview.html' %}" title="Japanese">Japanese</a>
+          <a class="footer-link" href="{% url '/ru/overview.html' %}" title="Russian">Russian</a>
+        </p>
           </div>
         </div>
       </div>
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <p class="small text-muted">&copy; 2013-{% now "Y" %} CRATE Technology GmbH</p>
+            <p class="small text-center text-muted">&copy; 2013-{% now "Y" %} CRATE Technology GmbH</p>
           </div>
         </div>
       </div>

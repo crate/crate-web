@@ -9,14 +9,14 @@
 
     <meta name="description" content="{{ description }}" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     <meta property="og:title" content="{% if og_title %}{{ og_title }}{% else %}{{ title }}{% endif %}" />
-    <meta property="og:url" content="{% if canonical %}{{canonical}}{% else %}{{ CURRENT_PAGE.absolute_final_url }}{% endif %}" />
+    <meta property="og:url" content="{% if canonical %}{{ canonical }}{% else %}{{ CURRENT_PAGE.absolute_final_url }}{% endif %}" />
     <meta property="og:description" content="{% if og_description %}{{ og_description }}{% else %}{{ description }}{% endif %}" />
-    {% if og_image %} <meta property="og:image" content="{{ og_image }}" />{% endif %}
-    {% if og_type %} <meta property="og:type" content="{{ og_type }}" />{% endif %}
+    {% if og_image %}<meta property="og:image" content="{{ og_image }}" />{% endif %}
+    {% if og_type %}<meta property="og:type" content="{{ og_type }}" />{% endif %}
 
     <link rel="apple-touch-icon-precomposed" href="{% static '/static/apple-touch-icon-precomposed.png' %}">
     <link rel="apple-touch-icon" href="{% static '/static/apple-touch-icon.png' %}">
@@ -29,21 +29,19 @@
     <!--[if lt IE 9]>
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="{% static '/static/js/modernizr-2.6.2.js' %}"></script>
 
     <link rel="stylesheet" href="{% static '/static/css/pygments-github.css' %}" />
     <link rel="stylesheet" href="{% static '/static/css/bootstrap.css' %}" />
     <link rel="stylesheet" href="{% static '/static/css/font-awesome.min.css' %}" />
-    <style type="text/css">
-     body {
-       padding-top: 50px;
-     }
-    </style>
     <link rel="stylesheet" href="{% static '/static/css/main.css' %}" />
-    <script src="{% static '/static/js/modernizr-2.6.2.js' %}"></script>
+    {% block extra_css %}
+    {% endblock %}
   </head>
 
   <body>
 
+    {% block navbar1 %}
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -57,14 +55,26 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="{% if_current_page '/overview.html' 'active' '' %}"><a href="{% url '/overview.html' %}">What is Crate?</a></li>
-            <li class="{% if_current_page '/download.html' 'active' '' %}"><a href="{% url '/download.html' %}">Download &amp; Install</a></li>
-            <li class="{% if_current_page '/docs.html' 'active' '' %}"><a href="{% url '/docs.html' %}">Docs</a></li>
-            <li class="{% if_current_page '/community.html' 'active' '' %}"><a href="{% url '/community.html' %}">Community</a></li>
-            <li class="{% if_current_page '/blog.html' 'active' '' %}"><a href="{% url '/blog.html' %}">News</a></li>
+            <li class="{% if_current_page '/try.html' 'active' '' %}"><a href="{% url '/try.html' %}">Try it!</a></li>
+            <li class="{% if_current_page '/docs.html' 'active' '' %}"><a href="{% url '/docs.html' %}">Install &amp; Docs</a></li>
           </ul>
+          <form class="navbar-form navbar-right {% if_current_page '/search.html' 'hide' '' %}" action="https://www.google.com/cse">
+            <input type="hidden" name="cx" value="009648942934194962260:bxkpxryedis" />
+            <input type="hidden" name="ie" value="UTF-8" />
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control input-sm" type="text" name="q" placeholder="Search crate.io" />
+                <div class="input-group-addon input-sm"><i class="fa fa-search"></i></div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </nav>
+    {% endblock %}
+
+    {% block navbar2 %}
+    {% endblock %}
 
     {% block header %}
     {% endblock %}
@@ -80,6 +90,8 @@
     <script src="{% static '/static/js/jquery.cookie.js' %}"></script>
     <script src="{% static '/static/js/bootstrap.js' %}"></script>
     <script src="{% static '/static/js/main.js' %}"></script>
+    {% block extra_js %}
+    {% endblock %}
 
     <!-- Google Analytics SDK -->
     {% if CONFIG.google_analytics %}
@@ -129,14 +141,14 @@
 
     <!-- Optimizely -->
     <script type="text/javascript">
-      (function() { 
+      (function() {
           var projectId = 2233620880;
-          var protocol = ('https:' == document.location.protocol ? 
+          var protocol = ('https:' == document.location.protocol ?
           'https://' : 'http://');
           var scriptTag = document.createElement('script');
           scriptTag.type = 'text/javascript';
           scriptTag.async = true;
-          scriptTag.src = protocol + 'cdn.optimizely.com/js/' + 
+          scriptTag.src = protocol + 'cdn.optimizely.com/js/' +
           projectId + '.js';
           var s = document.getElementsByTagName('script')[0];
           s.parentNode.insertBefore(scriptTag, s);

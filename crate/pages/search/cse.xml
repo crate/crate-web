@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GoogleCustomizations>
+  <CustomSearchEngine>
+    <Title>Crate.IO</Title>
+    <Description>Custom Search Engine for Crate.IO</Description>
+    <Context>
+      <BackgroundLabels>
+        <Label name="Crate.IO" mode="FILTER" />
+      </BackgroundLabels>
+    </Context>
+    <LookAndFeel nonprofit="true">
+    </LookAndFeel>
+  </CustomSearchEngine>
+  <Annotations>
+    <Annotation about="https://crate.io/*">
+      <Label name="Crate.IO"/>
+    </Annotation>
+  </Annotations>
+</GoogleCustomizations>

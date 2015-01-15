@@ -2,6 +2,27 @@
    Author's custom styles
    ========================================================================== */
 
+@font-face {
+  font-family: BlenderPro;
+  src: url('../fonts/blender/BlenderPro-ThinWeb.eot');
+  src: url('../fonts/blender/BlenderPro-ThinWeb.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/blender/BlenderPro-ThinWeb.woff') format('woff'),
+    url('../fonts/blender/BlenderPro-Thin.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: BlenderPro;
+  src: url('../fonts/blender/BlenderPro-BoldWeb.eot');
+  src: url('../fonts/blender/BlenderPro-BoldWeb.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/blender/BlenderPro-BoldWeb.woff') format('woff'),
+    url('../fonts/blender/BlenderPro-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+body {
+    padding-top: 63px;
+}
+
 .float-right {
     float: right;
     clear: right;
@@ -18,20 +39,24 @@
     max-width: 100%;
 }
 
-footer.footer {
-    padding: 40px 0 0 0;
-    margin: 40px 0 0 0;
+.footer {
+    padding: 20px 0 0 0;
+    margin: 60px 0 0 0;
+    color: #98978b;
+    background-color: #f8f5f0;
 }
 .footer .panel {
     font-size: 13px;
 }
-
+.footer .footer-link {
+    padding: 0 10px;
+}
 .jumbotron {
     margin-bottom: 0px;
 }
 
 .feature {
-    padding: 40px 0;
+    padding: 40px 0 20px;
 }
 
 .feature-dark {
@@ -92,5 +117,28 @@ footer.footer {
 
 .community-block {
     min-height: 146px;
+}
+
+form.navbar-form {
+    margin: 17px -15px 15px 0;
+}
+
+nav.navbar-second {
+    border-radius: 0;
+    margin-bottom: 0;
+    min-height: 40px;
+}
+
+nav.navbar-second .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.blender {
+    font-family: BlenderPro;
+}
+
+.row-logos > div {
+    padding: 0 15px 30px;
 }
 

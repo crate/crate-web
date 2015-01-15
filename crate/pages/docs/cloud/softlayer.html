@@ -2,17 +2,10 @@ title: Crate & IBM Softlayer
 description: This combination makes SoftLayer an ideal hosting provider for your own Crate cluster, no matter if you just need a small cluster to play around or run your production cluster even across data centres.
 logo: /static/images/softlayer-logo.jpg
 
-{% extends "base.html" %}
+{% extends "doc.html" %}
 
 {% block body %}
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>{{ title }}</h1>
-      </div>
-    </div>
-  </div>
   <div class="row">
     <div class="col-sm-8">
 {% filter markdown %}
@@ -123,11 +116,7 @@ discovery.zen.ping.unicast.hosts:
     <div class="col-sm-4">
       <img class="img-responsive" src="{% static logo %}" />
       <hr />
-      <h3>More Cloud Templates</h3>
-      <ul>
-        <li><a href="{% url '/cloud/aws.html' %}">Crate &amp; Amazon Web Services</a></li>
-        <li><a href="{% url '/cloud/gce.html' %}">Crate &amp; Google Compute Engine</a></li>
-      </ul>
+      {% include "cloud-template-list.html" %}
     </div>
   </div>
 </div>
