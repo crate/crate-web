@@ -16,168 +16,295 @@ logo: /static/images/gce-logo.png
   <div class="row">
     <div class="col-sm-8">
 
-      <p>We love using the Google Compute Engine resources here at Crate.IO.</p>
-      <p>We've done quite a few Proof of Concepts using the platform.
-        We're currently running <a href="https://play.crate.io">play.crate.io</a> there,
-        a public instance of Crate that lets you experiment with it without
-        having to download or install anything. Our current work involves using
-        Docker or Docker on CoreOS, but you don't have to use either.</p>
-      <p>If your GCE instances are running regular operating systems like Ubuntu,
-        you can just use APT (or similar) or however you handle your configuration
-        management (Puppet, SaltStack, Chef, et al.)</p>
-      <p>CoreOS just makes cluster node discovery easy and Docker containers
-        provide excellent isolation and easy installation.</p>
+      <p>We love using the Google Compute Engine resources here at Crate.IO.  We've done quite a few Proof of Concepts using the platform.  We're currently running <a href="https://play.crate.io">play.crate.io</a> there, a public instance of Crate that lets you experiment with it without having to download or install anything.</p>
+
+      <p>Our current work involves using Docker or Docker on CoreOS, but you don't have to use either.  If your GCE instances are running regular operating systems like Ubuntu, you can just use APT (or similar) or however you handle your configuration management (Puppet, SaltStack, Chef, et al.)  CoreOS just makes cluster node discovery easy and Docker containers provide excellent isolation and easy installation.</p>
 
       {% filter markdown %}
-## Getting Started
 
-We assume that you've already got your local `gcloud` environment up and running.
-If not, visit: <https://cloud.google.com/compute/docs/gcloud-compute> First you'll need to build a cluster of GCE instances and the associated resources they require: 
+<h3>Getting Started:</h3>
 
-* Network
-* Firewall rules
-* Disks
-* Machine type
+We assume that you've already got your local 'gcloud' environment up and running. If not, visit: <a href="https://cloud.google.com/compute/docs/gcloud-compute" target="_newbie">https://cloud.google.com/compute/docs/gcloud-compute</a> to get started.
 
-**Please note:** in the following commands you cannot use the {1..3} substitution syntax, it’ll throw an error.  This means you’ll have to run the command three times using 1 then 2, then 3.
+First you'll need to build a cluster of GCE instances and the associated resources they require:
+
+<ul>
+    <li>Network</li>
+    <li>Firewall rules</li>
+    <li>Disks</li>
+    <li>Machine type</li>
+</ul>
 
 First we'll create a Crate demo network with the proper firewall rules:
 
-    $ gcloud compute networks create demo
+<pre>gcloud compute networks create demo</pre>
 
-    $ gcloud compute firewall-rules create demo-internal \
-      --network demo \
-      --source-ranges 10.240.0.0/16 \
-      --allow tcp udp icmp
+<pre>gcloud compute firewall-rules create demo-internal \
+--network demo \
+--source-ranges 10.240.0.0/16 \
+--allow tcp udp icmp</pre>
 
-    $ gcloud compute firewall-rules create demo-external \
-      --network demo \
-      --source-ranges 0.0.0.0/0 \
-      --allow tcp:22 tcp:80 tcp:4200
+<pre>gcloud compute firewall-rules create demo-external \
+--network demo \
+--source-ranges 0.0.0.0/0 \
+--allow tcp:22 tcp:80 tcp:4200</pre>
 
-Then we'll create some disks used to store Crate's data: 
+Then we'll create some disks used to store Crate's data:
 
-    $ gcloud compute disks create demo-ssd-${1..3} \
-      --project YOUR_PROJECT_NAME \
-      --zone us-central1-a \
-      --size 50GB \
-      --type pd-ssd
+<pre>gcloud compute disks create demo-ssd-{1..3} \
+--zone us-central1-a \
+--size 50GB \
+--type pd-ssd</pre>
 
-And finally we'll create the instances that will run Crate: 
+And finally we'll create the instances that will run Crate. <b>Please note:</b> in the following command you cannot use the {1..3} substitution syntax, it’ll throw an error.  This means you’ll have to run the command three times using 1 then 2, then 3.
 
-    $ gcloud compute instances create demo-${1..3} \
-      --project YOUR_PROJECT_NAME \
-      --zone us-central1-a \
-      --image ubuntu-14-04 \
-      --disk name=demo-ssd-${1..3} \
-      --machine-type n1-standard-8 \
-      --boot-disk-size 10GB \
-      --network demo
+<pre>gcloud compute instances create demo-{1..3} \
+--zone us-central1-a \
+--image ubuntu-14-04 \
+--disk name=demo-ssd-{1..3} \
+--machine-type n1-standard-8 \
+--boot-disk-size 10GB \
+--network demo</pre>
 
-It's important to note that the machine type you choose should have at least 32GB of RAM.  The default heap size for Crate is 16GB, and should never take up more than half of the RAM available on the instance.  No one machine type fits this perfectly, so you can use any of the following: 
+If you want a bash one-liner that loops, use this:
 
-* n1-standard-8 (30GB RAM w/8 cores)
-* n1-highmem-4 (26GB RAM w/4 cores)
-* n1-highmem-8 (52GB RAM w/8 cores)
+<pre>for i in {1..3}; do; gcloud compute instances create demo-$i --zone us-central1-a --image ubuntu-14-04 --disk name=demo-ssd-$i --machine-type n1-standard-8 --boot-disk-size 10GB --network demo; done</pre>
 
-When you're done you should have 3 instances named "demo-x" using the "demo" network and the SSD disks that were set up.  Please note that you'll have to manually mount the disks, or script that to be done during setup. Now you're ready to install Crate.  You can do this any number of ways (tarball, APT, Docker, etc.) and we recommend using Docker simply for the ease it provides. 
+It's important to note that the machine type you choose should have at least 32GB of RAM.  The default heap size for Crate is 16GB, and should never take up more than half of the RAM available on the instance.  No one machine type fits this perfectly, so you can use any of the following:
 
-### Installing via APT
+<ul>
+    <li>n1-highmem-4 (26GB RAM w/4 cores</li>
+    <li>n1-standard-8 (30GB RAM w/8 cores)</li>
+    <li>n1-highmem-8 (52GB RAM w/8 cores)</li>
+</ul>
 
-To install on Ubuntu, you can simply run: 
+When you're done you should have 3 instances named "demo-x" using the "demo" network and the SSD disks that were set up.  You should be able to SSH into them like so:
 
-    $ sudo apt-get install python-software-properties
-    $ sudo add-apt-repository ppa:crate/stable
-    $ sudo apt-get update
-    $ sudo apt-get install crate
+<pre>gcloud compute ssh demo-1</pre>
 
-And Crate should be ready to go.  You'll need to do this on each instance. 
+<h3>Setting up the storage locations:</h3>
 
-### Installing with Docker
+Even though the drives we created for the instances are configured they won't be formatted or mounted.  You can script this but for simplicity of this demo we'll just do it manually on each instance:
 
-First make sure Docker is installed: 
+<pre>sudo su -
+mkfs.ext4 -F /dev/sdb
+mkdir -p /data/data1
+mount /dev/sdb /data/data1</pre>
 
-    $ sudo apt-get install docker.io
+Now you're ready to install Crate.  You can do this any number of ways (tarball, APT, yum, Docker, etc.) but we recommend using Docker containers.
 
-Then install Crate's official Docker container: 
+<h3>Installing with Docker:</h3>
 
-    $ sudo docker run crate
+First make sure Docker is installed:
 
-Now Crate should be running in a container on your instance.  Again, repeat for each instance. 
+<pre class="lang:default decode:true">sudo apt-get -y install docker.io</pre>
 
-## Installing using CoreOS and Docker
+Then get Crate's official Docker container:
 
-If you want to install CoreOS on your instances, it can take a few extra steps to get set up, but then you gain some benefits from using CoreOS.  Create the networks and disks as before, but when it comes to building the instances, you'll pass in a YAML file that outlines the steps CoreOS should take while installing. First, generate a new token for each unique cluster using: <https://discovery.etcd.io/new>.  This will give you a token you'll need to put into the YAML file so all nodes register themselves and are then discoverable. Here is a sample YAML file for Crate, CoreOS, and Docker.  Be sure to add the Discovery token as well as your username and public key:
+<pre>sudo docker pull crate:latest</pre>
+Now Crate should be ready to run in a container on your instance.  Again, repeat these commands on each instance.
 
-    #cloud-config
-    coreos:
-      update:
-        reboot-strategy: off
-      etcd:
-        # generate a new token for each unique cluster from https://discovery.etcd.io/new
-        discovery: https://discovery.etcd.io/YOUR_DISCOVERY_TOKEN_HERE
-        # multi-region and multi-cloud deployments need to use $public_ipv4
-        addr: $private_ipv4:4001
-        peer-addr: $private_ipv4:7001
-      units:
-        - name: etcd.service
-        command: start
-        - name: fleet.service
-        command: start
-        - name: docker.service
-        command: start
-        - name: docker-pull-crate.service
-        command: start
-        content: |
-          [Unit]
-          Description=Pull the latest Crate Docker Image
-          After=docker.service
-          [Service]
-          Type=oneshot
-          ExecStart=/usr/bin/docker pull crate:latest
-        - name: format-data1.service
-        command: start
-        content: |
-          [Unit]
-          Description=Format SSD
-          Before=mnt-data1.mount
-          [Service]
-          Type=oneshot
-          ExecStartPre=/usr/bin/mkdir -p /mnt/data1
-          ExecStart=/usr/sbin/mkfs.ext3 -F /dev/sdb
-        - name: mnt-data1.mount
-        command: start
-        content: |
-          [Unit]
-          Description=Mount SSD
-          Requires=format-data1.service
-          After=format-data1.service
-          Before=docker.service
-          [Mount]
-          What=/dev/sdb
-          Where=/mnt/data1
-      ssh_authorized_keys:
-        - ssh-dss YOUR_PUBLIC_KEY_HERE
-      users:
-        - name: YOUR_DESIRED_USERNAME
-        coreos-ssh-import-github: YOUR_GITHUB_ID
-      groups:
-        - sudo
-        - docker
+<h3>Setting up a Cluster:</h3>
 
-### Building the instances
+It's important to keep in mind that multicast is not supported in GCE (or in most cloud providers).  A multicast setup allows nodes to automatically discover each other.  Since we do not have this ability, we have to manually add the nodes to the cluster.  We'll do this by putting a comma separated list of all of the hostnames (or IP addresses) into a local environment variable (HOSTS), and get the local IP to publish (PRIVATE_IP) and then pass those to Docker. Don't forget to include the discovery port which is 4300. You can get a list of the instance private IPs by using the following command locally:
 
-Now that you've got your `cloud-config.yaml` file ready, you can start up the instances.  In the same directory as this file (or provide the proper path to it) you can do: 
+<pre>gcloud compute instances list | grep demo</pre>
 
-    $ gcloud compute instances create demo-${1..3} \
-      --project YOUR_PROJECT_NAME \
-      --zone us-standard1-a \
-      --image coreos \
-      --disk name=demo-ssd-${1..3} \
-      --machine-type n1-standard-8 \
-      --boot-disk-size 10GB \
-      --network demo \
-      --metadata-from-file user-data=cloud-config.yaml
+Then fill in the IPs from that list to the following line, making sure to add :4300
+
+<pre>HOSTS="10.240.0.1:4300,10.240.0.2:4300,10.240.0.3:4300"</pre>
+
+<pre>PRIVATE_IP=$(curl "http://metadata/computeMetadata/v1/instance/network-interfaces/0/ip" -H "X-Google-Metadata-Request: True")
+sudo docker run -d -p 4200:4200 \
+    -p 4300:4300 \
+    --volume /data:/data \
+    --env CRATE_HEAP_SIZE=16g \
+    crate \
+    crate \
+    -Des.path.data="/data/data1" \
+    -Des.multicast.enabled=false \
+    -Des.network.publish_host=$PRIVATE_IP \
+    -Des.discovery.zen.ping.unicast.hosts=$HOSTS</pre>
+
+Run this on each instance and the cluster should discover all of the nodes and become a 3-node cluster.
+
+<h3>Testing the Cluster:</h3>
+
+To verify that the cluster is running and that all nodes have joined properly, just call the API using curl:
+
+<pre>curl -XPOST $PRIVATE_IP:4200/_sql -d '{ "stmt": "select name from sys.nodes" }'</pre>
+
+<h2>Installing Crate using CoreOS and Docker:</h2>
+
+If you want to install CoreOS on your instances, it can take a few extra steps to get set up, but then you gain some benefits from using CoreOS.  Create the networks and disks as before, but when it comes to building the instances, you'll pass in a YAML file that outlines the steps CoreOS should take while installing.
+
+First, generate a new token for each unique cluster using:
+
+<a href="https://discovery.etcd.io/new">https://discovery.etcd.io/new</a>.  This will give you a token you'll need to put into the YAML file so all nodes register themselves and are then discoverable.
+
+Here is a sample YAML file for Crate, CoreOS, and Docker.  Be sure to add the Discovery token as well as your username and public key:
+
+<strong>cloud-config.yaml</strong>
+<pre class="lang:default decode:true ">#cloud-config
+
+coreos:
+  update:
+    reboot-strategy: off
+  etcd:
+    # generate a new token for each unique cluster from https://discovery.etcd.io/new
+    discovery: https://discovery.etcd.io/YOUR_DISCOVERY_TOKEN_HERE
+    # multi-region and multi-cloud deployments need to use $public_ipv4
+    addr: $private_ipv4:4001
+    peer-addr: $private_ipv4:7001
+  units:
+    - name: etcd.service
+      command: start
+    - name: fleet.service
+      command: start
+    - name: docker.service
+      command: start
+    - name: docker-pull-crate.service
+      command: start
+      content: |
+        [Unit]
+        Description=Pull the latest Crate Docker Image
+        After=docker.service
+        [Service]
+        Type=oneshot
+        ExecStart=/usr/bin/docker pull crate:latest
+    - name: format-data1.service
+      command: start
+      content: |
+        [Unit]
+        Description=Format SSD
+        Before=mnt-data1.mount
+        [Service]
+        Type=oneshot
+        ExecStartPre=/usr/bin/mkdir -p /mnt/data1
+        ExecStart=/usr/sbin/mkfs.ext3 -F /dev/sdb
+    - name: mnt-data1.mount
+      command: start
+      content: |
+        [Unit]
+        Description=Mount SSD
+        Requires=format-data1.service
+        After=format-data1.service
+        Before=docker.service
+        [Mount]
+        What=/dev/sdb
+        Where=/mnt/data1
+
+ssh_authorized_keys:
+  - ssh-dss YOUR_PUBLIC_KEY_HERE
+
+users:
+  - name: YOUR_DESIRED_USERNAME
+    coreos-ssh-import-github: YOUR_GITHUB_ID
+    groups:
+      - sudo
+      - docker</pre>
+
+<h3>Building the instances:</h3>
+
+Now that you've got your cloud-config.yaml file ready, you can start up the instances.  In the same directory as this file (or provide the proper path to it) you can do this.  Reminder that the brace expansion doesn't work, so you'll need to run this 3 times.
+
+<pre class="lang:default decode:true  ">$ gcloud compute instances create demo-{1..3} \
+--zone us-central1-a \
+--image coreos \
+--disk name=demo-ssd-{1..3} \
+--machine-type n1-standard-8 \
+--boot-disk-size 10GB \
+--network demo \
+--metadata-from-file user-data=cloud-config.yaml</pre>
+
+Again, if you want a bash one-liner that loops, use this:
+
+<pre>for i in {1..3}; do; gcloud compute instances create demo-$i --zone us-central1-a --image coreos --disk name=demo-ssd-$i --machine-type n1-standard-8 --boot-disk-size 10GB --network demo --metadata-from-file user-data=cloud-config.yaml; done</pre>
+
+When this completes, you should have 3 instances of Crate running in automatically discoverable nodes, inside Docker containers, with the SSD drives automatically mounted, and your user's SSH keys ready to go!
+
+<h3>Fleetctl and Services</h3>
+
+<a href="https://coreos.com/docs/launching-containers/launching/fleet-using-the-client/" target="_blank">Fleetctl</a> is the command line tool you use on a CoreOS instance to manage the "fleet" of machines. You provide the fleet with services which then get run on all of the CoreOS machines the fleet knows about.  This is why CoreOS is so powerful, you don't have to install the containers on each instance, just let fleetctl take care of it!
+
+First let's verify that all of the GCE instances are talking to each other and part of the fleet.
+
+<pre>gcloud compute ssh demo-1</pre>
+
+<pre>fleetctl list-machines</pre>
+
+<strong>Output:</strong>
+<pre>MACHINE        IP        METADATA
+58b93a38...    10.240.126.164    -
+d9c96412...    10.240.14.91    -
+dcb7f013...    10.240.224.27    -</pre>
+
+Now let's copy the appropriate service files up to one of the instances. The Crate service file that's needed is here:
+
+<strong>crate.service</strong>
+
+<pre>[Unit]
+Description=crate
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutSec=3600
+ExecStartPre=/bin/bash -c "/usr/bin/docker rm %p || exit 0"
+ExecStartPre=/usr/bin/mkdir -p /mnt/data1/crate
+ExecStartPre=/usr/bin/docker pull crate:latest
+
+ExecStart=/bin/bash -c '\
+    HOSTS=$(fleetctl list-machines --fields=ip --no-legend \
+                | sed "s/$/:4300/" \
+                | paste -s -d","); \
+    /usr/bin/docker run \
+        --name %p \
+        --publish 4200:4200 \
+        --publish 4300:4300 \
+        --volume /mnt/data1/crate:/data \
+        --volume /tmp:/tmp \
+        --env CRATE_HEAP_SIZE=16g \
+        crate:latest \
+        /crate/bin/crate \
+        -Des.cluster.name=gce \
+        -Des.indices.store.throttle.max_bytes_per_sec=100mb \
+        -Des.indices.memory.index_buffer_size=30% \
+        -Des.indices.recovery.concurrent_streams=5 \
+        -Des.indices.recovery.max_bytes_per_sec=100mb \
+        -Des.multicast.enabled=false \
+        -Des.network.publish_host=%H \
+        -Des.discovery.zen.ping.unicast.hosts=$HOSTS'
+
+ExecStop=/usr/bin/docker stop %p
+ExecStop=/usr/bin/docker rm %p
+
+[X-Fleet]
+Global=true</pre>
+
+Create this file on the instance and name it "crate.service".  Once you have the service file in place, starting Crate across the entire cluster is as simple as running:
+
+<pre>fleetctl start crate.service</pre>
+
+You can verify that it's running everywhere by typing:
+
+<pre>fleetctl list-units</pre>
+
+<strong>Output:</strong>
+<pre>UNIT        MACHINE                ACTIVE    SUB
+crate.service    58b93a38.../10.240.126.164    active    running
+crate.service    d9c96412.../10.240.14.91    active    running
+crate.service    dcb7f013.../10.240.224.27    active    running</pre>
+
+Now let's just make sure that the Crate cluster is well-formed and operating correctly:
+
+<pre>PRIVATE_IP=$(curl "http://metadata/computeMetadata/v1/instance/network-interfaces/0/ip" -H "X-Google-Metadata-Request: True")
+curl -XPOST $PRIVATE_IP:4200/_sql -d '{ "stmt": "select name from sys.nodes" }'</pre>
+
+<strong>Output:</strong>
+<pre>{"cols":["name"],"duration":242,"rows":[["Scrier"],["Orphan-Maker"],["Micro"]],"rowcount":3}</pre>
+
+There you have it!  You can see that there are 3 Crate nodes running in this cluster.  Now if you add another node to the CoreOS cluster, it will automatically join the Crate cluster and Crate will take care of the rest.  Simple scalability FTW!
 
       {% endfilter %}
 
