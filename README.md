@@ -20,6 +20,14 @@ The dev environment requires Python 2.7 to be installed.
     $ python2.7 bootstrap.py
     $ bin/buildout -N
 
+Select an environment:
+
+    $ bin/py src/web/env.py local > crate/config.json
+
+or simpler:
+
+    $ bin/env local
+
 To start the development server:
 
     $ bin/serve
