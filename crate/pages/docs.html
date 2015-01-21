@@ -15,14 +15,14 @@ testing_version: 0.46.3
         <p>The most convenient and secure way to run Crate on your Linux host is the usage of <a href="https://docker.com" rel="nofollow">Docker</a>.</p>
         <p>It will not only keep your host system clean but also allows you to scale your backend from a single machine to a multi-node cluster easily.</p>
         <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">pull</span> <span class="ni">crate</span></pre>
-        <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">pull</span> <span class="ni">crate</span> <span class="o">-p</span> <span class="m">4200:4200</span></pre>
+        <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="ni">crate</span> <span class="o">-p</span> <span class="m">4200:4200</span></pre>
         <p>Then visit your host on port <code>4200</code> in the browser,
           e.g. <code>http://127.0.0.1:4200/admin/</code>.</p>
         <p>Read more about Crate &amp; Docker <a href="{% url '/docs/docker.html' %}">here</a>.</p>
 
         <hr />
 
-        <h2><i class="fa fa-terminal"></i> Easy Install</h2>
+        <h2><i class="fa fa-terminal"></i> Try with Tarball</h2>
         <p>Use our easy one-step command to launch Crate in a sandboxed environment: Hint: Launch it on two or more machine in the same network :)</p>
         <pre class="codehighlight"><span class="nd">bash</span> <span class="o">-c</span> <span class="s">"<span class="nl">$(curl -L try.crate.io)</span>"</span></pre>
         <p>Insert your data or play around with the live Twitter stream as sample data.

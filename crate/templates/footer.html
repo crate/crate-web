@@ -3,7 +3,7 @@
         <div class="row">
           <div class="col-sm-2 col-xs-4 col-md-2">
             <p class="h4">Company</p>
-            <ul class="list-unstyled footer-link">
+            <ul class="list-unstyled">
               <li><a href="{% url '/about/index.html' %}" title="About">About</a></li>
               <li><a href="{% url '/about/team.html' %}" title="Team">Team</a></li>
               <li><a href="{% url '/jobs.html' %}" title="Jobs">Jobs</a></li>
@@ -14,19 +14,19 @@
           </div>
           <div class="col-sm-2 col-xs-4 col-md-2">
             <p class="h4">Open Source</p>
-            <ul class="list-unstyled footer-link">
+            <ul class="list-unstyled">
               <li><a href="{% url '/community.html' %}" title="Community">Community</a></li>
               <li><a href="{% url '/community/contribute.html' %}" title="Contribute">Contribute</a></li>
               <li><a target="_blank" href="https://github.com/crate" title="Github">Github</a></li>
             </ul>
             <p class="h4">Enterprise</p>
-            <ul class="list-unstyled footer-link">
+            <ul class="list-unstyled">
               <li><a href="{% url '/download/pricing.html' %}" title="Pricing">Pricing</a></li>
             </ul>
           </div>
           <div class="col-sm-2 col-xs-4 col-md-2 col-lg-4">
             <p class="h4">Legal</p>
-            <ul class="list-unstyled footer-link">
+            <ul class="list-unstyled">
               <li><a href="{% url '/legal/trademarks.html' %}" title="Trademark">Trademark Guidelines</a></li>
               <li><a href="{% url '/legal/privacy.html' %}" title="Privacy Policy">Privacy Policy</a></li>
               <li><a href="{% url '/legal/terms-of-service.html' %}" title="Terms of Service">Terms of Service</a></li>
@@ -37,7 +37,7 @@
           </div>
           <div class="col-sm-6 col-xs-12 col-md-6 col-lg-4">
             <p class="h4">Connect</p>
-            <div class="footer-link">
+            <div class="">
               <table style="width:100%;">
                 <tr>
                   <td><a rel="nofollow" href="https://twitter.com/CrateIO"><i class="fa fa-twitter"></i> Twitter</a></td>
@@ -53,21 +53,9 @@
             </div>
             <p>&nbsp;</p>
             <p class="h4">Newsletter</p>
-            <div class="footer-link">
+            <div class="">
               {% include "mailchimp-simple.html" %}
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-        <p class="h4">Languages</p>
-        <p><a class="footer-link" href="{% url '/zh-cn/overview.html' %}" title="Chinese">Chinese</a>
-          <a class="footer-link" href="{% url '/fr/overview.html' %}" title="French">French</a>
-          <a class="footer-link" href="{% url '/de/overview.html' %}" title="German">German</a>
-          <a class="footer-link" href="{% url '/it/overview.html' %}" title="Italian">Italian</a>
-          <a class="footer-link" href="{% url '/ja/overview.html' %}" title="Japanese">Japanese</a>
-          <a class="footer-link" href="{% url '/ru/overview.html' %}" title="Russian">Russian</a>
-        </p>
           </div>
         </div>
       </div>
