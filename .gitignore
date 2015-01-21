@@ -58,5 +58,6 @@ target/
 # Cactus
 crate/.delpoy/
 crate/.build/
+crate/config.json
 out/
 wp2md/
