@@ -130,6 +130,7 @@ nav.navbar-second {
 }
 
 nav.navbar-second .navbar-nav > li > a {
+    color: #3e3f3a;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -142,3 +143,12 @@ nav.navbar-second .navbar-nav > li > a {
     padding: 0 15px 30px;
 }
 
+code, kbd, pre, samp {
+    font-family: Consolas, Menlo, Monaco, Courier New, monospace;
+}
+pre {
+    border: 1px solud #efefef;
+}
+pre code {
+    color: #555533;
+}

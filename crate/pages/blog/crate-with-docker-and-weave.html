@@ -1,0 +1,217 @@
+title: Crate with Docker & Weave
+author: Jodok Batlogg
+description: This post will give you a step-by-step guide to using Docker and Weave to build a Crate cluster on Google Compute Engine.
+created: 2015/01/22 12:10:00
+post_name: crate-with-docker-and-weave
+status: publish
+post_type: post
+tags: docker, weave, weaveworks, networking, multicast
+category: news
+
+
+_This is a guest post originally published on [all about Weave](http://weaveblog.com/2015/01/07/crate-with-docker-weave/) on Jan 7, 2015._
+
+
+[Crate](https://crate.io/overview/) is a massively scalable, distributed, and highly available database that leverages the power of Lucene for lighting fast response times, but you access it using familiar SQL. Crate's distributed SQL planner layer analyzes and optimizes your queries for maximum efficiency in a distributed environment.  You can think of it as [SQL for Elasticsearch](https://crate.io/blog/sql-for-elasticsearch/). Because Crate is designed from the ground up for scalability, it is also perfectly suited for containerization, in our case Docker.
+
+[Weave](https://github.com/zettio/weave) is a software-defined networking technology (SDN) that integrates with Docker and is particularly easy to use. Weave allows developers to implement overlay networks that are tailored for their applications without a need to touch the underlying infrastructure. Among [many features](http://zettio.github.io/weave/features.html), it enables multicast-based discovery to work in any cloud.
+
+This post will give you a step-by-step guide to using Docker and Weave to [build a Crate cluster on Google Compute Engine](https://crate.io/cloud/gce).
+
+## Launch Instances
+
+Launching instances on Google Compute Engine is simple. Just make sure you have the [gcloud utilites](https://cloud.google.com/compute/docs/gcloud-compute/) installed.
+
+If you prefer to separate your Crate instances in a separate network you can of course do so, but make sure that `TCP` port `4300` (used by Crate) and `TCP`+`UDP` port `6783`  (used by Weave) are open to all hosts on the network.
+
+For the purpose of this blog post we'll use three [n1-standard-](https://cloud.google.com/compute/docs/machine-types)[4](https://cloud.google.com/compute/docs/machine-types)  instances with a 12GB SSD root disk running CentOS 7, which conveniently has Docker package available [in the standard repository](https://docs.docker.com/installation/centos/).
+
+```
+$ gcloud compute instances create weave-{1..3} \
+    --project YOUR_PROJECT_NAME \
+    --zone us-central1-a \
+    --machine-type n1-standard-4 \
+    --image centos-7 \
+    --boot-disk-type pd-ssd \
+    --boot-disk-size 12GB \
+    --metadata-from-file startup-script=user-data.sh
+```
+
+The startup script (line 8) is a minimalistic bash script containing just the necessary commands to bootstrap the instances, e.g. install Docker and Weave, and pulling the required images:
+
+```sh
+#!/bin/bash
+# update repos
+yum update -y
+# install docker
+yum install -y docker
+service docker start
+# install weave
+curl --silent --location \
+  --output /usr/sbin/weave \
+  https://github.com/zettio/weave/releases/download/latest_release/weave
+chmod a+x /usr/sbin/weave
+# pull docker images
+docker pull crate:latest
+docker pull zettio/weave:latest
+```
+
+Once the instances are started you can list them using the `gcloud` utility.
+
+```
+$ gcloud compute instances list
+```
+
+The output should look similar like this:
+
+    NAME    ZONE          MACHINE_TYPE  INTERNAL_IP    EXTERNAL_IP    STATUS
+    weave-1 us-central1-a n1-standard-4 10.240.81.152  23.251.159.143 RUNNING
+    weave-2 us-central1-a n1-standard-4 10.240.60.209  23.251.158.46  RUNNING
+    weave-3 us-central1-a n1-standard-4 10.240.82.60   23.251.145.69  RUNNING
+
+## Launch Weave Network
+
+Now we're good to go to launch Weave to create a virtual network that spans across the 3 instances. To do so, connect to the first machine `weave-1` and launch Weave as root.
+
+```
+$ gcloud compute ssh weave-1 --zone us-central1-a
+> sudo weave launch
+```
+
+_Note: You might have to wait a bit after the instance is ready for the startup script to complete.  If you get "command not found" just wait a minute for the instance to catch up. To be sure, you can tail `/var/log/startupscript.log` and watch for the line: `Finished running startup script` to appear._
+
+Repeat that for `weave-2` and `weave-3` but add `weave-1` as a launch option.
+
+```
+$ gcloud compute ssh weave-2 --zone us-central1-a
+> sudo weave launch weave-1
+```
+
+To verify the status of the network, type:
+
+```
+> sudo weave status
+```
+
+You should get output similar to the following:
+
+```
+weave router 0.7.0
+Our name is 7a:dd:1b:b3:31:80
+Sniffing traffic on &{9 65535 ethwe 0e:45:c3:8a:aa:44 up|broadcast|multicast}
+MACs:
+0e:45:c3:8a:aa:44 -> 7a:dd:1b:b3:31:80 (2014-12-30 21:12:02.438783157 +0000 UTC)
+7a:dd:1b:b3:31:80 -> 7a:dd:1b:b3:31:80 (2014-12-30 21:12:02.521045141 +0000 UTC)
+Peers:
+Peer 7a:de:1b:b3:31:80 (v2) (UID 14445032660173218941)
+   -> 7a:0a:23:70:55:60 [10.240.153.241:6783]
+   -> 7a:0a:b9:aa:2b:bb [10.240.40.159:6783]
+Peer 7a:0a:23:70:55:60 (v2) (UID 879772198233532096)
+   -> 7a:0a:b9:aa:2b:bb [10.240.40.159:53611]
+   -> 7a:de:1b:b3:31:80 [10.240.57.155:57562]
+Peer 7a:0a:b9:aa:2b:bb (v2) (UID 3350071212069558429)
+   -> 7a:0a:23:70:55:60 [10.240.153.241:6783]
+   -> 7a:dd:1b:b3:31:80 [10.240.57.155:49729]
+Routes:
+unicast:
+7a:dd:1b:b3:31:80 -> 00:00:00:00:00:00
+7a:0a:23:70:55:60 -> 7a:0a:23:70:55:60
+7a:0a:b9:aa:2b:bb -> 7a:0a:b9:aa:2b:bb
+broadcast:
+7a:dd:1b:b3:31:80 -> [7a:0a:23:70:55:60 7a:0a:b9:aa:2b:bb]
+7a:0a:23:70:55:60 -> []
+7a:0a:b9:aa:2b:bb -> []
+Reconnects:
+```
+
+## Launch Crate
+
+Now that the Weave layer is ready, it's a breeze to launch the Crate cluster.
+The Weave network has multicast enabled that is you don't need to think about the unicast setup.
+Just start the Crate nodes with `weave run _CIDR_` and the usual `docker run` options (Weave passes the options to docker run),
+  with the only difference that you'll need to bind the host to the Weave network interface (lines 5-6).
+
+```
+> sudo weave run 10.0.1.x/24 \
+    -p 4300:4300 \
+    -p 4200:4200 \
+    crate:latest \
+    crate -Des.cluster.name=crate-weave \
+          -Des.network.bind_host=0.0.0.0 \
+          -Des.network.publish_host=_ethwe:ipv4_
+```
+
+Repeat that on all 3 nodes, starting with `10.0.1.1/24` for `weave-1` and so on.
+
+That's it! The Crate cluster with 3 nodes should be ready.
+
+**Verify Cluster**
+
+To verify the cluster, we just need to [expose Weave](http://zettio.github.io/weave/features.html#host-network-integration) to the local host's network.  Just be sure to choose an IP address that isn't in use, here we randomly pick 101:
+
+```
+> sudo weave expose 10.0.1.101/24
+```
+
+The SQL command to list all names of the nodes of a Crate cluster is:
+
+_(For more information about the SQL commands see [Crate's SQL documentation](https://crate.io/docs/stable/sql/index.html).)_
+
+```sql
+SELECT name FROM sys.nodes;
+```
+
+Using 'curl' we can POST the statement to the `_sql` endpoint of any Crate node and we can see that there are 3 nodes with random names.
+
+```sh
+> curl -XPOST 10.0.1.1:4200/_sql?pretty -d '{
+  "stmt": "select name from sys.nodes"
+  }'
+```
+```json
+{
+    "cols" : [ "name" ],
+    "duration" : 7,
+    "rows" : [ [ "Bloodstorm" ], [ "Dmitri Smerdyakov" ], [ "Perfection" ]  ],
+    "rowcount" : 3
+}
+```
+
+If you want to "turn off" the exposed network, you can use the Weave "hide" command:
+
+```
+> sudo weave hide 10.0.1.101/24
+```
+
+In order to make the cluster accessible from the outside world, we have already set `bind_host=0.0.0.0` and now need to configure GCE firewall to allow access:
+
+
+```
+$ gcloud compute firewall-rules create allow-crate \
+    --project YOUR_PROJECT_NAME \
+    --allow tcp:4200 tcp:4300 --source-ranges 0.0.0.0/0
+```
+
+## Final Steps
+
+Now that you've got your Crate cluster running, you can connect to the Admin UI by visiting the public IP of any node on port 4200, like so: `http://PUBLIC_IP:4200/admin`
+
+You can then import some sample data from Twitter using the "Get Started" link in the left sidebar of the Admin UI: `http://PUBLIC_IP:4200/admin/#/tutorial`
+
+Enjoy!
+
+## Conclusion
+
+Using Crate with Weave has definitely some advantages over the regular Docker usage.
+It removes the overhead of a unicast setup and makes it ever easier to deploy Crate clusters that span across availability zones or even cloud providers.
+And all this happens in a secure network that you can adjust to your needs.
+
+If you have any questions about Crate, you can ask in their [Google group](https://groups.google.com/forum/#!forum/crateio) or in [IRC #crate](http://en.irc2go.com/webchat/?net=freenode&room=crate). Happy deploying!
+
+## Appendix
+
+This post shows shell commands executed in different places. The line prefix shows where to run them:
+
+- `$` ... local machine
+- `>` ... remote machine
+- `#` ... docker container
