@@ -26,17 +26,17 @@
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.png' %}" />
 
-    <!--[if lt IE 9]>
-      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <script src="{% static '/static/js/modernizr-2.6.2.js' %}"></script>
-
     <link rel="stylesheet" href="{% static '/static/css/pygments-github.css' %}" />
     <link rel="stylesheet" href="{% static '/static/css/bootstrap.css' %}" />
     <link rel="stylesheet" href="{% static '/static/css/font-awesome.min.css' %}" />
     <link rel="stylesheet" href="{% static '/static/css/main.css' %}" />
     {% block extra_css %}
     {% endblock %}
+
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="{% static '/static/js/modernizr-2.6.2.js' %}"></script>
   </head>
 
   <body>
@@ -89,9 +89,9 @@
     <script src="{% static '/static/js/jquery-1.10.1.js' %}"></script>
     <script src="{% static '/static/js/jquery.cookie.js' %}"></script>
     <script src="{% static '/static/js/bootstrap.js' %}"></script>
-    <script src="{% static '/static/js/main.js' %}"></script>
     {% block extra_js %}
     {% endblock %}
+    <script src="{% static '/static/js/main.js' %}"></script>
 
     <!-- Google Analytics SDK -->
     {% if CONFIG.google_analytics %}

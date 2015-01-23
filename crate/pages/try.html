@@ -3,6 +3,12 @@ description: Try Crate from your browser, no installation needed. The Crate Cube
 
 {% extends "base.html" %}
 
+{% block extra_js %}
+<script src="{% static '/static/js/ascii-table.js' %}"></script>
+<script src="{% static '/static/js/highlight.pack.js' %}"></script>
+<script src="{% static '/static/js/crate.js' %}"></script>
+{% endblock %}
+
 {% block body %}
 <div class="container">
 
@@ -11,27 +17,58 @@ description: Try Crate from your browser, no installation needed. The Crate Cube
       <div class="page-header">
         <h1>Try Crate</h1>
       </div>
-      <p class="lead">Starting with Crate is easy as cake! Try out our demo cluster running on the Crate Cube.</p>
-      <iframe src="https://play.crate.io/_plugin/crate-admin/#/console" width="100%" height="600" border="0" frameborder="0"></iframe>
+      <p class="lead">Starting with Crate is easy as cake! Simply try out our demo cluster console ...</p>
+      <p><b>play.crate.io</b> is an 8-node demo cluster running on Google Compute Engine.</p>
       <p>&nbsp;</p>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-8">
-      <p>The Crate Cube is a condensed miniaturized cluster that we've custom built to allow you to try out Crate without having to download or install anything!
-        The image above shows three Crate Cubes running in an 12-node cluster configuration with Crate pre-installed in our sophisticated data broom closet*.</p>
-      <p>Just click the green button below to open the Crate Admin Console where you can explore the cluster and run queries against the sample data.
-        The cluster is populated with tweets from the Twitter firehose which are contained in a table named “tweets”.</p>
-      <p>If you click the “Console” button in the left column, you’ll be able to enter SQL queries on the data.
-        For example, to see how many tweets are in the data store, run:</p>
-      <pre>SELECT COUNT(*) FROM tweets;</pre>
-      <p>Give a few queries a try and see how easy it is to query the distributed and auto-sharded data store with SQL.</p>
-      <hr /><br />
-      <p class="small text-muted"><i>* Hopefully the cleaning staff doesn’t turn off the light!</i></p>
+
+      <div class="terminal">
+        <div class="terminal-header">
+          crate@play.crate.io | crash
+        </div>
+        <form class="crate-cli form terminal-body" data-host="https://play.crate.io">
+          <pre class="terminal-history"><div class="text-success">Welcome to the Crate Shell (aka CraSh) ...</div></pre>
+          <div class="terminal-prompt">
+            <input name="input" type="text" class="terminal-prompt" value="cr> " />
+          </div>
+        </form>
+      </div>
+      <p>&nbsp;</p>
+      <p class="text-right"><a class="btn btn-success" href="/docs/stable/sql/index.html" target="_blank"><i class="fa fa-book"></i> Crate SQL Help &raquo;</a></p>
 
     </div>
     <div class="col-sm-4">
-      <p class="text-center"><a href="https://play.crate.io/admin" class="btn btn-success btn-lg"><i class="fa fa-dashboard"></i> Open in separate window</a></p>
+
+      <p>Start off with exploring existing tables:</p>
+      <pre class="tut">select * from information_schema.tables where schema_name = 'doc';</pre>
+      <p>Select retweeted tweets:</p>
+      <pre class="tut">select id, user['id'], text from tweets where user['id'] > 1000000000 limit 10;</pre>
+      <p>Count tweets and unique users:</p>
+      <pre class="tut">select count(*) as tweets, count(distinct user['id']) as users from tweets;</pre>
+
+      <p>Step by Step:</p>
+      <pre class="tut">create table T_NAME (
+  name string,
+  address object as (
+    zip integer,
+    city string,
+    country string
+  ),
+  tags array(string)
+) clustered into 8 shards
+with (number_of_replicas='0-all');</pre>
+      <pre class="tut">insert into T_NAME (name, address, tags) values
+('Crate.IO GmbH', {zip=10969, city='Berlin', country='Germany'}, ['crate','de']),
+('Crate.IO', {zip=94107 , city='San Francisco', country='United States'}, ['crate','us']),
+('Crate Technology GmbH', {zip=6850, city='Dornbirn', country='Austria'}, ['crate','at']);</pre>
+      <pre class="tut">select count(*) as count from T_NAME;</pre>
+      <pre class="tut">select name, address['city'] as city, tags from T_NAME;</pre>
+      <pre class="tut">drop table T_NAME;</pre>
+
+      <p class="text-center"><a href="https://play.crate.io/admin" class="btn btn-success btn-lg"><i class="fa fa-dashboard"></i> Open full Admin UI</a></p>
       <hr /><br />
       <p class="h4">Want to use Crate in production?</p>
       <p><a class="btn btn-default" href="{% url '/docs.html' %}"><i class="fa fa-flask"></i> Install Crate</a></p>

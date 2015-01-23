@@ -65,3 +65,9 @@ pre.codehilite { font-family: Consolas, Menlo, Courier, monospace; }
 
 .l-Scalar-Plain { color: #63a35c }
 .p-Indicator { color: #df5000 }
+
+.hljs-operator { }
+.hljs-keyword { color: #795da3; }
+.hljs-string { color: #df5000; }
+.hljs-number { color: #0086b3; }
+
