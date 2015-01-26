@@ -19,7 +19,14 @@ title: Install with Docker
       <p>There are Docker images available from version <code>0.41.4</code>.
         For further information please refer to the <a href="https://github.com/crate/docker-crate/">docker-crate</a> Github repository.</p>
 
-      <h2>Using The Crate Docker Image</h2>
+      <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#linux" aria-controls="liuux" role="tab" data-toggle="tab">Linux</a></li>
+          <li role="presentation" class=""><a href="#osx" aria-controls="osx" role="tab" data-toggle="tab">OSX</a></li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="linux">
+             <h2>Using The Crate Docker Image</h2>
       <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-d</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="o">-p</span> <span class="m">4300:4300</span> <span class="ni">crate:latest</span></pre>
       <h3>Attach persistent data directory</h3>
       <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-d</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="o">-p</span> <span class="m">4300:4300</span> <span class="o">-v</span> <span class="m">&lt;data-dir&gt;:/data</span> <span class="ni">crate</span></pre>
@@ -49,6 +56,11 @@ title: Install with Docker
       <p>If you change the transport port from the default <code>4300</code> to something else, you also need to pass
         the publish port to Crate.</p>
       <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-d</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="o">-p</span> <span class="m">4321:4300</span> <span class="ni">crate</span> <span class="m">crate</span> <span class="o">-D</span><span class="m">es.transport.publish_port=4321</span></pre>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="osx">
+          </div>
+        </div>
+      </div>
 
       <h2>Further Reading</h2>
       <ul>
