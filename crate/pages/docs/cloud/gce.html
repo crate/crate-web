@@ -297,7 +297,9 @@ curl -XPOST $PRIVATE_IP:4200/_sql -d '{ "stmt": "select name from sys.nodes" }'<
 <strong>Output:</strong>
 <pre>{"cols":["name"],"duration":242,"rows":[["Scrier"],["Orphan-Maker"],["Micro"]],"rowcount":3}</pre>
 
-There you have it!  You can see that there are 3 Crate nodes running in this cluster.  Now if you add another node to the CoreOS cluster, it will automatically join the Crate cluster and Crate will take care of the rest.  Simple scalability FTW!
+<p>There you have it!  You can see that there are 3 Crate nodes running in this cluster.  Now if you add another node to the CoreOS cluster, it will automatically join the Crate cluster and Crate will take care of the rest.  Simple scalability FTW!</p>
+
+<p>Want to run this all in one simple bash script? Check out the <a href="../gce-bash-script">Crate Cluster All-in-one Bash Script</a>!</p>
 
       {% endfilter %}
 

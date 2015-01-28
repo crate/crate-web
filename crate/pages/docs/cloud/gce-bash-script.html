@@ -1,0 +1,144 @@
+title: All-in-one bash script Crate cluster installer for Google Compute
+description: We love using the Google Compute Engine resources here at Crate.IO
+logo: /static/images/gce-logo.png
+
+{% extends "doc.html" %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8">
+
+		<p class="lead">Looking to install a Crate cluster on Google Cloud in one fell swoop? You've come to the right place!</p>
+
+		<p>While I was writing the <a href="../gce">Crate &amp; GCE install docs</a>, I realized that I could basically script the whole thing. Eventually I got tired of running all of the commands so I got lazy and built this bash script to do it all at once.  Behold!</p>
+
+		<p>Before you run the script, make sure the check the environment variables at the top and adjust them to your liking.  Eventually I'll get this into GitHub so everyone can contribute (like adding error handling or cli argument passing) but for now, here is the initial script.</p>
+
+		<p><strong>PREREQUISITES:</strong> Google's 'gcloud' utilities configured and running locally.</p>
+
+		<h3>crate-gce.sh</h3>
+		<pre>#!/bin/bash
+
+# All in one bash script for installing Crate on
+# Google Compute Engine using Docker
+
+GCE_ZONE=us-central1-a
+INSTALL_NAME=demo
+NUMBER_OF_INSTANCES=3
+OS_NAME="ubuntu-14-04"
+
+echo "> Setting default GCE Zone to $GCE_ZONE"
+gcloud config set compute/zone $GCE_ZONE
+
+echo
+echo "> Creating network $INSTALL_NAME"
+gcloud compute networks create $INSTALL_NAME
+
+echo
+echo "> Creating internal firewall rule $INSTALL_NAME-internal"
+gcloud compute firewall-rules create $INSTALL_NAME-internal \
+--network $INSTALL_NAME \
+--source-ranges 10.240.0.0/16 \
+--allow tcp udp icmp
+
+echo
+echo "> Creating external firewall rule $INSTALL_NAME-external"
+gcloud compute firewall-rules create $INSTALL_NAME-external \
+--network $INSTALL_NAME \
+--source-ranges 0.0.0.0/0 \
+--allow tcp:22 tcp:80 tcp:4200
+
+echo
+echo "> Creating $NUMBER_OF_INSTANCES disks"
+for i in $(seq 1 $NUMBER_OF_INSTANCES)
+do
+    echo "> Creating disk: $INSTALL_NAME-ssd-$i"
+    gcloud compute disks create $INSTALL_NAME-ssd-$i \
+    --zone us-central1-a \
+    --size 50GB \
+    --type pd-ssd
+done
+
+echo
+echo "> Creating $NUMBER_OF_INSTANCES $OS_NAME instances"
+for i in $(seq 1 $NUMBER_OF_INSTANCES)
+do
+    echo "> Creating instance: $INSTALL_NAME-$i"
+    gcloud compute instances create $INSTALL_NAME-$i \
+	    --zone us-central1-a \
+	    --image $OS_NAME \
+	    --disk name=$INSTALL_NAME-ssd-$i \
+	    --machine-type n1-standard-8 \
+	    --boot-disk-size 10GB \
+	    --network $INSTALL_NAME
+done
+
+echo
+echo "> Getting IP addresses of the instances"
+unset GCE_HOSTS
+for i in $(seq 1 $NUMBER_OF_INSTANCES)
+do
+    GCE_IP=`gcloud compute instances list $INSTALL_NAME-$i \
+    	--format=json | grep networkIP | awk -F": " '{print $2}' | sed s/\"//g`
+    GCE_HOSTS="$GCE_IP:4300,$GCE_HOSTS"
+done
+
+# Strip trailing comma
+GCE_HOSTS=${GCE_HOSTS%,}
+
+echo
+echo "> CGE_HOSTS is $GCE_HOSTS"
+echo
+
+for i in $(seq 1 $NUMBER_OF_INSTANCES)
+do
+    echo "> Configuring instance: $INSTALL_NAME-$i"
+    gcloud compute ssh $INSTALL_NAME-$i --command "\
+        sudo mkfs.ext4 -F /dev/sdb; \
+        sudo mkdir -p /data/data1; \
+        sudo mount /dev/sdb /data/data1; \
+        sudo apt-get -y install docker.io; \
+        sudo docker pull crate:latest; \
+        sudo docker run -d -p 4200:4200 \
+            -p 4300:4300 \
+            --volume /data:/data \
+            --env CRATE_HEAP_SIZE=16g \
+            crate \
+            crate \
+            -Des.path.data='/data/data1' \
+            -Des.multicast.enabled=false \
+            -Des.network.publish_host=\$(curl -s \
+	            'http://metadata/computeMetadata/v1/instance/network-interfaces/0/ip' \
+	            -H 'X-Google-Metadata-Request: True') \
+            -Des.discovery.zen.ping.unicast.hosts=$GCE_HOSTS \
+        logout"
+    echo
+done
+
+echo "Waiting for everything to catch up..."
+sleep 9
+
+echo "Everything should be running now, let's check:"
+echo
+
+GCE_EXT_IP=`gcloud compute instances list $INSTALL_NAME-1 \
+	--format=json | grep natIP | awk -F": " '{print $2}' | sed s/\"//g`
+GCE_EXT_IP=${GCE_EXT_IP%,}
+
+curl -s -XPOST $GCE_EXT_IP:4200/_sql -d '{ "stmt": "select name from sys.nodes" }'
+
+echo</pre>
+
+<p>Cheers!</p>
+
+		</div>
+		<div class="col-sm-4">
+			<img class="img-responsive" src="{% static logo %}" />
+			<hr />
+			{% include "cloud-template-list.html" %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+
