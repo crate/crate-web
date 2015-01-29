@@ -1,0 +1,29 @@
+title: Crate with Docker, Weave, Flocker, and Powerstrip at SnowSprint
+link: https://crate.io/blog/crate-flocker-weave-powerstrip-snowsprint/
+author: Spanky
+description: 
+created: 2015/01/29 18:00:00
+post_name: crate-flocker-weave-powerstrip-snowsprint
+status: publish
+post_type: post
+tags: docker, flocker, weave, powerstrip, clusterhq, snowsprint
+category: news
+
+
+<img src="/static/images/powerstrip-ss.jpeg" width="780" height="462" />
+
+There's been so much interesting work happening at the [Crate.IO SnowSprint]({% url '/snowsprint.html' %}), but one of the most exciting has been to watch the [WeaveWorks](http://weave.works/) and [ClusterHQ](https://clusterhq.com/) guys ([Ilya Dmitrichenko](https://twitter.com/errordeveloper) and [Luke Marsden](https://twitter.com/lmarsden)) hacking together the final pieces of a new project called [Powerstrip](https://github.com/clusterhq/powerstrip). 
+
+Powerstrip allows various third party tools in the Docker space to interact with each other by allowing them to avoid wrapping Docker commands. For example, it was previously impossible to use Flocker and Weave together because they both needed to wrap commands sent to Docker and thus they couldn't interoperate. With Powerstrip, this is now possible.
+
+Crate.IO is happy to have brought these two together in the Austrian Alps at SnowSprint to collaborate in person and put the finishing touches on their integration. We're also excited that one of the first applications to test drive Powerstrip is Crate! Last night we were privileged to witness the first Powerstrip integration, and after the high fives and congratulations (and beers), we quickly set about doing a Crate proof of concept. By leveraging Powerstrip, you can now run a Crate cluster in Docker containers that uses Weave's container networking as well as portable storage provided by Flocker. Wunderbar!
+
+[Check out the in-depth blogpost and screencast from ClusterHQ.](http://clusterhq.com/blog/powerstrip-prototype-docker-extensions-today)
+
+We're all super excited about the potential of Powerstrip and its benefit to the entire Docker community. The ability to prototype integrations for various Docker "extensions" like Weave and Flocker (and more!) will create huge opportunities for developers to take containerization to the next level. It's a boon for Crate because it gives developers more flexibility in how they install, run, and manage their Crate clusters. We look forward to seeing where Powerstrip can take us! 
+
+[Learn more about Crate]({% url '/overview.html' %})
+
+[Installing Crate in Docker containers]({% url '/docs/docker.html' %})
+
+[Get &amp; Install Crate]({% url '/download.html' %})
