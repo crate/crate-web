@@ -1,5 +1,5 @@
-title: Crate & Google Compute Engine (GCE)
-description: We love using the Google Compute Engine resources here at Crate.IO
+title: Crate & Google Cloud Platform
+description: We love using the Google Cloud Platform resources here at Crate.IO
 logo: /static/images/gce-logo.png
 
 {% extends "doc.html" %}
@@ -9,9 +9,9 @@ logo: /static/images/gce-logo.png
   <div class="row">
     <div class="col-sm-8">
 
-      <p>We love using the Google Compute Engine resources here at Crate.IO.  We've done quite a few Proof of Concepts using the platform.  We're currently running <a href="https://play.crate.io">play.crate.io</a> there, a public instance of Crate that lets you experiment with it without having to download or install anything.</p>
+      <p>We love using Google Cloud Platform resources here at Crate.IO.  We've done quite a few Proof of Concepts using the platform.  For example, we're currently running <a href="https://play.crate.io">play.crate.io</a> there, a public instance of Crate that lets you experiment with it without having to download or install anything.</p>
 
-      <p>Our current work involves using Docker or Docker on CoreOS, but you don't have to use either.  If your GCE instances are running regular operating systems like Ubuntu, you can just use APT (or similar) or however you handle your configuration management (Puppet, SaltStack, Chef, et al.)  CoreOS just makes cluster node discovery easy and Docker containers provide excellent isolation and easy installation.</p>
+      <p>Our current work involves using Docker or Docker on CoreOS, but you don't have to use either.  If your Google Compute instances are running regular operating systems like Ubuntu, you can just use APT (or similar) or however you handle your configuration management (Puppet, SaltStack, Chef, et al.)  CoreOS just makes cluster node discovery easy and Docker containers provide excellent isolation and easy installation.</p>
 
       {% filter markdown %}
 
@@ -19,7 +19,7 @@ logo: /static/images/gce-logo.png
 
 We assume that you've already got your local 'gcloud' environment up and running. If not, visit: <a href="https://cloud.google.com/compute/docs/gcloud-compute" target="_newbie">https://cloud.google.com/compute/docs/gcloud-compute</a> to get started.
 
-First you'll need to build a cluster of GCE instances and the associated resources they require:
+First you'll need to build a cluster of Goolge Compute Engine (GCE) instances and the associated resources they require:
 
 <ul>
     <li>Network</li>
@@ -28,7 +28,7 @@ First you'll need to build a cluster of GCE instances and the associated resourc
     <li>Machine type</li>
 </ul>
 
-First we'll create a Crate demo network with the proper firewall rules:
+First we'll create a demo network with the proper firewall rules:
 
 <pre>gcloud compute networks create demo</pre>
 

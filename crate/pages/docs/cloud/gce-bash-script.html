@@ -1,4 +1,4 @@
-title: All-in-one bash script Crate cluster installer for Google Compute
+title: All-in-one bash script Crate cluster installer for Google Cloud
 description: We love using the Google Compute Engine resources here at Crate.IO
 logo: /static/images/gce-logo.png
 
@@ -11,17 +11,18 @@ logo: /static/images/gce-logo.png
 
 		<p class="lead">Looking to install a Crate cluster on Google Cloud in one fell swoop? You've come to the right place!</p>
 
-		<p>While I was writing the <a href="{% url '/docs/cloud/gce.html' %}">Crate &amp; GCE install docs</a>, I realized that I could basically script the whole thing. Eventually I got tired of running all of the commands so I got lazy and built this bash script to do it all at once.  Behold!</p>
+		<p>While I was writing the <a href="{% url '/docs/cloud/gce.html' %}">Crate &amp; Google Cloud install docs</a>, I realized that I could basically script the whole thing. Eventually I got tired of running all of the commands so I got lazy and built this bash script to do it all at once.  Behold!</p>
 
 		<p>Before you run the script, make sure the check the environment variables at the top and adjust them to your liking.  Eventually I'll get this into GitHub so everyone can contribute (like adding error handling or cli argument passing) but for now, here is the initial script.</p>
 
 		<p><strong>PREREQUISITES:</strong> Google's 'gcloud' utilities configured and running locally.</p>
 
 		<h3>crate-gce.sh</h3>
+
 		<pre>#!/bin/bash
 
-# All in one bash script for installing Crate on
-# Google Compute Engine using Docker
+# All-in-one bash script for installing a Crate cluster 
+# on Google Cloud Platform using Docker.
 
 GCE_ZONE=us-central1-a
 INSTALL_NAME=demo
