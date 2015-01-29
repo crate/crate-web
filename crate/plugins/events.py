@@ -63,6 +63,7 @@ def preBuildPage(site, page, context, data):
             raw = force_unicode(ctx['raw_body'])
             ctx['body'] = mark_safe(markdown(raw, extras=["fenced-code-blocks"]))
             context['__CACTUS_CURRENT_PAGE__'] = page
+            context['CURRENT_PAGE'] = page
             context.update(ctx)
             data = tpl.render(context)
 
