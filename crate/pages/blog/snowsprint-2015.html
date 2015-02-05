@@ -1,0 +1,73 @@
+title: Crate.IO Snowsprint 2015 Recap: Dockerzeit
+link: https://crate.io/blog/Snowsprint-2015/
+author: Kenan
+description: Crate.IO SnowSprint 2015 revived a long tradition of legendary Austrian Alpine hackathons. This time revolving around Docker containers and The Crate.IO database.
+created: 2015/02/05 18:00:00
+post_name: crate-flocker-weave-powerstrip-snowsprint
+status: publish
+post_type: post
+tags: docker, flocker, weave, powerstrip, clusterhq, snowsprint, cenito, hackathon, sql, nosql
+category: news
+
+
+<div class="youtube-wrapper">
+<iframe align="center" width="700" height="393" src="https://www.youtube.com/embed/hvQyqpK49MU" frameborder="0" allowfullscreen></iframe></div>
+
+[Crate.IO SnowSprint 2015]({% url '/snowsprint.html' %}) revived a long tradition of legendary Austrian Alpine hackathons. For a whole week we have been drinking beer, skiing and of course, hacking around Crate which is the perfect database to be used in containererized enviroments, especially Docker. This time we have had over 30 developers from all over the world, from San Francisko, Sarajevo, Berlin, London, Bristol, up to Graz and Dornbirn.
+
+Even if it has been a lot of fun, we managed to get a lot of work done and get some positive feedback from the community surrounding Crate and Docker. It has been my very first SnowSprint and it has been wonderful to see how people are engaging and building bleeding edge stuff by using Crate over various platforms and in conjunction with all kinds of technology stacks. We wish to present some of the things that we did in the week we have been hacking together:
+
+##Crate with Docker, Flocker, and Weave
+
+Notably [Luke Marsden](https://twitter.com/lmarsden) from [ClusterHQ](https://clusterhq.com/) and [Ilya Dmitrichenko](https://twitter.com/errordeveloper) from [WeaveWorks](http://weave.works/) hacked together the final pieces of a new project called [Powerstrip](https://github.com/clusterhq/powerstrip), which lets various third party tools for Docker interact with each other by allowing them to avoid wrapping Docker commands. Crate, as a database which uses Weaves container networking, and Flocker's portable storage has been used a proof of concept and use case for Dockerized databases.
+
+As a high point after announcing Powerstrip, Solomon from Docker said hello: 
+
+<blockquote class="twitter-tweet" lang="en"><p>Wish I could make it to <a href="https://twitter.com/hashtag/snowsprint?src=hash">#snowsprint</a>! I hear there&#39;s a lot of cool Docker hacking going on. Next year! /cc <a href="https://twitter.com/lmarsden">@lmarsden</a> <a href="https://twitter.com/CrateIO">@CrateIO</a> <a href="https://twitter.com/monadic">@monadic</a></p>&mdash; Solomon Hykes (@solomonstre) <a href="https://twitter.com/solomonstre/status/560981794170736640">January 30, 2015</a></blockquote>
+
+You can find out more on how to integrate Docker, Crate, Flocker, and Weave in our in-depth blog post: [Crate, Weave, Docker, Flocker](https://crate.io/blog/crate-flocker-weave-powerstrip-snowsprint/)
+
+##How to integrate Crate with PHP / Symfony 2
+
+Another really interesting thing which happened in the quiet corner at Leo's Hutte was that [Kamil Adryjanek](https://twitter.com/kadryjanek) from [Level 7 Systems](http://level7system.co.uk) has done some really amazing work on integrating Crate with PHP / Symfony 2, bearing some impressive performance gains over MySQL on their own backend.
+
+>"Lately we were looking for some new solution to store our Call Detail Records which grow very quickly. MySQL database engine was doing quite well so far but with the beginning of the year it was time for change. Before migration on table with about 30 million records, MySQL quries were executed in about 5 to 15 seconds. Now with CRATE it takes less than 500 milliseconds." From [Level 7 Systems](https://www.level7systems.co.uk)
+
+<blockquote class="twitter-tweet" lang="en"><p>More great work out of <a href="https://twitter.com/hashtag/SnowSprint?src=hash">#SnowSprint</a> from <a href="https://twitter.com/kadryjanek">@kadryjanek</a>, Crate &amp; <a href="https://twitter.com/hashtag/Symfony2?src=hash">#Symfony2</a> integration! <a href="http://t.co/nw1I90jsIv">http://t.co/nw1I90jsIv</a> <a href="http://t.co/a4fOGw6L3H">pic.twitter.com/a4fOGw6L3H</a></p>&mdash; CrateIO (@CrateIO) <a href="https://twitter.com/CrateIO/status/563284878972960768">February 5, 2015</a></blockquote>
+
+Read their blog post for an in-depth guide on how to use Crate with PHP / Symphony 2 Network and their experiences with it: [Symphony7Systems running Crate with PHP / Symphony 2](http://level7systems.co.uk/en/using-crate-with-symfony2/)
+
+##Crate goes Azure cloud                                             
+
+[Sasha Vincic](https://twitter.com/vincic), a long time SnowSprinter from [Cenito Software](http://www.cenito.se) from Sweden has been firing up Crate clusters all over Microsoft's cloud platform, Azure. Cenito Software has been hitting the limits of the Azure SQL DB with a project of their own, so Crate and Azure seem to be an interesting way to go.
+
+>"At Cenito we have few projects running on Azure where the biggest has hit some limits of the SQL DB. We will be try Crate.IO for one of them to compare the price/performance compared to Azure SQL DB." from [Cenito Software](http://www.cenito.se/2015/02/one-week-azure-crate-io-austrian-alps-snowsprint/) Blog
+
+We are looking forward to see what kind of results come out of the comparison!
+
+<blockquote class="twitter-tweet" lang="en"><p>Thanks <a href="https://twitter.com/CrateIO">@CrateIO</a> for yet a great <a href="https://twitter.com/hashtag/Snowsprint?src=hash">#SnowSprint</a>! <a href="http://t.co/NeDg2rHHF4">pic.twitter.com/NeDg2rHHF4</a></p>&mdash; Sasha Vinčić (@vincic) <a href="https://twitter.com/vincic/status/561614411572711424">January 31, 2015</a></blockquote>
+
+##Crate for Ruby on Rails getting hypercharged and a Node.JS Loopback connector in the works
+
+Meanwhile the [Lovelysystems](www.lovelysystems.com) guys from right next door to the Dornbirn office of Crate have been working on implementing a Loopback connector for Node.JS, which is used to quickly create dynamic end-to-end REST APIs.
+
+>"Loopback is a framework for rapidly implementing REST APIs, which would be quite a natural fit for Crate" says [Lukas Ender](https://twitter.com/lukasender)
+
+[Johannes Faigle](https://twitter.com/jayeff) Ruby on Rails developer at day, Partymensch at night joined the SnowSprint, and he has been giving the Ruby adapter some love and updated it to be in line with the latest versions of Crate. We are hoping to update the official Ruby client soon, for all the Ruby lovers out there!
+
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/Snowsprint?src=hash">#SnowSprint</a> 2015 was a blast. Thanks <a href="https://twitter.com/CrateIO">@CrateIO</a> for organizing everything. <a href="http://t.co/cPmlyEm5oT">pic.twitter.com/cPmlyEm5oT</a></p>&mdash; Johannes Faigle (@jayeff) <a href="https://twitter.com/jayeff/status/562304496622374914">February 2, 2015</a></blockquote>
+
+##The challenges of developing well performant joins for a distributed database
+
+The Crate.IO core team hasn't been sitting idly either, they have been working hard on upcoming key features like: Joins, finished a better implementation of nested analyzing and nested planning, and are on their way to a new stable release soon. They have gone full-pace on the SnowSprint, tackling the core of Crate.
+
+>"The challenging part about Joins is it is a work to do and have the nested thing going on, dabble in the exploit field cache in Lucene, it is simply a lot of work, but we are getting there!" says Bernd Dorn, CTO of Crate
+
+SnowSprints, historically have been community building events, with many outdoor activities. As it seems beer, schnapps and spaetzle-fueled developers at their best the alpine mountains have done some amazing work which has gone around the world in tweets, blog posts, and even trended on Hackernews. We are looking forward for next year's SnowSprint, hope to see you there too. We want to thank everyone for being so great, and keep on hacking!
+
+
+**[Learn more about Crate]({% url '/overview.html' %})**
+
+**[Installing Crate in Docker containers]({% url '/docs/docker.html' %})**
+
+**[Get &amp; Install Crate]({% url '/docs' %})**

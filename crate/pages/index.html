@@ -21,19 +21,19 @@ description: Crate is an open source database built with familiar SQL syntax, re
   <div class="container">
     <div class="row">
       <div class="col-sm-4">
-        <p><img class="img-responsive thumbnail" src="{% static '/static/images/sql.jpg' %}" /></p>
+        <p><a href="{% url '/overview.html' %}"><img class="img-responsive thumbnail" src="{% static '/static/images/sql.jpg' %}" /></a></p>
         <h2>Distributed SQL</h2>
         <p class="lead">One to rule them all: sub-second queries on tabular data and semi-structured records. Including support for binary objects (BLOBs).</p>
         <p>Read more about <a href="{% url '/overview.html' %}">Crate's features</a>.</p>
       </div>
       <div class="col-sm-4">
-        <p><img class="img-responsive thumbnail" src="{% media '/media/1501/powerstrip-home.jpeg' %}" /></p>
-        <h2>Crate, Docker, Weave, Flocker, and Powerstrip!</h2>
-        <p class="lead">Amazing work coming out of SnowSprint with the launch of ClusterHQ's Powerstrip.</p>
-        <p>Read more about <a href="{% url '/blog/crate-flocker-weave-powerstrip-snowsprint.html' %}">Crate and Powerstrip</a>.</p>
+        <p><a href="{% url '/blog/snowsprint-2015' %}"><img class="img-responsive thumbnail" src="{% static '/static/images/thumbnail.png' %}" /></a></p>
+        <h2>Crate.IO Snowsprint 2015 Recap: Dockerzeit</h2>
+        <p class="lead">SwnoSprint 2015, beer, schnapps and spaetzle-fueled developers at their best! They have done some amazing work in the Docker ecosystem. </p>
+        <p>Read more about <a href="{% url '/blog/snowsprint-2015' %}">SnowSprint 2015 recap: Dockerzeit</a>.</p>
       </div>
       <div class="col-sm-4">
-        <p><img class="img-responsive thumbnail" src="{% static '/static/images/sharednothing.png' %}" /></p>
+        <p><a href="{% url '/docs/cloud.html' %}"><img class="img-responsive thumbnail" src="{% static '/static/images/sharednothing.png' %}" /></a></p>
         <h2>Shared Nothing Architecture</h2>
         <p class="lead">Adding nodes on commodity hardware or in the cloud is as simple as a single command in your terminal.</p>
         <p>Learn how to <a href="{% url '/docs/cloud.html' %}">install Crate in the cloud</a>.</p>
