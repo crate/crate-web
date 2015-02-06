@@ -1,0 +1,103 @@
+title: New Crate release: v0.46.5
+link: https://crate.io/blog/crate release-v0-46-5/
+author: Kenan
+description: New Crate Release v0.46.5
+created: 2015-02-06
+post_name: new release: v0.46.5
+status: publish
+post_type: post
+tags: crate, release, schemata, column policy
+category: developernews
+
+We're pleased to announce that Crate 0.46.5 is now stable. You can find a summary of changes in the [CHANGES.txt](https://github.com/crate/crate/blob/master/CHANGES.txt) file in our GitHub repository. If you find this to not be the case, please do not hesitate to [contact us](https://crate.io/about/contact/) and let us know.
+
+##In v0.46.5 we have added quite a few new features, we shall show off the most interesting ones here:
+
+* Support for user defined schemata
+* Support for column policies
+* Error handling when selecting non-existent root columns
+
+Also we have upgraded Elasticsearch from 1.3.6 to 1.4.1 
+
+##Support for user defined schemata
+
+Crate now supports user defined schemas, please note: schemas are primarily namespaces for tables. There is no notion of access control. Everybody can see and manipulate tables in every schema.
+
+    cr> create table my_schema.my_table_1 (name string, value float);
+    CREATE OK, 1 row affected (0.000 sec)
+
+    cr> select * from information_schema.schemata;
+    +--------------------+
+    | schema_name        |
+    +--------------------+
+    | blob               |
+    | my_schema          |
+    | information_schema |
+    | sys                |
+    | doc                |
+    +--------------------+
+
+Here we can see the list of schemas, "blob", "information_schema", "sys" and "doc" are default schemas. Every table that is created without an explicit schema name, will be created in the doc schema.
+
+A user created schema exists as long as there are tables with the same schema name. If the last table with that schema is dropped, the schema is gone (except for the blob and doc schema):
+
+    cr> drop table my_schema.my_table_1;
+    cr> select * from information_schema.schemata;
+    +--------------------+
+    | schema_name        |
+    +--------------------+
+    | blob               |
+    | information_schema |
+    | sys                |
+    | doc                |
+    +--------------------+
+
+##Error handling when selecting non-existent root columns
+
+    cr> create table foo (name string, value float);
+    CREATE OK, 1 row affected (0.000 sec)
+
+When trying to select a non-existent root column now we we get an error message, before it has been returning a '0' value.
+
+    cr> select name, attributes from foo;
+    SQLActionException[Column attributes unknown]
+
+## Support for column policies
+
+The Column Policy defines if a table enforces its defined schema or if it’s allowed to store additional columns which are a not defined in the table schema. If the column policy is not defined within the with clause, dynamic will be used.
+
+    cr> create table my_table (
+    ...   title string,
+    ...   author string
+    ... ) with (column_policy = 'strict');
+    CREATE OK, 1 row affected (0.000 sec)
+
+    cr> insert into my_table1 (title, author)
+    ... values ('steppenwolf', 'Herman Hesse')
+    ... ;
+
+If we insert a new column, we shall get an exepcion
+
+    cr> insert into my_table1 (title, author, date)
+    ... values ('Steppenwolf', 'Herman Hesse', '1927')
+    ... ;
+    SQLActionException[Column date unknown]
+
+In case we use a 'dynamic column policy', a new column shal be automatically created
+
+    cr> create table my_table2 (           
+    ... title string,                      
+    ... author string                      
+    ... ) with (column_policy = 'dynamic');
+    CREATE OK, 1 row affected (0.000 sec)
+
+    cr> insert into my_table2 (title, author, date)
+    ... values ('Steppenwolf', 'Herman Hesse', '1927')
+    ... ;
+    INSERT OK, 1 row affected (0.000 sec)
+
+Elasticsearch upgrade from 1.3.4 to the latest version 1.4.1, [ES changelog](http://www.elasticsearch.org/blog/elasticsearch-1-4-1-released/).
+    
+That’s all we have to report today, see you next release!
+
+_~Kenan &amp; the CrateIO Team_
