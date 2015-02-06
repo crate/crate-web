@@ -15,7 +15,9 @@ logo: /static/images/gce-logo.png
 
       {% filter markdown %}
 
-<h3>Getting Started:</h3>
+<p><strong>Want to run this all in one simple bash script? Check out the <a href="{% url '/docs/cloud/gce-bash-script.html' %}">Crate Cluster All-in-One Bash Script</a>!</strong></p>
+
+<h2>Getting Started:</h2>
 
 We assume that you've already got your local 'gcloud' environment up and running. If not, visit: <a href="https://cloud.google.com/compute/docs/gcloud-compute" target="_newbie">https://cloud.google.com/compute/docs/gcloud-compute</a> to get started.
 
@@ -75,37 +77,49 @@ When you're done you should have 3 instances named "demo-x" using the "demo" net
 
 <pre>gcloud compute ssh demo-1</pre>
 
-<h3>Setting up the storage locations:</h3>
+<h2>Setting up the storage locations:</h2>
 
-Even though the drives we created for the instances are configured they won't be formatted or mounted.  You can script this but for simplicity of this demo we'll just do it manually on each instance:
+Even though the drives we created for the instances are configured, they won't be formatted or mounted.  You can script this, but for simplicity of this demo we'll just do it manually on each instance:
 
 <pre>sudo su -
 mkfs.ext4 -F /dev/sdb
 mkdir -p /data/data1
 mount /dev/sdb /data/data1</pre>
 
-Now you're ready to install Crate.  You can do this any number of ways (tarball, APT, yum, Docker, etc.) but we recommend using Docker containers.
+<h2>Installing Crate</h2>
 
-<h3>Installing with Docker:</h3>
+<p>Now you're ready to install Crate. You can do this any way you choose (tarball, APT, yum, Docker, etc.) but we recommend using Docker containers.  We also like CoreOS because of it's small footprint and ease of scaling.  In the tabs below you'll find instructions for both Docker or Docker on CoreOS</p>
 
-First make sure Docker is installed:
+<div role="tabpanel">
 
-<pre class="lang:default decode:true">sudo apt-get -y install docker.io</pre>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#docker" aria-controls="docker" role="tab" data-toggle="tab">Docker</a></li>
+    <li role="presentation" class=""><a href="#coreos" aria-controls="cores" role="tab" data-toggle="tab">Docker &amp; CoreOS</a></li>
+  </ul>
 
-Then get Crate's official Docker container:
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="docker">
 
-<pre>sudo docker pull crate:latest</pre>
-Now Crate should be ready to run in a container on your instance.  Again, repeat these commands on each instance.
+      <h3>Installing with Docker:</h3>
 
-<h3>Setting up a Cluster:</h3>
+      First make sure Docker is installed (substitute your OS's package manager):
 
-It's important to keep in mind that multicast is not supported in GCE (or in most cloud providers).  A multicast setup allows nodes to automatically discover each other.  Since we do not have this ability, we have to manually add the nodes to the cluster.  We'll do this by putting a comma separated list of all of the hostnames (or IP addresses) into a local environment variable (HOSTS), and get the local IP to publish (PRIVATE_IP) and then pass those to Docker. Don't forget to include the discovery port which is 4300. You can get a list of the instance private IPs by using the following command locally:
+      <pre class="lang:default decode:true">sudo apt-get -y install docker.io</pre>
 
-<pre>gcloud compute instances list | grep demo</pre>
+      Then get Crate's official Docker container:
 
-Then fill in the IPs from that list to the following line, making sure to add :4300
+      <pre>sudo docker pull crate:latest</pre>
+      Now Crate should be ready to run in a container on your instance.  Again, repeat these commands on each instance.
 
-<pre>HOSTS="10.240.0.1:4300,10.240.0.2:4300,10.240.0.3:4300"</pre>
+      <h3>Setting up a Cluster:</h3>
+
+      It's important to keep in mind that multicast is not supported in GCE (or in most cloud providers).  A multicast setup allows nodes to automatically discover each other.  Since we do not have this ability, we have to manually add the nodes to the cluster.  We'll do this by putting a comma separated list of all of the hostnames (or IP addresses) into a local environment variable (HOSTS), and get the local IP to publish (PRIVATE_IP) and then pass those to Docker. Don't forget to include the discovery port which is 4300. You can get a list of the instance private IPs by using the following command locally:
+
+      <pre>gcloud compute instances list | grep demo</pre>
+
+      Then fill in the IPs from that list to the following line, making sure to add :4300
+
+      <pre>HOSTS="10.240.0.1:4300,10.240.0.2:4300,10.240.0.3:4300"</pre>
 
 <pre>PRIVATE_IP=$(curl "http://metadata/computeMetadata/v1/instance/network-interfaces/0/ip" -H "X-Google-Metadata-Request: True")
 sudo docker run -d -p 4200:4200 \
@@ -119,25 +133,29 @@ sudo docker run -d -p 4200:4200 \
     -Des.network.publish_host=$PRIVATE_IP \
     -Des.discovery.zen.ping.unicast.hosts=$HOSTS</pre>
 
-Run this on each instance and the cluster should discover all of the nodes and become a 3-node cluster.
+      Run this on each instance and the cluster should discover all of the nodes and become a 3-node cluster.
 
-<h3>Testing the Cluster:</h3>
+      <h3>Testing the Cluster:</h3>
 
-To verify that the cluster is running and that all nodes have joined properly, just call the API using curl:
+      To verify that the cluster is running and that all nodes have joined properly, just call the API using curl:
 
-<pre>curl -XPOST $PRIVATE_IP:4200/_sql -d '{ "stmt": "select name from sys.nodes" }'</pre>
+      <pre>curl -XPOST $PRIVATE_IP:4200/_sql -d '{ "stmt": "select name from sys.nodes" }'</pre>
 
-<h2>Installing Crate using CoreOS and Docker:</h2>
+    </div>
 
-If you want to install CoreOS on your instances, it can take a few extra steps to get set up, but then you gain some benefits from using CoreOS.  Create the networks and disks as before, but when it comes to building the instances, you'll pass in a YAML file that outlines the steps CoreOS should take while installing.
+    <div role="tabpanel" class="tab-pane" id="coreos">
 
-First, generate a new token for each unique cluster using:
+      <h3>Installing Crate using CoreOS and Docker:</h3>
 
-<a href="https://discovery.etcd.io/new">https://discovery.etcd.io/new</a>.  This will give you a token you'll need to put into the YAML file so all nodes register themselves and are then discoverable.
+      <p>If you want to run CoreOS on your instances, it can take a few extra steps to get set up, but then you gain some benefits from using CoreOS. Create the networks and disks as before, but when it comes to building the instances, you'll pass in a YAML file that outlines the steps CoreOS should take while installing.</p>
 
-Here is a sample YAML file for Crate, CoreOS, and Docker.  Be sure to add the Discovery token as well as your username and public key:
+      <p>There are several different <a href="https://coreos.com/docs/cluster-management/setup/cluster-architectures/#overview">CoreOS cluster architectures</a> you can read about. Here we're going to outline a simple small cluster with high-availability.</p>
 
-<strong>cloud-config.yaml</strong>
+      <p>First, generate a new token for each unique cluster using: <a href="https://discovery.etcd.io/new">https://discovery.etcd.io/new</a>. This will give you a token you'll need to put into the YAML file so all nodes register themselves and are then discoverable.</p>
+
+      <p>Here is a sample YAML file for Crate, CoreOS, and Docker. Be sure to add the Discovery token as well as your username and public key:</p>
+
+      <strong>cloud-config.yaml</strong>
 <pre class="lang:default decode:true ">#cloud-config
 
 coreos:
@@ -197,9 +215,9 @@ users:
       - sudo
       - docker</pre>
 
-<h3>Building the instances:</h3>
+      <h3>Building the instances:</h3>
 
-Now that you've got your cloud-config.yaml file ready, you can start up the instances.  In the same directory as this file (or provide the proper path to it) you can do this.  Reminder that the brace expansion doesn't work, so you'll need to run this 3 times.
+      <p>Now that you've got your cloud-config.yaml file ready, you can start up the instances.  In the same directory as this file (or provide the proper path to it) you can do this.  Reminder that the brace expansion doesn't work, so you'll need to run this 3 times.</p>
 
 <pre class="lang:default decode:true  ">$ gcloud compute instances create demo-{1..3} \
 --zone us-central1-a \
@@ -210,31 +228,31 @@ Now that you've got your cloud-config.yaml file ready, you can start up the inst
 --network demo \
 --metadata-from-file user-data=cloud-config.yaml</pre>
 
-Again, if you want a bash one-liner that loops, use this:
+      <p>Again, if you want a bash one-liner that loops, use this:</p>
 
-<pre>for i in {1..3}; do; gcloud compute instances create demo-$i --zone us-central1-a --image coreos --disk name=demo-ssd-$i --machine-type n1-standard-8 --boot-disk-size 10GB --network demo --metadata-from-file user-data=cloud-config.yaml; done</pre>
+      <pre>for i in {1..3}; do; gcloud compute instances create demo-$i --zone us-central1-a --image coreos --disk name=demo-ssd-$i --machine-type n1-standard-8 --boot-disk-size 10GB --network demo --metadata-from-file user-data=cloud-config.yaml; done</pre>
 
-When this completes, you should have 3 instances of Crate running in automatically discoverable nodes, inside Docker containers, with the SSD drives automatically mounted, and your user's SSH keys ready to go!
+      When this completes, you should have 3 instances of Crate running in automatically discoverable nodes, inside Docker containers, with the SSD drives automatically mounted, and your user's SSH keys ready to go!
 
-<h3>Fleetctl and Services</h3>
+      <h3>Fleetctl and Services</h3>
 
-<a href="https://coreos.com/docs/launching-containers/launching/fleet-using-the-client/" target="_blank">Fleetctl</a> is the command line tool you use on a CoreOS instance to manage the "fleet" of machines. You provide the fleet with services which then get run on all of the CoreOS machines the fleet knows about.  This is why CoreOS is so powerful, you don't have to install the containers on each instance, just let fleetctl take care of it!
+      <p><a href="https://coreos.com/docs/launching-containers/launching/fleet-using-the-client/" target="_blank">Fleetctl</a> is the command line tool you use on a CoreOS instance to manage the "fleet" of machines. You provide the fleet with services which then get run on all of the CoreOS machines the fleet knows about.  This is why CoreOS is so powerful, you don't have to install the containers on each instance, just let fleetctl take care of it!</p>
 
-First let's verify that all of the GCE instances are talking to each other and part of the fleet.
+      <p>First let's verify that all of the GCE instances are talking to each other and part of the fleet.</p>
 
-<pre>gcloud compute ssh demo-1</pre>
+      <pre>gcloud compute ssh demo-1</pre>
 
-<pre>fleetctl list-machines</pre>
+      <pre>fleetctl list-machines</pre>
 
-<strong>Output:</strong>
+      <strong>Output:</strong>
 <pre>MACHINE        IP        METADATA
 58b93a38...    10.240.126.164    -
 d9c96412...    10.240.14.91    -
 dcb7f013...    10.240.224.27    -</pre>
 
-Now let's copy the appropriate service files up to one of the instances. The Crate service file that's needed is here:
+      <p>Now let's copy the appropriate service files up to one of the instances. The Crate service file that's needed is here:</p>
 
-<strong>crate.service</strong>
+      <strong>crate.service</strong>
 
 <pre>[Unit]
 Description=crate
@@ -275,31 +293,33 @@ ExecStop=/usr/bin/docker rm %p
 [X-Fleet]
 Global=true</pre>
 
-Create this file on the instance and name it "crate.service".  Once you have the service file in place, starting Crate across the entire cluster is as simple as running:
+      <p>Create this file on the instance and name it "crate.service".  Once you have the service file in place, starting Crate across the entire cluster is as simple as running:</p>
 
-<pre>fleetctl start crate.service</pre>
+      <pre>fleetctl start crate.service</pre>
 
-You can verify that it's running everywhere by typing:
+      <p>You can verify that it's running everywhere by typing:</p>
 
-<pre>fleetctl list-units</pre>
+      <pre>fleetctl list-units</pre>
 
-<strong>Output:</strong>
+      <strong>Output:</strong>
 <pre>UNIT        MACHINE                ACTIVE    SUB
 crate.service    58b93a38.../10.240.126.164    active    running
 crate.service    d9c96412.../10.240.14.91    active    running
 crate.service    dcb7f013.../10.240.224.27    active    running</pre>
 
-Now let's just make sure that the Crate cluster is well-formed and operating correctly:
+      <p>Now let's just make sure that the Crate cluster is well-formed and operating correctly:</p>
 
-<pre>PRIVATE_IP=$(curl "http://metadata/computeMetadata/v1/instance/network-interfaces/0/ip" -H "X-Google-Metadata-Request: True")
-curl -XPOST $PRIVATE_IP:4200/_sql -d '{ "stmt": "select name from sys.nodes" }'</pre>
+      <pre>PRIVATE_IP=$(curl "http://metadata/computeMetadata/v1/instance/network-interfaces/0/ip" -H "X-Google-Metadata-Request: True")
+      curl -XPOST $PRIVATE_IP:4200/_sql -d '{ "stmt": "select name from sys.nodes" }'</pre>
 
-<strong>Output:</strong>
-<pre>{"cols":["name"],"duration":242,"rows":[["Scrier"],["Orphan-Maker"],["Micro"]],"rowcount":3}</pre>
+      <strong>Output:</strong>
+      <pre>{"cols":["name"],"duration":242,"rows":[["Scrier"],["Orphan-Maker"],["Micro"]],"rowcount":3}</pre>
 
-<p>There you have it!  You can see that there are 3 Crate nodes running in this cluster.  Now if you add another node to the CoreOS cluster, it will automatically join the Crate cluster and Crate will take care of the rest.  Simple scalability FTW!</p>
+      <p>There you have it!  You can see that there are 3 Crate nodes running in this cluster.  Now if you add another node to the CoreOS cluster, it will automatically join the Crate cluster and Crate will take care of the rest.  Simple scalability FTW!</p>
 
-<p>Want to run this all in one simple bash script? Check out the <a href="{% url '/docs/cloud/gce-bash-script.html' %}">Crate Cluster All-in-one Bash Script</a>!</p>
+    </div>  
+  </div>
+</div>
 
       {% endfilter %}
 
@@ -312,4 +332,3 @@ curl -XPOST $PRIVATE_IP:4200/_sql -d '{ "stmt": "select name from sys.nodes" }'<
   </div>
 </div>
 {% endblock %}
-
