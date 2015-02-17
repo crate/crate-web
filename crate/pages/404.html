@@ -24,9 +24,15 @@ title: Page Not Found
 </div>
 
 <script type="text/javascript">
- (function($){
-   ga('send', 'event', 'error', '404', location.pathname, 1);
- }(jQuery));
+  ga('send', 'event', 'error', '404', location.pathname, 1);
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+  $(function(){
+    ga('send', 'event', 'error', '404', location.pathname, 1);
+  });
 </script>
 {% endblock %}
 
