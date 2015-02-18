@@ -1,0 +1,175 @@
+title: New Crate Release: 0.47.3 (Stable)
+link: https://crate.io/blog/crate-release-v0-47.x/
+author: Kenan
+description: Major release, Crate version 0.47.3 is now Stable !
+created: 2015-02-17
+post_name: new stable release: 0.47.3
+status: publish
+post_type: post
+tags: crate, release, on duplicate key, aggregation functions, CURRENT_TIMESTAMP
+category: developernews
+
+
+![Yoda approves](https://cdn.crate.io/media/1502/yoda.jpg)
+
+We're pleased to announce that Crate `0.47.3` is stable! You can find a summary of changes in the [CHANGES.txt](https://github.com/crate/crate/blob/0.47/CHANGES.txt) file in our GitHub repository. If you find this to not be the case, please do not hesitate to [contact us](https://crate.io/about/contact/) and let us know.
+
+**0.47.3 is quite a major release, check out all the goodies we have prepared for you:**
+
+> **Important note:** If you are using SQLAlchemy, make sure that you update the Python client because the update statement generation has changed.
+
+* Fix: Inserting from a query which contains aggregation functions failed in some cases
+* Improved performance of queries that use generic scalar functions (like equals comparison on arrays)
+* Added a new option ``overwrite_duplicates`` (default: false) to COPY FROM. This option can be used to make COPY FROM behave the same as it did in versions prior to ``0.47.0``
+* Added support for array comparisons using the equals `=` operator.
+* Support `INSERT ... ON DUPLICATE KEY UPDATE` statement
+* Added case-insensitive regex operator ~*
+* Support PCRE compatible regular expressions
+* Updated crate-admin version to 0.11.3 which contains following changes: Fixed bug that showed custom schemas in the table list as often as the amount of tables in that custom schema
+* Added support for the ``std_dev``, ``variance`` and ``geometric_mean``
+aggregation functions
+* Added support for the CURRENT_TIMESTAMP expression
+* Throw an error while using unknown column references in ``SELECT`` statements while parent's policy is not of type ``ignored``
+* Added support for the datetime function ``extract (field from source)``
+* Support column referencing in ``Update`` statement assignment
+expression
+* Removed undocumented feature: It is no longer possible to use sys
+expressions in any context.
+* Don’t allow full qualified names in UPDATE assignments, INSERT and
+INSERT INTO
+* The ``sys.operations`` table has now a ``_nodes`` system column
+which exposes information about the node the operation runs on.
+
+## Support `INSERT ... ON DUPLICATE KEY UPDATE` statement
+
+The ON DUPLICATE KEY UPDATE clause is used to update the existing row if inserting is not possible because of a duplicate-key conflict if a document with the same PRIMARY KEY already exists:
+
+    cr> select
+    ...     name,
+    ...     visits,
+    ...     extract(year from last_visit) as last_visit
+    ... from uservisits order by name;
+    +----------+--------+------------+
+    | name     | visits | last_visit |
+    +----------+--------+------------+
+    | Ford     |      1 | 2013       |
+    | Trillian |      3 | 2013       |
+    +----------+--------+------------+
+    SELECT 2 rows in set (... sec)
+<!---->
+    
+    cr> insert into uservisits (id, name, visits, last_visit) values
+    ... (
+    ...     0,
+    ...     'Ford',
+    ...     1,
+    ...     '2015-09-12'
+    ... ) on duplicate key update
+    ...     visits = visits + 1,
+    ...     last_visit = '2015-01-12';
+    INSERT OK, 1 row affected (... sec)
+<!---->
+   
+    cr> select
+    ...     name,
+    ...     visits,
+    ...     extract(year from last_visit) as last_visit
+    ... from uservisits where id = 0;
+    +------+--------+------------+
+    | name | visits | last_visit |
+    +------+--------+------------+
+    | Ford |      2 | 2015       |
+    +------+--------+------------+
+    SELECT 1 row in set (... sec)
+
+It’s possible to refer to values which would be inserted if no duplicate-key conflict occured, by using the VALUES(column_ident) function. This function is especially useful in multiple-row inserts, to refer to the current rows values:
+
+    cr> insert into uservisits (id, name, visits, last_visit) values
+    ... (
+    ...     0,
+    ...     'Ford',
+    ...     2,
+    ...     '2016-01-13'
+    ... ),
+    ... (
+    ...     1,
+    ...     'Trillian',
+    ...     5,
+    ...     '2016-01-15'
+    ... ) on duplicate key update
+    ...     visits = visits + VALUES(visits),
+    ...     last_visit = VALUES(last_visit);
+    INSERT OK, 2 rows affected (... sec)
+<!---->
+
+    cr> select
+    ...     name,
+    ...     visits,
+    ...     extract(year from last_visit) as last_visit
+    ... from uservisits order by name;
+    +----------+--------+------------+
+    | name     | visits | last_visit |
+    +----------+--------+------------+
+    | Ford     |      4 | 2016       |
+    | Trillian |      8 | 2016       |
+    +----------+--------+------------+
+    SELECT 2 rows in set (... sec)
+
+## Added support for the ``std_dev``, ``variance`` and ``geometric_mean`` aggregation functions:
+
+The geometric_mean aggregation function computes the geometric mean, a mean for positive numbers. 
+[Geometric mean](http://en.wikipedia.org/wiki/Geometric_mean) is defined on all numeric types and on timestamp. It always returns double values. If a value is negative, all values were null or we got no value at all NULL is returned. If any of the aggregated values is 0 the result will be 0.0 as well.
+
+
+    cr> select geometric_mean(position), kind from locations
+    ... group by kind order by kind;
+    +--------------------------+-------------+
+    | geometric_mean(position) | kind        |
+    +--------------------------+-------------+
+    |             2.6321480259 | Galaxy      |
+    |             2.6051710847 | Planet      |
+    |             2.2133638394 | Star System |
+    +--------------------------+-------------+
+    SELECT 3 rows in set (... sec)
+
+The [variance](http://en.wikipedia.org/wiki/Variance) aggregation function computes the Variance of the set of non-null values in a column. It is a measure about how far a set of numbers is spread. A variance of 0.0 indicates that all values are the same.
+
+    cr> select variance(position), kind from locations
+    ... group by kind order by kind desc;
+    +--------------------+-------------+
+    | variance(position) | kind        |
+    +--------------------+-------------+
+    |             1.25   | Star System |
+    |             2.0    | Planet      |
+    |             3.6875 | Galaxy      |
+    +--------------------+-------------+
+    SELECT 3 rows in set (... sec)
+
+The [stddev](http://en.wikipedia.org/wiki/Standard_deviation) aggregation function computes the Standard Deviation of the set of non-null values in a column. It is a measure of the variation of data values. A low standard deviation indicates that the values tend to be near the mean.
+
+    cr> select stddev(position), kind from locations
+    ... group by kind order by kind;
+    +------------------+-------------+
+    | stddev(position) | kind        |
+    +------------------+-------------+
+    |    1.92028643697 | Galaxy      |
+    |    1.41421356237 | Planet      |
+    |    1.11803398875 | Star System |
+    +------------------+-------------+
+    SELECT 3 rows in set (... sec)
+
+## Added support for the ``CURRENT_TIMESTAMP`` expression
+
+The CURRENT_TIMESTAMP expression returns the timestamp in milliseconds since epoch at the time the SQL statement is handled. It is evaluated once per query while the query is analyzed, before actual execution.
+
+    CURRENT_TIMESTAMP [ ( precision ) ]
+
+Precision must be a positive integer between 0 and 3. The default value is 3. It determines the number of fractional seconds to output. A value of 0 means the timestamp will have second precision, no fractional seconds (milliseconds) are given.
+
+**[Download instructions for Crate 0.47.3](https://crate.io/download/)**
+
+If you need help, please refer to our [Google group](https://groups.google.com/forum/#!forum/crateio) or send us an E-mail to <support@crate.io>
+    
+That’s all we have to report today, see you next release!
+
+_~Kenan &amp; the CrateIO Team_
