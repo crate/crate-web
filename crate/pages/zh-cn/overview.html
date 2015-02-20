@@ -3,21 +3,31 @@ description: Crate.IO 是一种数据存储，拥有具有强大搜索功能（�
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>Crate：易于扩展的实时SQL数据存储<br />可扩展、简单、快速。</h1>
-      </div>
-    </div>
+{% block header %}
+<div class="wrapper wrapper-hero" id="wrapper-hero-overview">
+  <div class="container">
+    <h1>Crate：易于扩展的实时SQL数据存储<br />可扩展、简单、快速。</h1>
   </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-12">
 
       <h2>Crate 是一种无共享、完全可搜索、以文档为导向的分类数据存储：针对数据密集型应用、物联网，或者实时分析的一种快速、强大、具有大规模扩展性的后端。它是100%开源的。</h2>
       <p><strong>Crate.IO 是一种数据存储，拥有具有强大搜索功能（如库中所包含的Elasticsearch）的NoSQL文档数据库的益处，可以使用SQL访问。</strong></p>
+    </div>
+  </div>
+</div>
+</div>
 
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
       <h2>强大和超级快速</h2>
       <p>Crate 是针对列表数据、半结构化记录，以及二进制对象（Blobs）的一种强大后端。它具有高度可用性并且提供实时大规模并行访问，能够对数十亿记录作出次秒级响应。</p>
       <h2>零管理</h2>
@@ -27,9 +37,14 @@ description: Crate.IO 是一种数据存储，拥有具有强大搜索功能（�
 
     </div>
   </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <img class="thumbnail img-responsive" src="{% static '/static/images/crate-architecture.jpg' %}" />
+      <img class="img-responsive thumbnail" src="{% media '/media/1502/crate-architecture.png' %}" />
     </div>
     <div class="col-sm-6">
 
@@ -41,6 +56,11 @@ description: Crate.IO 是一种数据存储，拥有具有强大搜索功能（�
 
     </div>
   </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
   <div class="row">
     <div class="col-sm-12">
 
@@ -70,6 +90,15 @@ description: Crate.IO 是一种数据存储，拥有具有强大搜索功能（�
       </ol>
       <p>还记得过去可以通过使用单个SQL脚本重组整个关系型数据库的美好时光吗？Crate通过借用将查询结果直接放入一个或多个索引中的能力实现了这种功能。这种要求对于基于文档的数据库来说甚至更加显著。在这种数据库中，数据常常是以一种高度非标准化的格式存储的。</p>
 
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
       <h2>要求</h2>
       <p>Linux，Mac OS X或者Windows<br />
         Java 7<br />
@@ -77,8 +106,7 @@ description: Crate.IO 是一种数据存储，拥有具有强大搜索功能（�
         （针对命令行客户端）</p>
       <h2>客户端和工具</h2>
       <p>Crate 产品中包含一个内建管理界面。使用命令行界面（Crate Shell &#8211;  CraSh ）可以进行互动式查询。Crate的Python客户端是最先进的，它整合了SQLAlchemy。</p>
-      <p><a class="btn btn-lg btn-success" href="{% url '/docs.html' %}">下载Crate</a></p>
-
+      <p><a class="btn btn-primary" href="{% url '/docs.html' %}">下载Crate</a></p>
     </div>
   </div>
 </div>

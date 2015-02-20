@@ -52,9 +52,10 @@ var Term = function(elem){
       addSQLResponse(response);
       addComment('OK ('+ duration +'s)');
     }).fail(function(req){
-      var response = req.responseJSON;
-      if (response.error) {
-        addErrorResponse(response.error.message);
+      if (req.responseJSON) {
+        addErrorResponse(req.responseJSON.error.message);
+      } else if (req.statusText) {
+        addErrorResponse(req.statusText);
       }
     }).always(function(e){
       history[0].scrollTop = history[0].scrollHeight;

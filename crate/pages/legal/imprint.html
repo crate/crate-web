@@ -2,67 +2,88 @@ title: Imprint
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
+{% block navbar2 %}
+<div class="wrapper wrapper-plain">
+    <nav class="breadcrumb-container">
+      <div class="container">
+  <ol class="breadcrumb">
+    <li class="active">Legal</li>
+  </ol>
+      </div>
+    </nav>
+</div>
+{% endblock %}
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <h1>Imprint</h1>
+{% block body %}
+<div class="wrapper wrapper-border">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header">
+          <h1>Imprint</h1>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <p class="lead">Crate.IO GmbH
-        <br />Prinzessinnenstraße 19-20
-        <br />10969 Berlin
-        <br />Germany
-      </p>
-      <p>
-        <a href="http://goo.gl/9m3jz7">Show on Google Maps</a>
-      </p>
-      <p>Phone: +49 (30) 120 895 5810
-        <br />Fax: +49 (30) 120 895 5819
-      </p>
-      <p>HRB: 162810 B
-      </p>
+    <div class="row">
+      <div class="col-sm-4">
+        <p class="lead">Crate.IO GmbH
+          <br />Prinzessinnenstraße 19-20
+          <br />10969 Berlin
+          <br />Germany
+        </p>
+        <p>
+          <a href="http://goo.gl/9m3jz7">Show on Google Maps</a>
+        </p>
+        <p>Phone: +49 (30) 120 895 5810
+          <br />Fax: +49 (30) 120 895 5819
+        </p>
+        <p>HRB: 162810 B
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <p class="lead">Crate.IO
+          <br />620 Folsom Street
+          <br />San Francisco, CA 94107
+          <br />United States
+        </p>
+        <p>
+          <a href="https://goo.gl/maps/IhiQP">Show on Google Maps</a>
+        </p>
+        <p>Phone: +1 (415) 358 0808
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <p class="lead">CRATE Technology GmbH
+          <br />Hintere Achm&uuml;hlerstra&szlig;e 1
+          <br />6850 Dornbirn
+          <br />Austria
+        </p>
+        <p>
+          <a href="https://goo.gl/maps/TwLm6">Show on Google Maps</a>
+        </p>
+        <p>Phone: +43 (5572) 909808
+          <br />Fax: +43 (5572) 909808-77
+        </p>
+        <p>UID-Nr: ATU66349837
+          <br />FN: 359702z, FB-Gericht: Feldkirch
+        </p>
+      </div>
     </div>
-    <div class="col-sm-4">
-      <p class="lead">Crate.IO
-        <br />620 Folsom Street
-        <br />San Francisco, CA 94107
-        <br />United States
-      </p>
-      <p>
-        <a href="https://goo.gl/maps/IhiQP">Show on Google Maps</a>
-      </p>
-      <p>Phone: +1 (415) 358 0808
-      </p>
-    </div>
-    <div class="col-sm-4">
-      <p class="lead">CRATE Technology GmbH
-        <br />Hintere Achm&uuml;hlerstra&szlig;e 1
-        <br />6850 Dornbirn
-        <br />Austria
-      </p>
-      <p>
-        <a href="https://goo.gl/maps/TwLm6">Show on Google Maps</a>
-      </p>
-      <p>Phone: +43 (5572) 909808
-        <br />Fax: +43 (5572) 909808-77
-      </p>
-      <p>UID-Nr: ATU66349837
-        <br />FN: 359702z, FB-Gericht: Feldkirch
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <p>E-Mail: <a href="mailto:office@crate.io">office@crate.io</a>
-        <br />Executive Directors: Jodok Batlogg, Christian Lutz
-      </p>
+    <div class="row">
+      <div class="col-lg-12">
+        <p>E-Mail: <a href="mailto:office@crate.io">office@crate.io</a>
+          <br />Executive Directors: Jodok Batlogg, Christian Lutz
+        </p>
+      </div>
     </div>
   </div>
 </div>
 {% endblock %}
+
+{% block extra_css %}
+<style type="text/css">
+.lead {
+  font-size: 23px;
+}
+</style>
+{% endblock %}  

@@ -3,22 +3,32 @@ description: Crate は、表形式データ、半構造のレコード及びバ�
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>クレートデータ（Crate）:簡単にリアルタイムSQLデータ保存を拡張</h1>
-      </div>
-    </div>
+{% block header %}
+<div class="wrapper wrapper-hero" id="wrapper-hero-overview">
+  <div class="container">
+    <h1>クレートデータ（Crate）:簡単にリアルタイムSQLデータ保存を拡張</h1>
   </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-12">
 
       <h2>拡張可能シンプル高速</h2>
       <p><strong>Crate は、何も共有せず、フルに検索可能、ドキュメント指向クラスター型データ保存です： データ集中処理型のアプリ、モノのインターネット、あるいはリアルタイム分析用の高速かつパワフルな大量の拡張可能なバックエンド。100％オープンソースです。</strong></p>
       <p><strong>Crate.IO は、SQLを利用してアクセスできる強力な検索（ライブラリーが含まれたElasticsearch）のあるNoSQLドキュメントデータベースのメリットでデータを保存します。</strong></p>
+    </div>
+  </div>
+</div>
+</div>
 
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
       <h2>パワフルかつ超高速</h2>
       <p>Crate は、表形式データ、半構造のレコード及びバイナリ―オブジェクト(Blobs)用の1つのパワフルなバックエンドです。それは極めて有用で、何十億ものレコードに1秒以下での対応を可能にしており、リアルタイムの大量平行アクセスを提供します。</p>
       <h2>ゼロ管理</h2>
@@ -28,9 +38,14 @@ description: Crate は、表形式データ、半構造のレコード及びバ�
 
     </div>
   </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <img class="thumbnail img-responsive" src="{% static '/static/images/crate-architecture.jpg' %}" />
+      <img class="img-responsive thumbnail" src="{% media '/media/1502/crate-architecture.png' %}" />
     </div>
     <div class="col-sm-6">
 
@@ -42,6 +57,11 @@ description: Crate は、表形式データ、半構造のレコード及びバ�
 
     </div>
   </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
   <div class="row">
     <div class="col-sm-12">
 
@@ -69,6 +89,15 @@ Crateは検索にElasticsearchを利用します。それはスピードを求�
           全体のリレーショナルデータベースを再構築することが1つのSQLスクリプトの利用により可能であった古き良き時代をご存知ですか？Crateは、1つ以上のインデックスに直接クエリの結果を出す能力を借りることによりその機能性を実行します。この要件は、でーたが極めて非正規化のフォーマットで保存されることが多い文書ベースのデータベース上でさらに著しいものとなります。</li>
       </ol>
 
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
       <h2>要件</h2>
       <p>Linux、Mac OS XまたはWindows<br />
         Java 7<br />
@@ -76,9 +105,7 @@ Crateは検索にElasticsearchを利用します。それはスピードを求�
         (コマンドラインクラインアント用)</p>
       <h2>クライアントとツール</h2>
       <p>Crate Dataは内蔵管理インターフェース付きで出荷されます。コマンドラインのインターフェース(Crate Shell – CraSh)でインタラクティブなクエリが可能になります。CrateのPythonクライアントは最先端であり、SQLAlchemy統合を特徴とします。</p>
-      <p><a class="btn btn-lg btn-success" href="{% url '/docs.html' %}">Crate をダウンロードする</a></p>
-
-
+      <p><a class="btn btn-primary" href="{% url '/docs.html' %}">Crate をダウンロードする</a></p>
     </div>
   </div>
 </div>

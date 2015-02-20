@@ -6,8 +6,7 @@ testing_version: 0.47.4
 
 {% extends "doc.html" %}
 
-{% block body %}
-<div class="container">
+{% block docs_content %}
     <div class="row">
       <div class="col-sm-8">
 
@@ -36,8 +35,7 @@ testing_version: 0.47.4
               data-url="https://cdn.crate.io/downloads/releases/crate-{{ stable_version }}.tar.gz"
               data-required="false">
           <fieldset>
-            <legend>Latest Stable Release</legend>
-            <p>Version <strong>{{ stable_version }}</strong><br /><small>released on {{ stable_version_date }}</small></p>
+            <p>Version <strong>{{ stable_version }}</strong><br /><small class="text-muted">Released on {{ stable_version_date }}</small></p>
             <div class="form-group form-group-email">
               <label for="inputEmail" class="col-lg-2 control-label">Email</label>
               <div class="col-lg-10">
@@ -47,16 +45,16 @@ testing_version: 0.47.4
             </div>
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
-                <button type="submit" class="btn btn-success" id="download-main"><i class="fa fa-download"></i> Download .tar.gz</button>
+                <button type="submit" class="btn btn-primary" id="download-main"><i class="fa fa-download"></i> Download .tar.gz</button>
               </div>
             </div>
           </fieldset>
         </form>
 
-	<h3>Testing/Unstable Releases</h3>
-        <p>Testing builds of Crate should be used for testing upcoming new features only and should not be used in production.</p>
-        <p><a class="btn btn-default btn-sm" href="https://cdn.crate.io/downloads/releases/crate-{{ testing_version }}.tar.gz" target="_blank">Latest Testing Release</a></p>
-        <p>Nightly builds of Crate are provided for testing purposes only. You can download the latest builds <a href="https://cdn.crate.io/downloads/releases/nightly/" target="_blank">here</a>.</p>
+        <p>Testing builds of Crate should be used for testing upcoming new features only and should not be used in production.
+	<a href="https://cdn.crate.io/downloads/releases/crate-{{ testing_version }}.tar.gz" target="_blank">Download latest testing release.</a></p>
+        <p>Nightly builds of Crate are provided for testing purposes only.
+	You can download the latest builds <a href="https://cdn.crate.io/downloads/releases/nightly/" target="_blank">here</a>.</p>
 
       </div>
       <div class="col-sm-4">
@@ -72,6 +70,5 @@ testing_version: 0.47.4
         </div>
       </div>
     </div>
-</div>
 
 {% endblock %}

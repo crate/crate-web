@@ -4,43 +4,48 @@ description:
 {% extends "base.html" %}
 
 {% block body %}
-<div class="container">
-
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>Contributor License Agreements</h1>
-      </div>
-      <p>We are not asking you to give us your copyright, but we need to get your OK to distribute and potentially relicense your code without restriction. So please make sure you have signed our contributor agreement, please select the appropriate description of yourself:</p>
+<div class="wrapper wrapper-bg-primary">
+    <div class="container">
+      <h1>Contributor License Agreements</h1>
     </div>
   </div>
+</div>
+<div class="wrapper wrapper-border">
+  <div class="container">
 
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="well text-center">
-        <i class="fa-large fa fa-user"></i><br />
-        <a href="{% url '/community/contribute/icla.html' %}">Individual Contributor</a>
+    <div class="row">
+      <div class="col-sm-12">
+        <p>We are not asking you to give us your copyright, but we need to get your OK to distribute and potentially relicense your code without restriction. So please make sure you have signed our contributor agreement, please select the appropriate description of yourself:</p>
       </div>
     </div>
-    <div class="col-sm-4">
-      <div class="well text-center">
-        <i class="fa-large fa fa-building-o"></i><br />
-        <a href="{% url '/community/contribute/ccla.html' %}">Company</a> having employees contributing
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="well text-center contributor-type-box">
+          <i class="fa-large fa fa-user"></i><br />
+          <a href="{% url '/community/contribute/icla.html' %}">Individual Contributor</a>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="well text-center contributor-type-box">
+          <i class="fa-large fa fa-building-o"></i><br />
+          <a href="{% url '/community/contribute/ccla.html' %}">Company</a> having employees contributing
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="well text-center contributor-type-box">
+          <i class="fa-large fa fa-briefcase"></i><br />
+          <a href="{% url '/community/contribute/iccla.html' %}">Individual Corporate Contributor</a> under an existing company contributor agreement (your employer)
+        </div>
       </div>
     </div>
-    <div class="col-sm-4">
-      <div class="well text-center">
-        <i class="fa-large fa fa-briefcase"></i><br />
-        <a href="{% url '/community/contribute/iccla.html' %}">Individual Corporate Contributor</a> under an existing company contributor agreement (your employer)
+
+    <div class="row">
+      <div class="col-sm-12">
+        <p>All contributors of Crate have signed a CLA, thats how we can assure the users of Crate about the origin and continuing existence of the code. You only need to sign the CLA once.</p>
       </div>
     </div>
+
   </div>
-
-  <div class="row">
-    <div class="col-sm-12">
-      <p>All contributors of Crate have signed a CLA, thats how we can assure the users of Crate about the origin and continuing existence of the code. You only need to sign the CLA once.</p>
-    </div>
-  </div>
-
 </div>
 {% endblock %}

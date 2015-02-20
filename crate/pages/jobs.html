@@ -3,15 +3,26 @@ description: Crate.IO is hiring! We work for two things: technology excellence a
 
 {% extends "base.html" %}
 
+{% block header %}
+<div class="wrapper wrapper-bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Crate.IO is hiring!</h1>
+	<p class="lead">We work for two things: technology excellence and being a great place to work.</p> 
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
 {% block body %}
+<div class="wrapper wrapper-border">
 <div class="container">
 
   <div class="row">
     <div class="col-lg-12">
-      <div class="page-header">
-        <h1>Crate.IO is hiring!</h1>
-      </div>
-      <p>Joining Crate.IO lets you be part of an open open source company that’s set to change how developers use data stores. <b>We work for two things: technology excellence and being a great place to work.</b> We’re hiring in <strong>Dornbirn/Austria</strong> and <strong>Berlin/Germany</strong>. We are looking for exceptional individuals with the drive to join us for the challenges and the rewards of developing something new and growing quickly.</p>
+      <p>Joining Crate.IO lets you be part of an open open source company that’s set to change how developers use data stores. We’re hiring in <strong>Dornbirn/Austria</strong> and <strong>Berlin/Germany</strong>. We are looking for exceptional individuals with the drive to join us for the challenges and the rewards of developing something new and growing quickly.</p>
     </div>
   </div>
 
@@ -39,7 +50,7 @@ description: Crate.IO is hiring! We work for two things: technology excellence a
       <p><a class="btn btn-primary btn-sm" href="/jobs/java-software-engineer/">Check out the job spec &raquo;</a></p>
     </div>
     <div class="col-sm-6">
-      <h3>Developer Advocate / Developer Relations</h3>
+      <h3>Developer Advocate</h3>
       <table class="table">
           <tr>
             <td>Team or role:</td>
@@ -69,5 +80,6 @@ description: Crate.IO is hiring! We work for two things: technology excellence a
     </div>
   </div>
 
+</div>
 </div>
 {% endblock %}

@@ -1,0 +1,325 @@
+/**
+ * < 768px (phone)
+ */
+@media (max-width: 767px) {
+  .navbar-subnav > li {
+    margin: 0 32px;
+  }
+}
+
+/**
+ * >= 768px (tablet)
+ */
+@media (min-width: 768px) {
+}
+
+/**
+ * >= 992px (small screen)
+ */
+@media (min-width: 992px) {
+  .wrapper-hero h1,
+  .wrapper-bg-primary h1 {
+    font-size: 72px;
+    line-height: 72px;
+    margin-bottom: 64px;
+  }
+}
+
+/**
+ * >= 1200px (wide screen)
+ */
+@media (min-width: 1200px) {
+}
+
+/**
+ * Wrapper elements
+ */
+
+.wrapper {
+  max-width: 1110px;
+  margin: 0 auto;
+  padding: 32px 0;
+}
+.wrapper-hero {
+  padding: 0;
+}
+.wrapper-hero .container {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  background-color: rgba(85, 212, 245, 0.9);
+}
+#wrapper-hero-frontpage {
+  background-image: url('https://cdn.crate.io/media/1502/hero-bg-frontpage.jpg');
+}
+#wrapper-hero-overview {
+  background-image: url('https://cdn.crate.io/media/1502/hero-bg-overview.jpg');
+}
+.wrapper-plain {
+  padding: 0;
+}
+.wrapper-border {
+  border-right: 1px solid #e7e7e7;
+  border-left: 1px solid #e7e7e7;
+}
+.wrapper-bg-primary {
+  background-color: #55d4f5;
+}
+.wrapper-bg-gray {
+  background-color: #e7e7e7;
+}
+.wrapper-bg-light {
+  background-color: #f9f9f9;
+  border-right: 1px solid #e7e7e7;
+  border-left: 1px solid #e7e7e7;
+}
+.wrapper-blogpost-header {
+  padding-bottom: 0px;
+}
+.wrapper-blogpost-header h1 {
+  margin: 0px;
+  padding: 0px;
+}
+
+footer.wrapper {
+  padding-top: 0;
+}
+
+/**
+ * Footer elements
+ */
+
+.footer {
+  padding-top: 32px;
+  border-top: 1px solid #e7e7e7;
+  font-size: 16px;
+  line-height: 16px;
+}
+.footer td a,
+.footer li a {
+  display: inline-block;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  color: #000000;
+  text-decoration: none;
+}
+.footer td a:hover,
+.footer li a:hover {
+  color: #7d7d7d;
+  text-decoration: none;
+}
+.footer td a:active,
+.footer li a:active {
+  background-color: transparent;
+  color: black;
+}
+.footer .copyright {
+  margin-top: 32px;
+  text-align: center;
+}
+
+/**
+ * Custom navigation elements
+ */
+
+.navbar-subnav,
+.navbar-primary {
+  background-color: #55d4f5;
+}
+.navbar-subnav > li {
+  margin-right: 32px
+}
+.navbar-subnav > li > a {
+  color: #000000;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.navbar-subnav > li.active > a {
+  font-weight: bold;
+  background-color: transparent;
+}
+.navbar-subnav > li > a:hover {
+  background-color: transparent;
+  opacity: 0.5;
+}
+
+.navbar-collapse {
+  padding: 13px 0 0 0;
+}
+
+.breadcrumb li a {
+  color: #000000;
+}
+
+.breadcrumb li a:hover {
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+.breadcrumb-container {
+  background-color: #55d4f5;
+}
+
+/**
+ * Blog post elements
+ */
+
+#post-content img {
+    max-width: 100%;
+}
+
+#post-content > p:first-of-type {
+  font-size: 20px;
+  line-height: 26px;
+  margin: 0 0 16px;
+}
+
+@media (min-width: 768px) {
+  #post-content > p:first-of-type {
+    font-size: 24px;
+    line-height: 32px;
+    margin: 0 0 32px;
+  }
+}
+
+.youtube-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+
+.youtube-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.cloud-block {
+  height: 100px;
+}
+.cloud-block > img {
+  max-height: 64px;
+}
+
+.community-block {
+    min-height: 190px;
+}
+
+.community-oos-projects {
+    min-height: 384px; 
+}
+
+.contributor-type-box {
+    min-height: 250px;
+}
+
+
+.fa-large {
+    display: block;
+    font-size: 48px;
+    padding: 12px;
+}
+
+.event-logo {
+    padding-top: 20px;
+}
+
+.client-info {
+    height: 340px;
+}
+.client-info > p.text-center {
+  height: 72px;
+}
+
+/**
+ * Team
+ */
+
+.team .caption {
+  margin-bottom: 32px;
+}
+
+.caption h3,
+.caption p {
+  margin: 0px;
+}
+
+.h3-caption {
+  margin: 0px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.c-ph-heading {
+    padding-bottom: 64px;
+    font-size: 72px;
+    line-height: 72px;
+}
+.row-list-item {
+  margin-bottom: 32px;
+}
+
+/**
+ * Buttons on frontpage
+ */
+
+.btn-fp-white,
+.btn-fp-black {
+  margin: 0 0 16px 0;
+  padding: 16px 24px;
+  transition: background-color 250ms ease 0s;
+  line-height: 1.0;
+}
+
+.btn-fp-white {
+  background-color: #ffffff;
+  color: #333333;
+}
+.btn-fp-white:hover, .btn-fp-white:focus {
+  background-color: #e7e7e7;
+  color: #000000;
+}
+.btn-fp-black {
+  background-color: #000000;
+  color: #e7e7e7;
+}
+.btn-fp-black:hover, .btn-fp-black:focus {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/**
+ * Typography
+ */
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: #000000;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
+.nav a,
+a.btn,
+.pager a,
+.breadcrumb a,
+.footer a {
+  text-decoration: none;
+}
+a.navbar-brand,
+.nav a:hover, a.btn:hover, .footer a:hover,
+.nav a:focus, a.btn:focus, .footer a:focus {
+  opacity: 1.0;
+}
+
+
+.list-header h1, .list-header .h1,
+.list-header h2, .list-header .h2,
+.list-header h3, .list-header .h3,
+.list-header h4, .list-header .h4,
+.list-header h5, .list-header .h5,
+.list-header h6, .list-header .h6 {
+  margin-bottom: 0px;
+}
+

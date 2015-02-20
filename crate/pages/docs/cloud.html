@@ -4,6 +4,7 @@ description: We love our Cloud Solution partners, and we’re working hard to ma
 {% extends "doc.html" %}
 
 {% block body %}
+<div class="wrapper wrapper-border">
 <div class="container">
 
   <div class="row">
@@ -12,36 +13,41 @@ description: We love our Cloud Solution partners, and we’re working hard to ma
         <a href="{% url '/about/contact.html' %}">Let us know</a> and we’ll get right on it.</p>
     </div>
   </div>
+</div>
+</div>
 
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-4">
       <div class="well">
-        <div class="cloud-box">
+        <div class="cloud-block">
           <img class="img-responsive" src="{% static '/static/images/aws-logo.png' %}" alt="Amazon Web Services" />
         </div>
-        <h3>Amazon Web Services</h3>
-        <p><a class="btn btn-default" href="{% url '/docs/cloud/aws.html' %}">Learn more!</a></p>
+        <h4>Amazon Web Services</h4>
+        <p><a class="btn btn-primary" href="{% url '/docs/cloud/aws.html' %}">Learn more!</a></p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="well">
-        <div class="cloud-box">
+        <div class="cloud-block">
           <img class="img-responsive" src="{% static '/static/images/gce-logo.png' %}" alt="Google Cloud Platform" />
         </div>
-        <h3>Google Cloud Platform</h3>
-        <p><a class="btn btn-default" href="{% url '/docs/cloud/gce.html' %}">Learn more!</a></p>
+        <h4>Google Cloud Platform</h4>
+        <p><a class="btn btn-primary" href="{% url '/docs/cloud/gce.html' %}">Learn more!</a></p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="well">
-        <div class="cloud-box">
+        <div class="cloud-block">
           <img class="img-responsive" src="{% static '/static/images/softlayer-logo.jpg' %}" alt="IBM Softlayer" />
         </div>
-        <h3>IBM Softlayer</h3>
-        <p><a class="btn btn-default" href="{% url '/docs/cloud/softlayer.html' %}">Learn more!</a></p>
+        <h4>IBM Softlayer</h4>
+        <p><a class="btn btn-primary" href="{% url '/docs/cloud/softlayer.html' %}">Learn more!</a></p>
       </div>
     </div>
   </div>
 
+</div>
 </div>
 {% endblock %}

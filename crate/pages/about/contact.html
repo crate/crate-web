@@ -3,47 +3,44 @@ description: Get in touch with the people behind Crate!
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="jumbotron">
+{% block header %}
+<div class="wrapper wrapper-bg-primary">
   <div class="container">
     <h1><i class="fa fa-paper-plane"></i> Contact Us</h1>
-    <p>Get in touch with the people behind Crate!</p>
+    <p class="lead">Get in touch with the people behind Crate!</p>
   </div>
 </div>
+{% endblock %}
 
-
+{% block body %}
+<div class="wrapper wrapper-border">
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      <h3>Office Berlin</h3>
+      <h2>Office Berlin</h2>
       <p><b>Crate.IO GmbH</b>
         <br />Prinzessinnenstra&szlig;e 19-20
         <br />10969 Berlin
         <br />Germany
         <br /><a href="http://goo.gl/9m3jz7">Show on Google Maps</a>
       </p>
-      <h3>Office San Francisco</h3>
+      <h2>Office San Francisco</h2>
         <p><b>Crate.IO</b>
         <br />620 Folsom Street
         <br />San Francisco, CA 94107
         <br />United States
         <br /><a href="https://goo.gl/maps/IhiQP">Show on Google Maps</a>
       </p>
-      <h3>Office Austria</h3>
+      <h2>Office Austria</h2>
       <p><b>CRATE Technology GmbH</b>
         <br />Hintere Achm&uuml;hlerstra&szlig; 1
         <br />6850 Dornbirn
         <br />Austria
         <br /><a href="https://goo.gl/maps/TwLm6">Show on Google Maps</a>
       </p>
-      <h3>Social Media</h3>
-      <ul class="list-unstyled">
-        <li><a href="https://twitter.com/CrateIO">Twitter</a></li>
-        <li><a href="https://fb.me/cratedata">Facebook</a></li>
-      </ul>
     </div>
     <div class="col-sm-8">
-      <h3>Reach out for certain people</h3>
+      <h2>Reach out for certain people</h2>
       <table class="table">
         <tr>
           <td>Media</td>
@@ -59,7 +56,7 @@ description: Get in touch with the people behind Crate!
         </tr>
       </table>
 
-      <h3>Help and Support</h3>
+      <h2>Help and Support</h2>
       <table class="table">
         <tr>
           <td>IRC</td>
@@ -74,9 +71,15 @@ description: Get in touch with the people behind Crate!
           <td><a href="mailto:support@crate.io">support@crate.io</a></td>
         </tr>
       </table>
+      
+      <h2>Social Media</h2>
+      <ul class="list-unstyled">
+        <li><a href="https://twitter.com/CrateIO">Twitter</a></li>
+        <li><a href="https://fb.me/cratedata">Facebook</a></li>
+      </ul>
+
     </div>
   </div>
 </div>
-
-
+</div>
 {% endblock %}

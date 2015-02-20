@@ -1,0 +1,56 @@
+/**
+ * Terminal style for /try page
+ *
+ */
+
+.terminal {
+    background-color: #666666;
+    color: #ffffff;
+    border-radius: 8px;
+    color: #efefef;
+}
+
+.terminal-header {
+    text-align: center;
+    padding: 8px 0;
+}
+
+.terminal-body {
+    background-color: #111111;
+    font-family: Console, Menlo, monospace;
+    font-size: 12px;
+    min-height: 200px;
+}
+
+pre.terminal-history {
+    padding: 10px;
+    color: #ffffff;
+    border: 0px none;
+    background-color: transparent;
+    max-height: 480px;
+    word-wrap: normal !important;
+}
+
+.terminal-prompt {
+    padding: 10px;
+    color: #98978b;
+    font-size: 12px;
+}
+
+.terminal-prompt input {
+    border: 0px none;
+    color: #98978b;
+    font-size: 12px;
+    background-color: transparent;
+    font-family: Console, Menlo, monospace;
+    padding: 0px;
+    width: 100%;
+}
+
+.terminal-prompt input:focus {
+    outline: none;
+}
+
+pre.tut {
+    cursor: pointer;
+}

@@ -3,27 +3,35 @@ description: Try Crate from your browser, no installation needed. The Crate Cube
 
 {% extends "base.html" %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static '/static/css/crate.terminal.css' %}" />
+{% endblock %}
+
 {% block extra_js %}
 <script src="{% static '/static/js/ascii-table.js' %}"></script>
 <script src="{% static '/static/js/highlight.pack.js' %}"></script>
 <script src="{% static '/static/js/crate.js' %}"></script>
 {% endblock %}
 
+{% block header %}
+<div class="wrapper wrapper-bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+	<h1>Try Crate</h1>
+	<p class="lead">Starting with Crate is a piece of cake! Simply try out our demo cluster console ...</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
 {% block body %}
+<div class="wrapper wrapper-border">
 <div class="container">
 
   <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>Try Crate</h1>
-      </div>
-      <p class="lead">Starting with Crate is a piece of cake! Simply try out our demo cluster console ...</p>
-      <p><b>play.crate.io</b> is an 8-node demo cluster running on Google Compute Engine.</p>
-      <p>&nbsp;</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-8">
+    <div class="col-lg-12">
 
       <div class="terminal">
         <div class="terminal-header">
@@ -37,13 +45,13 @@ description: Try Crate from your browser, no installation needed. The Crate Cube
         </form>
       </div>
       <p>&nbsp;</p>
-      <p class="text-right"><a class="btn btn-success" href="/docs/stable/sql/index.html" target="_blank"><i class="fa fa-book"></i> Crate SQL Help &raquo;</a></p>
+      <p class="text-right"><a class="btn btn-default" href="/docs/stable/sql/index.html" target="_docs"><i class="fa fa-book"></i> Crate SQL Help &raquo;</a></p>
 
-    </div>
-    <div class="col-sm-4">
+      <p>&nbsp;</p>
 
       <p>Start off with exploring existing tables:</p>
-      <pre class="tut">select * from information_schema.tables where schema_name = 'doc';</pre>
+      <pre class="tut">select schema_name, table_name, number_of_shard, number_of_replicas
+from information_schema.tables where schema_name = 'doc';</pre>
       <p>Select retweeted tweets:</p>
       <pre class="tut">select id, user['id'], text from tweets where user['id'] > 1000000000 limit 10;</pre>
       <p>Count tweets and unique users:</p>
@@ -68,13 +76,23 @@ with (number_of_replicas='0-all');</pre>
       <pre class="tut">select name, address['city'] as city, tags from T_NAME;</pre>
       <pre class="tut">drop table T_NAME;</pre>
 
-      <p class="text-center"><a href="https://play.crate.io/admin" class="btn btn-success btn-lg"><i class="fa fa-dashboard"></i> Open full Admin UI</a></p>
-      <hr /><br />
-      <p class="h4">Want to use Crate in production?</p>
-      <p><a class="btn btn-default" href="{% url '/docs.html' %}"><i class="fa fa-flask"></i> Install Crate</a></p>
+      <p class="text-center"><a href="https://play.crate.io/admin" class="btn btn-primary btn-lg"><i class="fa fa-dashboard"></i> Open full Admin UI</a></p>
+
     </div>
   </div>
 </div>
+</div>
 
+
+<div class="wrapper wrapper-bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+	<p class="h2">Want to use Crate in production?</p>
+	<p><a class="btn btn-default" href="{% url '/docs.html' %}"><i class="fa fa-flask"></i> Install Crate</a></p>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 

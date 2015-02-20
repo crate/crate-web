@@ -4,123 +4,125 @@ description: Crate is an open source project with a strong community.  Join the 
 {% extends "base.html" %}
 
 {% block body %}
-<div class="jumbotron">
+<div class="wrapper wrapper-bg-primary">
+    <div class="container">
+      <h1>The Crate Open Source Project</h1>
+      <p class="lead">The Crate Data open source project was launched in 2013 and today presents the simplest and most powerful option for any developer building a data intensive application. Crate Technology is the company responsible for keeping the momentum behind the Crate project. Crate remains 100% open.</p>
+    </div>
+  </div>
+</div>
+<div class="wrapper wrapper-border">
+  <div class="feature">
+    <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Crate is an elastic SQL Data Store. It is ideal for data intensive applications and combines the well known SQL interface with the document oriented approach of modern NoSQL/MongoDB-style databases – the ideal middle ground for many developers. Crate Data is quick and powerful and massively scalable.</p>
+      </div>
+    </div>
+    </div>
+  </div>
+
   <div class="container">
-    <h1>The Crate Open Source Project</h1>
-    <p>The Crate Data open source project was launched in 2013 and today presents the simplest and most powerful option for any developer building a data intensive application. Crate Technology is the company responsible for keeping the momentum behind the Crate project. Crate remains 100% open.</p>
-  </div>
-</div>
 
-<div class="feature">
+    <div class="row">
+      <div class="col-md-4 col-xs-6">
+        <div class="community-block">
+          <h3><i class="fa fa-comments"></i> Discuss Crate</h3>
+          <p>Join the Crate discussion through community supported forums such as, <a href="https://stackoverflow.com/questions/tagged/crate" target="_blank">StackOverflow</a> or <a href="http://en.irc2go.com/webchat/?net=freenode&amp;room=crate" target="_blank">IRC</a>. We also offer <a title="Pricing" href="https://crate.io/download/pricing/">paid support</a>. </p>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-6">
+        <div class="community-block">
+          <h3><i class="fa fa-newspaper-o"></i> Mailing List</h3>
+          <p>Get updates about the Crate.IO project, any interesting write-ups and meetups by joining our mailing list on <a title="Crate on Google Groups" href="https://groups.google.com/forum/#!forum/crateio">Google Groups</a>.</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-6">
+        <div class="community-block">
+          <h3><i class="fa fa-paper-plane"></i> Newsletter</h3>
+          <p>Our monthly newsletter announcing new features, events, and Crate community news.<br /><a href="{% url '/newsletter.html' %}">Sign up!</a></p>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-6">
+        <div class="community-block">
+          <h3><i class="fa fa-code"></i> Code Crate</h3>
+          <p>Check out Crate on <a href="https://github.com/crate/crate" target="_blank">GitHub</a> and start hacking, building tools and drivers that help other developers. Here are <a title="How to contribute" href="https://crate.io/community/contribute/">some guidelines</a> on what you need to do before you contribute. </p>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-6">
+        <div class="community-block">
+          <h3><i class="fa fa-question"></i> Ask Anything</h3>
+          <p>You can email us directly at <a href="mailto:support@crate.io">support@crate.io</a> </p>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-6">
+        <div class="community-block">
+          <h3><i class="fa fa-share-alt"></i> Connect with Crate</h3>
+          <p>You can report issues or request features by opening a request on <a href="https://github.com/crate" target="_blank">GitHub</a>.</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-6">
+        <div class="community-block">
+          <h3><i class="fa fa-youtube"></i> On Youtube</h3>
+          <p>Check out videos and presentations on our <a href="https://www.youtube.com/channel/UCcp_IqjXaejmwBcwg51n1AA" target="_blank">YouTube</a> channel.</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-6">
+        <div class="community-block">
+          <h3><i class="fa fa-users"></i> Crate Groups</h3>
+          <p>You can <a href="http://www.meetup.com/CrateIO/">join</a> or start a Crate user group to network and learn about Crate.IO. If there isn&#8217;t a Crate user group near you, <a href="/about/contact/">contact us</a> and we will help you get started.</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-6">
+        <div class="community-block">
+          <h3><i class="fa fa-graduation-cap"></i> Learn Crate</h3>
+          <p>Access the Crate.IO <a href="/docs/">documentation</a> for information about getting started with Crate or to deepen your knowledge of it. You can also join one of our <a title="Events" href="https://crate.io/events/">events</a> near you.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <p>Crate is an elastic SQL Data Store. It is ideal for data intensive applications and combines the well known SQL interface with the document oriented approach of modern NoSQL/MongoDB-style databases – the ideal middle ground for many developers. Crate Data is quick and powerful and massively scalable.</p>
-    </div>
-  </div>
-  </div>
-</div>
-
-<div class="container">
-
-  <div class="row">
-    <div class="col-md-4 col-xs-6">
-      <div class="community-block">
-        <h3><i class="fa fa-comments"></i> Discuss Crate</h3>
-        <p>Join the Crate discussion through community supported forums such as, <a href="https://stackoverflow.com/questions/tagged/crate" target="_blank">StackOverflow</a> or <a href="http://en.irc2go.com/webchat/?net=freenode&amp;room=crate" target="_blank">IRC</a>. We also offer <a title="Pricing" href="https://crate.io/download/pricing/">paid support</a>. </p>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header">
+          <h2>Open Source</h2>
+        </div>
+        <p>We are proud to stand on the shoulders of Open Source giants, of which the most prominent are:</p>
       </div>
     </div>
-    <div class="col-md-4 col-xs-6">
-      <div class="community-block">
-        <h3><i class="fa fa-newspaper-o"></i> Mailing List</h3>
-        <p>Get updates about the Crate.IO project, any interesting write-ups and meetups by joining our mailing list on <a title="Crate on Google Groups" href="https://groups.google.com/forum/#!forum/crateio">Google Groups</a>.</p>
+    <div class="row">
+      <div class="col-lg-3 col-xs-6">
+        <div class="well well-lg community-oos-projects">
+          <h3><a href="http://prestodb.io/" target="_blank">Presto</a></h3>
+          <p>The SQL parser from Presto. We love the clean architecture and modern Java code. Presto is a distributed SQL Query Engine for Big Data by Facebook.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-xs-6">
+        <div class="well well-lg community-oos-projects">
+          <h3><a href="http://www.elasticsearch.org/" target="_blank">Elasticsearch</a></h3>
+          <p>The transport protocol, cluster discover, Lucene integration and much more of Elasticsearch. Developed by Elasticsearch &amp; Shay Bannon.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-xs-6">
+        <div class="well well-lg community-oos-projects">
+          <h3><a href="http://netty.io/" target="_blank">Netty</a></h3>
+          <p>Much of the credit for speed goes to Netty. An asynchronous event-driven network application framework for rapid development of maintainable high performance protocol servers &amp; clients. Developed by the Netty project team.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-xs-6">
+        <div class="well well-lg community-oos-projects">
+          <h3><a href="http://lucene.apache.org/" target="_blank">Lucene</a></h3>
+          <p>The Ultra-fast search library Apache Lucene that sets the standard for search and indexing performance. Developed by The Apache Software Foundation.</p>
+        </div>
       </div>
     </div>
-    <div class="col-md-4 col-xs-6">
-      <div class="community-block">
-        <h3><i class="fa fa-paper-plane"></i> Newsletter</h3>
-        <p>Our monthly newsletter announcing new features, events, and Crate community news.<br /><a href="{% url '/newsletter.html' %}">Sign up!</a></p>
+    <div class="row">
+      <div class="col-lg-12">
+        <p>We’re happy to give back to the community and make Crate available under the Apache Version 2.0 <a title="License" href="https://crate.io/about/legal/license/">license</a>. See our <a title="Notice" href="https://crate.io/about/legal/notice/">notice</a> file for a complete list of Open Source Software we are using.</p>
+        <p>To be able to serve enterprise customers and be a sustainable business, Crate offers <a title="Pricing" href="https://crate.io/download/pricing/">commercial licenses, add-ons enterprise support and services</a>.</p>
       </div>
-    </div>
-    <div class="col-md-4 col-xs-6">
-      <div class="community-block">
-        <h3><i class="fa fa-code"></i> Code Crate</h3>
-        <p>Check out Crate on <a href="https://github.com/crate/crate" target="_blank">GitHub</a> and start hacking, building tools and drivers that help other developers. Here are <a title="How to contribute" href="https://crate.io/community/contribute/">some guidelines</a> on what you need to do before you contribute. </p>
-      </div>
-    </div>
-    <div class="col-md-4 col-xs-6">
-      <div class="community-block">
-        <h3><i class="fa fa-question"></i> Ask Anything</h3>
-        <p>You can email us directly at <a href="mailto:support@crate.io">support@crate.io</a> </p>
-      </div>
-    </div>
-    <div class="col-md-4 col-xs-6">
-      <div class="community-block">
-        <h3><i class="fa fa-share-alt"></i> Connect with Crate</h3>
-        <p>You can report issues or request features by opening a request on <a href="https://github.com/crate" target="_blank">GitHub</a>.</p>
-      </div>
-    </div>
-    <div class="col-md-4 col-xs-6">
-      <div class="community-block">
-        <h3><i class="fa fa-youtube"></i> On Youtube</h3>
-        <p>Check out videos and presentations on our <a href="https://www.youtube.com/channel/UCcp_IqjXaejmwBcwg51n1AA" target="_blank">YouTube</a> channel.</p>
-      </div>
-    </div>
-    <div class="col-md-4 col-xs-6">
-      <div class="community-block">
-        <h3><i class="fa fa-users"></i> Crate Groups</h3>
-        <p>You can <a href="http://www.meetup.com/CrateIO/">join</a> or start a Crate user group to network and learn about Crate.IO. If there isn&#8217;t a Crate user group near you, <a href="/about/contact/">contact us</a> and we will help you get started.</p>
-      </div>
-    </div>
-    <div class="col-md-4 col-xs-6">
-      <div class="community-block">
-        <h3><i class="fa fa-graduation-cap"></i> Learn Crate</h3>
-        <p>Access the Crate.IO <a href="/docs/">documentation</a> for information about getting started with Crate or to deepen your knowledge of it. You can also join one of our <a title="Events" href="https://crate.io/events/">events</a> near you.</p>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <h2>Open Source</h2>
-      </div>
-      <p>We are proud to stand on the shoulders of Open Source giants, of which the most prominent are:</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-3 col-xs-6">
-      <div class="well well-lg">
-        <h3><a href="http://prestodb.io/" target="_blank">Presto</a></h3>
-        <p>The SQL parser from Presto. We love the clean architecture and modern Java code. Presto is a distributed SQL Query Engine for Big Data by Facebook.</p>
-      </div>
-    </div>
-    <div class="col-lg-3 col-xs-6">
-      <div class="well well-lg">
-        <h3><a href="http://www.elasticsearch.org/" target="_blank">Elasticsearch</a></h3>
-        <p>The transport protocol, cluster discover, Lucene integration and much more of Elasticsearch. Developed by Elasticsearch &amp; Shay Bannon.</p>
-      </div>
-    </div>
-    <div class="col-lg-3 col-xs-6">
-      <div class="well well-lg">
-        <h3><a href="http://netty.io/" target="_blank">Netty</a></h3>
-        <p>Much of the credit for speed goes to Netty. An asynchronous event-driven network application framework for rapid development of maintainable high performance protocol servers &amp; clients. Developed by the Netty project team.</p>
-      </div>
-    </div>
-    <div class="col-lg-3 col-xs-6">
-      <div class="well well-lg">
-        <h3><a href="http://lucene.apache.org/" target="_blank">Lucene</a></h3>
-        <p>The Ultra-fast search library Apache Lucene that sets the standard for search and indexing performance. Developed by The Apache Software Foundation.</p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <p>We’re happy to give back to the community and make Crate available under the Apache Version 2.0 <a title="License" href="https://crate.io/about/legal/license/">license</a>. See our <a title="Notice" href="https://crate.io/about/legal/notice/">notice</a> file for a complete list of Open Source Software we are using.</p>
-      <p>To be able to serve enterprise customers and be a sustainable business, Crate offers <a title="Pricing" href="https://crate.io/download/pricing/">commercial licenses, add-ons enterprise support and services</a>.</p>
     </div>
   </div>
 </div>

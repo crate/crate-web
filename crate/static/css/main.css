@@ -2,22 +2,6 @@
    Author's custom styles
    ========================================================================== */
 
-@font-face {
-  font-family: BlenderPro;
-  src: url('../fonts/blender/BlenderPro-ThinWeb.eot');
-  src: url('../fonts/blender/BlenderPro-ThinWeb.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/blender/BlenderPro-ThinWeb.woff') format('woff'),
-    url('../fonts/blender/BlenderPro-Thin.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: BlenderPro;
-  src: url('../fonts/blender/BlenderPro-BoldWeb.eot');
-  src: url('../fonts/blender/BlenderPro-BoldWeb.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/blender/BlenderPro-BoldWeb.woff') format('woff'),
-    url('../fonts/blender/BlenderPro-Bold.ttf') format('truetype');
-  font-weight: bold;
-}
 
 body {
     padding-top: 63px;
@@ -33,41 +17,8 @@ body {
     clear: left;
 }
 
-#crate-blog-post img {
-    border: 1px solid #dfd7ca;
-    padding: 2px;
-    max-width: 100%;
-}
-
-.footer {
-    padding: 20px 0 0 0;
-    margin: 60px 0 0 0;
-    color: #98978b;
-    background-color: #f8f5f0;
-}
-.footer .panel {
-    font-size: 13px;
-}
-.footer .footer-link {
-    padding: 0 10px;
-}
 .jumbotron {
     margin-bottom: 0px;
-}
-
-.feature {
-    padding: 40px 0 20px;
-}
-
-.feature-dark {
-    background-color: #f8f5f0;
-}
-
-.feature-header h1,
-.feature-header h2,
-.feature-header h3 {
-    text-align: center;
-    margin-bottom: 20px;
 }
 
 .navbar-brand {
@@ -100,21 +51,6 @@ body {
     height: 90px;
 }
 
-.youtube-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    padding-top: 25px;
-    height: 0;
-}
-
-.youtube-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
 .community-block {
     min-height: 146px;
 }
@@ -135,13 +71,40 @@ nav.navbar-second .navbar-nav > li > a {
     padding-bottom: 10px;
 }
 
-.blender {
-    font-family: BlenderPro;
-}
-
 .row-logos > div {
     padding: 0 15px 30px;
 }
+
+/**
+ * Blogpost style
+ *
+ */
+
+#crate-blog-post img {
+    border: 1px solid #dfd7ca;
+    padding: 2px;
+    max-width: 100%;
+}
+
+.youtube-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+
+.youtube-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/**
+ * Code style
+ *
+ */
 
 code, kbd, pre, samp {
     font-family: Consolas, Menlo, Monaco, Courier New, monospace;
@@ -153,55 +116,3 @@ pre code {
     color: #555533;
 }
 
-
-.terminal {
-    background-color: #666666;
-    color: #ffffff;
-    border-radius: 8px;
-    color: #efefef;
-}
-
-.terminal-header {
-    text-align: center;
-    padding: 8px 0;
-}
-
-.terminal-body {
-    background-color: #111111;
-    font-family: Console, Menlo, monospace;
-    font-size: 12px;
-    min-height: 200px;
-}
-
-pre.terminal-history {
-    padding: 10px;
-    color: #ffffff;
-    border: 0px none;
-    background-color: transparent;
-    max-height: 480px;
-    word-wrap: normal !important;
-}
-
-.terminal-prompt {
-    padding: 10px;
-    color: #98978b;
-    font-size: 12px;
-}
-
-.terminal-prompt input {
-    border: 0px none;
-    color: #98978b;
-    font-size: 12px;
-    background-color: transparent;
-    font-family: Console, Menlo, monospace;
-    padding: 0px;
-    width: 100%;
-}
-
-.terminal-prompt input:focus {
-    outline: none;
-}
-
-pre.tut {
-    cursor: pointer;
-}

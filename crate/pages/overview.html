@@ -3,54 +3,55 @@ description: Crate is revolutionizing scalable databases by offering SQL syntax,
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="jumbotron">
+{% block header %}
+<div class="wrapper wrapper-hero" id="wrapper-hero-overview">
   <div class="container">
     <h1>What is Crate?</h1>
-    <p>Crate is revolutionizing the way you build scalable backends for web scale applications. Instead of nailing together different services to build your backend data store and wondering how to scale when your data grows from millions to billions, Crate offers the simplicity and scalability you need from the outset.</p>
+    <p class="lead">Crate is revolutionizing the way you build scalable backends for web scale applications. Instead of nailing together different services to build your backend data store and wondering how to scale when your data grows from millions to billions, Crate offers the simplicity and scalability you need from the outset.</p>
+    <p><a href="{% url '/try.html' %}" class="btn btn-fp-white">Try it now!</a></p>
   </div>
 </div>
+{% endblock %}
 
-<div class="feature">
+{% block body %}
+<div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
-      <div class="col-md-6 col-sm-12">
+      <div class="col-sm-12">
         <p class="lead">Crate is a distributed data store. Simply install Crate directly on your application servers and make the big centralized database a thing of the past. Crate takes care of synchronization, sharding, scaling, and replication even for mammoth data sets. If a node becomes unavailable, Crate self-heals and rebalances the cluster automatically.</p>
-      </div>
-      <div class="col-md-6 col-sm-12">
-        <p class="lead">Our guiding principle is simplicity. Crate is simple to set up, scale, and query in real time using SQL. Crate can be installed in the cloud, or using on-premise commodity hardware.  Use our Docker image to simplify installations across your entire cluster.</p>
+        <p>Our guiding principle is simplicity. Crate is simple to set up, scale, and query in real time using SQL. Crate can be installed in the cloud, or using on-premise commodity hardware.  Use our Docker image to simplify installations across your entire cluster.</p>
       </div>
     </div>
   </div>
 </div>
 
+<div class="wrapper wrapper-border">
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <div class="page-header">
         <h2>Scalable. Simple. Fast.</h2>
-      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-6">
-      <img class="img-responsive thumbnail" src="{% static '/static/images/crate-architecture.jpg' %}" />
+      <img class="img-responsive thumbnail" src="{% media '/media/1502/crate-architecture.png' %}" />
     </div>
     <div class="col-sm-6">
-      <p>Crate is a distributed system that runs on one machine or a cluster of machines. Crate comes in one complete install package. It includes solid established open source components (Presto, Elasticsearch, Lucene, Netty) and extends those with added core functionality like read/write support, SQL language, dashboard and query console.</p>
+      <p class="lead">Crate is a distributed system that runs on one machine or a cluster of machines.</p>
+      <p>Crate comes in one complete install package. It includes solid established open source components (Presto, Elasticsearch, Lucene, Netty) and extends those with added core functionality like read/write support, SQL language, dashboard and query console.</p>
       <p>All nodes in a Crate Cluster are equal, a shared-nothing architecture. That makes configuration really easy. Furthermore, Crate is able to utilize all cluster resources for all functions if needed.</p>
       <p>On each node, the Handler Side component receives client requests and processes them. After parsing, SQL queries are analyzed and executed in a distributed manner. To calculate the final result, remote nodes collect intermediate results and merge them in the next phase. To make BLOB delivery even faster, nodes are able to stream results directly as well.</p>
     </div>
   </div>
 </div>
+</div>
 
+<div class="wrapper wrapper-bg-gray">
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
 
-      <div class="page-header">
         <h2>Crate vs. A Zoo of Technologies</h2>
-      </div>
 
       <p>Crate.IO has built a new breed of database to serve today’s mammoth data needs. Based on the familiar SQL syntax, Crate combines high availability, resiliency, and scalability in a distributed design that allows you to query mountains of data in realtime, not batches. It is also 100 % open source. We built it so developers with a data intensive back-end won’t need to “glue” several technologies together to store documents, blobs and support real-time search. We also wanted to help developers avoid the manual work associated with tuning, sharding, replication and other operations required to keep a large de-normalized data store in good shape. We wanted a simple, failure-tolerant and massively scalable data store anyone can use, on a single machine, many machines or on the cloud.</p>
 
@@ -81,12 +82,14 @@ description: Crate is revolutionizing scalable databases by offering SQL syntax,
       </ol>
     </div>
   </div>
+</div>
+</div>
 
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <div class="page-header">
         <h2>Requirements</h2>
-      </div>
       <ul>
         <li>Linux, Mac OS X or Windows</li>
         <li>Java 7</li>
@@ -95,61 +98,92 @@ description: Crate is revolutionizing scalable databases by offering SQL syntax,
     </div>
   </div>
 </div>
+</div>
 
-<div class="feature feature-dark">
+<div class="wrapper wrapper-border">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>Clients and Tools</h2>
+      <p>Crate is shipping with a built-in Administration Interface. The Command Line interface (Crate Shell – CraSh) allows interactive queries. Crate’s Python client is most advanced and features SQLAlchemy integration.</p>
+      <p>See <a href="{% url '/docs/clients.html' %}">Client Documentation</a> for more information.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div class="text-center">
-          <h4>Ready to get started with Crate?</h4>
-          <p><a class="btn btn-success btn-lg" href="{% url '/docs.html' %}">Install Crate Now!</a></p>
+        <h2>Screenshots of the Administration Interface</h2>
+
+    <div class="carousel slide" id="admin-ui-slides">
+      <ol class="carousel-indicators">
+        <li data-target="#admin-ui-slides" data-slide-to="0" class="active"></li>
+        <li data-target="#admin-ui-slides" data-slide-to="1"></li>
+        <li data-target="#admin-ui-slides" data-slide-to="2"></li>
+        <li data-target="#admin-ui-slides" data-slide-to="3"></li>
+        <li data-target="#admin-ui-slides" data-slide-to="4"></li>
+        <li data-target="#admin-ui-slides" data-slide-to="5"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+	  <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-1.png' %}" />
+          <div class="container">
+            <div class="carousel-caption">
+            </div>
+          </div>
         </div>
+        <div class="item">
+	  <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-2.png' %}" />
+          <div class="container">
+            <div class="carousel-caption">
+            </div>
+          </div>
+        </div>
+        <div class="item">
+	  <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-3.png' %}" />
+          <div class="container">
+            <div class="carousel-caption">
+            </div>
+          </div>
+        </div>
+        <div class="item">
+	  <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-4.png' %}" />
+          <div class="container">
+            <div class="carousel-caption">
+            </div>
+          </div>
+        </div>
+        <div class="item">
+	  <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-5.png' %}" />
+          <div class="container">
+            <div class="carousel-caption">
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#admin-ui-slides" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#admin-ui-slides" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
       </div>
     </div>
   </div>
 </div>
 
+<div class="wrapper wrapper-border">
 <div class="container">
   <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <h2>Clients and Tools</h2>
-      </div>
-      <p>Crate is shipping with a built-in Administration Interface. The Command Line interface (Crate Shell – CraSh) allows interactive queries. Crate’s Python client is most advanced and features SQLAlchemy integration.</p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <h2>Screenshots from the Administration Interface</h2>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-4 col-sm-6">
-      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-1.png' %}" />
-    </div>
-    <div class="col-lg-4 col-sm-6">
-      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-2.png' %}" />
-    </div>
-    <div class="col-lg-4 col-sm-6">
-      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-3.png' %}" />
-    </div>
-    <div class="col-lg-4 col-sm-6">
-      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-4.png' %}" />
-    </div>
-    <div class="col-lg-4 col-sm-6">
-      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-large-5.png' %}" />
-    </div>
-  </div>
-
-  <div class="row">
     <div class="col-sm-12">
-      <div class="page-header">
         <h2>Other Languages</h2>
-      </div>
       <p>This page is also available in
         <a href="{% url '/zh-cn/overview.html' %}" title="Chinese">Chinese</a>,
         <a href="{% url '/fr/overview.html' %}" title="French">French</a>,
@@ -160,6 +194,6 @@ description: Crate is revolutionizing scalable databases by offering SQL syntax,
       </p>
     </div>
   </div>
-
+</div>
 </div>
 {% endblock %}

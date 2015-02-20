@@ -2,20 +2,33 @@ title: Privacy Policy
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
+{% block navbar2 %}
+<div class="wrapper wrapper-plain">
+    <nav class="breadcrumb-container">
+      <div class="container">
+  <ol class="breadcrumb">
+    <li class="active">Legal</li>
+  </ol>
+      </div>
+    </nav>
+</div>
+{% endblock %}
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <h1>Privacy Policy</h1>
+{% block body %}
+<div class="wrapper wrapper-border">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header">
+          <h1>Privacy Policy</h1>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      {% filter markdown %}
+    <div class="row">
+      <div class="col-lg-12">
+{% filter markdown %}
 
 ## Applicability
 
@@ -71,9 +84,10 @@ For revisions to this Privacy Policy that may be materially less restrictive on 
 
 _This privacy policy was last updated on February 16th, 2014._
 
-      {% endfilter %}
+{% endfilter %}
+      </div>
     </div>
-  </div>
 
+  </div>
 </div>
 {% endblock %}

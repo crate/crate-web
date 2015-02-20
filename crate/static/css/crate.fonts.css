@@ -1,0 +1,23 @@
+@font-face {
+  font-family: BlenderPro;
+  src: url('../fonts/blender/BlenderPro-ThinWeb.eot');
+  src: url('../fonts/blender/BlenderPro-ThinWeb.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/blender/BlenderPro-ThinWeb.woff') format('woff'),
+    url('../fonts/blender/BlenderPro-Thin.ttf') format('truetype');
+  font-weight: normal;
+  /*font-weight: 300;*/
+}
+
+@font-face {
+  font-family: BlenderPro;
+  src: url('../fonts/blender/BlenderPro-BoldWeb.eot');
+  src: url('../fonts/blender/BlenderPro-BoldWeb.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/blender/BlenderPro-BoldWeb.woff') format('woff'),
+    url('../fonts/blender/BlenderPro-Bold.ttf') format('truetype');
+  font-weight: bold;
+  /*font-weight: 800;*/
+}
+
+.blender {
+    font-family: BlenderPro;
+}
