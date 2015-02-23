@@ -4,8 +4,8 @@ logo: /static/images/aws-logo.png
 
 {% extends "doc.html" %}
 
-{% block body %}
-<div class="container">
+{% block docs_content %}
+
   <div class="row">
     <div class="col-sm-8">
       <p>Amazon’s cloud (AWS) is a great way to run a Crate cluster.  You can leverage all of the power of AWS’s EC2, EBS (and more) to build a truly elastic data store.  Here, we’ll go over just the basics of getting a 3 node cluster running using Docker, although you can easily deploy Crate without Docker.  We’re just big fans of containers!</p>
@@ -104,6 +104,6 @@ HOSTS="ec2-54-99-254-104.us-west-1.compute.amazonaws.com:4300,ec2-54-208-251-24.
       {% include "cloud-template-list.html" %}
     </div>
   </div>
-</div>
+
 {% endblock %}
 

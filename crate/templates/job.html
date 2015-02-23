@@ -1,15 +1,32 @@
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <p class="small">Open Position at Crate.IO</p>
+{% block navbar2 %}
+<div class="wrapper wrapper-plain">
+    <nav class="breadcrumb-container">
+      <div class="container">
+	<ol class="breadcrumb">
+	  <li class="active"><a href="{% url '/jobs.html' %}">Jobs at Crate.IO</a></li>
+	</ol>
+      </div>
+    </nav>
+</div>
+{% endblock %}
+
+{% block header %}
+<div class="wrapper wrapper-border wrapper-blogpost-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
         <h1>{{ title }}</h1>
       </div>
     </div>
   </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-8">
       <div class="job-description">
@@ -42,5 +59,6 @@
       <p><a class="btn btn-success" href="mailto:jobs@crate.io?subject={{ title|escapejs }}">Apply now!</a></p>
     </div>
   </div>
+</div>
 </div>
 {% endblock %}

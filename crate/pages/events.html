@@ -3,17 +3,22 @@ description: Meet the people of Crate.IO at events, conferences, meetups, ... ar
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
-
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
+{% block header %}
+<div class="wrapper wrapper-bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
         <h1>Events</h1>
+        <p class="lead">Meet the people of Crate.IO at events, conferences, meetups, ... around the world.</p>
       </div>
-      <p class="lead">Meet the people of Crate.IO at events, conferences, meetups, ... around the world.</p>
     </div>
   </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border">
+<div class="container">
 
   {% for event in events %}
   <div class="row">
@@ -23,17 +28,20 @@ description: Meet the people of Crate.IO at events, conferences, meetups, ... ar
       {% endif %}
     </div>
     <div class="col-sm-8 col-md-9 col-lg-10">
-      <h2><a href="{{ event.url }}">{{ event.title }}</a></h2>
-      <p class="text-muted">{{ event.date_from|date }}
-        {% if event.date_to|date != event.date_from|date %} &mdash; {{ event.date_to|date }}{% endif %}</p>
+      <div class="list-header">
+	<h2><a href="{{ event.url }}">{{ event.title }}</a></h2>
+	<p class="text-muted"><i class="fa fa-calendar"></i> {{ event.date_from|date }}
+	  {% if event.date_to|date != event.date_from|date %} &mdash; {{ event.date_to|date }}{% endif %}</p>
+      </div>
       <p class="excerpt">
         {{ event.raw_body|markdown|striptags|truncatewords:50 }}
       </p>
-      <p><a href="{{ event.url }}" title="Read more" class="btn btn-default btn-sm">Read more &raquo;</a></p>
+      <p class="text-right"><a href="{{ event.url }}" title="Read more">Read more &raquo;</a></p>
     </div>
   </div>
   {% if not forloop.last %}<hr />{% endif %}
   {% endfor %}
 
+</div>
 </div>
 {% endblock %}

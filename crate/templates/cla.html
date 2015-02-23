@@ -1,34 +1,48 @@
 {% extends "base.html" %}
 
+{% block navbar2 %}
+<div class="wrapper wrapper-plain">
+    <nav class="breadcrumb-container">
+      <div class="container">
+      <ol class="breadcrumb">
+        <li class="active">Contributor Agreement</li>
+      </ol>
+      </div>
+    </nav>
+</div>
+{% endblock %}
+
 {% block body %}
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>{{ title }}</h1>
+<div class="wrapper wrapper-border">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-header">
+          <h1>{{ title }}</h1>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8">
-      {% block widget %}
-      <p><script type="text/javascript" src="https://secure.echosign.com/public/embeddedWidget?wid={{ widget_id }}"></script></p>
-      <p class="small text-muted">(<a href="https://secure.echosign.com/public/esignWidget?wid={{ widget_id }}">No Widget Displayed?</a>)</p>
-      {% endblock %}
-    </div>
-    <div class="col-md-4">
-      <h3>Looking for other CLAs?</h3>
-      <div class="well text-center">
-        <i class="fa-large fa fa-user"></i><br />
-        <a href="{% url '/community/contribute/icla.html' %}">Individual Contributor</a>
+    <div class="row">
+      <div class="col-md-8">
+        {% block widget %}
+        <p><script type="text/javascript" src="https://secure.echosign.com/public/embeddedWidget?wid={{ widget_id }}"></script></p>
+        <p class="small text-muted">(<a href="https://secure.echosign.com/public/esignWidget?wid={{ widget_id }}">No Widget Displayed?</a>)</p>
+        {% endblock %}
       </div>
-      <div class="well text-center">
-        <i class="fa-large fa fa-building-o"></i><br />
-        <a href="{% url '/community/contribute/ccla.html' %}">Company</a> having employees contributing
-      </div>
-      <div class="well text-center">
-        <i class="fa-large fa fa-briefcase"></i><br />
-        <a href="{% url '/community/contribute/iccla.html' %}">Individual Corporate Contributor</a> under an existing company contributor agreement (your employer)
+      <div class="col-md-4">
+        <h3>Looking for other CLAs?</h3>
+        <div class="well text-center">
+          <i class="fa-large fa fa-user"></i><br />
+          <a href="{% url '/community/contribute/icla.html' %}">Individual Contributor</a>
+        </div>
+        <div class="well text-center">
+          <i class="fa-large fa fa-building-o"></i><br />
+          <a href="{% url '/community/contribute/ccla.html' %}">Company</a> having employees contributing
+        </div>
+        <div class="well text-center">
+          <i class="fa-large fa fa-briefcase"></i><br />
+          <a href="{% url '/community/contribute/iccla.html' %}">Individual Corporate Contributor</a> under an existing company contributor agreement (your employer)
+        </div>
       </div>
     </div>
   </div>

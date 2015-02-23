@@ -1,128 +1,130 @@
-title: Your Elastic Data Store
-description: Crate is an open source database built with familiar SQL syntax, replication, sharding and Lucene indexes in one complete package.
+title: The Distributed Database for Docker
+description: Crate is the distributed database for containerized environments such as Docker. Based on the familiar SQL syntax Crate combines high availability, resiliency and scalability in a distributed design that allows to query mountains of data in realtime, not batches.
 
 {% extends "base.html" %}
 
 {% block title %}CRATE{% endblock %}
 
-{% block body %}
-<div class="jumbotron">
+{% block header %}
+<div class="wrapper wrapper-hero" id="wrapper-hero-frontpage">
   <div class="container">
-    <h1 class="blender"><b>CRATE <small>The Distributed Database for Docker</small></b></h1>
-    <p class="blender"><b>Scale Data as Elastic as your Application.</b></p>
-    <p>
-      <a href="{% url '/overview.html' %}" class="btn btn-primary">What is Crate?</a>
-      <a href="{% url '/try.html' %}" class="btn btn-success">Try it!</a>
-    </p>
+    <h1>The Distributed Database for Docker</h1>
+    <p class="lead">Scale data as elastic as your application.</b></p>
+    <p><a class="btn btn-fp-white" href="{% url '/overview.html' %}">What is Crate?</a><a class="btn btn-fp-black" href="{% url '/try.html' %}">Try Crate now!</a></p>
   </div>
 </div>
+{% endblock %}
 
-<div class="feature">
+{% block body %}
+<div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
       <div class="col-sm-4">
-        <p><a href="{% url '/overview.html' %}"><img class="img-responsive thumbnail" src="{% static '/static/images/sql.jpg' %}" /></a></p>
-        <h2>Distributed SQL</h2>
-        <p class="lead">One to rule them all: sub-second queries on tabular data and semi-structured records. Including support for binary objects (BLOBs).</p>
+        <p><a href="{% url '/overview.html' %}"><img class="img-responsive thumbnail" src="{% media '/media/1502/sql.png' %}" /></a></p>
+        <h2>Distributed SQL Queries</h2>
+        <p class="">One to rule them all: sub-second queries on tabular data and semi-structured records. Including support for binary objects (BLOBs).</p>
         <p>Read more about <a href="{% url '/overview.html' %}">Crate's features</a>.</p>
       </div>
       <div class="col-sm-4">
-        <p><a href="{% url '/blog/snowsprint-2015.html' %}"><img class="img-responsive thumbnail" src="{% static '/static/images/snowsprint-thumb.png' %}" /></a></p>
-        <h2>Crate.IO Snowsprint 2015 Recap: Dockerzeit</h2>
-        <p class="lead">SwnoSprint 2015, beer, schnapps and spaetzle-fueled developers at their best! They have done some amazing work in the Docker ecosystem. </p>
+        <p><a href="{% url '/blog/snowsprint-2015.html' %}"><img class="img-responsive thumbnail" src="{% media '/media/1502/snowsprint.png' %}" /></a></p>
+        <h2>Snowsprint 2015 Recap: Dockerzeit</h2>
+        <p class="">Snowsprint 2015: beer and spaetzle-fueled developers at their best! They have done some amazing work in the Docker ecosystem.</p>
         <p>Read more about <a href="{% url '/blog/snowsprint-2015.html' %}">SnowSprint 2015 recap: Dockerzeit</a>.</p>
       </div>
       <div class="col-sm-4">
-        <p><a href="{% url '/docs/cloud.html' %}"><img class="img-responsive thumbnail" src="{% static '/static/images/sharednothing.png' %}" /></a></p>
+        <p><a href="{% url '/docs/cloud.html' %}"><img class="img-responsive thumbnail" src="{% media '/media/1502/shared_nothing.png' %}" /></a></p>
         <h2>Shared Nothing Architecture</h2>
-        <p class="lead">Adding nodes on commodity hardware or in the cloud is as simple as a single command in your terminal.</p>
+        <p class="">Adding nodes on commodity hardware or in the cloud is as simple as a single command in your terminal.</p>
         <p>Learn how to <a href="{% url '/docs/cloud.html' %}">install Crate in the cloud</a>.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="feature">
+<div class="wrapper wrapper-bg-gray">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6">
-        <div class="page-header">
-          <h2 class="text-center">Featured In</h2>
-        </div>
+      <div class="col-lg-12">
+        <h2 class="">Crate rocks ...</h2>
+        <ul class="list-group">
+          <li class="list-group-item">
+	  ... as <b>resilient</b>, <b>distributed</b> persistence layer for <b>containerized applications</b>.
+          </li>
+          <li class="list-group-item">
+	  ... if you process large amounts of <b>time-series data</b>, e.g. for <b>IoT applications</b> with read/write workloads.
+          </li>
+          <li class="list-group-item">
+	  ... if you process <b>semistructured/dynamic data</b>, including geospatial data. Crate supports binary objects as well.
+          </li>
+          <li class="list-group-item">
+	  ... operational datastore for web applications that require powerful <b>fulltext search</b>.
+          </li>
+          <li class="list-group-item">
+	  ... <b>realtime</b> map-reduce style queries on a modern, post-hadoop architecture.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2 class="">Featured In</h2>
         <div class="row row-logos">
-          <div class="col-xs-2 col-sm-3 col-md-2">
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
             <a href="http://techcrunch.com/2014/04/24/a-crate-load-of-data/">
-              <img class="img-responsive" src="{% media '/media/1501/techcrunch-monotone.png' %}" />
+              <img class="img-responsive" src="{% media '/media/1502/techcrunch.png' %}" />
             </a>
           </div>
-          <div class="col-xs-2 col-sm-3 col-md-2">
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
             <a href="http://gigaom.com/2014/06/02/crate-pitches-its-zero-admin-data-store-for-the-internet-of-things-and-other-high-concurrency-sectors/">
-              <img class="img-responsive" src="{% media '/media/1501/gigaom-monotone.png' %}" />
+              <img class="img-responsive" src="{% media '/media/1502/gigaom.png' %}" />
             </a>
           </div>
-          <div class="col-xs-2 col-sm-3 col-md-2">
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
             <a href="http://news.ycombinator.com/item?id=7609323">
-              <img class="img-responsive" src="{% media '/media/1501/hackernews-monotone.png' %}" />
+              <img class="img-responsive" src="{% media '/media/1502/hackernews.png' %}" />
             </a>
           </div>
-          <div class="col-xs-2 col-sm-3 col-md-2">
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
             <a href="http://inventures.eu/crate-data-wins-at-2014-launchpad-competition">
-              <img class="img-responsive" src="{% media '/media/1501/inventures-monotone.png' %}" />
+              <img class="img-responsive" src="{% media '/media/1502/inventures.png' %}" />
               </a>
           </div>
         </div>
-        <div class="page-header">
-          <h2 class="text-center">Awards</h2>
-        </div>
-        <div class="row row-logos">
-          <div class="col-xs-2 col-sm-3 col-md-2">
-            <a href="{% url '/blog/crate-io-wins-techcrunch-disrupt-startup-battle-2.html' %}" title="Crate.IO Wins TechCrunch Disrupt Startup Battle!">
-              <img class="img-responsive" src="{% media '/media/1501/techcrunch-monotone.png' %}" />
-            </a>
-          </div>
-          <div class="col-xs-2 col-sm-3 col-md-2">
-            <a href="{% url '/blog/crate-data-wins-the-2014-structure-launchpad-competition.html' %}" title="Crate Wins the 2014 GigaOm Structure Launchpad Competition">
-              <img class="img-responsive" src="{% media '/media/1501/gigaom-structure-montone.png' %}" />
-            </a>
-          </div>
-          <div class="col-xs-2 col-sm-3 col-md-2">
-            <a href="{% url '/blog/pioneers-festival-final-8.html' %}" title="Crate.IO makes it to the Final 8 at Pioneers Festival">
-              <img class="img-responsive" src="{% media '/media/1501/pioneers-monotone.png' %}" />
-            </a>
-          </div>
-          <div class="col-xs-3 col-sm-4 col-md-3">
-            <a href="https://eir.cisco.com/">
-              <img class="img-responsive" src="{% media '/media/1501/cisco-monotone.png' %}" />
-            </a>
-          </div>
-          <div class="col-xs-3 col-sm-4 col-md-3">
-            <a href="http://sxsw.com/interactive/news/2015/seventh-annual-sxsw-accelerator%C2%AE-finalists-judges-and-emcees-revealed-2015">
-              <img class="img-responsive" src="{% media '/media/1501/sxsw-monotone.png' %}" />
-            </a>
-          </div>
-        </div>
       </div>
-      <div class="col-sm-6">
-        <div class="page-header">
-          <h2 class="text-center">Crate rocks ...</h2>
+      <div class="col-lg-6">
+        <h2 class="">Awards</h2>
+        <div class="row row-logos">
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
+            <a href="{% url '/blog/crate-io-wins-techcrunch-disrupt-startup-battle-2.html' %}" title="Crate.IO Wins TechCrunch Disrupt Startup Battle!">
+              <img class="img-responsive" src="{% media '/media/1502/techcrunch.png' %}" />
+            </a>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
+            <a href="{% url '/blog/crate-data-wins-the-2014-structure-launchpad-competition.html' %}" title="Crate Wins the 2014 GigaOm Structure Launchpad Competition">
+              <img class="img-responsive" src="{% media '/media/1502/gigaom_launchpad.png' %}" />
+            </a>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
+            <a href="{% url '/blog/pioneers-festival-final-8.html' %}" title="Crate.IO makes it to the Final 8 at Pioneers Festival">
+              <img class="img-responsive" src="{% media '/media/1502/pioneers.png' %}" />
+            </a>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
+            <a href="https://eir.cisco.com/">
+              <img class="img-responsive" src="{% media '/media/1502/cisco.png' %}" />
+            </a>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
+            <a href="http://sxsw.com/interactive/news/2015/seventh-annual-sxsw-accelerator%C2%AE-finalists-judges-and-emcees-revealed-2015">
+              <img class="img-responsive" src="{% media '/media/1502/sxsw.png' %}" />
+            </a>
+          </div>
         </div>
-        <ul class="list-group">
-          <li class="list-group-item">
-            as resilient, distributed persistence layer for containerized applications.
-          </li>
-          <li class="list-group-item">
-            if you process large amounts of time-series data, e.g. for IoT applications with read/write workloads.
-          </li>
-          <li class="list-group-item">
-            if you process semistructured/dynamic data, including geospatial data. Crate supports binary objects as well.
-          </li>
-          <li class="list-group-item">
-            operational datastore for web applications that require powerful fulltext search.
-          </li>
-          <li class="list-group-item">
-            realtime map-reduce style queries on a modern, post-hadoop architecture.
-          </li>
-        </ul>
       </div>
     </div>
   </div>

@@ -1,19 +1,36 @@
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>{{ title }}</h1>
+{% block navbar2 %}
+<div class="wrapper wrapper-plain">
+    <nav class="breadcrumb-container">
+      <div class="container">
+	<ol class="breadcrumb">
+	  <li class="active"><a href="{% url '/events.html' %}">Events</a></li>
+	</ol>
       </div>
-      <p class="text-muted">
-        <i class="fa fa-calendar"></i> {{ date_from|date }}{% if date_from|date != date_to|date %} &mdash; {{ date_to|date }}{% endif %}
+    </nav>
+</div>
+{% endblock %}
+
+{% block header %}
+<div class="wrapper wrapper-border wrapper-blogpost-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+	<div class="page-header">
+	  <h1>{{ title }}</h1>
+          <p class="text-muted">
+            <i class="fa fa-calendar"></i> {{ date_from|date }}{% if date_from|date != date_to|date %} &mdash; {{ date_to|date }}{% endif %}
         {% if date_from|time != date_to|time %}<i class="fa fa-clock-o"></i> {{ date_from|time }} - {{ date_to|time }}{% endif %}</p>
-      <hr />
+	</div>
+      </div>
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border">
 <div class="container">
   <div class="row">
     <div class="col-sm-8">
@@ -37,5 +54,6 @@
       <p><a href="{% url '/events.html' %}">More events &raquo;</a></p>
     </div>
   </div>
+</div>
 </div>
 {% endblock %}

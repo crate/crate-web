@@ -2,25 +2,39 @@ title: License
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
+{% block navbar2 %}
+<div class="wrapper wrapper-plain">
+    <nav class="breadcrumb-container">
+      <div class="container">
+  <ol class="breadcrumb">
+    <li class="active">Legal</li>
+  </ol>
+      </div>
+    </nav>
+</div>
+{% endblock %}
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <h1>License</h1>
+{% block body %}
+<div class="wrapper wrapper-border">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header">
+          <h1>License</h1>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <pre>
+    <div class="row">
+      <div class="col-lg-12">
+        <pre>
 {% include "legal/license.txt" %}
-      </pre>
-      <p>Plain text version: <a href="{% url '/legal/license.txt' %}">LICENSE.txt</a></p>
+        </pre>
+        <p>Plain text version: <a href="{% url '/legal/license.txt' %}">LICENSE.txt</a></p>
+      </div>
     </div>
-  </div>
 
-</div>
+  </div>
+  </div>
 {% endblock %}

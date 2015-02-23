@@ -3,19 +3,23 @@ description: The team at Crate.io is beyond excited to announce Snow Sprint 2015
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
+{% block header %}
+<div class="wrapper wrapper-plain">
+  <img class="img-responsive" src="{% static '/static/images/snowsprint-header.png' %}" />
+</div>
+{% endblock %}
 
+{% block body %}
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <img class="img-responsive" src="{% static '/static/images/snowsprint-header.png' %}" />
       <div class="page-header">
-        <h1>Crate Snow Sprint 2015</h1>
+	<h1>Crate Snow Sprint 2015</h1>
       </div>
       <p class="lead">The team at Crate.io is beyond excited to announce Snow Sprint 2015!</p>
     </div>
   </div>
-
   <div class="row">
     <div class="col-sm-6">
       <h2>Summary</h2>
@@ -101,5 +105,6 @@ description: The team at Crate.io is beyond excited to announce Snow Sprint 2015
       <p>In our experience, most people arrive at Zurich and take the train to St. Margrethen. If you plan to drive yourself, we can help with driving directions. Make sure you have snow tires!</p>
     </div>
 
+</div>
 </div>
 {% endblock %}

@@ -2,27 +2,40 @@ title: Notice
 
 {% extends "base.html" %}
 
+{% block navbar2 %}
+<div class="wrapper wrapper-plain">
+    <nav class="breadcrumb-container">
+      <div class="container">
+  <ol class="breadcrumb">
+    <li class="active">Legal</li>
+  </ol>
+      </div>
+    </nav>
+</div>
+{% endblock %}
 {% block body %}
-<div class="container">
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <h1>Notice</h1>
+<div class="wrapper wrapper-border">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header">
+          <h1>Notice</h1>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <p>Crate uses numerous third-party Open Source Libraries. You always can find the most recent and complete list of libraries in the NOTICE file of our corresponding Github Repository.</p>
-      <h2>Crate.IO</h2>
-      <p>Copyright 2013-2015 CRATE Technology GmbH ("Crate")</p>
-      <h3>Third party dependencies</h3>
-{% filter markdown %}
-{% include "legal/notice.txt" %}
-{% endfilter %}
-    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Crate uses numerous third-party Open Source Libraries. You always can find the most recent and complete list of libraries in the NOTICE file of our corresponding Github Repository.</p>
+        <h2>Crate.IO</h2>
+        <p>Copyright 2013-2015 CRATE Technology GmbH ("Crate")</p>
+        <h3>Third party dependencies</h3>
+  {% filter markdown %}
+  {% include "legal/notice.txt" %}
+  {% endfilter %}
+      </div>
   </div>
 
 </div>

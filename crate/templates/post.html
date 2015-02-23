@@ -1,21 +1,37 @@
 {% extends "base.html" %}
 
-{% block body %}
-<!-- post header -->
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>{{ title }}</h1>
+{% block navbar2 %}
+<div class="wrapper wrapper-plain">
+    <nav class="breadcrumb-container">
+      <div class="container">
+	<ol class="breadcrumb">
+	  <li class="active"><a href="{% url '/blog.html' %}">Blog</a></li>
+	</ol>
+      </div>
+    </nav>
+</div>
+{% endblock %}
+
+{% block header %}
+<div class="wrapper wrapper-border wrapper-blogpost-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+	<div class="page-header">
+	  <h1>{{ title }}</h1>
+	</div>
       </div>
     </div>
   </div>
 </div>
-<!-- post body -->
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border">
 <div class="container">
   <div class="row">
     <div class="col-sm-8">
-      <div class="post-content" id="crate-blog-post">
+      <div id="post-content">
         {{ body }}
       </div>
 
@@ -83,6 +99,7 @@
 
     </div>
   </div>
+</div>
 </div>
 <!-- post footer -->
 {% endblock %}

@@ -4,8 +4,8 @@ logo: /static/images/softlayer-logo.jpg
 
 {% extends "doc.html" %}
 
-{% block body %}
-<div class="container">
+{% block docs_content %}
+
   <div class="row">
     <div class="col-sm-8">
 {% filter markdown %}
@@ -119,6 +119,6 @@ discovery.zen.ping.unicast.hosts:
       {% include "cloud-template-list.html" %}
     </div>
   </div>
-</div>
+
 {% endblock %}
 

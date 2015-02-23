@@ -4,45 +4,53 @@ description: We are an open source company by heart and we’d love to get your 
 {% extends "base.html" %}
 
 {% block body %}
-<div class="container">
-
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>Contribute to Crate</h1>
-      </div>
-      <p class="lead">We are an open source company by heart and we’d love to get your help and support by contributions from our community. This does not only mean code, but also engaging on stackoverflow, usergroups, documentation, submitting bugs and issues and of course feature requests.</p>
-    </div>
+<div class="wrapper wrapper-bg-primary">
+  <div class="container">
+    <h1>Contribute to Crate</h1>
+    <p class="lead">We are an open source company by heart and we’d love to get your help and support by contributions from our community. This does not only mean code, but also engaging on stackoverflow, usergroups, documentation, submitting bugs and issues and of course feature requests.</p>
   </div>
+</div>
+
+<div class="wrapper wrapper-border">
+  <div class="container">
 
     <div class="row">
-    <div class="col-sm-12">
+      <div class="col-sm-12">
+        <div class="page-header">
 
-      <h2>Request Features &amp; Report Issues</h2>
-      <p>We are aware that many features have to be added over time. In order to help prioritize we also want to get your feedback. Just open an <a href="https://github.com/crate/crate/issues" target="_blank">issue on Github</a> and describe the feature you want and how it should work. If you explain why you’re making the feature request, we may find a way to help you.</p>
-      <p>Before reporting an issue, make sure you use the latest version of Crate and search our issues list on Github, it may be already tracked and in the pipeline. If possible help us in reproducing the bug by delivering a small test case so we can run a test against it.</p>
-
-      <h2>Contribute Code</h2>
-      <p>We appreciate your ideas and help. Before you start to contribute please contact us (e.g. in #crate on Freenode IRC), just to make sure nobody else is already working on that problem or feature. In order to optimize the way things get solved it is best to find the best approach with us before writing too much code – we want your code to get accepted!</p>
-      <ol>
-        <li><strong>Fork</strong> and clone the repository<br />
-          Clone the main Crate repository to your local machine.</li>
-        <li>Start <strong>coding</strong><br />
-          The document <a href="https://github.com/crate/crate/blob/master/DEVELOP.rst" target="_blank">DEVELOP.rst</a> on GitHub has detailled instructions about how to work on Crate.</li>
-        <li><strong>Test</strong> your changes<br />
-          Run tests to make sure that nothing is broken.</li>
-        <li><strong>Sign</strong> the <a title="Contributor License Agreements (CLAs)" href="{% url '/community/contribute/agreements.html' %}">Contributor License Agreement (CLA)</a><br />
-          We are not asking you to give us your copyright, but we need to get your OK to distribute your code without restriction.</li>
-        <li>Update your local repository with latest Crate code<br />
-          <strong>Rebase</strong> your branch on top of the latest master branch. We prefer your changes to be squashed into a single commit.</li>
-        <li>Submit a <strong>pull request</strong><br />
-          Update your forked copy of the repository and submit a pull request to our team. Please describe your changes, and if possible refer to the issues solved on the issue list.</li>
-        <li>Grab a <strong>coffee</strong><br />
-          Our team will review the pull request and discuss it internally. We may come back to you. And if things go well pull your request into the code base.</li>
-      </ol>
-
+        </div>
+       
+      </div>
     </div>
-  </div>
 
-</div>
+      <div class="row">
+      <div class="col-sm-12">
+
+        <h2>Request Features &amp; Report Issues</h2>
+        <p>We are aware that many features have to be added over time. In order to help prioritize we also want to get your feedback. Just open an <a href="https://github.com/crate/crate/issues" target="_blank">issue on Github</a> and describe the feature you want and how it should work. If you explain why you’re making the feature request, we may find a way to help you.</p>
+        <p>Before reporting an issue, make sure you use the latest version of Crate and search our issues list on Github, it may be already tracked and in the pipeline. If possible help us in reproducing the bug by delivering a small test case so we can run a test against it.</p>
+
+        <h2>Contribute Code</h2>
+        <p>We appreciate your ideas and help. Before you start to contribute please contact us (e.g. in #crate on Freenode IRC), just to make sure nobody else is already working on that problem or feature. In order to optimize the way things get solved it is best to find the best approach with us before writing too much code – we want your code to get accepted!</p>
+        <ol>
+          <li><strong>Fork</strong> and clone the repository<br />
+            Clone the main Crate repository to your local machine.</li>
+          <li>Start <strong>coding</strong><br />
+            The document <a href="https://github.com/crate/crate/blob/master/DEVELOP.rst" target="_blank">DEVELOP.rst</a> on GitHub has detailled instructions about how to work on Crate.</li>
+          <li><strong>Test</strong> your changes<br />
+            Run tests to make sure that nothing is broken.</li>
+          <li><strong>Sign</strong> the <a title="Contributor License Agreements (CLAs)" href="{% url '/community/contribute/agreements.html' %}">Contributor License Agreement (CLA)</a><br />
+            We are not asking you to give us your copyright, but we need to get your OK to distribute your code without restriction.</li>
+          <li>Update your local repository with latest Crate code<br />
+            <strong>Rebase</strong> your branch on top of the latest master branch. We prefer your changes to be squashed into a single commit.</li>
+          <li>Submit a <strong>pull request</strong><br />
+            Update your forked copy of the repository and submit a pull request to our team. Please describe your changes, and if possible refer to the issues solved on the issue list.</li>
+          <li>Grab a <strong>coffee</strong><br />
+            Our team will review the pull request and discuss it internally. We may come back to you. And if things go well pull your request into the code base.</li>
+        </ol>
+
+      </div>
+    </div>
+
+  </div>
 {% endblock %}

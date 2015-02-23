@@ -1,31 +1,51 @@
 {% extends "base.html" %}
 
 {% block navbar2 %}
-<nav class="navbar navbar-inverse navbar-second">
-  <div class="container">
-    <div>
-      <ul class="nav navbar-nav">
-        <li class="{% if_current_page '/docs.html' 'active' '' %}"><a href="{% url '/docs.html' %}">Installation</a></li>
-        <li class="{% if_current_page '/docs/docker.html' 'active' '' %}"><a href="{% url '/docs/docker.html' %}">Docker</a></li>
-        <li class="{% if_current_page '/docs/linux.html' 'active' '' %}"><a href="{% url '/docs/linux.html' %}">Linux</a></li>
-        <li class="{% if_current_page '/docs/cloud.html' 'active' '' %}"><a href="{% url '/docs/cloud.html' %}">Cloud</a></li>
-        <li class="{% if_current_page '/docs/clients.html' 'active' '' %}"><a href="{% url '/docs/clients.html' %}">Clients</a></li>
-        <li class="{% if_current_page '/docs/faq.html' 'active' '' %}"><a href="{% url '/docs/faq.html' %}">FAQ</a></li>
-        <li class=""><a href="https://github.com/crate/crate" target="_blank"><i class="fa fa-github"></i> Source</a></li>
-      </ul>
+<div class="wrapper wrapper-plain">
+  <nav class="breadcrumb-container">
+    <div class="container">
+      <ol class="nav navbar-nav navbar-subnav">
+        <li class="{% if_current_page '/docs.html' 'active' '' %}">
+	  <a href="{% url '/docs.html' %}">Installation</a></li>
+        <li class="{% if_current_page '/docs/docker.html' 'active' '' %}">
+	  <a href="{% url '/docs/docker.html' %}">Docker</a></li>
+        <li class="{% if_current_page '/docs/linux.html' 'active' '' %}">
+	  <a href="{% url '/docs/linux.html' %}">Linux</a></li>
+        <li class="{% if_current_page '/docs/cloud.html' 'active' '' %}">
+	  <a href="{% url '/docs/cloud.html' %}">Cloud</a></li>
+        <li class="{% if_current_page '/docs/clients.html' 'active' '' %}">
+	  <a href="{% url '/docs/clients.html' %}">Clients</a></li>
+        <li class="{% if_current_page '/docs/faq.html' 'active' '' %}">
+	  <a href="{% url '/docs/faq.html' %}">FAQ</a></li>
+        <li class=""><a href="https://github.com/crate/crate" target="_blank">
+	  <i class="fa fa-github"></i> Source</a></li>
+      </ol>
     </div>
-  </div>
-</nav>
+  </nav>
+</div>
 {% endblock %}
 
 {% block header %}
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1 id="{{ title|slugify }}">{{ title }}</h1>
+<div class="wrapper wrapper-border wrapper-blogpost-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+	<div class="page-header">
+	  <h1 id="{{ title|slugify }}">{{ title }}</h1>
+        </div>
       </div>
     </div>
   </div>
 </div>
 {% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border">
+  <div class="container">
+    {% block docs_content %}
+    <!-- @docs_content -->
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}
+

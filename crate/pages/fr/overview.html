@@ -3,21 +3,31 @@ description: Crate est un datastore comportant les avantages d’une base de don
 
 {% extends "base.html" %}
 
+{% block header %}
+<div class="wrapper wrapper-hero" id="wrapper-hero-overview">
+  <div class="container">
+    <h1>Crate: un datastore SQL en temps réel facilement ajustable</h1>
+  </div>
+</div>
+{% endblock %}
+
 {% block body %}
+<div class="wrapper wrapper-border">
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <div class="page-header">
-        <h1>Crate: un datastore SQL en temps réel facilement ajustable</h1>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-
       <h2>Ajustable. Simple. Rapide.</h2>
       <p><strong>Crate est une grappe de datastores shared-nothing, intégralement interrogeables et orientés document : un backend rapide, puissant et massivement ajustable pour les applis à forte consommation de données, l’internet des objets ou les analytiques en temps réel. Cette solution est intégralement open source.</strong></p>
       <p><strong>Crate est un datastore comportant les avantages d’une base de données orientée documents NoSQL, et intégrant une fonction de recherche puissante (Elasticsearch inclut en tant que bibliothèque), accessible en utilisant SQL.</strong></p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
       <h2>Puissant et ultra rapide</h2>
       <p>Crate.IO est un backend puissant pour les données tabulaires, les dossiers semi-structurés et les objets binaires (blobs). Il offre une disponibilité élevée ainsi qu’un accès massivement parallèle en temps réel, permettant d’obtenir des temps de réponse inférieurs à la seconde sur des milliards de dossiers.</p>
@@ -28,13 +38,18 @@ description: Crate est un datastore comportant les avantages d’une base de don
 
     </div>
   </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <img class="thumbnail img-responsive" src="{% static '/static/images/crate-architecture.jpg' %}" />
+      <img class="img-responsive thumbnail" src="{% media '/media/1502/crate-architecture.png' %}" />
     </div>
     <div class="col-sm-6">
 
-      <h3>MASSIVEMENT PARALLÈLE EN TEMPS RÉEL</h3>
+      <h2>MASSIVEMENT PARALLÈLE EN TEMPS RÉEL</h2>
       <h3>RAPIDE ET FACILE À UTILISER</h3>
       <p>Utilise SQL pour des lectures et écritures dans des délais inférieurs à la seconde.</p>
       <h3>DISPONIBILITÉ ÉLEVÉE</h3>
@@ -42,6 +57,11 @@ description: Crate est un datastore comportant les avantages d’une base de don
 
     </div>
   </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
   <div class="row">
     <div class="col-sm-12">
 
@@ -66,7 +86,16 @@ description: Crate est un datastore comportant les avantages d’une base de don
         Crate permet des analytiques de données en temps réel utilisant SQL par le biais de l’analyseur, planificateur et moteur d’exécution d’interrogations distribué. Celui-ci ajoute une fonctionnalité de groupage et de triage avancée afin d’offrir des fonctions similaires au « group by … having .. » et « order by » de SQL. Pensez Map/Reduce, mais en temps réel.<br />
         5. <strong>Effectuer des modifications sans avoir à tout refaire</strong><br />
         Vous vous souvenez de cette époque formidable où restructurer l’intégralité d’une base de données relationnelle était possible grâce à un seul script SQL ? Crate implémente cette fonctionnalité en empruntant la faculté de placer le résultat d’une interrogation directement dans un ou plusieurs indexes. Cette exigence prend encore plus d’importance pour les bases de données basées sur documents, dans lesquelles les données sont souvent stockées sous un format hautement dénormalisé.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
+<div class="wrapper wrapper-border">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12"
       <h2>Configurations requises</h2>
       <p>Linux, Mac OS X ou Windows<br />
         Java 7<br />
@@ -74,10 +103,10 @@ description: Crate est un datastore comportant les avantages d’une base de don
         (pour le client en ligne de commande)</p>
       <h2>Clients et outils</h2>
       <p>Crate Data est fourni avec une interface d’administration incorporée. L’interface en ligne de commande (Crate Shell – CraSh) permet des interrogations interactives. Le client Python de Crate est le plus avancé disponible et inclut l’intégration à SQLAlchemy.</p>
-      <p><a class="btn btn-lg btn-success" href="{% url '/docs.html' %}">Téléchargez Crate</a></p>
-
-
+      <p><a class="btn btn-primary" href="{% url '/docs.html' %}">Téléchargez Crate</a></p>
     </div>
   </div>
 </div>
+</div>
+
 {% endblock %}

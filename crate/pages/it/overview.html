@@ -3,20 +3,32 @@ description:
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>Crate: archivio di dati SQL in tempo reale e facilmente espandibile</h1>
-      </div>
-    </div>
+{% block header %}
+<div class="wrapper wrapper-hero" id="wrapper-hero-overview">
+  <div class="container">
+    <h1>Crate: archivio di dati SQL in tempo reale e facilmente espandibile</h1>
   </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-12">
 
       <h2>Espandibile. Semplice. Veloce.</h2>
       <p><strong>Crate è un archivio di dati in cluster con architettura shared nothing, completamente ricercabile, e progettato per documenti: un backend veloce e potente, altamente scalabile per le applicazioni ad alta intensità di dati, l’Internet degli Oggetti o l’analisi in tempo reale. È al 100% open source.</strong> <strong>Crate.IO è un archivio di dati con i benefici di un DB documentale NoSQL con una funzionalità di ricerca potente (Elasticsearch come biblioteca inclusa), accessibile utilizzando SQL.</strong></p>
+    
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
       <h2>Potente e Velocissimo</h2>
       <p>Crate è un backend potente per dati tabulari, record semistrutturati e oggetti binari (Blob). È altamente disponibile e offre grande accesso parallelo in tempo reale, consentendo risposte sotto il secondo per miliardi di record.</p>
@@ -27,13 +39,18 @@ description:
 
     </div>
   </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <img class="thumbnail img-responsive" src="{% static '/static/images/crate-architecture.jpg' %}" />
+      <img class="img-responsive thumbnail" src="{% media '/media/1502/crate-architecture.png' %}" />
     </div>
     <div class="col-sm-6">
 
-      <h3>IN TEMPO REALE, ENORMEMENTE PARALLELO</h3>
+      <h2>IN TEMPO REALE, ENORMEMENTE PARALLELO</h2>
       <h3>VELOCE, FACILE DA USARE</h3>
       <p>Usa SQL per leggere e scrivere con tempo di risposta sotto il secondo.</p>
       <h3>ALTA DISPONIBILITA’</h3>
@@ -41,6 +58,11 @@ description:
 
     </div>
   </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
   <div class="row">
     <div class="col-sm-12">
 
@@ -64,14 +86,21 @@ description:
         5. <strong>Fare cambi senza dover rifare tutto</strong><br />
         Ricordate i bei tempi in cui la ristrutturare un intero database relazionale era possibile utilizzando un singolo script SQL? Crate implementa questa funzionalità prendendo in prestito la capacità di mettere il risultato di una query direttamente in uno o più indici. Questa esigenza diventa ancora più importante su database basati su documenti, dove i dati vengono spesso memorizzati in un formato altamente denormalizzato</p>
 
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
+  <div class="row">
+    <div class="col col-sm-12">
       <h2>Requisiti</h2>
       <p>Linux, Mac OS X o Windows Java 7 Python (per il client a linea di comando)</p>
-
       <h2>Client e Strumenti</h2>
       <p>Crate viene distribuito con una Interfaccia Amministratore. L’interfaccia a linea di comando (Crate Shell – CraSh) consente di fare query interattive. Il client Python di Crate è molto avanzato e implementa l’integrazione SQLAlchemy.</p>
-
-      <p><a class="btn btn-lg btn-success" href="{% url '/docs.html' %}">Scarica Crate</a></p>
-
+      <p><a class="btn btn-primary" href="{% url '/docs.html' %}">Scarica Crate</a></p>
     </div>
   </div>
 </div>

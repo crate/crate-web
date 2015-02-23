@@ -3,21 +3,31 @@ description: Crate &#8211; это единый мощный сервер для 
 
 {% extends "base.html" %}
 
+{% block header %}
+<div class="wrapper wrapper-hero" id="wrapper-hero-overview">
+  <div class="container">
+    <h1>Crate: хранилище данных SQL с легким масштабированием в реальном времени</h1>
+  </div>
+</div>
+{% endblock %}
+
 {% block body %}
+<div class="wrapper wrapper-border">
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <div class="page-header">
-        <h1>Crate: хранилище данных SQL с легким масштабированием в реальном времени</h1>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-
       <h2>Масштабируемость. Простота. Быстрота.</h2>
       <p><strong>Crate &#8211; это неразделяемое, документо-ориентированное кластерное хранилище данных с возможностью поиска: быстрый и мощный массивно-масштабируемый сервер для приложений с обработкой больших объемов данных, Интернета вещей или анализа в режиме реального времени. Это приложение со 100% открытым исходным кодом.</strong></p>
       <p><strong>Crate.IO является хранилищем данных, обладающей преимуществом документо-ориентированной базы данных NoSQL, мощным поиском (Elasticsearch включен в качестве библиотеки), использованием SQL.</strong></p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
       <h2>Мощный и сверхбыстрый</h2>
       <p>Crate &#8211; это единый мощный сервер для табличных данных, полуструктурированных записей и двоичных объектов (BLOBs). Приложение является высоко доступным и предлагает массово-параллельный доступ в реальном времени, позволяя отвечать на миллиарды записей меньше чем за секунду.</p>
@@ -28,9 +38,14 @@ description: Crate &#8211; это единый мощный сервер для 
 
     </div>
   </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <img class="thumbnail img-responsive" src="{% static '/static/images/crate-architecture.jpg' %}" />
+      <img class="img-responsive thumbnail" src="{% media '/media/1502/crate-architecture.png' %}" />
     </div>
     <div class="col-sm-6">
 
@@ -42,6 +57,11 @@ description: Crate &#8211; это единый мощный сервер для 
 
     </div>
   </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
   <div class="row">
     <div class="col-sm-12">
 
@@ -66,6 +86,15 @@ description: Crate &#8211; это единый мощный сервер для 
         Crate позволяет анализировать данные в режиме реального времен с помощью SQL через анализатор, планировщик и механизм выполнения распределенных запросов. Это добавляет расширенные функции группирования и сортировки для обеспечения функциональности SQL типа “group by … having ..” и “order by”. Представьте себе MapReduce, но в реальном времени.<br />
         5. <strong>Выполнение изменений без общего переделывания</strong><br />
         Помните старые добрые времена, когда реструктуризацию всей реляционной базы данных можно было выполнить с помощью одного сценария SQL? Crate реализует эту функцию с помощью записи результата запроса прямо в один или несколько индексов. Это требование стало более необходимым в базах данных документов, где данные часто хранятся в денормализованном формате.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
       <h2>Требования</h2>
       <p>Linux, Mac OS X или Windows<br />

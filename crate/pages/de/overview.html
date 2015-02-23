@@ -3,15 +3,17 @@ description: Crate ist ein Datenspeicher mit den Vorteilen einer NoSQL-Dokument-
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="page-header">
-        <h1>Crate: Verteilter Data Store mit SQL</h1>
-      </div>
-    </div>
+{% block header %}
+<div class="wrapper wrapper-hero" id="wrapper-hero-overview">
+  <div class="container">
+    <h1>Crate: Verteilte Datenbank mit SQL</h1>
   </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-12">
 
@@ -19,6 +21,16 @@ description: Crate ist ein Datenspeicher mit den Vorteilen einer NoSQL-Dokument-
       <p><strong>Crate basiert auf einer Shared-Nothing-Architektur und ist ein vollständig durchsuchbarer, dokumentenorientierter Data Store: ein schnelles, leistungsstarkes und massiv skalierbares Backend für hochverfügbare, datenintensive Anwendungen, wie Mobile- und Webapps, Internet of Things oder Echtzeit-Analysen.</strong></p>
       <p><strong>Crate.IO ist 100% Open Source.</strong></p>
       <p><strong>Crate ist ein Datenspeicher mit den Vorteilen einer NoSQL-Dokument-Datenbank mit leistungsfähiger Suche (Elasticsearch als Library enthalten) und dabei wird SQL unterstützt.</strong></p>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
       <h2>Leistungsstark &amp; schnell</h2>
       <p>Crate.IO ist ein leistungsfähiges Backend für tabellarische Daten, semi-strukturierten Datensätze und binäre Objekt (BLOBs). Es ist hoch verfügbar und bietet in Echtzeit massiv parallelen Zugriff, und damit Antwortzeiten in Millisekunden, auch Milliarden von Datensätzen.</p>
@@ -31,12 +43,18 @@ description: Crate ist ein Datenspeicher mit den Vorteilen einer NoSQL-Dokument-
 
     </div>
   </div>
+</div>
+</div>
+
+
+<div class="wrapper wrapper-border">
+<div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <img class="thumbnail img-responsive" src="{% static '/static/images/crate-architecture.jpg' %}" />
+      <img class="img-responsive thumbnail" src="{% media '/media/1502/crate-architecture.png' %}" />
     </div>
     <div class="col-sm-6">
-      <h3>HOCH VERFÜGBARE SHARED-NOTHING-ARCHITEKTUR</h3>
+      <h2>HOCH VERFÜGBARE SHARED-NOTHING-ARCHITEKTUR</h2>
 
       <h3>SCHNELL UND EINFACH ZU BEDIENEN</h3>
       <p>Verwenden Sie SQL um gleichzeitig zu lesen und zu schreiben mit Reaktionszeiten unter einer Sekunde.</p>
@@ -45,9 +63,13 @@ description: Crate ist ein Datenspeicher mit den Vorteilen einer NoSQL-Dokument-
       <p>Crate Cluster sind persistent und belastbar. Ausgefallenen Knoten werden automatisch entfernt und Replikationen erneuert. Neue Knoten werden automatisch hinzugefügt und erhöhen die Performance sowie die Verfügbarkeit.</p>
     </div>
   </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
   <div class="row">
     <div class="col-sm-12">
-
 
       <h2>CRATE versus einem Technologie-Mix</h2>
       <p>Crate wurde entwickelt, so dass Entwickler mit einem datenintensiven Back-End nicht mehrere Technologien zusammenmischen müssen, um Tabellen, Dokumente und Blobs zu speichern und Echtzeit-Volltextsuche zu haben.</p>
@@ -72,16 +94,25 @@ description: Crate ist ein Datenspeicher mit den Vorteilen einer NoSQL-Dokument-
         <strong>5. Änderungen machen, ohne alles wieder zu tun </strong><br />
         Man erinnere sich an die guten alten Zeiten, als die Umstrukturierung einer ganzen relationalen Datenbank noch durch die Verwendung eines einzigen SQL-Skripts möglich war? Crate implementiert diese Funktionalität durch die Möglichkeit, das Ergebnis einer Abfrage direkt in einen oder mehrere Indizes zu schreiben. Diese Anforderung wird noch bedeutender in document-based Datenbanken, in denen Daten oft in einem hochgradig denormalisierten Format gespeichert werden.</p>
 
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
       <h2>Anforderungen</h2>
       <p>Linux, Mac OS X oder Windows<br />
         Java 7<br />
         Python</p>
       <h2>Clients und Tools</h2>
       <p>Crate stellt ein eine integrierte Administrationsoberfläche zu Verfügung. Das Command Line Interface (Crate Shell &#8211; CraSh) ermöglicht interaktive Abfragen direkt in der Console. Der Crate Python-Client ist weit fortgeschritten und verfügt über eine SQLAlchemy Integration. Weiters gibts einen Ruby Client, Node.js Client, Java Nativeclient und JDBC Treiber, PDO und DBAL Treiber.</p>
-      <p><a class="btn btn-lg btn-success" href="{% url '/docs.html' %}">Crate herunterladen</a></p>
-
+      <p><a class="btn btn-primary" href="{% url '/docs.html' %}">Crate herunterladen</a></p>
     </div>
   </div>
+</div>
 </div>
 {% endblock %}
 

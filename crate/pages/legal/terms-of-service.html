@@ -2,20 +2,33 @@ title: Terms of Service
 
 {% extends "base.html" %}
 
-{% block body %}
-<div class="container">
+{% block navbar2 %}
+<div class="wrapper wrapper-plain">
+    <nav class="breadcrumb-container">
+      <div class="container">
+  <ol class="breadcrumb">
+    <li class="active">Legal</li>
+  </ol>
+      </div>
+    </nav>
+</div>
+{% endblock %}
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <h1>Terms of Service</h1>
+{% block body %}
+<div class="wrapper wrapper-border">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header">
+          <h1>Terms of Service</h1>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      {% filter markdown %}
+    <div class="row">
+      <div class="col-lg-12">
+{% filter markdown %}
 
 ## Acceptance of terms
 
@@ -53,9 +66,10 @@ You hereby acknowledge that all rights, titles and interests including but not l
 
 You agree not to disclose information you obtain from us and or from our clients, advertisers, suppliers and forum members. All information submitted to by an end-user customer pursuant to a Program is proprietary information of Crate Technology. Such customer information is confidential and may not be disclosed. Publisher agrees not to reproduce, disseminate, sell, distribute or commercially exploit any such proprietary information in any manner.
 
-      {% endfilter %}
+{% endfilter %}
+      </div>
     </div>
-  </div>
 
+  </div>
 </div>
 {% endblock %}
