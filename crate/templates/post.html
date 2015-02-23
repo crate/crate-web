@@ -38,8 +38,8 @@
       <hr />
       <h4 class="text-center">Did you like this post? Read more!</h4>
       <ul class="pager">
-        <li class="{% if not prev_post %}disabled{% endif%}"><a href="{{ prev_post.url }}">&laquo; Older</a></li>
-        <li class="{% if not next_post %}disabled{% endif%}"><a href="{{ next_post.url }}">Newer &raquo;</a></li>
+        <li class="{% if not prev_post %}hide{% endif%}"><a href="{{ prev_post.url }}">&laquo; Older</a></li>
+        <li class="{% if not next_post %}hide{% endif%}"><a href="{{ next_post.url }}">Newer &raquo;</a></li>
       </ul>
 
     </div>
