@@ -93,8 +93,7 @@ def preBuildPage(site, page, context, data):
             tpl = get_template(post.get('template', 'post.html'))
             raw = force_unicode(post['raw_body'])
             post['body'] = mark_safe(markdown(raw,
-                extras=["fenced-code-blocks","header-ids","link-patterns"],
-                link_patterns=link_patterns))
+                extras=["fenced-code-blocks","header-ids"]))
             context['__CACTUS_CURRENT_PAGE__'] = page
             context['CURRENT_PAGE'] = page
             context.update(post)
