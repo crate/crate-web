@@ -1,210 +1,89 @@
+### Lucene
 
-========================================================================= 
+<http://lucene.apache.org>  
+developed by The Apache Software Foundation  
+License: Apache License v2 (<http://www.apache.org/licenses>)
 
-**Lucene**
 
-<http://lucene.apache.org/>
+### Elasticsearch
+<http://www.elasticsearch.org>  
+developed by Elasticsearch and Shay Banon  
+License: Apache License v2 (<http://www.apache.org/licenses>)
 
-Developed by The Apache Software Foundation.
 
-License: Apache License v2 (<http://www.apache.org/licenses>) 
+### Presto (SQL Parser)
+<http://prestodb.io>  
+developed by Facebook (<https://github.com/facebook/presto>)  
+License: Apache License v2 (<http://www.apache.org/licenses>)
 
-========================================================================= 
 
-**Elasticsearch**
+### Netty
+<http://netty.io>  
+developed by The Netty Project  
+License: Apache License v2 (<http://www.apache.org/licenses>)
 
-<http://www.elasticsearch.org/>
 
-Developed by Elasticsearch and Shay Banon.
+### Meyer CSS reset
+<http://meyerweb.com/eric/tools/css/reset/>  
+License: none (public domain)
 
-License: Apache License v2 (<http://www.apache.org/licenses>) 
 
-========================================================================= 
+### normalize.css
+<http://github.com/necolas/normalize.css>  
+Copyright (c) Nicolas Gallagher and Jonathan Neal  
+License: <https://github.com/necolas/normalize.css/blob/master/LICENSE.md>
 
-**elasticsearch-head**
 
-<https://github.com/mobz/elasticsearch-head>
+### CSS3-mediaqueries.js
+<http://code.google.com/p/css3-mediaqueries-js/>  
+License: MIT License, <http://www.opensource.org/licenses/mit-license.php>
 
-developed by Ben Birch (<http://mobz.github.io/elasticsearch-head>).
 
-License: Apache License v2 (<http://www.apache.org/licenses>) 
+### jQuery
+Copyright 2012 jQuery Foundation and other contributors  
+<http://jquery.com>  
+License: MIT License, <http://jquery.org/license/>
 
-=========================================================================
 
-**Bigdesk**
-
-<https://github.com/lukas-vlcek/bigdesk>
-
-developed by Lukáš Vlček (<http://cz.linkedin.com/in/lukasvlcek>)
-
-License: Apache License v2 (<http://www.apache.org/licenses>) 
-
-=========================================================================
-
-**Meyer CSS reset**
-
-<http://meyerweb.com/eric/tools/css/reset/>
-
-License: none (public domain) 
-
-========================================================================= 
-
-**normalize.css**
-
-<http://github.com/necolas/normalize.css>
-
-Copyright (c) Nicolas Gallagher and Jonathan Neal
-
-License: <https://github.com/necolas/normalize.css/blob/master/LICENSE.md> 
-
-========================================================================= 
-
-**CssGrid**
-
-<http://cssgrid.net>
-
-Copyright (c) Andy Taylor
-
-License: <http://creativecommons.org/licenses/by/3.0/au/> 
-
-=========================================================================
-
-**D3.js** 
-
-<http://d3js.org>
-
-Copyright (c) 2012, Michael Bostock
-
-License: <http://opensource.org/licenses/BSD-3-Clause> 
-
-========================================================================= 
-
-**Backbone.js**
-
-<http://backbonejs.org>
-
-Copyright (c) 2010-2012 Jeremy Ashkenas, DocumentCloud
-
-License: MIT License, <https://github.com/documentcloud/backbone/blob/master/LICENSE>
-
-=========================================================================
-
-**CSS3-mediaqueries.js**
-
-<http://code.google.com/p/css3-mediaqueries-js/>
-
-License: MIT License, <http://www.opensource.org/licenses/mit-license.php> 
-
-========================================================================= 
-
-**jQuery**
-
-<http://jquery.com>
-
-Copyright 2012 jQuery Foundation and other contributors
-
-License: MIT License, <http://jquery.org/license/> 
-
-========================================================================= 
-
-**Mustache.js**
-
-<http://mustache.github.com>
-
+### Mustache.js
 Copyright (c) 2009 Chris Wanstrath (Ruby)  
-Copyright (c) 2010 Jan Lehnardt (JavaScript)
+Copyright (c) 2010 Jan Lehnardt (JavaScript)  
+<http://mustache.github.com>  
+License: MIT License
 
-License: MIT License 
 
-========================================================================= 
+### Raphael
+<http://raphaeljs.com>, from fork at <git@github.com:mobz/g.raphael.git>  
+Copyright (c) 2010 Dmitry Baranovskiy  
+License: MIT (<http://raphaeljs.com/license.htm>
 
-**Tinysort.js**
 
-<http://code.google.com/p/tinysort/>
+### date-range-parser
+<https://github.com/mobz/date-range-parser>  
+Contributed to the Apache Software Foundation by Ben Birch - Aconex  
+License: Apache License v2 (<http://www.apache.org/licenses>)
 
-<http://tinysort.sjeiti.com/>
 
-License: MIT License 
+### Bootstrap
+<https://getbootstrap.com>  
+Copyright 2012 Twitter, Inc.  
+License: Apache License v2 (<http://www.apache.org/licenses>)
 
-========================================================================= 
 
-**Underscore.js**
+### 'SB Admin' HTML Template
+<http://startbootstrap.com>  
+Copyright 2013 Iron Summit Media Strategies  
+License: Apache License v2 (<http://www.apache.org/licenses>)
 
-<http://underscorejs.org>
 
-Copyright (c) 2009-2012 Jeremy Ashkenas, DocumentCloud
+### AngularJS
+<http://angularjs.org>  
+Copyright 2010-2014 Google, Inc  
+License: MIT (<https://github.com/angular/angular.js/blob/master/LICENSE>)
 
-License: MIT License, <https://github.com/documentcloud/underscore/blob/master/LICENSE> 
 
-========================================================================= 
-
-**Segments.py**
-
-<https://github.com/polyfractal/elasticsearch-segmentspy>
-
-developed by Zachary Tong (<http://www.euphonious-intuition.com/>)
-
-License: MIT (<https://raw.github.com/polyfractal/elasticsearch-segmentspy/master/LICENSE>) 
-
-========================================================================= 
-
-**Raphael**
-
-<http://raphaeljs.com>
-
-from fork at git@github.com:mobz/g.raphael.git
-
-Copyright (c) 2010 Dmitry Baranovskiy
-
-License: MIT (<http://raphaeljs.com/license.html>) 
-
-=========================================================================
-
-**date-range-parser**
-
-<https://github.com/mobz/date-range-parser>
-
-Contributed to the Apache Software Foundation by Ben Birch - Aconex
-
-License: Apache License v2 (<http://www.apache.org/licenses>) 
-
-=========================================================================
-
-**Bootstrap**
-
-<https://getbootstrap.com>
-
-Copyright 2012 Twitter, Inc.
-
-License: Apache License v2 (<http://www.apache.org/licenses>) 
-
-=========================================================================
-
-**'SB Admin' HTML Template**
-
-<http://startbootstrap.com>
-
-Copyright 2013 Iron Summit Media Strategies
-
-License: Apache License v2 (<http://www.apache.org/licenses>) 
-
-========================================================================= 
-
-**AngularJS**
-
-<http://angularjs.org>
-
-Copyright 2010-2014 Google, Inc
-
-License: MIT (<https://github.com/angular/angular.js/blob/master/LICENSE>) 
-
-========================================================================= 
-
-**Handlebars**
-
-<http://github.com/danharper>
-
-Copyright Dan Harper
-
-License: Do What The Fuck You Want To Public License, Version 2 (<http://sam.zoy.org/wtfpl/COPYING>)
+### Various Components of Lovely Systems GmbH
+<http://www.lovelysystems.com>  
+Copyright Lovely Systems GmbH  
+License: Apache 2.0 (<http://www.apache.org/licenses>)
 

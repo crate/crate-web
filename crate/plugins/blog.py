@@ -24,6 +24,8 @@ NEWS_JSON = []
 DEVELOPER_NEWS_JSON = []
 CONFIG = {}
 
+# https://github.com/trentm/python-markdown2/wiki/link-patterns
+link_patterns=[(re.compile(r'((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+(:[0-9]+)?|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)'),r'\1')]
 
 def filterPosts(posts, categ):
     return filter(lambda x: categ in x.get('category'), posts)
@@ -90,7 +92,9 @@ def preBuildPage(site, page, context, data):
         if post['path'] == page.path:
             tpl = get_template(post.get('template', 'post.html'))
             raw = force_unicode(post['raw_body'])
-            post['body'] = mark_safe(markdown(raw, extras=["fenced-code-blocks"]))
+            post['body'] = mark_safe(markdown(raw,
+                extras=["fenced-code-blocks","header-ids","link-patterns"],
+                link_patterns=link_patterns))
             context['__CACTUS_CURRENT_PAGE__'] = page
             context['CURRENT_PAGE'] = page
             context.update(post)
