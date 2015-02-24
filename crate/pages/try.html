@@ -50,7 +50,7 @@ description: Try Crate from your browser, no installation needed. The Crate Cube
       <p>&nbsp;</p>
 
       <p>Start off with exploring existing tables:</p>
-      <pre class="tut">select schema_name, table_name, number_of_shard, number_of_replicas
+      <pre class="tut">select schema_name, table_name, number_of_shards, number_of_replicas
 from information_schema.tables where schema_name = 'doc';</pre>
       <p>Select retweeted tweets:</p>
       <pre class="tut">select id, user['id'], text from tweets where user['id'] > 1000000000 limit 10;</pre>
