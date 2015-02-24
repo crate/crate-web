@@ -4692,6 +4692,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pager li > span {
   display: inline-block;
   padding: 4px 16px;
+  min-width: 100px;
   background-color: #ffffff;
   border: 1px solid #e7e7e7;
 }
