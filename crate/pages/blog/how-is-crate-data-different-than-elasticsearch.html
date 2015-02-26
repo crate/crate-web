@@ -12,6 +12,12 @@ category: news, developernews
 
 People ask us whether Crate.IO is a SQL layer on top of Elasticsearch. Although we use Elasticsearch as a framework, as explained [here](/blog/using-elasticsearch-as-part-of-the-crate-data-store/), Crate is a data store, and as a result has some noticeable differences. Crate is a distributed system that runs on one machine or a cluster of machines. Crate comes in one complete install package. It includes solid established open source components (Presto, Elasticsearch, Lucene, Netty) and extends those with added core functionalities like read/write support, SQL language, dashboard and query console. Here are some of the differences between Crate.IO, as a datastore, and using Elasticsearch: 
 
+## Full Array Support
+
+Since version `0.46` Crate fully supports array types.
+Whereas Elasticsearch does not strictly distinguish between [arrays](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/mapping-array-type.html) and core types (a string type can be string or string array depending how you insert it), Crate does strictly differenciate between these and handles them differently.
+Therefore Crate has support for recursively guessing the inner type of arrays and storing it correctly in the internal mapping even if they are inserted into a dynamic table schema.
+
 ## Blob Storage
 
 One of the design goals behind [Crate](/download/) was to be more than a database, offering a complete solution that covers blob storage as well, and offering the opportunity to replace expensive network storage solutions with cheap commodity hardware. Crate’s blob storage functions include sharding, replication and rebalancing. You can read about them [here](https://crate.io/blog/using-crate-data-as-a-blobstore/). Additionally, this can enable storing data on a self-hosted cluster rather than on the public cloud (we are planning an AWS S3 compatible blob API).
