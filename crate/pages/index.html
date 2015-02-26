@@ -26,16 +26,32 @@ description: Crate is the distributed database for containerized environments su
         <p>Read more about <a href="{% url '/overview.html' %}">Crate's features</a>.</p>
       </div>
       <div class="col-sm-4">
-        <p><a href="{% url '/blog/snowsprint-2015.html' %}"><img class="img-responsive thumbnail" src="{% media '/media/1502/snowsprint.png' %}" /></a></p>
-        <h2>Snowsprint 2015 Recap: Dockerzeit</h2>
-        <p class="">Snowsprint 2015: beer and spaetzle-fueled developers at their best! They have done some amazing work in the Docker ecosystem.</p>
-        <p>Read more about <a href="{% url '/blog/snowsprint-2015.html' %}">SnowSprint 2015 recap: Dockerzeit</a>.</p>
-      </div>
-      <div class="col-sm-4">
         <p><a href="{% url '/docs/cloud.html' %}"><img class="img-responsive thumbnail" src="{% media '/media/1502/shared_nothing.png' %}" /></a></p>
         <h2>Shared Nothing Architecture</h2>
         <p class="">Adding nodes on commodity hardware or in the cloud is as simple as a single command in your terminal.</p>
         <p>Learn how to <a href="{% url '/docs/cloud.html' %}">install Crate in the cloud</a>.</p>
+      </div>
+      <div class="col-sm-4">
+        <div class="dynamic-content-well">
+          <h4 class="">The Latest Posts</h4>
+          <table class="table">
+            {% for post in posts|slice:":3" %}
+            <tr>
+              <td><a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title|title }}</a></td>
+            </tr>
+            {% endfor %}
+         </table>
+        </div>
+        <div class="dynamic-content-well">
+          <h4 class="">Meet Us Here</h4>
+          <table class="table">
+            {% for event in events|slice:":3" %}
+            <tr>
+              <td><a href="{{ event.url }}" title="{{ event.title|escape }}">{{ event.title|title }}</a></td>
+            </tr>
+            {% endfor %}
+         </table>
+        </div>
       </div>
     </div>
   </div>
