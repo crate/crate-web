@@ -1,0 +1,330 @@
+title: Deploying a Crate Cluster with Docker Machine + Swarm
+author: Christian Haudum
+description: ...
+created: 2015/02/26 18:00:00
+tags: docker, docker-swarm, docker-machine
+category: developer-news
+youtube_id: WEitDkuzmYg
+
+
+Docker recently started pushing towards a complete solution for orchastrating distributed applications.
+Machine and Swarm are two projects that let you manage cluster instances and deploy docker containers onto them.
+
+This post shows you how to set up a Swarm cluster on the Google Cloud Platform using Machine and then run a Crate cluster using Swarm.
+All instructions in this post refer to docker-machine version `0.1.0-rc5`.
+
+First and foremost, you'll have to create the firewall rules so Swarm is able to talk to its instances. Unfortunatelly it's using the public IP addresses for communication so we have to allow certain ports to be used.
+
+## Prerequisites
+
+```console
+# ssh from everywhere
+$ gcloud compute firewall-rules create default-ssh --allow tcp:22 icmp --source-range 0.0.0.0/0
+$ gcloud compute firewall-rules create default-swarm --allow tcp:2376 tcp:3376 --source-range 0.0.0.0/0
+$ gcloud compute firewall-rules create default-crate --allow tcp:4200 tcp:4300 --source-range 0.0.0.0/0
+```
+
+You can start up the Swarm cluster from your personal laptop, but I prefer doing it from the cloud, so everyone in the team may join the in the fun.
+This means we have to create a `machine-master` first and that instance is also the place where later on all the deployment commands are executed.
+
+```console
+$ gcloud compute instances create machine-master \
+    --network default \
+    --zone us-central1-a \
+    --boot-disk-size 50GB \
+    --image centos-7 \
+    --machine-type f1-micro \
+    --metadata-from-file startup-script=startup-master.sh
+```
+
+The script `startup-master.sh` will install docker, docker-machine, and all necessary dependencies when launching the instance.
+
+```sh
+#!/bin/bash -x
+sudo su -
+yum clean expire-cache
+yum update -y
+yum install -y wget docker bridge-utils 
+curl -Lo /usr/bin/docker-machine https://github.com/docker/machine/releases/download/v0.1.0-rc5/docker-machine_linux-amd64
+chmod +x /usr/bin/docker-machine
+```
+
+## Creating The Swarm Cluster
+
+Wait until the instance is up and running (go grab a coffee) and then connect to it using the `gcloud compute ssh` command.
+We'll need the Google Project ID several times, so it's a good idea to set the env variable too.
+
+```console
+$ gcloud compute ssh machine-master --zone us-central1-a
+$ echo "export GCE_PROJECT=<YOUR_PROJECT_ID>" >> .bash_profile
+$ source .bash_profile
+```
+
+### Obtaining The Cluster Token:
+
+To create a swarm token - a unique token used to identify the swarm cluster -
+you need to create a remote docker host first, and then obtain the swarm token on that docker host.
+
+We call the environment for the token `env-crate`.
+
+```console
+$ docker-machine create -d google --google-project ${GCE_PROJECT} env-crate
+INFO[0000] Opening auth URL in browser.
+INFO[0000] https://accounts.google.com/o/oauth2/auth?client_id=...
+INFO[0000] If the URL doesn't open please open it manually and copy the code here.
+INFO[0008] Got code: ....
+INFO[0008] Saving token in /home/christian/.docker/machines/env-crate/gce_token
+INFO[0008] Creating host...
+INFO[0008] Generating SSH Key
+INFO[0008] Creating instance.
+INFO[0010] Waiting for Instance...
+INFO[0027] Waiting for SSH...
+INFO[0054] Uploading SSH Key
+INFO[0054] Waiting for SSH Key
+INFO[0058] Configuring Machine...
+INFO[0899] "env-crate" has been created and is now the active machine.
+INFO[0899] To point your Docker client at it, run this in your shell: $(docker-machine env env-crate)
+```
+
+As the output already suggests, we load the environment into the shell, and then run `swarm create` which will generate a swarm.
+The hash of the container is used as the token.
+
+```console
+$ $(docker-machine env env-crate)
+$ docker run swarm create
+572c97e72aefe953031f5f2e7d3ca9bb
+```
+
+I found it useful to put the token into bash profile, so it's available as soon as you log on to the machine.
+
+```console
+$ echo "export TOKEN=572c97e72aefe953031f5f2e7d3ca9bb" >> .bash_profile
+$ source .bash_profile
+```
+
+### Creating Master and Nodes
+
+The Swarm master is the first instance of the cluster, and all other subsequent nodes will connect to that.
+However, the master also acts as a regular node in the cluster, meaning that docker containers can be launched on it.
+
+We use the `google` driver and `n1-standard-2` instances for a bit more computing power, also a bigger boot disk size than default.
+
+The option `--swarm-master`` is the key here:
+
+```console
+$ docker-machine create -d google --google-project=${GCE_PROJECT} --google-machine-type=n1-standard-2 --google-disk-size=50 --swarm --swarm-master --swarm-discovery token://${TOKEN} crate-swarm
+INFO[0000] Opening auth URL in browser.
+INFO[0000] https://accounts.google.com/o/oauth2/auth?client_id=...
+INFO[0000] If the URL doesn't open please open it manually and copy the code here.
+INFO[0035] Got code: ...
+INFO[0035] Saving token in /home/christian/.docker/machines/swarm-master/gce_token
+INFO[0035] Creating host...
+INFO[0036] Generating SSH Key
+INFO[0036] Creating instance.
+INFO[0037] Waiting for Instance...
+INFO[0055] Waiting for SSH...
+INFO[0119] Uploading SSH Key
+INFO[0119] Waiting for SSH Key
+INFO[0122] Configuring Machine...
+INFO[0565] Configuring Swarm...
+INFO[0574] "swarm-master" has been created and is now the active machine.
+INFO[0574] To point your Docker client at it, run this in your shell: $(docker-machine env swarm-master)
+```
+
+Create Swarm nodes basically works the same way, just take the command from above, omit the `--swarm-master` option and name your instance appropriately.
+
+```console
+$ docker-machine create -d google --google-project=${GCE_PROJECT} --google-machine-type=n1-standard-2 --google-disk-size=50 --swarm --swarm-discovery token://${TOKEN} crate-swarm-node1
+INFO[0000] Opening auth URL in browser.
+INFO[0000] https://accounts.google.com/o/oauth2/auth?client_id=...
+INFO[0000] If the URL doesn't open please open it manually and copy the code here.
+INFO[0015] Got code:  ...
+INFO[0015] Saving token in /home/christian/.docker/machines/swarm-node-1/gce_token
+INFO[0015] Creating host...
+INFO[0015] Generating SSH Key
+INFO[0015] Creating instance.
+INFO[0017] Waiting for Instance...
+INFO[0036] Waiting for SSH...
+INFO[0054] Uploading SSH Key
+INFO[0055] Waiting for SSH Key
+INFO[0057] Configuring Machine...
+INFO[0498] Configuring Swarm...
+INFO[0510] "crate-swarm-node1" has been created and is now the active machine.
+INFO[0510] To point your Docker client at it, run this in your shell: $(docker-machine env crate-swarm-node1)
+```
+
+... and repeat for `crate-swarm-node2` and `crate-swarm-node3` ...
+
+Now we have a Swarm cluster of 4 nodes (1 master, 3 nodes) that we can connect to:
+
+```console
+# inspect the nodes
+$ docker-machine ls
+NAME                ACTIVE   DRIVER   STATE     URL                          SWARM
+crate-swarm                  google   Running   tcp://104.154.93.89:2376     crate-swarm (master)
+crate-swarm-node1            google   Running   tcp://104.154.73.244:2376    crate-swarm
+crate-swarm-node2            google   Running   tcp://107.178.213.253:2376   crate-swarm
+crate-swarm-node3   *        google   Running   tcp://104.197.14.121:2376    crate-swarm
+env-crate                    google   Running   tcp://104.154.85.254:2376
+
+# load crate-swarm environment into shell
+$ $(docker-machine env --swarm crate-swarm)
+
+$ docker info
+Containers: 5
+Images: 0
+Storage Driver:
+Nodes: 4
+ crate-swarm: 104.154.93.89:2376
+  └ Containers: 2
+  └ Reserved CPUs: 0 / 2
+  └ Reserved Memory: 0 B / 7.306 GiB
+ crate-swarm-node1: 104.154.73.244:2376
+  └ Containers: 1
+  └ Reserved CPUs: 0 / 2
+  └ Reserved Memory: 0 B / 7.306 GiB
+ crate-swarm-node2: 107.178.213.253:2376
+  └ Containers: 1
+  └ Reserved CPUs: 0 / 2
+  └ Reserved Memory: 0 B / 7.306 GiB
+ crate-swarm-node3: 104.197.14.121:2376
+  └ Containers: 1
+  └ Reserved CPUs: 0 / 2
+  └ Reserved Memory: 0 B / 7.306 GiB
+Execution Driver:
+Kernel Version:
+Operating System:
+```
+
+Ok, the Swarm cluster is ready to be used.
+
+## Launching Crate
+
+<div class="youtube-wrapper">
+  <iframe align="center" width="700" height="393" src="https://www.youtube.com/watch?v=WEitDkuzmYg" frameborder="0" allowfullscreen></iframe>
+</div>
+
+Now let's start a Crate instance in this cluster. You can simply do that with the regular `docker run` command that we all know and love.
+
+```console
+$ docker run -d -p 4200:4200 crate:latest crate -Des.cluser.name=hello-swarm
+3cc561fc48a4f4bc983410b15bc1e9ffd13143c4bc482a2b2e064d3dfbfc297f
+
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                     NAMES
+3cc561fc48a4        crate:latest        "crate -Des.cluster.   17 seconds ago      Up 6 seconds        4300/tcp, 104.197.14.121:4200->4200/tcp   crate-swarm-node3/hopeful_babbage
+```
+
+The Crate instance was automatically deployed on one of the available nodes.
+You can find out which one by looking at the port mapping, in this case on `104.197.14.121` which is the host `crate-swarm-node3`.
+
+To verify whether the Crate node has started correctly you can look at the logs or execute a simple curl command.
+
+```console
+$ docker logs 3cc561fc48a4
+[2015-02-26 15:36:07,518][INFO ][node                     ] [Theresa Cassidy] version[1.4.2], pid[1], build[${build/NA]
+[2015-02-26 15:36:07,519][INFO ][node                     ] [Theresa Cassidy] initializing ...
+[2015-02-26 15:36:07,579][INFO ][plugins                  ] [Theresa Cassidy] loaded [crate-core], sites [crate-admin]
+[2015-02-26 15:36:07,899][INFO ][io.crate.module.CrateCoreModule] configuring crate. version: 0.47.4
+[2015-02-26 15:36:10,811][INFO ][io.crate.rest.CrateRestFilter] Elasticsearch HTTP REST API not enabled
+[2015-02-26 15:36:10,915][INFO ][node                     ] [Theresa Cassidy] initialized
+[2015-02-26 15:36:10,916][INFO ][node                     ] [Theresa Cassidy] starting ...
+[2015-02-26 15:36:10,917][INFO ][io.crate.blob.BlobService] [Theresa Cassidy] BlobService.doStart() io.crate.blob.BlobService@50a4e1e6
+[2015-02-26 15:36:10,980][INFO ][http                     ] [Theresa Cassidy] bound_address {inet[/0:0:0:0:0:0:0:0:4200]}, publish_address {inet[/172.17.0.18:4200]}
+[2015-02-26 15:36:10,996][INFO ][transport                ] [Theresa Cassidy] bound_address {inet[/0:0:0:0:0:0:0:0:4300]}, publish_address {inet[/172.17.0.18:4300]}
+[2015-02-26 15:36:11,010][INFO ][discovery                ] [Theresa Cassidy] hello-swarm/CZ02-FrDSpi2QC2aGirwCg
+[2015-02-26 15:36:14,780][INFO ][cluster.service          ] [Theresa Cassidy] new_master [Theresa Cassidy][CZ02-FrDSpi2QC2aGirwCg][3cc561fc48a4][inet[/172.17.0.18:4300]]{http_address=http://172.17.0.18:4200}, reason: zen-disco-join (elected_as_master)
+[2015-02-26 15:36:14,811][INFO ][node                     ] [Theresa Cassidy] started
+[2015-02-26 15:36:14,907][INFO ][gateway                  ] [Theresa Cassidy] recovered [0] indices into cluster_state
+
+$ curl -XPOST 104.197.14.121:4200/_sql?pretty -d '{"stmt":"select id, name, hostname from sys.nodes"}'
+{
+  "cols" : [ "id", "name", "hostname" ],
+  "duration" : 4,
+  "rows" : [ [ "CZ02-FrDSpi2QC2aGirwCg", "Theresa Cassidy", "3cc561fc48a4" ] ],
+  "rowcount" : 1
+}
+```
+
+### Launching a Crate Cluster
+
+So far we've started a single Crate instance that does not need to communicate with any other nodes.
+Not we want to start multiple Crate nodes that form a cluster. Unfortunatelly, we're hitting a problem with Swarm here.
+
+Google Cloud Platform (and other cloud hosting network environments) do not have multicast enabled, so Crate needs to use unicast discovery,
+and because Crate is running inside a container, the Crate node would need to publish the IP or hostname of its host.
+
+Usually you know on which host you're running your Crate container, so you can pass the hostname in the `docker run` command.
+However, when using Swarm you don't know where your container will be deployed when you execute the `docker run` command.
+
+We're really looking forward to seeing a solution for this problem.
+
+In the meantime, I've come up with an idea how to easily deploy Crate on all Swarm nodes:
+
+- Get a list of all remote Docker hosts
+- Assemble a list of unicast hosts from them
+- Calculate the `minimum_master_nodes` setting from the amount of availble docker host (`nodes/2+1`)
+- Iterate over all remote Docker hosts and execute `docker run` explicitly on each host
+
+This is how the bash script looks:
+
+```sh
+#!/bin/bash -x
+export LIST=$(docker run -d swarm list token://$TOKEN)
+export REMOTE_DOCKER_HOSTS=$(docker logs $LIST)
+export MIN_MASTER_NODES=$(( $(docker logs $LIST | wc -l) / 2 + 1))
+export UNICAST_HOSTS=$(docker logs $LIST | sed "s/:2376/:4300/" | paste -s -d",")
+
+for host in $REMOTE_DOCKER_HOSTS; do
+  pub_host=$(echo $host | sed "s/:2376//")
+  docker -H tcp://$host \
+    run -d -p 4200:4200 -p 4300:4300 \
+    crate:latest \
+    crate -Des.cluster.name=crate-swarm \
+          -Des.multicast.enabled=false \
+          -Des.transport.publish_host=$pub_host \
+          -Des.discovery.zen.ping.unicast.hosts=$UNICAST_HOSTS \
+          -Des.discovery.zen.minimum_master_nodes=$MIN_MASTER_NODES
+  sleep 3
+done
+
+docker stop $LIST
+docker rm $LIST
+```
+
+Having that in place, you can simply run this bash script and a Crate container will be started on each Swarm node.
+
+It might take some time until the nodes will find each other.
+Finally, use `curl` to verify the cluster:
+
+```console
+$ curl -XPOST 104.197.14.121:4200/_sql?pretty -d '{"stmt":"select id, name, hostname from sys.nodes"}'
+{
+  "cols" : [ "id", "name", "hostname" ],
+  "duration" : 4,
+  "rows" : [ ... ],
+  "rowcount" : 4
+}
+```
+
+Here we go. The Crate cluster is up and running. You can also visit the web based administration UI which is available on every node on port 4200
+at the path `/admin`.
+
+
+## Summary
+
+Setting up a cluster to be able to deploy your Crate database cluster might sound difficult,
+but I have to say that Docker made a lot of effort to make this process as simple as possible.
+
+Once the Swarm cluster is up and running it is easy to add and remove instances
+(although it takes a long time sometimes until a new instance is provisioned and ready to use).
+
+I am really looking forward to seeing features that allows you to you know on which machine a container is deployed so this information can be fed into the container. Unfortunatelly this is required to make the Crate deployment using Swarm simpler.
+
+
+
+### Resources
+
+- [Docker Machine](https://github.com/docker/machine)
+- [Docker Swarm](https://github.com/docker/swarm/)
+
