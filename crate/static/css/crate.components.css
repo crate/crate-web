@@ -258,6 +258,27 @@ footer.wrapper {
   color: #ffffff;
 }
 
+/** 
+  * Content wells on front page
+  */
+.dynamic-content-well h4 {
+  font-size: 18px;
+  padding-left: 8px;
+}
+
+.dynamic-content-well a {
+  color: #000000;
+}
+
+.dynamic-content-well td:last-child {
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.dynamic-content-well+.dynamic-content-well {
+  margin-top: 10px;
+}
+
+
 /**
  * Typography
  */
