@@ -17,7 +17,8 @@ First and foremost, you'll have to create the firewall rules so Swarm is able to
 
 ## Prerequisites
 
-```console
+```
+console
 # ssh from everywhere
 $ gcloud compute firewall-rules create default-ssh --allow tcp:22 icmp --source-range 0.0.0.0/0
 $ gcloud compute firewall-rules create default-swarm --allow tcp:2376 tcp:3376 --source-range 0.0.0.0/0
@@ -27,7 +28,8 @@ $ gcloud compute firewall-rules create default-crate --allow tcp:4200 tcp:4300 -
 You can start up the Swarm cluster from your personal laptop, but I prefer doing it from the cloud, so everyone in the team may join the in the fun.
 This means we have to create a `machine-master` first and that instance is also the place where later on, all the deployment commands are executed.
 
-```console
+```
+console
 $ gcloud compute instances create machine-master \
     --network default \
     --zone us-central1-a \
@@ -39,7 +41,8 @@ $ gcloud compute instances create machine-master \
 
 The script `startup-master.sh` will install Docker, docker-machine, and all necessary dependencies when launching the instance.
 
-```sh
+```
+sh
 #!/bin/bash -x
 sudo su -
 yum clean expire-cache
@@ -54,7 +57,8 @@ chmod +x /usr/bin/docker-machine
 Wait until the instance is up and running (go grab a coffee) and then connect to it using the `gcloud compute ssh` command.
 We'll need the Google Project ID several times, so it's a good idea to set the environment variable too.
 
-```console
+```
+console
 $ gcloud compute ssh machine-master --zone us-central1-a
 $ echo "export GCE_PROJECT=<YOUR_PROJECT_ID>" >> .bash_profile
 $ source .bash_profile
@@ -67,7 +71,8 @@ you need to create a remote Docker host first, and then obtain the Swarm token o
 
 We call the environment for the token `env-crate`.
 
-```console
+```
+console
 $ docker-machine create -d google --google-project ${GCE_PROJECT} env-crate
 INFO[0000] Opening auth URL in browser.
 INFO[0000] https://accounts.google.com/o/oauth2/auth?client_id=...
@@ -89,7 +94,8 @@ INFO[0899] To point your Docker client at it, run this in your shell: $(docker-m
 As the output already suggests, we load the environment into the shell, and then run `swarm create` which will generate a Swarm.
 The hash of the container is used as the token.
 
-```console
+```
+console
 $ $(docker-machine env env-crate)
 $ docker run swarm create
 572c97e72aefe953031f5f2e7d3ca9bb
@@ -97,7 +103,8 @@ $ docker run swarm create
 
 I found it useful to put the token into bash profile, so it's available as soon as you log on to the machine.
 
-```console
+```
+console
 $ echo "export TOKEN=572c97e72aefe953031f5f2e7d3ca9bb" >> .bash_profile
 $ source .bash_profile
 ```
@@ -111,7 +118,8 @@ We use the `google` driver and `n1-standard-2` instances for a bit more computin
 
 The option `--swarm-master`` is the key here:
 
-```console
+```
+console
 $ docker-machine create -d google --google-project=${GCE_PROJECT} --google-machine-type=n1-standard-2 --google-disk-size=50 --swarm --swarm-master --swarm-discovery token://${TOKEN} crate-swarm
 INFO[0000] Opening auth URL in browser.
 INFO[0000] https://accounts.google.com/o/oauth2/auth?client_id=...
@@ -133,7 +141,8 @@ INFO[0574] To point your Docker client at it, run this in your shell: $(docker-m
 
 Create Swarm nodes basically works the same way, just take the command from above, omit the `--swarm-master` option and name your instance appropriately.
 
-```console
+```
+console
 $ docker-machine create -d google --google-project=${GCE_PROJECT} --google-machine-type=n1-standard-2 --google-disk-size=50 --swarm --swarm-discovery token://${TOKEN} crate-swarm-node1
 INFO[0000] Opening auth URL in browser.
 INFO[0000] https://accounts.google.com/o/oauth2/auth?client_id=...
@@ -157,7 +166,8 @@ INFO[0510] To point your Docker client at it, run this in your shell: $(docker-m
 
 Now we have a Swarm cluster of 4 nodes (1 master, 3 nodes) that we can connect to:
 
-```console
+```
+console
 # inspect the nodes
 $ docker-machine ls
 NAME                ACTIVE   DRIVER   STATE     URL                          SWARM
@@ -220,7 +230,8 @@ You can find out which one by looking at the port mapping, in this case on `104.
 
 To verify whether the Crate node has started correctly you can look at the logs or execute a simple curl command.
 
-```console
+```
+console
 $ docker logs 3cc561fc48a4
 [2015-02-26 15:36:07,518][INFO ][node                     ] [Theresa Cassidy] version[1.4.2], pid[1], build[${build/NA]
 [2015-02-26 15:36:07,519][INFO ][node                     ] [Theresa Cassidy] initializing ...
@@ -268,7 +279,8 @@ In the meantime, I've come up with an idea how to easily deploy Crate on all Swa
 
 This is how the bash script looks:
 
-```sh
+```
+sh
 #!/bin/bash -x
 export LIST=$(docker run -d swarm list token://$TOKEN)
 export REMOTE_DOCKER_HOSTS=$(docker logs $LIST)
@@ -297,7 +309,8 @@ Having that in place, you can simply run this bash script and a Crate container 
 It might take some time until the nodes will find each other.
 Finally, use `curl` to verify the cluster:
 
-```console
+```
+console
 $ curl -XPOST 104.197.14.121:4200/_sql?pretty -d '{"stmt":"select id, name, hostname from sys.nodes"}'
 {
   "cols" : [ "id", "name", "hostname" ],
