@@ -1,6 +1,6 @@
 title: Deploying a Crate Cluster with Docker Machine + Swarm
 author: Christian Haudum
-description: ...
+description: This post shows you how to set up a Swarm cluster on the Google Cloud Platform using Docker Machine and then run a Crate cluster using Docker Swarm.
 created: 2015/02/26 18:00:00
 tags: docker, docker-swarm, docker-machine
 category: developer-news
@@ -60,7 +60,7 @@ $ echo "export GCE_PROJECT=<YOUR_PROJECT_ID>" >> .bash_profile
 $ source .bash_profile
 ```
 
-<h3>Obtaining The Cluster Token:</h3>
+<h3>Obtaining The Cluster Token</h3>
 
 To create a Swarm token - a unique token used to identify the Swarm cluster -
 you need to create a remote Docker host first, and then obtain the Swarm token on that Docker host.
@@ -320,7 +320,6 @@ Once the Swarm cluster is up and running it is easy to add and remove instances
 (although it takes a long time sometimes until a new instance is provisioned and ready to use).
 
 I am really looking forward to seeing features that allows you to you know on which machine a container is deployed so this information can be fed into the container. Unfortunately this is required to make the Crate deployment using Swarm simpler.
-
 
 
 <h3>Resources</h3>
