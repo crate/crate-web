@@ -10,7 +10,7 @@ to generate HTML pages.
 
 ## Development Setup
 
-    $ git clone -b setup git@github.com:crate/crate-web.git
+    $ git clone git@github.com:crate/crate-web.git
     $ cd crate-web
     $ git submodule init
     $ git submodule update
@@ -73,12 +73,12 @@ Site will be served without caching on <https://staging.crate.io>.
 
 ### Deploying to Amazon
 
-To deploy to S3 run 
+To deploy to S3 run
 
     $ cd crate-web/crate
     $ ../bin/cactus deploy
 
-The first time you run this command it will ask for 
+The first time you run this command it will ask for
  - The bucket: crate-web
  - Your AWS access key: https://console.aws.amazon.com/iam/home?#users
  - Your AWS access key password: https://console.aws.amazon.com/iam/home?#users
@@ -88,7 +88,7 @@ The first time you run this command it will ask for
 *requirments*
 - Install google-api-python-client
 - Install httplib2
-- Modify upstream/cactus/deployment/gcs/engine:41 
+- Modify upstream/cactus/deployment/gcs/engine:41
     - Old:  "service = apiclient.discovery.build('storage', 'v1beta2', http=http_client)"
     - New: "service = apiclient.discovery.build('storage', 'v1', http=http_client)"
 
@@ -98,10 +98,10 @@ Modify the config.json to include:
     $ "gcs-bucket-name": "crateweb",
     $ "gcs-bucket-website": "Unavailable for GCS",
     $ "provider": "google"
-    
-Now you can deploy with: 
+
+Now you can deploy with:
 
     $ cd crate-web/crate
     $ ../bin/cactus deploy
-    
+
 The first time you run this command Google will verify the account and you have to copy and paste a code from your browser into your terminal
