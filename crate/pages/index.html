@@ -33,7 +33,7 @@ description: Crate is the distributed database for containerized environments su
       </div>
       <div class="col-sm-4">
         <div class="dynamic-content-well">
-          <h4 class="">The Latest Posts</h4>
+          <h4 class=""><a href="{% url '/blog.html' %}">The Latest Posts</a></h4>
           <table class="table">
             {% for post in posts|slice:":3" %}
             <tr>
@@ -43,7 +43,7 @@ description: Crate is the distributed database for containerized environments su
          </table>
         </div>
         <div class="dynamic-content-well">
-          <h4 class="">Meet Us Here</h4>
+          <h4 class=""><a href="{% url '/events.html' %}">Meet Us Here</a></h4>
           <table class="table">
             {% for event in events|slice:":3" %}
             <tr>
