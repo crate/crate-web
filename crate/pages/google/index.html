@@ -1,0 +1,211 @@
+title: Build your App with Crate on Google Cloud
+description:
+heroImg: wrapper-hero-frontpage
+
+{% extends "base.html" %}
+
+{% block header %}
+<div class="wrapper wrapper-hero landing-page" id="{{ heroImg }}">
+  <div class="container">
+    <h1>Using Crate with the Google Cloud Platform</h1>
+    <a href="{% url '/try.html' %}" class="btn btn-fp-white">Get your cluster up<br>and running now!</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <p>Crate is a distributed database. Simply install a Crate cluster directly on multiple Google Compute Engine instances and make the unwieldy centralized database a thing of the past.</p>
+      </div>
+      <div class="col-sm-12">
+        <p>Crate is the perfect combination for a highly scalable, distributed data store which enables you to focus on the development of your product and worry less about maintaining your database cluster.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>Crate is simple to set up, scale, and query</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/cloud_everywhere.png' %}" />
+      </div>
+      <div class="col-sm-8">
+        <ul>
+          <li>Ideal for use in containerized, platform agnostic environments like Docker</li>
+          <li>Optimized for all major cloud platforms</li>
+          <li>No more unwieldy big centralized databases – Crate runs on your application servers</li>
+          <li>Crate uses familiar SQL Syntax</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>Simple administration</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/cloud_admin.png' %}" />
+      </div>
+      <div class="col-sm-8">
+        <ul>
+          <li>Friendly Admin UI shows the status of your cluster at any time</li>
+          <li>SQL console included</li>
+          <li>Auto scaling, self healing and re-balancing. We automatically take care of failed nodes, but most of the time nodes don't fail, clusters are scaled as required.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>Scale easily from millions to billions of records</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/cloud_scale.png' %}" />
+      </div>
+      <div class="col-sm-8">
+        <ul>
+          <li>Takes care of synchronization, sharding, scaling, and replication even for mammoth data sets</li>
+          <li>A true shared nothing architecture, with Crate all nodes are equal</li>
+          <li>Queries are automatically parallelized across all nodes, resulting in sub-second queries on tabular data and semi-structured records</li>
+          <li>When running out of power, just add new nodes with a few command line inputs, Crate takes care of the rest</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>Open source</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/cloud_open-source.png' %}" />
+      </div>
+      <div class="col-sm-8">
+        <ul>
+          <li>Crate is Open Source</li>
+          <li>A true shared nothing architecture, with Crate all nodes are equal</li>
+          <li>Crate uses a variety of battle tested open source components: Presto, Elasticsearch, Lucene, Netty</li>
+          <li>We invest in and support Open Source communities</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="text-center">Get your cluster up and running in no time!</h2>
+        <p class="text-center">
+          <a href="{% url '/docs/cloud/gce.html' %}" class="btn btn-black btn-lg">Start your cluster now!</a>
+        </p>
+        <p class="text-center">
+          <a href="{% url '/community.html' %}" class="black-link">Any questions? Feel free to get in touch with us</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="text-center">Crate has been built to support these five requirements</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-sm-6">
+        <p class="text-center">
+          <h2>Storing Documents</h2>
+          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
+        </p>
+        <p>Crate utilizes the indexing engine Lucene for storing documents.</p>
+      </div>
+
+      <div class="col-lg-4 col-sm-6">
+        <p class="text-center">
+          <h2>Storing Blobs</h2>
+          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_blob.png' %}" />
+        </p>
+        <p>Blob storage is done transparently, using the Crate blob implementation, which distributes and replicates blobs  evenly across all nodes.</p>
+      </div>
+
+      <div class="col-lg-4 col-sm-6">
+        <p class="text-center">
+          <h2>Finding Documents</h2>
+          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_search.png' %}" />
+        </p>
+        <p>Crate uses Elasticsearch for fulltext search – that’s pretty much the best there is for speed.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4 col-sm-6">
+        <p class="text-center">
+          <h2>Real time data analytics using SQL</h2>
+          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_analytics.png' %}" />
+        </p>
+        <p>Crate enables real time data analytics using SQL through the distributed query analyzer, planner and execution engine in real time.</p>
+      </div>
+
+      <div class="col-lg-4 col-sm-6">
+        <p class="text-center">
+          <h2>Make changes without re-doing everything</h2>
+          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_restructure.png' %}" />
+        </p>
+        <p>Remember when restructuring an entire relational database was possible using a single SQL script? Crate allows you to put the result of a query directly into one or more indices. This requirement is more essential in document based databases, where data is often stored in a highly denormalized format.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="text-center">"Crate is really friggin awesome!" John Doe</h2>
+        <p class="text-center">
+          Want to know how Skyhigh got a 20x increase in performance with only ¼ the number of nodes by using Crate?<br/><a href="#" target="_blank">Check out our Case-Study!</a>
+        </p>
+        <p class="text-center">
+          <a href="{% url '/community.html' %}" class="black-link">Any questions? Feel free to get in touch with us</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

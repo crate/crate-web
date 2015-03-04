@@ -1,0 +1,81 @@
+title: Crate and Weave: Access Crate Nodes across Networks with Weave
+description: 
+heroImg: wrapper-hero-frontpage
+
+
+{% extends "base.html" %}
+
+{% block header %}
+<div class="wrapper wrapper-hero landing-page" id="{{ heroImg }}">
+  <div class="container">
+    <h1>Crate and Weave:<br />Access Crate Nodes across Networks with Weave</h1>
+    <p class="lead">Weave creates a virtual network that connects and manages containers deployed across multiple hosts</p>
+    <a href="{% url '/try.html' %}" class="btn btn-fp-white">Get your cluster up<br>and running now!</a>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block body %}
+<div class="wrapper wrapper-border wrapper-border-bottom">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <p>Crate is a distributed database that allows you to create a flexible and scalable backend suited to a wide variety of purposes. Combined with Weave, developers working with a large number of containers can implement overlay networks tailored to their applications without touching infrastructure.</p>
+    </div>
+    <div class="col-sm-6">
+      <p>With Weave your applications can use a virtual network of containers as if they were all connected into the same infrastructure. Nodes on the Weave network can easily be exposed to the outside World or kept private to your internal network.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>Benefits of using Crate with Weave</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Multicast Support</h3>
+      <p class="lead">True broadcast communication in the cloud, Crate containers are aware of each others with no need for manual configuration.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Simple Network Configuration</h3>
+      <p class="lead">Easily expose or hide containers with a simple command and no need to juggle ports from container to host.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Security</h3>
+      <p class="lead">If your network is behind a firewall or traffic needs encryption, Weave can handle it.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+    <br />
+    <p class="text-center">
+      <a href="{% url '/blog/crate-with-docker-and-weave.html' %}" class="btn btn-primary btn-lg">Get Started with Crate and Weave</a>
+    </p>
+    </div>
+  </div>
+</div>
+</div>
+<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-primary">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+    <h2 class="text-center">Get your cluster up and running in no time!</h2>
+    <p class="text-center">
+      <a href="{% url '/blog/crate-with-docker-and-weave.html' %}" class="btn btn-black btn-lg">Start your cluster now!</a>
+    </p>
+    <p class="text-center">
+      <a href="{% url '/community.html' %}" class="black-link">Any questions? Feel free to get in touch with us</a>
+    </p>
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}
