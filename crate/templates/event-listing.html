@@ -1,0 +1,22 @@
+  {% for event in events %}
+  <div class="row">
+    <div class="col-sm-4 col-md-3 col-lg-2">
+      {% if event.image %}
+      <p class="event-logo"><img class="img-responsive" src="{% media event.image %}" /></p>
+      {% endif %}
+    </div>
+    <div class="col-sm-8 col-md-9 col-lg-10">
+      <div class="list-header">
+	<h2><a href="{{ event.url }}">{{ event.title }}</a></h2>
+	<p class="text-muted"><i class="fa fa-calendar"></i> {{ event.date_from|date }}
+	  {% if event.date_to|date != event.date_from|date %} &mdash; {{ event.date_to|date }}{% endif %}</p>
+      </div>
+      <p class="excerpt">
+        {{ event.raw_body|markdown|striptags|truncatewords:50 }}
+      </p>
+      <p class="text-right"><a href="{{ event.url }}" title="Read more">Read more &raquo;</a></p>
+    </div>
+  </div>
+  {% if not forloop.last %}<hr />{% endif %}
+  {% endfor %}
+

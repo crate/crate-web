@@ -24,9 +24,13 @@ logger = logging.getLogger(__name__)
 
 DIR = 'events/'
 EVENTS = []
+PAST_EVENTS = []
+UPCOMING_EVENTS = []
 
 def preBuild(site):
     global EVENTS
+    global UPCOMING_EVENTS
+    global PAST_EVENTS
     for event in site.pages():
         if event.path.startswith(DIR):
 
@@ -46,8 +50,12 @@ def preBuild(site):
             EVENTS.append(ctx)
 
     # Sort the posts by date
+    today = datetime.today()
     EVENTS = sorted(EVENTS, key=lambda x: x['date_from'])
     EVENTS.reverse()
+    PAST_EVENTS= filter(lambda x: x['date_to'] < today, EVENTS)
+    UPCOMING_EVENTS = filter(lambda x: x['date_to'] >= today, EVENTS)
+    UPCOMING_EVENTS.reverse()
 
 
 def preBuildPage(site, page, context, data):
@@ -56,6 +64,8 @@ def preBuildPage(site, page, context, data):
     access them from wherever on the site.
     """
     context['events'] = EVENTS
+    context['upcoming_events'] = UPCOMING_EVENTS
+    context['past_events'] = PAST_EVENTS
 
     for ctx in EVENTS:
         if ctx['path'] == page.path:

@@ -45,7 +45,7 @@ description: Crate is the distributed database for containerized environments su
         <div class="dynamic-content-well">
           <h4 class=""><a href="{% url '/events.html' %}">Meet Us Here</a></h4>
           <table class="table">
-            {% for event in events|slice:":3" %}
+            {% for event in upcoming_events|slice:":3" %}
             <tr>
               <td><a href="{{ event.url }}" title="{{ event.title|escape }}">{{ event.title|title }}</a></td>
             </tr>
