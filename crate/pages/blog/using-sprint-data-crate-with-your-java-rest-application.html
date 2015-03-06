@@ -1,0 +1,457 @@
+title: Using Spring Data Crate With Your Java REST Application
+description: This post shows you how to use the Spring Data Crate project to connect your REST application to Crate.
+created: 2015/03/06 18:00:00
+author: Christian Haudum
+category: developer-news
+tags: java, spring, spring data, howto, tutorial, rest, webservice
+
+
+Crate as an Open Source project lives from contributions to its ecosystem from the community. Therefore we're always happy to see projects coming up that facilitate the use of Crate.
+
+[Hasnain Javed](https://github.com/hasnainjaved) ([KP Technology Lab](https://github.com/KPTechnologyLab)) and [Rizwan Idrees](https://github.com/rizwanidrees) (Springer) developed a Spring Data adapter for Crate.
+
+> Spring Data makes it easy to use new data access technologies, such as non-relational databases, map-reduce frameworks, and cloud based data services. Spring Data also provides improved support for relational database technologies. 
+
+In this tutorial post will demonstrate how to integrate [Spring Data Crate](https://github.com/KPTechnologyLab/spring-data-crate) with your Java application based on a very simple Spring Boot REST application that accepts `GET` requests at `http://localhost:8080` and returns a list of users that are stored in Crate.
+
+**You can find the complete example of this tutorial also on [Github](https://github.com/chaudum/spring-data-crate-example/)!**
+
+
+## Let's go!
+
+To get started please clone the code of the `spring-data-crate` project to your local machine and compile the `jar` file. This will require `JDK 1.8` to be installed, but the compile target should be `1.7`, because Crate does not officially support Java 8 yet.
+
+```console
+$ git clone https://github.com/KPTechnologyLab/spring-data-crate
+$ mvn clean install
+```
+
+Then let's create a new Gradle project using [IntelliJ IDEA](http://www.jetbrains.com/idea/download/) with the following folder structure ...
+
+```
+├── libs
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── io
+    │   │       └── crate
+    │   │           └── hellospring
+    │   └── resources
+    └── test
+        ├── java
+        └── resources
+```
+
+... and put the previously compiled `spring-data-crate-1.0.0-BUILD-SNAPSHOT.jar` (and the `-sources.jar` if you want) into the `./libs` folder.
+
+In the file `build.gradle` we add the Spring Boot Gradle plugin and additional repositories where Gradle should look for dependencies.
+Note the `flatDirs {}` directive, this will tell Gradle to look in the `./libs` folder for `jar` files.
+
+```groovy
+buildscript {
+    ext {
+        springBootVersion = '1.2.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    mavenCentral()
+    maven {
+        url 'https://repo.spring.io/libs-snapshot'
+    }
+    jcenter()
+}
+```
+
+We'll also need to add a couple of dependencies, such as the Crate client and some Spring framework libraries.
+
+The validators are optional, but we use them in our example to define column constraints.
+
+```groovy
+dependencies {
+    ext {
+	springVersion = '4.0.9.RELEASE'
+	springDataVersion = '1.10.0.BUILD-SNAPSHOT'
+	crateVersion = '0.47.4'
+    }
+
+    // Crate client
+    compile("io.crate:crate-client:${crateVersion}")
+    // our newly created Spring Data Crate jar
+    compile name: 'spring-data-crate-1.0.0.BUILD-SNAPSHOT'
+
+    // spring framework
+    compile("org.springframework.boot:spring-boot-starter")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework:spring-core:${springVersion}")
+    compile("org.springframework:spring-context:${springVersion}")
+    compile("org.springframework:spring-tx:${springVersion}")
+    compile("org.springframework.data:spring-data-commons:${springDataVersion}")
+
+    // other tools
+    compile("org.codehaus.groovy:groovy:2.4.1")
+    compile("org.apache.commons:commons-lang3:3.3.2")
+
+    // optional
+    compile("javax.validation:validation-api:1.0.0.GA")
+    compile("org.hibernate:hibernate-validator:4.2.0.Final")
+
+    // testing
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+```
+
+That's it for the setup!
+
+## Installing Crate
+
+However, before you start coding the application,
+you will need to <a href="{% url '/docs.html' %}">download and install Crate</a> first.
+You can either download and extract the tarball or pull the latest Docker image.
+Instructions for both ways can be found in the <a href="{% url '/docs.html' %}">documentation</a> section on our website.
+
+**Run Crate after extracting the `tar.gz`**
+
+```console
+$ cd crate-0.47.4
+$ ./bin/crate
+```
+
+**Or run Crate using Docker after pulling the image `crate:latest`**
+
+```console
+$ docker run -ti -p 4200:4200 crate:latest crate
+```
+
+
+## Building The Application
+
+For our REST application we need a `User` model which will be mapped to a `users` table in Crate, an HTTP endpoint which is provided by a Spring `RestController`, and an application entry point that will make the app executable.
+
+### The Model
+
+Our `User` model has an email address as its unique id and a few other attributes.
+Important to mention here is that Crate has built in support for `ARRAY` and `OBJECT` types (see [docs](https://crate.io/docs/en/latest/sql/data_types.html#object)).
+In your Java application you can simply use `<Type>[]` and `HashMap<String, Object>`, and Spring Data Crate will take care of the correct conversion to the database types.
+
+The `@Table` annotation wires up the `User` model to the correct database table. The decorator allows various arguments:
+
+- `name`: the name of the table (required)
+- `refreshInterval`: specifies the refresh interval of a shard in milliseconds (optional, defaults to `1000`) - see [docs](https://crate.io/docs/stable/sql/refresh.html)
+- `numberOfReplicas`: number of configured replicas (optional, defaults to `"1"`) - see [docs](https://crate.io/docs/stable/sql/ddl.html#replication)
+- `columnPolicy`: defines whether a table enforces its defined schema (optional, defaults to `DYNAMIC`) - see [docs](https://crate.io/docs/en/latest/sql/ddl.html#column-policy)
+
+If you provide one or more constructors for a model - such as we do in our example,
+you need to annotate one of them with `@PersistenceConstructor` or an exception will be thrown at runtime.
+
+```java
+@Table(name="users", numberOfReplicas="0-all")
+public class User {
+
+    @Id
+    @Email
+    @NotBlank
+    private String email;
+    private String firstName;
+    private String lastName;
+    private Long dateJoined;
+    private String[] tags;
+    private HashMap<String, Object> attributes;
+
+    public User(String firstName, String lastName, String email, Long dateJoined) {
+        this(firstName, lastName, email, dateJoined, new String[]{});
+    }
+
+    public User(String firstName, String lastName, String email, Long dateJoined, String[] tags) {
+        this(firstName, lastName, email, dateJoined, tags, new HashMap<String, Object>());
+    }
+
+    @PersistenceConstructor
+    public User(String firstName, String lastName, String email, Long dateJoined, String[] tags, HashMap<String, Object> attributes) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.dateJoined = dateJoined;
+        this.tags = tags;
+        this.attributes = attributes;
+    }
+
+    // getter and setters here
+    ...
+}
+```
+
+### The Database Configuration
+
+#### User Repository
+
+Spring Data Crate provides a generic repository programming model to simplify the creation of data repositories.
+For our `User` class with `Id` property of type `String`, a `UserRepository` interface can be defined as:
+
+```java
+public interface UserRepository extends CrateRepository<User, String> {
+}
+```
+
+*NOTE: Currently documents can be queried only by Id. Support will be added to derive queries from method names.*
+
+
+#### App Configuration
+
+To provide beans for the Crate client, the Crate template and the Crate PESM we also need to create an application configuration
+that enables all Crate data repositories using the `@EnableCrateRepositories` annotation.
+
+```java
+@Configuration
+@EnableCrateRepositories
+class ApplicationConfig extends AbstractCrateConfiguration {
+
+    @Bean
+    public CratePersistentEntitySchemaManager cratePersistentEntitySchemaManager() throws Exception {
+        return new CratePersistentEntitySchemaManager(crateTemplate(), SchemaExportOption.CREATE);
+    }
+
+    // optional
+    // only required because we are using @Email and @NotBlank annotations (JSR-303) for validation
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+        return new LocalValidatorFactoryBean();
+    }
+
+    // optional
+    // only required because we are using @Email and @NotBlank annotations (JSR-303) for validation
+    @Bean
+    public ValidatingCrateEventListener validatingCrateEventListener() {
+        return new ValidatingCrateEventListener(validator());
+    }
+
+}
+```
+
+For further information on how you can configure the PESM, please refer to the [Spring Data Crate documentation](https://github.com/KPTechnologyLab/spring-data-crate#craterepository)
+
+
+### The Service
+
+The `UserService` is an additional abstraction between the controller that we will create afterwards and the Crate data respository.
+Herer we define methods for creating, updating and retrieving users from the database. Since we've already defined beans for
+the Crate template and the User data repository earlier in the application configuration, we can inject them here using the `@Autowired` annotation on the properties.
+
+The `@Service` annotation defines the class as a Spring Service so we can also inject it later in our controller.
+
+```java
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    private Long now() {
+        return System.currentTimeMillis();
+    }
+
+    public void deleteUsers() {
+        userRepository.deleteAll();
+    }
+
+    public User createUser(String email, String firstName, String lastName) {
+        User user = new User(firstName, lastName, email, now());
+        userRepository.save(user);
+        return user;
+    }
+
+    public void updateUser(User user) {
+        // userRepository.save is clever enough to distinguish between insert and update
+        userRepository.save(user);
+    }
+
+    public Collection<User> allUsers() {
+        return userRepository.findAll();
+    }
+
+    public void refresh() {
+        userRepository.refreshTable();
+    }
+
+}
+```
+
+### The Controller
+
+The controller is the heart of our application and defines the routing. Annotating the controller with Spring's `@RestController` automatically turns the returned value into `JSON` using the Jackson library. This makes it really simple to create RESTful webservices using Spring.
+
+The `userService` bean is injected using the `@Autowired` annotation again.
+Our application only has one single HTTP endpoint at root (`/`), where we first delete all users from the table and then create three new which are then updated with attributes and tags.
+
+In the end we retrieve all user objects from the database and return them as a collection.
+
+```java
+@RestController
+public class CrateController {
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping("/")
+    public Collection<User> index() {
+        // reset
+        userService.deleteUsers();
+
+        // create users
+        User christian = userService.createUser("christian.haudum@example.com",
+                                                "Christian", "Haudum");
+        User rizwan = userService.createUser("rizwan.idrees@example.com",
+                                             "Rizwan", "Idrees");
+        User hasnain = userService.createUser("hasnain.javed@example.com",
+                                              "Hasnain", "Javed");
+
+        // refresh table to make sure we get latest version of the documents
+        userService.refresh();
+
+        // update users
+        christian.setTags(new String[]{"python"});
+        christian.setAttributes(new HashMap<String, Object>(){
+            { put("company","Crate.IO"); }
+        });
+        userService.updateUser(christian);
+
+        rizwan.setTags(new String[]{"java","spring framework"});
+        rizwan.setAttributes(new HashMap<String, Object>(){
+            { put("company", "KP Technology Lab"); }
+        });
+        userService.updateUser(rizwan);
+
+        hasnain.setTags(new String[]{"java","spring data"});
+        hasnain.setAttributes(new HashMap<String, Object>(){
+            { put("company", "KP Technology Lab"); }
+        });
+        userService.updateUser(hasnain);
+
+        // refresh table to make sure we get latest version of the documents
+        userService.refresh();
+
+        // return a collection of users
+        // Spring will automatically encode it to JSON using Jackson
+        return userService.allUsers();
+    }
+}
+```
+
+### The Application
+
+All we need to run our Spring Boot application now is the entry point. This is achieved by annotating the
+application class with `@SpringBootApplication` and defining the good old `main` method that invokes `SpringApplication.run()`.
+
+This will embed and run the application inside the Tomcat HTTP runtime when executed.
+
+```java
+package io.crate.hellospring;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CrateApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(CrateApplication.class, args);
+  }
+
+}
+```
+
+Now it's time to run the application! You can either start it from IntelliJ directly by right clicking on the `CrateApplication` class and selecting "Run CrateApplication.main()" or using the CLI:
+
+```console
+$ ./gradlew clean bootRun
+```
+
+Once the application is started up, you can navigate to `http://localhost:8080/` in your browser.
+And voilà ... there you should get a JSON formatted response looking like this:
+
+```json
+[
+  {
+    "email": "christian.haudum@example.com",
+    "firstName": "Christian",
+    "lastName": "Haudum",
+    "dateJoined": 1425631721178,
+    "tags": [
+      "crateio",
+      "python"
+    ],
+    "attributes": {
+      "company": "Crate.IO"
+    },
+    "id": "christian.haudum@example.com",
+    "fullName": "Christian Haudum"
+  },
+  {
+    "email": "rizwan.idrees@example.com",
+    "firstName": "Rizwan",
+    "lastName": "Idrees",
+    "dateJoined": 1425631721183,
+    "tags": [
+      "kptechnologylab",
+      "java",
+      "spring framework"
+    ],
+    "attributes": {
+      "company": "KP Technology Lab"
+    },
+    "id": "rizwan.idrees@example.com",
+    "fullName": "Rizwan Idrees"
+  },
+  {
+    "email": "hasnain.javed@example.com",
+    "firstName": "Hasnain",
+    "lastName": "Javed",
+    "dateJoined": 1425631721188,
+    "tags": [
+      "kptechnologylab",
+      "java",
+      "spring data"
+    ],
+    "attributes": {
+      "company": "KP Technology Lab"
+    },
+    "id": "hasnain.javed@example.com",
+    "fullName": "Hasnain Javed"
+  }
+]
+```
+
+
+## Summary
+
+The Spring Data Crate adapter allows you to create RESTful web applications with the scalable Crate backend super easily.
+Although the project is only in its early stage and misses some features (e.g. find entities by method) it can be used for various use cases.
+The project is Open Source and available on [Github](https://github.com/KPTechnologyLab/spring-data-crate), so contributions are very welcome!
+
+**You can find the complete example of this tutorial also on [Github](https://github.com/chaudum/spring-data-crate-example/)!**
+
+## Resources
+
+- [Crate](https://crate.io/docs/)
+- [Spring](https://spring.io)
+- [Sprint Boot](http://projects.spring.io/spring-boot/)
+- [Spring Data Crate](https://github.com/KPTechnologyLab/spring-data-crate)
+- [Spring Rest Service Guide](https://spring.io/guides/gs/rest-service/)
+
+
