@@ -65,6 +65,11 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
+            name="Chris Ward",
+            title="Developer Advocate",
+            email="",
+            ),
+        dict(
             name="Sebastian Utz",
             title="Core Developer",
             email="",
@@ -77,4 +82,3 @@ def preBuildPage(site, page, context, data):
         ]
 
     return context, data
-
