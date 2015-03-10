@@ -337,6 +337,15 @@ a.black-link {
   color: #000000;
 }
 
+.note {
+  background-color: #e7e7e7;
+  padding: 16px;
+}
+.note.note-primary {
+  background-color: #cff5ff;
+  border-left: 4px solid #55d4f5;
+}
+
 /**
  * Typography
  */
