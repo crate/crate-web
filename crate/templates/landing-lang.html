@@ -6,8 +6,8 @@
     <div class="row">
       <div class="col-sm-12">
         <h1 id="{{ title|slugify }}">{{ title }}</h1>
-        <p class="lead">{{ description }}</p>
-        <p><a class="btn btn-fp-white" href="{% url '#start' %}">Start using Crate with {{ name }} now!</a></p>
+	<p class="lead">{{ description }}</p>
+	<p><a class="btn btn-fp-white" href="{{ CURRENT_PAGE.final_url }}#start">Start using Crate with {{ name }} now!</a></p>
       </div>
     </div>
   </div>
@@ -119,6 +119,7 @@
   </div>
 </div>
 
+<a id="start"></a>
 {% block content %}
 <!-- CONTENT -->
 {% endblock %}
