@@ -47,6 +47,7 @@ def preBuild(site):
             ctx['url'] = event.absolute_final_url
             ctx['date_from'] = parseDate(headers.get('date_from'))
             ctx['date_to'] = parseDate(headers.get('date_to'))
+            ctx['tags'] = headers.get('tags') and [h.strip() for h in headers['tags'].split(',')] or []
             EVENTS.append(ctx)
 
     # Sort the posts by date

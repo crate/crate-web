@@ -1,18 +1,19 @@
 {% extends "base.html" %}
 
 {% block header %}
-<div class="wrapper wrapper-hero wrapper-bg-primary" id="landing-page-{{ slug }}">
+<div class="wrapper wrapper-hero" id="wrapper-hero-overview">
   <div class="container">
-    <h1 id="{{ title|slugify }}">{{ title }}</h1>
+    <div class="row">
+      <div class="col-sm-12">
+	<h1 id="{{ title|slugify }}">{{ title }}</h1>
+	<p class="lead">{{ description }}</p>
+	<p><a class="btn btn-fp-white" href="{% url '/docs.html' %}">Start using Crate with {{ slug|title }} now!</a></p>
+      </div>
+    </div>
   </div>
 </div>
 <div class="wrapper wrapper-border">
   <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-	<p class="lead">{{ description }}</p>
-      </div>
-    </div>
   </div>
 </div>
 {% endblock %}
@@ -46,8 +47,10 @@
 <div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
+      <div class="col-sm-12">
+	<h2>What is Crate?</h2>
+      </div>
       <div class="col-sm-6">
-	<h3>What is Crate?</h3>
 	<p>THIS TEXT NEEDS TO BE IMPROVED AND SHORTENED! --- Crate works seamlessly with {{ slug|title }}. Crate is a shared-nothing,
         fully searchable, document-oriented cluster data store. It is also 100%
         open source. We built it so developers with a data intensive back-end
@@ -60,6 +63,9 @@
         cloud.</p>
       </div>
       <div class="col-sm-6">
+	<p class="text-center">
+	  <img class="max-320" src="{% media '/media/1502/sql.png' %}" />
+	</p>
       </div>
     </div>
   </div>
@@ -68,17 +74,33 @@
 <div class="wrapper wrapper-border {% if testimonial_quote %}wrapper-border-bottom{% endif %}">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-md-4 col-sm-12 col-xs-12">
 	<p class="text-center"><img class="max-160" src="{% media image %}" /></p>
       </div>
-      <div class="col-sm-6">
+      <div class="col-md-4 col-sm-6 col-xs-6">
 	<div class="dynamic-content-well">
-	  <h3>Recent {{ slug|title }} News</h3>
+	  <h3>Recent Posts</h3>
 	  <table class="table">
 	  {% for post in posts|filter_by_tag:slug|slice:":5" %}
             <tr>
 	      <td><i class="fa fa-book"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title|title }}</a></td>
             </tr>
+	  {% empty %}
+	  <p>Sorry, there are no recent {{ slug|title }} blog posts.</p>
+          {% endfor %}
+	  </table>
+	</div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6">
+	<div class="dynamic-content-well">
+	  <h3>Upcoming Events</h3>
+	  <table class="table">
+	  {% for post in upcoming_events|filter_by_tag:slug|slice:":5" %}
+            <tr>
+	      <td><i class="fa fa-book"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title|title }}</a></td>
+            </tr>
+	  {% empty %}
+	  <p>Sorry, there are no upcoming {{ slug|title }} events.</p>
           {% endfor %}
 	  </table>
 	</div>

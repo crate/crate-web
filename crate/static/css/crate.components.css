@@ -137,6 +137,11 @@ img.max-160 {
   max-width: 160px;
 }
 
+img.max-320 {
+  max-height: 320px;
+  max-width: 320px;
+}
+
 /**
  * Blog post elements
  */
