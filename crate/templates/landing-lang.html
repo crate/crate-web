@@ -40,17 +40,17 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-4 col-xs-6">
-        <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-1.png' %}" />
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/cloud_everywhere.png' %}" width="110" />
         <h3>Powerful</h3>
         <p>Crate is a powerful, complete backend solution for tabular data, semi-structured records, and binary objects (BLOBs).</p>
       </div>
       <div class="col-sm-4 col-xs-6">
-        <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-2.png' %}" />
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_analytics.png' %}" width="110" />
         <h3>Sub-second, super-fast.</h3>
         <p>Crate is highly available and offers massively parallel access in real-time, enabling sub-second responses on billions of records.</p>
       </div>
       <div class="col-sm-4 col-xs-6">
-        <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-3.png' %}" />
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/cloud_scale.png' %}" width="110" />
         <h3>Easy to scale. Simple to use.</h3>
         <p>Adding nodes on commodity hardware or in the cloud is as simple as a single command in your terminal.</p>
       </div>
@@ -108,30 +108,17 @@
 </div>
 {% endif %}
 
+<a id="start"></a>
+{% block content %}
+<!-- CONTENT -->
+{% endblock %}
+
 <div class="wrapper wrapper-bg-primary">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
         <p><a class="btn btn-fp-white" href="{% url '/overview' %}">Want to know more about Crate?</a></p>
         <p>Any questions? Feel free to <a href="{% url '/about/contact.html' %}">get in touch with us</a>!</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<a id="start"></a>
-{% block content %}
-<!-- CONTENT -->
-{% endblock %}
-
-<div class="wrapper wrapper-bg-light">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h2 class="text-center">Get your cluster up and running in no time!</h2>
-        <p class="text-center">
-          <a href="{% url '/about/contact.html' %}" class="black-link">Any questions? Feel free to get in touch with us</a>
-        </p>
       </div>
     </div>
   </div>
