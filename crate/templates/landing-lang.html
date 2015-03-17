@@ -24,8 +24,9 @@
 	<h2>Crate &amp; {{ name }}</h2>
       </div>
       <div class="col-sm-6">
-	<p>Crate is a distributed database for Docker that allows you to create a flexible and scalable backend suited to a wide variety of purposes.</p>
+	<p class="lead">Crate is a distributed database that allows you to create a flexible and scalable backend suited to a wide variety of purposes.</p>
 	<p>Here you can find all the tools and resources you need to develop scalable {{ name }} applications with a Crate backend.</p>
+	<p>Crate is 100% open source.</p>
       </div>
       <div class="col-sm-6">
 	<p class="text-center"><img class="max-160" src="{% media image %}" /></p>
@@ -81,7 +82,7 @@
 	  <table class="table">
 	  {% for post in events|filter_by_tag:slug|slice:":5" %}
             <tr>
-	      <td><i class="fa fa-book"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
+	      <td><i class="fa fa-calendar"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
             </tr>
           {% endfor %}
 	  </table>
@@ -111,10 +112,10 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h2 class="text-center"></h2>
-	<p class="lead">!</p>
+        <h2 class="text-center">Call to action!</h2>
+	<p class="lead">Lorem ipsum</p>
 	<p><a class="btn btn-fp-white" href="{% url '/docs/clients.html' %}">Start implementing Crate now!</a></p>
-	<p>Any questions? Feel free to <a href="{% url '/about/contact.html' %}"><b>get in touch with us</b></a>!</p>
+	<p>Any questions? Feel free to <a href="{% url '/about/contact.html' %}">get in touch with us</a>!</p>
       </div>
     </div>
   </div>
@@ -124,7 +125,7 @@
 <!-- CONTENT -->
 {% endblock %}
 
-<div class="wrapper wrapper-bg-primary">
+<div class="wrapper wrapper-bg-light">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
