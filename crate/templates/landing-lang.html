@@ -5,9 +5,9 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-	<h1 id="{{ title|slugify }}">{{ title }}</h1>
-	<p class="lead">{{ description }}</p>
-	<p><a class="btn btn-fp-white" href="{% url '#start' %}">Start using Crate with {{ name }} now!</a></p>
+        <h1 id="{{ title|slugify }}">{{ title }}</h1>
+        <p class="lead">{{ description }}</p>
+        <p><a class="btn btn-fp-white" href="{% url '#start' %}">Start using Crate with {{ name }} now!</a></p>
       </div>
     </div>
   </div>
@@ -21,15 +21,15 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-	<h2>Crate &amp; {{ name }}</h2>
+        <h2>Crate &amp; {{ name }}</h2>
       </div>
       <div class="col-sm-6">
-	<p class="lead">Crate is a distributed database that allows you to create a flexible and scalable backend suited to a wide variety of purposes.</p>
-	<p>Here you can find all the tools and resources you need to develop scalable {{ name }} applications with a Crate backend.</p>
-	<p>Crate is 100% open source.</p>
+        <p class="lead">Crate is a distributed database that allows you to create a flexible and scalable backend suited to a wide variety of purposes.</p>
+        <p>Here you can find all the tools and resources you need to develop scalable {{ name }} applications with a Crate backend.</p>
+        <p>Crate is 100% open source.</p>
       </div>
       <div class="col-sm-6">
-	<p class="text-center"><img class="max-160" src="{% media image %}" /></p>
+        <p class="text-center"><img class="max-160" src="{% media image %}" /></p>
       </div>
     </div>
   </div>
@@ -40,19 +40,19 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-4 col-xs-6">
-	<img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-1.png' %}" />
-	<h3>Powerful</h3>
-	<p>Crate is a powerful, complete backend solution for tabular data, semi-structured records, and binary objects (BLOBs).</p>
+        <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-1.png' %}" />
+        <h3>Powerful</h3>
+        <p>Crate is a powerful, complete backend solution for tabular data, semi-structured records, and binary objects (BLOBs).</p>
       </div>
       <div class="col-sm-4 col-xs-6">
-	<img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-2.png' %}" />
-	<h3>Sub-second, super-fast.</h3>
-	<p>Crate is highly available and offers massively parallel access in real-time, enabling sub-second responses on billions of records.</p>
+        <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-2.png' %}" />
+        <h3>Sub-second, super-fast.</h3>
+        <p>Crate is highly available and offers massively parallel access in real-time, enabling sub-second responses on billions of records.</p>
       </div>
       <div class="col-sm-4 col-xs-6">
-	<img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-3.png' %}" />
-	<h3>Easy to scale. Simple to use.</h3>
-	<p>Adding nodes on commodity hardware or in the cloud is as simple as a single command in your terminal.</p>
+        <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-3.png' %}" />
+        <h3>Easy to scale. Simple to use.</h3>
+        <p>Adding nodes on commodity hardware or in the cloud is as simple as a single command in your terminal.</p>
       </div>
     </div>
   </div>
@@ -63,32 +63,32 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-xs-6">
-	<div class="dynamic-content-well">
-	  <h3>Recent Posts</h3>
-	  <table class="table">
-	  {% for post in posts|filter_by_tag:slug|slice:":5" %}
+        <div class="dynamic-content-well">
+          <h3>Recent Posts</h3>
+          <table class="table">
+            {% for post in posts|filter_by_tag:slug|slice:":5" %}
             <tr>
-	      <td><i class="fa fa-book"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
+              <td><i class="fa fa-book"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
             </tr>
-          {% endfor %}
-	  </table>
-	</div>
-	<p>Read more on our <a href="{% url '/blog.html' %}">blog</a>!</p>
+            {% endfor %}
+          </table>
+        </div>
+        <p>Read more on our <a href="{% url '/blog.html' %}">blog</a>!</p>
       </div>
       <div class="col-sm-6 col-xs-6">
-	<div class="dynamic-content-well">
-	  {% if events|filter_by_tag:slug|length %}
-	  <h3>Events</h3>
-	  <table class="table">
-	  {% for post in events|filter_by_tag:slug|slice:":5" %}
+        <div class="dynamic-content-well">
+          {% if events|filter_by_tag:slug|length %}
+          <h3>Events</h3>
+          <table class="table">
+            {% for post in events|filter_by_tag:slug|slice:":5" %}
             <tr>
-	      <td><i class="fa fa-calendar"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
+              <td><i class="fa fa-calendar"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
             </tr>
-          {% endfor %}
-	  </table>
-	  {% endif %}
-	</div>
-	<p>Meet us at other <a href="{% url '/events.html' %}">upcoming events</a>!</p>
+            {% endfor %}
+          </table>
+          {% endif %}
+        </div>
+        <p>Meet us at other <a href="{% url '/events.html' %}">upcoming events</a>!</p>
       </div>
     </div>
   </div>
@@ -100,8 +100,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-	<p class="lead text-center">“{{ testimonial_quote }}”</p>
-	<p class="text-center"><i class="fa fa-large fa-user"></i> {{ testimonial_name }}<br />{{ testimonial_company }}</p>
+        <p class="lead text-center">“{{ testimonial_quote }}”</p>
+        <p class="text-center"><i class="fa fa-large fa-user"></i> {{ testimonial_name }}<br />{{ testimonial_company }}</p>
       </div>
     </div>
   </div>
@@ -111,11 +111,9 @@
 <div class="wrapper wrapper-bg-primary">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
-        <h2 class="text-center">Call to action!</h2>
-	<p class="lead">Lorem ipsum</p>
-	<p><a class="btn btn-fp-white" href="{% url '/docs/clients.html' %}">Start implementing Crate now!</a></p>
-	<p>Any questions? Feel free to <a href="{% url '/about/contact.html' %}">get in touch with us</a>!</p>
+      <div class="col-lg-12 text-center">
+        <p><a class="btn btn-fp-white" href="{% url '/overview' %}">Want to know more about Crate?</a></p>
+        <p>Any questions? Feel free to <a href="{% url '/about/contact.html' %}">get in touch with us</a>!</p>
       </div>
     </div>
   </div>
