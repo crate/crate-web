@@ -57,6 +57,7 @@
   </div>
 </div>
 
+{% if posts|filter_by_tag:slug|length > 0 %}
 <div class="wrapper wrapper-bg-light">
   <div class="container">
     <div class="row">
@@ -92,6 +93,7 @@
     </div>
   </div>
 </div>
+{% endif %}
 
 {% if testimonial_quote %}
 <div class="wrapper wrapper-bg-light">
@@ -127,18 +129,6 @@
     <div class="row">
       <div class="col-lg-12">
         <h2 class="text-center">Get your cluster up and running in no time!</h2>
-        <p class="text-center">
-          <a href="{% url '/about/contact.html' %}" class="black-link">Any questions? Feel free to get in touch with us</a>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-gray">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
         <p class="text-center">
           <a href="{% url '/about/contact.html' %}" class="black-link">Any questions? Feel free to get in touch with us</a>
         </p>
