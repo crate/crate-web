@@ -128,6 +128,10 @@ footer.wrapper {
   background-color: #55d4f5;
 }
 
+.container p:last-child {
+  margin-bottom: 0px;
+}
+
 /**
  * Blog post elements
  */

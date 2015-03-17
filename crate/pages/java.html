@@ -1,18 +1,10 @@
-title: Building Ruby Applications with Crate
-description:
-heroImg: wrapper-hero-frontpage
+title: Building Java Applications with Crate
+description: ...
+slug: java
 
-{% extends "base.html" %}
+{% extends "landing-lang.html" %}
 
-{% block header %}
-<div class="wrapper wrapper-hero landing-page" id="{{ heroImg }}">
-  <div class="container">
-    <h1>Building Ruby Applications with Crate</h1>
-  </div>
-</div>
-{% endblock %}
-
-{% block body %}
+{% block content %}
 <div class="wrapper wrapper-border wrapper-border-bottom">
   <div class="container">
     <div class="row">
@@ -141,16 +133,5 @@ heroImg: wrapper-hero-frontpage
   </div>
 </div>
 
-<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-gray">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <p class="text-center">
-          <a href="{% url '/about/contact.html' %}" class="black-link">Any questions? Feel free to get in touch with us</a>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
 
 {% endblock %}
