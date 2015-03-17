@@ -1,134 +1,84 @@
 title: Building Ruby Applications with Crate
-description: Lorem Ipsum ... bla bla
+description: Connect your Ruby application to Crate with our interface and an optional ActiveRecord adapter to leverage the speed of search and elegance of SQL: A 100% open source data store for your application.
+name: Ruby
 slug: ruby
 image: /media/1503/lang-ruby-large.png
+testimonial_quote: The fact that Crate Data uses SQL lowers the barriers to entry when using distributed search. And on top of that with Crate you get MongoDB and Elasticsearch in one scalable package.
+testimonial_name: Jeff Nappi, Director of Engineering
+testimonial_company: Clearvoice
 
 {% extends "landing-lang.html" %}
 
 {% block content %}
-<div class="wrapper wrapper-border wrapper-border-bottom">
+<div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quid ergo attinet gloriose loqui, nisi constanter loquare? Quia dolori non voluptas contraria est, sed doloris privatio.</p>
-      </div>
-      <div class="col-sm-6">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quid ergo attinet gloriose loqui, nisi constanter loquare? Quia dolori non voluptas contraria est, sed doloris privatio.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border wrapper-border-bottom">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h2>Sub Heading</h2>
+      <div class="col-lg-12" id="start">
+        <h2>Install & Develop</h2>
+        <p>
+          Our Ruby distributions are hosted on <a href="https://rubygems.org" target="_blank">RubyGems</a>. The initial Ruby driver and ActiveRecord adapter were written by <a href="https://twitter.com/corck" target="_blank">Christoph Klocker</a>.
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-4">
-        <img class="img-responsive thumbnail" src="{% media '/media/1503/cloud_everywhere.png' %}" />
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_rubygems.png' %}" height="70" />
       </div>
       <div class="col-sm-8">
         <ul>
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-          <li>Four</li>
+          <li><a href="https://rubygems.org/gems/crate_ruby" target="_blank">Crate Ruby Interface on RubyGems</a></li>
+          <li><a href="https://rubygems.org/gems/activerecord-crate-adapter" target="_blank">ActiveRecord adapter on RubyGems</a></li>
         </ul>
       </div>
     </div>
   </div>
 </div>
 
-<div class="wrapper wrapper-border wrapper-border-bottom">
+<div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h2>Sub Heading</h2>
+        <h2>Learn</h2>
+        <p>
+          Find documentation about using Crate with a PHP application and view sample code to get you started.
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-4">
-        <img class="img-responsive thumbnail" src="{% media '/media/1503/cloud_everywhere.png' %}" />
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
       </div>
       <div class="col-sm-8">
         <ul>
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-          <li>Four</li>
+          <li><a href="https://github.com/crate/crate_ruby#readme" target="_blank">Crate Ruby Interface instructions</a></li>
+          <li><a href="https://github.com/crate/activerecord-crate-adapter#readme" target="_blank">Crate ActiveRecord adapter instructions</a></li>
         </ul>
       </div>
     </div>
   </div>
 </div>
 
-<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-primary">
+<div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h2 class="text-center">Get your cluster up and running in no time!</h2>
-        <p class="text-center">
-          <a href="{% url '/about/contact.html' %}" class="black-link">Any questions? Feel free to get in touch with us</a>
+        <h2>Contribute</h2>
+        <p>
+          Is there a problem or missing feature with our Ruby adapters? Or have an opinion of feedback to discuss with our community? We would love your input and participation.
         </p>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-gray">
-  <div class="container">
     <div class="row">
-      <div class="col-lg-12">
-        <h2 class="text-center">Feature Headings</h2>
+      <div class="col-sm-4">
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
       </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border wrapper-border-bottom">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <div class="col-sm-8">
+        <ul>
+          <li><a href="https://github.com/crate/crate_ruby/blob/master/DEVELOP.md" target="_blank">Get involved with improving the Crate interface</a>.</li>
+          <li><a href="https://github.com/crate/activerecord-crate-adapter/blob/master/DEVELOP.md" target="_blank">Get involved with improving the ActiveRecord adapter</a>.</li>
+          <li><a href="/bounties#ruby">For specific issues we need help with, see our current Ruby bounties</a></li>
+          <li><a href="/community/">Would rather help out in our community channels? Not a problem!</a></li>
+        </ul>
       </div>
     </div>
   </div>

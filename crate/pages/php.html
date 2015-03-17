@@ -1,8 +1,11 @@
 title: Building PHP Applications with Crate
-description: ...
+description: Connect your PHP application to Crate with PDO and DBAL drivers to leverage the speed of search and elegance of SQL: A 100% open source data store for your application.
 name: PHP
 slug: php
 image: /media/1503/lang-php-large.png
+testimonial_quote: The fact that Crate Data uses SQL lowers the barriers to entry when using distributed search. And on top of that with Crate you get MongoDB and Elasticsearch in one scalable package.
+testimonial_name: Jeff Nappi, Director of Engineering
+testimonial_company: Clearvoice
 
 {% extends "landing-lang.html" %}
 
@@ -10,9 +13,9 @@ image: /media/1503/lang-php-large.png
 <div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-12" id="start">
         <h2>Install & Develop</h2>
-        <p>Our PHP packages are hosted on <a href="https://packagist.org/" target="_blank">Packagist</a> for easy inclusion in your projects. There is a PDO driver and a DBAL Driver that depends on the PDO driver. The code for both drivers is on GitHub.</p>
+        <p>Our PHP packages are hosted on <a href="https://packagist.org/" target="_blank">Packagist</a> for easy inclusion in your projects. There is a PDO driver and a DBAL Driver that depends on the PDO driver.</p>
       </div>
     </div>
     <div class="row">
@@ -23,17 +26,6 @@ image: /media/1503/lang-php-large.png
         <ul>
           <li><a href="https://packagist.org/packages/crate/crate-pdo" target="_blank">PDO Driver on Packagist</a></li>
           <li><a href="https://packagist.org/packages/crate/crate-dbal" target="_blank">DBAL Driver on Packagist</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_github.png' %}" height="70" />
-      </div>
-      <div class="col-sm-8">
-        <ul>
-          <li><a href="http://github.com/crate/crate-pdo" target="_blank">PDO Driver on GitHub</a></li>
-          <li><a href="http://github.com/crate/crate-dbal" target="_blank">DBAL Driver on GitHub</a></li>
         </ul>
       </div>
     </div>
