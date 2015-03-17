@@ -57,7 +57,7 @@
   </div>
 </div>
 
-{% if posts|filter_by_tag:slug|length > 0 %}
+{% if posts|filter_by_tag:slug|length %}
 <div class="wrapper wrapper-bg-light">
   <div class="container">
     <div class="row">
@@ -67,28 +67,27 @@
 	  <table class="table">
 	  {% for post in posts|filter_by_tag:slug|slice:":5" %}
             <tr>
-	      <td><i class="fa fa-book"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title|title }}</a></td>
+	      <td><i class="fa fa-book"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
             </tr>
-	  {% empty %}
-	  <p>Sorry, there are no recent {{ name }} blog posts.</p>
           {% endfor %}
 	  </table>
 	</div>
+	<p>Read more on our <a href="{% url '/blog.html' %}">blog</a>!</p>
       </div>
       <div class="col-sm-6 col-xs-6">
 	<div class="dynamic-content-well">
-	  <h3>Upcoming Events</h3>
+	  {% if events|filter_by_tag:slug|length %}
+	  <h3>Events</h3>
 	  <table class="table">
-	  {% for post in upcoming_events|filter_by_tag:slug|slice:":5" %}
+	  {% for post in events|filter_by_tag:slug|slice:":5" %}
             <tr>
-	      <td><i class="fa fa-book"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title|title }}</a></td>
+	      <td><i class="fa fa-book"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
             </tr>
-	  {% empty %}
-	  <p>Sorry, there are no upcoming {{ name }} events.</p>
           {% endfor %}
 	  </table>
-	  <p>Meet us at other <a href="{% url '/events.html' %}">upcoming events</a>!</p>
+	  {% endif %}
 	</div>
+	<p>Meet us at other <a href="{% url '/events.html' %}">upcoming events</a>!</p>
       </div>
     </div>
   </div>
@@ -112,9 +111,10 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h2 class="text-center">CTA Headline</h2>
-	<p class="lead">Call to action!</p>
-        <p>Any questions? <a href="{% url '/about/contact.html' %}">Feel free to get in touch with us</a></p>
+        <h2 class="text-center"></h2>
+	<p class="lead">!</p>
+	<p><a class="btn btn-fp-white" href="{% url '/docs/clients.html' %}">Start implementing Crate now!</a></p>
+	<p>Any questions? Feel free to <a href="{% url '/about/contact.html' %}"><b>get in touch with us</b></a>!</p>
       </div>
     </div>
   </div>
@@ -124,7 +124,7 @@
 <!-- CONTENT -->
 {% endblock %}
 
-<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-primary">
+<div class="wrapper wrapper-bg-primary">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">

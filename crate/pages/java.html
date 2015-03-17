@@ -1,104 +1,42 @@
 title: Using Crate to Power Your Java Applications
-description: Crate is writte in Java for maximum performance ...
+description: Crate is written in Java for maximum performance. No need to say that therefore it is the best fit for your large-scale Java applications.
 name: Java
 slug: java
 image: /media/1503/lang-java-large.png
 
-
 {% extends "landing-lang.html" %}
 
 {% block content %}
-<div class="wrapper wrapper-border wrapper-border-bottom">
+<div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h2>Sub Heading</h2>
+        <h2>Install &amp; Develop</h2>
+        <p></p>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-4">
-        <img class="img-responsive thumbnail" src="{% media '/media/1503/cloud_everywhere.png' %}" />
       </div>
       <div class="col-sm-8">
         <ul>
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-          <li>Four</li>
+          <li><a href="https://packagist.org/packages/crate/crate-pdo" target="_blank">PDO Driver on Packagist</a></li>
+          <li><a href="https://packagist.org/packages/crate/crate-dbal" target="_blank">DBAL Driver on Packagist</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_github.png' %}" height="70" />
+      </div>
+      <div class="col-sm-8">
+        <ul>
+          <li><a href="http://github.com/crate/crate-pdo" target="_blank">PDO Driver on GitHub</a></li>
+          <li><a href="http://github.com/crate/crate-dbal" target="_blank">DBAL Driver on GitHub</a></li>
         </ul>
       </div>
     </div>
   </div>
 </div>
-
-<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-primary">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h2 class="text-center">Get your cluster up and running in no time!</h2>
-        <p class="text-center">
-          <a href="{% url '/about/contact.html' %}" class="black-link">Any questions? Feel free to get in touch with us</a>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-gray">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h2 class="text-center">Feature Headings</h2>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border wrapper-border-bottom">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 {% endblock %}
