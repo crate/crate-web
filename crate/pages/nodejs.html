@@ -1,120 +1,85 @@
 title: Building Node.js Applications with Crate
-description: ...
+description: Connect your Node.js application to Crate with several drivers available to leverage the speed of search and elegance of SQL: A 100% open source data store for your application.
+name: Node.js
 slug: nodejs
+image: /media/1503/lang-nodejs-large.png
+testimonial_quote: The fact that Crate Data uses SQL lowers the barriers to entry when using distributed search. And on top of that with Crate you get MongoDB and Elasticsearch in one scalable package.
+testimonial_name: Jeff Nappi, Director of Engineering
+testimonial_company: Clearvoice
 
 {% extends "landing-lang.html" %}
 
 {% block content %}
-<div class="wrapper wrapper-border wrapper-border-bottom">
+<div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
-        <h2>Sub Heading</h2>
+      <div class="col-lg-12" id="start">
+        <h2>Install & Develop</h2>
+        <p>Our Node.js packages are hosted on <a href="https://www.npmjs.com/" target="_blank">npm</a> for easy inclusion in your projects. There are several drivers available, all written by community contributors.</p>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-4">
-        <img class="img-responsive thumbnail" src="{% media '/media/1503/cloud_everywhere.png' %}" />
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_npm.png' %}" height="70" />
       </div>
       <div class="col-sm-8">
         <ul>
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-          <li>Four</li>
+          <li><a href="https://www.npmjs.com/package/node-crate" target="_blank">node-crate is SQL Crate driver using the _sql endpoint REST API</a></li>
+          <li><a href="https://www.npmjs.com/package/crate-connect" target="_blank">crate-connect is a simple Crate driver</a></li>
+          <li><a href="https://www.npmjs.com/package/cratejs" target="_blank">CrateJS is an extension to crate-connect that provides better methods for working with Crate</a></li>
         </ul>
       </div>
     </div>
   </div>
 </div>
 
-<div class="wrapper wrapper-border wrapper-border-bottom">
+<div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h2>Sub Heading</h2>
+        <h2>Learn</h2>
+        <p>
+          Find documentation about using Crate with a node.js application and view sample code to get you started.
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-4">
-        <img class="img-responsive thumbnail" src="{% media '/media/1503/cloud_everywhere.png' %}" />
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
       </div>
       <div class="col-sm-8">
         <ul>
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-          <li>Four</li>
+          <li><a href="https://www.npmjs.com/package/node-crate#readme" target="_blank">node-crate driver instructions</a></li>
+          <li><a href="https://www.npmjs.com/package/crate-connect#readme" target="_blank">crate-connect driver instructions</a></li>
+          <li><a href="https://www.npmjs.com/package/cratejs#readme" target="_blank">cratejs driver instructions</a></li>
         </ul>
       </div>
     </div>
   </div>
 </div>
 
-<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-primary">
+<div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h2 class="text-center">Get your cluster up and running in no time!</h2>
-        <p class="text-center">
-          <a href="{% url '/about/contact.html' %}" class="black-link">Any questions? Feel free to get in touch with us</a>
+        <h2>Contribute</h2>
+        <p>
+          Is there a problem or missing feature with our node.js adapters? Or have an opinion of feedback to discuss with our community? We would love your input and participation.
         </p>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-gray">
-  <div class="container">
     <div class="row">
-      <div class="col-lg-12">
-        <h2 class="text-center">Feature Headings</h2>
+      <div class="col-sm-4">
+        <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
       </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border wrapper-border-bottom">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-
-      <div class="col-lg-4 col-sm-6">
-        <p class="text-center">
-          <h2>Sub Heading</h2>
-          <img class="img-responsive thumbnail" src="{% media '/media/1503/icon_document.png' %}" />
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <div class="col-sm-8">
+        <ul>
+          <li><a href="https://github.com/megastef/node-crate" target="_blank">Get involved with improving the node-crate driver</a>.</li>
+          <li><a href="https://github.com/herenow/crate-connect" target="_blank">Get involved with improving the crate-connect driver</a>.</li>
+          <li><a href="https://github.com/herenow/cratejs" target="_blank">Get involved with improving the cratejs driver</a>.</li>
+          <li><a href="/bounties#nodejs">For specific issues we need help with, see our current node.js bounties</a></li>
+          <li><a href="/community/">Would rather help out in our community channels? Not a problem!</a></li>
+        </ul>
       </div>
     </div>
   </div>
