@@ -37,7 +37,7 @@ description: Crate is the distributed database for containerized environments su
           <table class="table">
             {% for post in posts|slice:":3" %}
             <tr>
-              <td><a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title|title }}</a></td>
+              <td><a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
             </tr>
             {% endfor %}
          </table>
@@ -47,7 +47,7 @@ description: Crate is the distributed database for containerized environments su
           <table class="table">
             {% for event in upcoming_events|slice:":3" %}
             <tr>
-              <td><a href="{{ event.url }}" title="{{ event.title|escape }}">{{ event.title|title }}</a></td>
+              <td><a href="{{ event.url }}" title="{{ event.title|escape }}">{{ event.title }}</a></td>
             </tr>
             {% endfor %}
          </table>

@@ -1,4 +1,5 @@
 title: Crate.IO Newsletter
+description:  Subscribe to our monthly newsletter announcing new features, events, and Crate community news.
 
 {% extends "base.html" %}
 
@@ -27,7 +28,7 @@ title: Crate.IO Newsletter
       <ul class="list-unstyled">
         {% for post in posts|slice:":3" %}
         <li>
-          <h4>{{ post.title|title }}<br /><small>{{ post.date|date }}</small></h4>
+          <h4>{{ post.title }}<br /><small>{{ post.date|date }}</small></h4>
           <p><a href="{{ post.url }}" title="Read">Read &raquo;</a></p>
         </li>
         {% endfor %}
