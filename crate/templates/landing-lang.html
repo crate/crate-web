@@ -129,7 +129,7 @@
 {% block extra_js %}
 <script type="text/javascript">
   $(function(){
-    ga('send', 'event', 'language_land', {{ name }}, location.pathname, 1);
+    ga('send', 'event', 'language_land', '{{ name }}', location.pathname, 1);
   });
 </script>
 {% endblock %}
