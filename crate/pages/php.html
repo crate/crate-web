@@ -10,43 +10,31 @@ testimonial_company: Level 7 Systems
 {% extends "landing-lang.html" %}
 
 {% block content %}
+
 <div class="wrapper wrapper-border">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12" id="start">
+    <div class="row" id="start">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_install.png' %}" />
+      </div>
+      <div class="col-lg-10">
         <h2>Install & Develop</h2>
         <p>Our PHP packages are hosted on <a href="https://packagist.org/" target="_blank">Packagist</a> for easy inclusion in your projects. There is a PDO driver and a DBAL Driver that depends on the PDO driver.</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <img class="img-responsive thumbnail max-160" src="{% media '/media/1503/icon_packagist.png' %}" />
-      </div>
-      <div class="col-sm-8">
         <ul>
           <li>Find the <a href="https://packagist.org/packages/crate/crate-pdo" target="_blank">PDO Driver on Packagist</a></li>
           <li>Find the <a href="https://packagist.org/packages/crate/crate-dbal" target="_blank">DBAL Driver on Packagist</a></li>
         </ul>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border">
-  <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_learn.png' %}" />
+      </div>
+      <div class="col-sm-10">
         <h2>Learn</h2>
         <p>
           Find documentation about using Crate with a PHP application and view sample code to get you started.
         </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <img class="img-responsive thumbnail max-160" src="{% media '/media/1503/icon_search.png' %}" />
-      </div>
-      <div class="col-sm-8">
         <ul>
           <li>Documentation for the <a href="https://github.com/crate/crate-pdo#readme" target="_blank">PDO adapter</a></li>
           <li>Documentation for the <a href="https://github.com/crate/crate-dbal#readme" target="_blank">DBAL adapter</a></li>
@@ -54,24 +42,15 @@ testimonial_company: Level 7 Systems
         </ul>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border">
-  <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_contribute.png' %}" />
+      </div>
+      <div class="col-sm-10">
         <h2>Contribute</h2>
         <p>
           Is there a problem or missing feature with our PHP adapters? Or have an opinion of feedback to discuss with our community? We would love your input and participation.
         </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <img class="img-responsive thumbnail max-160" src="{% media '/media/1503/cloud_open-source.png' %}" />
-      </div>
-      <div class="col-sm-8">
         <ul>
           <li>Get involved with improving the <a href="https://github.com/crate/crate-pdo/blob/master/DEVELOP.rst" target="_blank">PDO adapter</a></li>
           <li>Get involved with improving the <a href="https://github.com/crate/crate-dbal/blob/master/DEVELOP.rst" target="_blank">DBAL adapter</a></li>

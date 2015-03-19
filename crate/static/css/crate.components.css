@@ -128,9 +128,19 @@ footer.wrapper {
   background-color: #55d4f5;
 }
 
+img.max-120 {
+  max-height: 120px;
+  max-width: 120px;
+}
+
 img.max-160 {
   max-height: 160px;
   max-width: 160px;
+}
+
+img.max-200 {
+  max-height: 200px;
+  max-width: 200px;
 }
 
 img.max-320 {
@@ -188,7 +198,7 @@ img.max-320 {
 }
 
 .community-oos-projects {
-    min-height: 384px; 
+    min-height: 384px;
 }
 
 .contributor-type-box {
@@ -271,7 +281,7 @@ img.max-320 {
   color: #ffffff;
 }
 
-/** 
+/**
   * Content wells on front page
   */
 .dynamic-content-well h4 {
@@ -291,7 +301,7 @@ img.max-320 {
   margin-top: 10px;
 }
 
-/** 
+/**
   * Landing pages
   */
 .wrapper-hero.landing-page h1 {
@@ -304,8 +314,8 @@ img.max-320 {
   color: #FFFFFF;
 }
 
-.btn-black:visited, 
-.btn-black:hover, 
+.btn-black:visited,
+.btn-black:hover,
 .btn-black:active {
   background-color: #2e2e2e;
   color: #FFFFFF;
@@ -449,4 +459,3 @@ a.navbar-brand,
  */
 @media (min-width: 1200px) {
 }
-

@@ -10,72 +10,51 @@ testimonial_company: Clearvoice
 {% extends "landing-lang.html" %}
 
 {% block content %}
+
 <div class="wrapper wrapper-border">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12" id="start">
+    <div class="row" id="start">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_install.png' %}" />
+      </div>
+      <div class="col-lg-10">
         <h2>Install & Develop</h2>
         <p>Our Python projects are hosted on the <a href="https://pypi.python.org/pypi" target="_blank">Python Packaging Index</a>.</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <img class="img-responsive thumbnail max-160" src="{% media '/media/1503/icon_pypi.png' %}" />
-      </div>
-      <div class="col-sm-8">
         <ul>
           <li>Download the <a href="https://pypi.python.org/pypi/crate/">Python Client</a></li>
           <li>Download the <a href="https://pypi.python.org/pypi/crash/">Crate Shell (aka Crash)</a></li>
         </ul>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border">
-  <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_learn.png' %}" />
+      </div>
+      <div class="col-sm-10">
         <h2>Learn</h2>
         <p>
           Find documentation about using Crate with a Python application and view sample code to get you started.
         </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <img class="img-responsive thumbnail max-160" src="{% media '/media/1503/icon_search.png' %}" />
-      </div>
-      <div class="col-sm-8">
         <ul>
           <li>Documentation for the <a href="/docs/projects/crate-python/stable/">Python Client</a></li>
           <li>Documentation for the <a href="/docs/projects/crash/stable/">Crate Shell (aka Crash)</a></li>
         </ul>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border">
-  <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_contribute.png' %}" />
+      </div>
+      <div class="col-sm-10">
         <h2>Contribute</h2>
         <p>
           Is there a problem or missing feature with our Python client or shell? Or have an opinion of feedback to discuss with our community? We would love your input and participation.
         </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <img class="img-responsive thumbnail max-160" src="{% media '/media/1503/cloud_open-source.png' %}"/>
-      </div>
-      <div class="col-sm-8">
         <ul>
           <li>Get involved with improving the <a href="https://github.com/crate/crate-python/blob/master/DEVELOP.rst" target="_blank">Python client</a></li>
           <li>Get involved with improving the <a href="https://github.com/crate/crash/blob/master/DEVELOP.rst" target="_blank">crash cli</a></li>
           <li>For specific issues we need help with, see our <a href="https://www.bountysource.com/teams/crate/issues?tracker_ids=505660">current Python bounties</a></li>
-	  <li>Would rather help out in our community channels? <a href="{% url '/community.html' %}">Find out how</a></li>
+        <li>Would rather help out in our community channels? <a href="{% url '/community.html' %}">Find out how</a></li>
         </ul>
       </div>
     </div>

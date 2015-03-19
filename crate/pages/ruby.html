@@ -10,74 +10,53 @@ testimonial_company: Clearvoice -->
 {% extends "landing-lang.html" %}
 
 {% block content %}
+
 <div class="wrapper wrapper-border">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12" id="start">
+    <div class="row" id="start">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_install.png' %}" />
+      </div>
+      <div class="col-lg-10">
         <h2>Install & Develop</h2>
         <p>
           Our Ruby distributions are hosted on <a href="https://rubygems.org" target="_blank">RubyGems</a>. The initial Ruby driver and ActiveRecord adapter were written by <a href="https://twitter.com/corck" target="_blank">Christoph Klocker</a>.
         </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <img class="img-responsive thumbnail max-160" src="{% media '/media/1503/icon_rubygems.png' %}" />
-      </div>
-      <div class="col-sm-8">
         <ul>
           <li>Download the <a href="https://rubygems.org/gems/crate_ruby" target="_blank">Crate Ruby Interface</a></li>
           <li>Download the <a href="https://rubygems.org/gems/activerecord-crate-adapter" target="_blank">ActiveRecord adapter</a></li>
         </ul>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border">
-  <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_learn.png' %}" />
+      </div>
+      <div class="col-sm-10">
         <h2>Learn</h2>
         <p>
           Find documentation about using Crate with a Ruby application and view sample code to get you started.
         </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <img class="img-responsive thumbnail max-160" src="{% media '/media/1503/icon_search.png' %}" />
-      </div>
-      <div class="col-sm-8">
         <ul>
           <li>Documentation for the <a href="https://github.com/crate/crate_ruby#readme" target="_blank">Crate Ruby Interface</a></li>
           <li>Documentation for the <a href="https://github.com/crate/activerecord-crate-adapter#readme" target="_blank">Crate ActiveRecord adapter</a></li>
         </ul>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="wrapper wrapper-border">
-  <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_contribute.png' %}" />
+      </div>
+      <div class="col-sm-10">
         <h2>Contribute</h2>
         <p>
           Is there a problem or missing feature with our Ruby adapters? Or have an opinion of feedback to discuss with our community? We would love your input and participation.
         </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <img class="img-responsive thumbnail max-160" src="{% media '/media/1503/cloud_open-source.png' %}" />
-      </div>
-      <div class="col-sm-8">
         <ul>
           <li>Get involved with improving the <a href="https://github.com/crate/crate_ruby/blob/master/DEVELOP.md" target="_blank">Crate interface</a>.</li>
           <li>Get involved with improving the <a href="https://github.com/crate/activerecord-crate-adapter/blob/master/DEVELOP.md" target="_blank">ActiveRecord adapter</a>.</li>
           <li>For specific issues we need help with, see our <a href="https://www.bountysource.com/teams/crate/issues?tracker_ids=505666,918465">current Ruby bounties</a></li>
-	  <li>Would rather help out in our community channels? <a href="{% url '/community.html' %}">Find out how</a></li>
+    <li>Would rather help out in our community channels? <a href="{% url '/community.html' %}">Find out how</a></li>
         </ul>
       </div>
     </div>
