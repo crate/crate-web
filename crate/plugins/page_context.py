@@ -1,4 +1,5 @@
-#coding:utf-8
+# vim: set fileencodings=utf-8
+# -*- coding: utf-8 -*-
 
 def preBuildPage(page, context, data):
     """
@@ -9,7 +10,7 @@ def preBuildPage(page, context, data):
     # Any changes you make to context will be passed to the template renderer for this page.
 
     extra = {
-        "CURRENT_PAGE": page
+        "CURRENT_PAGE": page,
         # Add your own dynamic context elements here!
     }
 

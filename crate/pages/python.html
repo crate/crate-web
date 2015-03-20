@@ -1,76 +1,64 @@
 title: Crate for Python Developers
-description: Connect your Python application to Crate to leverage the speed of search and elegance of SQL: a 100% open source data store for your database.
+description: Connect your Python application to Crate to leverage the speed of search, the elegance of SQL and make use of SQLAlchemy.
+name: Python
+slug: python
+image: /media/1503/lang-python-notext.png
+testimonial_quote: The fact that Crate Data uses SQL lowers the barriers to entry when using distributed search. And on top of that with Crate you get MongoDB and Elasticsearch in one scalable package.
+testimonial_name: Jeff Nappi, Director of Engineering
+testimonial_company: Clearvoice
 
-{% extends "base.html" %}
+{% extends "landing-lang.html" %}
 
-{% block body %}
+{% block content %}
 
-<div class="jumbotron">
+<div class="wrapper wrapper-border">
   <div class="container">
+    <div class="row" id="start">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_install.png' %}" />
+      </div>
+      <div class="col-lg-10">
+        <h2>Install & Develop</h2>
+        <p>Our Python projects are hosted on the <a href="https://pypi.python.org/pypi" target="_blank">Python Packaging Index</a>.</p>
+        <ul>
+          <li>Download the <a href="https://pypi.python.org/pypi/crate/">Python Client</a></li>
+          <li>Download the <a href="https://pypi.python.org/pypi/crash/">Crate Shell (aka Crash)</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="row">
-      <div class="col-sm-12">
-        <h1>Crate <small>for Python Developers</small></h1>
-        <p>Connect your Python application to leverage speed of search and elegance of SQL: a 100% open source data store for your backend.</p>
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_learn.png' %}" />
+      </div>
+      <div class="col-sm-10">
+        <h2>Learn</h2>
+        <p>
+          Find documentation about using Crate with a Python application and view sample code to get you started.
+        </p>
+        <ul>
+          <li>Documentation for the <a href="/docs/projects/crate-python/stable/">Python Client</a></li>
+          <li>Documentation for the <a href="/docs/projects/crash/stable/">Crate Shell (aka Crash)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_contribute.png' %}" />
+      </div>
+      <div class="col-sm-10">
+        <h2>Contribute</h2>
+        <p>
+          Is there a problem or missing feature with our Python client or shell? Or have an opinion of feedback to discuss with our community? We would love your input and participation.
+        </p>
+        <ul>
+          <li>Get involved with improving the <a href="https://github.com/crate/crate-python/blob/master/DEVELOP.rst" target="_blank">Python client</a></li>
+          <li>Get involved with improving the <a href="https://github.com/crate/crash/blob/master/DEVELOP.rst" target="_blank">crash cli</a></li>
+          <li>For specific issues we need help with, see our <a href="https://www.bountysource.com/teams/crate/issues?tracker_ids=505660">current Python bounties</a></li>
+        <li>Would rather help out in our community channels? <a href="{% url '/community.html' %}">Find out how</a></li>
+        </ul>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container">
-
-  <div class="row feature">
-    <div class="col-sm-12">
-      <p class="text-center"><img src="{% static '/static/images/lang-python.png' %}" /></p>
-      <p><b>Crate.IO has built a new breed of database to serve today’s mammoth data needs. Based on the familiar SQL syntax, Crate combines high availability, resiliency, and scalability in a distributed design that allows you to query mountains of data in realtime, not batches. We solve your data scaling problems and make administration a breeze. Easy to scale, simple to use.</b></p>
-      <p class="text-center"><a class="btn btn-success btn-lg" href="{% url '/docs.html' %}">Download Crate</a></p>
-    </div>
-  </div>
-
-  <div class="row feature feature-dark">
-    <div class="col-sm-4">
-      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-1.png' %}" />
-      <h3>Powerful</h3>
-      <p>Crate is a powerful, complete backend solution for tabular data, semi-structured records, and binary objects (BLOBs).</p>
-    </div>
-    <div class="col-sm-4">
-      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-2.png' %}" />
-      <h3>Sub-second, super-fast.</h3>
-      <p>Crate is highly available and offers massively parallel access in real-time, enabling sub-second responses on billions of records.</p>
-    </div>
-    <div class="col-sm-4">
-      <img class="img-responsive thumbnail" src="{% static '/static/images/adminui-small-3.png' %}" />
-      <h3>Easy to scale. Simple to use.</h3>
-      <p>Adding nodes on commodity hardware or in the cloud is as simple as a single command in your terminal.</p>
-    </div>
-  </div>
-
-  <div class="row feature">
-    <div class="col-sm-12">
-      <p class="lead text-center">“The fact that Crate Data uses SQL lowers the barriers to entry when using distributed search. And on top of that with Crate you get MongoDB and Elasticsearch in one scalable package”</p>
-      <p class="text-center">
-        <i class="fa fa-large fa-user"></i>
-        Jeff Nappi, Director of Engineering<br />ClearVoice
-      </p>
-    </div>
-  </div>
-
-  <div class="row feature feature-dark">
-    <div class="col-sm-12">
-      <p>Crate data works seamlessly with Python. Crate Data is a shared-nothing,
-        fully searchable, document-oriented cluster data store. It is also 100%
-        open source. We built it so developers with a data intensive back-end
-        won’t need to “glue” several technologies together to store documents,
-        blobs and support real-time search. We also wanted to help developers
-        avoid the manual work associated with tuning, sharding, replication and
-        other operations required to keep a large de-normalized data store in
-        good shape. We wanted a simple, failure-tolerant and massively scalable
-        data store anyone can use, on a single machine, many machines or on the
-        cloud.</p>
-      <p>Get it right here:</p>
-      <p class="text-center"><a class="btn btn-default" href="{% url '/docs.html' %}">Download Crate</a></p>
-    </div>
-  </div>
-
-</div>
 {% endblock %}
-

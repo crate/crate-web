@@ -1,0 +1,68 @@
+title: Using Crate to Power Your Java Applications
+description: Crate is written in Java for maximum performance. No need to say that therefore it is the best fit for your large-scale Java applications.
+name: Java
+slug: java
+image: /media/1503/lang-java-large.png
+<!-- testimonial_quote: The fact that Crate Data uses SQL lowers the barriers to entry when using distributed search. And on top of that with Crate you get MongoDB and Elasticsearch in one scalable package.
+testimonial_name: Jeff Nappi, Director of Engineering
+testimonial_company: Clearvoice -->
+
+{% extends "landing-lang.html" %}
+
+{% block content %}
+
+<div class="wrapper wrapper-border">
+  <div class="container">
+    <div class="row" id="start">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_install.png' %}" />
+      </div>
+      <div class="col-lg-10">
+        <h2>Install & Develop</h2>
+        <p>Our Java distributions are hosted on <a href="https://bintray.com/crate/crate" target="_blank">Bintray</a> and available through JCenter. The JDBC driver requires Crate 0.38.0 or newer.</p>
+        <ul >
+          <li>Download <a href="https://bintray.com/crate/crate/crate-client/view">Java Client</a></li>
+          <li>Download <a href="https://bintray.com/crate/crate/crate-jdbc/view">JDBC Driver</a></li>
+          <li>Download <a href="https://github.com/KPTechnologyLab/spring-data-crate" target="_blank">Spring Data Driver</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_learn.png' %}" />
+      </div>
+      <div class="col-sm-10">
+        <h2>Learn</h2>
+        <p class="lead">Get started with our tutorial on using Crate with a Java application and take a look at some sample code.</p>
+        <ul >
+          <li>Documentation for the <a href="/docs/projects/crate-java/stable/">Java Client</a></li>
+          <li>Documentation for the <a href="/docs/projects/crate-jdbc/stable/">JDBC Driver</a></li>
+          <li>Documentation for the <a href="https://github.com/KPTechnologyLab/spring-data-crate#readme" target="_blank">Spring Data Driver</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_contribute.png' %}" />
+      </div>
+      <div class="col-sm-10">
+        <h2>Contribute</h2>
+        <p>
+          Is there a problem or missing feature with our Java client or driver? Or have an opinion of feedback to discuss with our community? We would love your input and participation.
+        </p>
+        <ul >
+          <li>Get involved with improving the <a href="https://github.com/crate/crate/blob/master/DEVELOP.rst" target="_blank">Java client</a></li>
+          <li>Get involved with improving the <a href="https://github.com/crate/crate-jdbc/blob/master/DEVELOP.rst" target="_blank">JDBC driver</a></li>
+          <li>Get involved with improving the <a href="https://github.com/KPTechnologyLab/spring-data-crate" target="_blank">Spring Data Driver</a>
+          </li>
+          <li>For specific issues we need help with, see our <a href="https://www.bountysource.com/teams/crate/issues?tracker_ids=505659,2398677">current Java bounties</a></li>
+        <li>Would rather help out in our community channels? <a href="{% url '/community.html' %}">Find out how</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

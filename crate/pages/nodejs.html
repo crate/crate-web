@@ -1,0 +1,66 @@
+title: Power Node.js Applications with Crate
+description: Connect your Node.js application to Crate with several drivers available to easily leverage speed of search and the elegance of SQL.
+name: Node.js
+slug: nodejs
+image: /media/1503/lang-nodejs-large.png
+<!-- testimonial_quote: The fact that Crate Data uses SQL lowers the barriers to entry when using distributed search. And on top of that with Crate you get MongoDB and Elasticsearch in one scalable package.
+testimonial_name: Jeff Nappi, Director of Engineering
+testimonial_company: Clearvoice -->
+
+{% extends "landing-lang.html" %}
+
+{% block content %}
+
+<div class="wrapper wrapper-border">
+  <div class="container">
+    <div class="row" id="start">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_install.png' %}" />
+      </div>
+      <div class="col-lg-10">
+        <h2>Install & Develop</h2>
+        <p>Our Node.js packages are hosted on <a href="https://www.npmjs.com/" target="_blank">npm</a> for easy inclusion in your projects. There are several drivers available, all written by community contributors.</p>
+        <ul>
+          <li>Download <a href="https://www.npmjs.com/package/node-crate" target="_blank">node-crate</a>, a SQL Crate driver using the _sql endpoint REST API</li>
+          <li>Download <a href="https://www.npmjs.com/package/crate-connect" target="_blank">crate-connect</a>, a simple Crate driver</li>
+          <li>Download <a href="https://www.npmjs.com/package/cratejs" target="_blank">CrateJS</a>, an extension to crate-connect that provides better methods for working with Crate</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_learn.png' %}" />
+      </div>
+      <div class="col-sm-10">
+        <h2>Learn</h2>
+        <p>
+          Find documentation about using Crate with a node.js application and view sample code to get you started.
+        </p>
+        <ul>
+          <li>Documentation for the <a href="https://www.npmjs.com/package/node-crate#readme" target="_blank">node-crate driver</a></li>
+          <li>Documentation for the <a href="https://www.npmjs.com/package/crate-connect#readme" target="_blank">crate-connect driver</a></li>
+          <li>Documentation for the <a href="https://www.npmjs.com/package/cratejs#readme" target="_blank">cratejs driver</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <img class="img-responsive thumbnail max-120" src="{% media '/media/1503/language_contribute.png' %}" />
+      </div>
+      <div class="col-sm-10">
+        <h2>Contribute</h2>
+        <p>
+          Is there a problem or missing feature with our node.js adapters? Or have an opinion of feedback to discuss with our community? We would love your input and participation.
+        </p>
+        <ul>
+          <li>Get involved with improving the <a href="https://github.com/megastef/node-crate" target="_blank">node-crate driver</a></li>
+          <li>Get involved with improving the <a href="https://github.com/herenow/crate-connect" target="_blank">crate-connect driver</a></li>
+          <li>Get involved with improving the <a href="https://github.com/herenow/cratejs" target="_blank">cratejs driver</a></li>
+	  <li>Would rather help out in our community channels? <a href="{% url '/community.html' %}">Find out how</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
