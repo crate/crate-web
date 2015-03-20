@@ -88,8 +88,8 @@
         <p>Read more on our <a href="{% url '/blog.html' %}">blog</a>!</p>
       </div>
       <div class="col-sm-6 col-xs-6">
+        {% if events|filter_by_tag:slug|length %}
         <div class="dynamic-content-well">
-          {% if events|filter_by_tag:slug|length %}
           <h3>Events</h3>
           <table class="table">
             {% for post in events|filter_by_tag:slug|slice:":5" %}
@@ -98,9 +98,21 @@
             </tr>
             {% endfor %}
           </table>
-          {% endif %}
         </div>
         <p>Meet us at other <a href="{% url '/events.html' %}">upcoming events</a>!</p>
+        {% else %}
+        <div class="dynamic-content-well">
+          <h3>Events</h3>
+          <table class="table">
+            {% for event in upcoming_events|slice:":3" %}
+            <tr>
+              <td><i class="fa fa-calendar"></i> <a href="{{ event.url }}" title="{{ event.title|escape }}">{{ event.title|title }}</a></td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <p>Meet us at other <a href="{% url '/events.html' %}">upcoming events</a>!</p>
+        {% endif %}
       </div>
     </div>
   </div>
