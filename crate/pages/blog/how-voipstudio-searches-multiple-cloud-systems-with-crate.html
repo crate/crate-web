@@ -1,0 +1,46 @@
+title: How VoIPStudio Searches Multiple Cloud Systems with Crate.IO
+link: https://Crate.IO.io/blog/how-voipstudio-searches-multiple-cloud-systems-with-Crate.IO/
+author: Chris Ward
+description:
+created: 2015/03/26 11:00:00
+post_name: how-voipstudio-searches-multiple-cloud-systems-with-Crate.IO
+status: publish
+post_type: post
+tags: voip,pbx,php
+category: news, case-study
+
+![VoIPStudio Logo](https://cdn.crate.io/media/1503/voipstudio.png)
+
+## Case Study at-a-glance
+
+**Company**: Level 7 Systems
+**Industry**: Cloud Telecommunication / Hosted PBX
+**Location**: London, UK
+**Use Case**: Searching records in multiple cloud systems
+
+## Highlights:
+
+* Scalable and highly-efficient
+* Extreme fast returns of search result
+* Can be implemented on various platforms (PHP, Python, Java, Ruby, etc.)
+* Powerful fulltext search support
+
+The VoIPstudio Telecom system is a unique cloud system running on a large amount of servers in a wide variety of locations. Each data center has two basic roles: storing data in real-time and backup for other locations in the cloud system.
+
+This results in a lot of data that has to be processed around the globe. Retrieving data in this environment is complex and fetching results can be time consuming.
+
+>"How complex is our implementation? Imagine over one hundred servers in several data centers on both sides of the Atlantic. Implementation was smooth and the whole cloud system is now configured on secured layers, including Crate.IO.",
+Says Martin Ozarek of Level7Systems
+
+VoIPstudio was looking for new a solution to primarily store CDRs (Call Detail Records). MySQL had been used successfully for several years but due to increasingly poor performance it was abandoned.
+
+>"The first problem we had to solve was importing lots of data. Our data is stored in the cloud using many locations and machines. We had to stay online for customers and import data into Crate.IO at the same time. As we are providing services for clients all over the world we couldn’t take a break for maintenance. As a telephone provider, we have to support our customers with the best telephone solution 24/7. The number of records was already over 100,000,000 and growing every minute. The whole process took almost one week."
+
+>"After a successful and problem free implementation it became clear to us that Crate.IO is the solution we were looking for. We gained better performance and new possibilities for our customers. We are going to improve and extend our cloud system using Crate.IO."
+
+For one table with about 25-30 million records, MySQL needed 10 to 15 seconds to execute the query. Now with Crate.IO it takes less than 500 milliseconds (that's impressive performance).
+
+## About VoIPstudio
+VoIPstudio is a cloud-based business phone system, created especially for organizations that require professional communication features without owning and managing an on-site telephone system. There is no need to maintain expensive on-site PBX equipment as VoIPstudio will maintain and upgrade the system so that you can focus on your business.
+
+With a VoIPstudio telephone system for your business, Internet or VoIP calls are free. It will enable co-workers to talk to each other without any extra costs. It does not matter if they are in the next room, in a different city or on the other side of the world - they are just one extension away!
