@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block navbar2 %}
+<div class="wrapper wrapper-plain">
+  <nav class="breadcrumb-container">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="active"><a href="{% url '/casestudies.html' %}">Case Studies</a></li>
+      </ol>
+    </div>
+  </nav>
+</div>
+{% endblock %}
+
+{% block header %}
+<div class="wrapper wrapper-border wrapper-blogpost-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-header">
+          <h1>{{ title }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+
+{% block top_content %}
+<div class="wrapper wrapper-border">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <div id="post-content">
+          <p><img src="{% media image %}" /></p>
+          {% block content %}
+          <!-- CONTENT -->
+          {% endblock %}
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="">
+          <h3>Case Study at a Glance</h3>
+          <strong>Company</strong>: {{casestudy_company}}<br />
+          <strong>Industry</strong>: {{casestudy_industry}}<br />
+          <strong>Location</strong>: {{casestudy_location}}<br />
+          <strong>Use Case</strong>: {{casestudy_usecase}}
+
+          <h3>Highlights</h3>
+          <ul>
+            <li>{{highlight_1}}</li>
+            <li>{{highlight_2}}</li>
+            <li>{{highlight_3}}</li>
+            <li>{{highlight_4}}</li>
+          </ul>
+        </div>
+
+        <hr />
+
+        <div class="socialmedia">
+          <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-dnt="true" data-related="CrateIO" data-size="large">Tweet</a>
+          <a href="https://twitter.com/CrateIO" class="twitter-follow-button" data-show-count="false" data-dnt="true" data-size="large">Follow @CrateIO</a>
+        </div>
+        <div class="socialmedia">
+          <div class="fb-share-button" data-href="https://www.facebook.com/cratedata" data-layout="button"></div>
+          <div class="fb-follow" data-href="https://www.facebook.com/cratedata" data-colorscheme="light" data-layout="button" data-show-faces="false"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+<div class="wrapper wrapper-bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>Crate is easy to install and integrate</h2>
+        <p><a class="btn btn-fp-white" href="{% url '/docs.html' %}">Start using Crate with your application now!</a></p>
+        <p>Any questions? Feel free to <a href="{% url '/about/contact.html' %}">get in touch with us</a>!</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+$(function(){
+  ga('send', 'event', 'case_study', '{{ name }}', location.pathname, 1);
+});
+</script>
+{% endblock %}
