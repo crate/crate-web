@@ -1,5 +1,5 @@
 title: How VoIPstudio Searches Multiple Cloud Systems with Crate.IO
-link: https://Crate.IO.io/blog/how-voipstudio-searches-multiple-cloud-systems-with-crate/
+link: https://crate.io/blog/how-voipstudio-searches-multiple-cloud-systems-with-crate/
 author: Chris Ward
 description: Learn how VoIPstudio migrated their complex setup to Crate.IO and experienced a performance boost
 created: 2015/03/26 11:00:00
@@ -16,13 +16,13 @@ category: news, case-study
 **Company**: [Level 7 Systems](http://level7systems.co.uk)  
 **Industry**: Cloud Telecommunication / Hosted PBX  
 **Location**: London, UK  
-**Use Case**: Searching records in multiple cloud systems
+**Use Case**: Storing and searching customer records across multiple cloud systems
 
 ## Highlights:
 
 * Scalable and highly-efficient
 * Extreme fast returns of search result
-* Can be implemented on various platforms (PHP, Python, Java, Ruby, etc.)
+* Can be implemented on various platforms (Level 7 Systems just use PHP)
 * Powerful fulltext search support
 
 The VoIPstudio Telecom system is a unique cloud system running on a large amount of servers in a wide variety of locations. Each data center has two basic roles: storing data in real-time and backup for other locations in the system.
@@ -40,6 +40,13 @@ The first problem Level 7 Systems had to solve was importing lots of data from m
 Previously one table with about 25-30 million records using MySQL needed 10 to 15 seconds to execute the query. Now with Crate.IO it takes less than 500 milliseconds and that performance impressed Level 7 Systems.
 
 >"After a successful and problem free implementation it became clear to us that Crate.IO was the solution we were looking for. We gained better performance and new possibilities for our customers. We are going to improve and extend our cloud system using Crate.IO."
+
+Currently VoIPstudio doesn't use the [official Crate PHP driver](/docs/clients/) as it was missing some features required. These were:
+
+* Driver level Crate server failover
+* Asynchronous cross data center replication (implemented with [Gearman](http://gearman.org))
+
+To accomplish this functionality, Level 7 Systems implemented their own custom Crate PHP driver.
 
 ## About VoIPstudio
 [VoIPstudio](http://www.voipstudio.com/) is a cloud-based business phone system, created especially for organizations that require professional communication features without owning and managing an on-site telephone system. There is no need to maintain expensive on-site PBX equipment as VoIPstudio will maintain and upgrade the system so that you can focus on your business.
