@@ -33,12 +33,10 @@ Previously one table with about 25-30 million records using MySQL needed 10 to 1
 
 >"After a successful and problem free implementation it became clear to us that Crate was the solution we were looking for. We gained better performance and new possibilities for our customers. We are going to improve and extend our cloud system using Crate."
 
-Currently VoIPstudio doesn't use the [official Crate PHP driver](/docs/clients/) as it was missing some features required. These were:
+VoIPstudio added some extra features they required to the [official Crate PHP driver](/docs/clients/), these were:
 
 * Driver level Crate server failover
 * Asynchronous cross data center replication (implemented with [Gearman](http://gearman.org))
-
-To accomplish this functionality, Level 7 Systems implemented their own custom Crate PHP driver.
 
 ## About VoIPstudio
 [VoIPstudio](http://www.voipstudio.com/) is a cloud-based business phone system, created especially for organizations that require professional communication features without owning and managing an on-site telephone system. There is no need to maintain expensive on-site PBX equipment as VoIPstudio will maintain and upgrade the system so that you can focus on your business.
