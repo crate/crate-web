@@ -1,29 +1,23 @@
 title: How VoIPstudio Searches Multiple Cloud Systems with Crate.IO
-link: https://crate.io/blog/how-voipstudio-searches-multiple-cloud-systems-with-crate/
-author: Chris Ward
 description: Learn how VoIPstudio migrated their complex setup to Crate.IO and experienced a performance boost
-created: 2015/03/26 11:00:00
+created: 2015-03-27
 post_name: how-voipstudio-searches-multiple-cloud-systems-with-crate
-status: publish
+image: /media/1503/voipstudio.png
+author: Chris Ward
+casestudy_name: Kamil Adryjanek
+casestudy_company: Level 7 Systems
+casestudy_link: http://level7systems.co.uk
+casestudy_industry: Cloud Telecommunication / Hosted PBX
+casestudy_location: London, UK
+casestudy_usecase: Storing and searching customer records across multiple cloud systems
+highlight_1: Scalable and highly-efficient
+highlight_2: Extreme fast returns of search result
+highlight_3: Native support for many different platforms including PHP
+highlight_4: Powerful fulltext search support
 post_type: post
 tags: voip,pbx,php
-category: news, case-study
-
-![VoIPstudio Logo](https://cdn.crate.io/media/1503/voipstudio.png)
-
-## Case Study at-a-glance
-
-**Company**: [Level 7 Systems](http://level7systems.co.uk)
-**Industry**: Cloud Telecommunication / Hosted PBX
-**Location**: London, UK
-**Use Case**: Storing and searching customer records across multiple cloud systems
-
-## Highlights:
-
-* Scalable and highly-efficient
-* Extreme fast returns of search result
-* Can be implemented on various platforms (Level 7 Systems just use PHP)
-* Powerful fulltext search support
+template: case-study.html
+category: casestudy
 
 The VoIPstudio Telecom system is a unique cloud system running on a large amount of servers in a wide variety of locations. Each data center has two basic roles: storing data in real-time and backup for other locations in the system.
 
@@ -41,7 +35,7 @@ Previously one table with about 25-30 million records using MySQL needed 10 to 1
 
 >"After a successful and problem free implementation it became clear to us that Crate was the solution we were looking for. We gained better performance and new possibilities for our customers. We are going to improve and extend our cloud system using Crate."
 
-VoIPstudio added some extra features they required to the [official Crate PHP driver](/docs/clients/), these were:
+Because Crate is an open source project Voipstudio was able to fork the [official Crate PHP driver](/docs/clients/) and modify it to fit their exact needs by adding:
 
 * Driver level Crate server failover
 * Asynchronous cross data center replication (implemented with [Gearman](http://gearman.org))
