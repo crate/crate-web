@@ -9,7 +9,7 @@ description: Crate is the distributed database for containerized environments su
 <div class="wrapper wrapper-hero" id="wrapper-hero-frontpage">
   <div class="container">
     <h1>Distributed SQL Database for the age of Docker</h1>
-    <p class="lead">For containers and microservices on:<br />Docker, Mesosphere, CoreOS, Amazon, Azure, Google, Softlayer</p>
+    <p class="lead">Scalable database with auto-sharding, replication, aggregation and realtime map-reduce</p>
     <p><a class="btn btn-fp-white" href="{% url '/overview.html' %}">What is Crate?</a><a class="btn btn-fp-black" href="{% url '/try.html' %}">Try Crate now!</a></p>
   </div>
 </div>
@@ -21,14 +21,15 @@ description: Crate is the distributed database for containerized environments su
     <div class="row">
       <div class="col-sm-4">
         <p><a href="{% url '/overview.html' %}"><img class="img-responsive thumbnail" src="{% media '/media/1502/sql.png' %}" /></a></p>
-        <h2>Distributed SQL Queries</h2>
-        <p class="">One to rule them all: sub-second queries on tabular data and semi-structured records. Including support for binary objects (BLOBs).</p>
+        <h2><br />Distributed SQL Queries</h2>
+        <p class="">Use SQL for real time distributed queries across a cluster based on Lucene / Elasticsearch Ecosystem with support for binary objects (BLOBs).</p>
         <p>Read more about <a href="{% url '/overview.html' %}">Crate's features</a>.</p>
       </div>
       <div class="col-sm-4">
         <p><a href="{% url '/docs/cloud.html' %}"><img class="img-responsive thumbnail" src="{% media '/media/1502/shared_nothing.png' %}" /></a></p>
-        <h2>Shared Nothing Architecture</h2>
-        <p class="">Adding nodes on commodity hardware or in the cloud is as simple as a single command in your terminal.</p>
+        <h2>Realtime aggregations<br />and map-recduce</h2>
+        <p class="">Query and store massive amounts of structured and unstructured data in a scalable database with automatic sharding and replication.</p>
+        <p>Migrate with <a href="https://crate.io/docs/stable/best_practice/index.html">best practice tips</a></p>
         <p>Learn how to <a href="{% url '/docs/cloud.html' %}">install Crate in the cloud</a>.</p>
       </div>
       <div class="col-sm-4">
@@ -61,22 +62,51 @@ description: Crate is the distributed database for containerized environments su
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
+        <h2>Crate vs MySQL</h2>
+        <div class="col-lg-12">
+          <p>Crate makes scaling a breeze, while still using Standard SQL. It offers auto-sharding and replication, super fast multi index queries, distributed aggregations & sort, lightning fast fulltext search and super simple cluster management. Cut the number of nodes in half or less, while gaining 10-20x in performance. Denormalize your data, because JOINs will be released in June 2015.</p>
+          <br />
+        </div>
+        <h2>Crate vs NoSQL solutions</h2>
+        <div class="col-lg-6">
+          <p class="text-center"><strong>Crate vs Cassandra</strong></p>
+          <p>Cassandra is great for writes but not so much for reads and requires more constraining schema definitions. Crate offers outstanding fulltext search, SQL interface, dynamic cluster resizing, auto-rebalancing, powerful concurrent reads and writes and is much more flexible as you grow by allowing aggregates and sorting fields to be changed at anytime. </p>
+        </div>
+        <div class="col-lg-6">
+          <p class="text-center"><strong>Crate vs MongoDB</strong></p>
+          <p>No need for specialists to run and scale your cluster. A Crate cluster is extremely simply to scale and manage, with faster aggregations, combining schemas with JSON (unstructured) in one DB, powerful fulltext search and BLOB support, query with SQL standard interface and a permissive license.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
         <h2 class="">Crate rocks ...</h2>
         <ul class="list-group">
           <li class="list-group-item">
-	  ... as <b>resilient</b>, <b>distributed</b> persistence layer for <b>containerized applications</b>.
+            ... as resilient, distributed SQL database for containers and microservices with automatic sharding and replication.
           </li>
           <li class="list-group-item">
-	  ... as an operational datastore for web applications that require powerful <b>fulltext search</b>.
+            ... as a "post-hadoop/next-gen Vertica" solution with distributed distinct aggregations and realtime map-reduce via standard SQL queries built on top of Lucene / Elasticsearch eco-system.
           </li>
           <li class="list-group-item">
-	  ... if you process large amounts of <b>time-series data</b>, e.g. for <b>IoT applications</b> with read/write workloads.
+            ... to drastically increase performance and scalability of your MySQL or MongoDB cluster while supporting structured and unstructured data
           </li>
           <li class="list-group-item">
-	  ... if you process <b>semistructured/dynamic data</b>, including geospatial data. Crate supports binary objects as well.
+            ... handle thousands of simultaneous read and writes, and reduce operations costs.
           </li>
           <li class="list-group-item">
-	  ... <b>realtime</b> map-reduce style queries on a modern, post-hadoop architecture.
+            ... if you process semistructured/dynamic data, including geospatial data. Crate supports binary objects as well.
+          </li>
+          <li class="list-group-item">
+            ... as an horizontally scaling database for applications that require powerful fulltext search and flexible schemas.
+          </li>
+          <li class="list-group-item">
+            ... as flexible deployment solution either local (for dev), on bare metal, cloud VMs, containers
           </li>
         </ul>
       </div>
