@@ -50,18 +50,13 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
-            name="Tom Kapanka",
+            name="Spanky",
             title="Developer Advocate",
             email="",
             ),
         dict(
             name="Tyler Randles",
-            title="Developer Advocate",
-            email="",
-            ),
-        dict(
-            name="Kenan Salihbegović",
-            title="Developer Advocate",
+            title="Developer Evangelist",
             email="",
             ),
         dict(
