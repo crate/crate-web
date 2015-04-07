@@ -51,7 +51,7 @@ def preBuildPage(site, page, context, data):
             ),
         dict(
             name="Spanky",
-            title="Developer Advocate",
+            title="aka Tom Kapanka Developer Advocate",
             email="",
             ),
         dict(

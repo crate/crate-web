@@ -229,6 +229,7 @@ img.max-320 {
 
 .team .caption {
   margin-bottom: 32px;
+  min-height: 105px;
 }
 
 .caption h3,
