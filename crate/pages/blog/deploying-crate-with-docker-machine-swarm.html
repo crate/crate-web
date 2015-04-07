@@ -44,7 +44,7 @@ The script `startup-master.sh` will install Docker, docker-machine, and all nece
 sudo su -
 yum clean expire-cache
 yum update -y
-yum install -y wget docker bridge-utils 
+yum install -y wget docker bridge-utils
 curl -Lo /usr/bin/docker-machine https://github.com/docker/machine/releases/download/v0.1.0-rc5/docker-machine_linux-amd64
 chmod +x /usr/bin/docker-machine
 ```
@@ -207,7 +207,7 @@ Ok, the Swarm cluster is ready to be used.
 Now let's start a Crate instance in this cluster. You can simply do that with the regular `docker run` command that we all know and love.
 
 ```console
-$ docker run -d -p 4200:4200 crate:latest crate -Des.cluser.name=hello-swarm
+$ docker run -d -p 4200:4200 crate:latest crate -Des.cluster.name=hello-swarm
 3cc561fc48a4f4bc983410b15bc1e9ffd13143c4bc482a2b2e064d3dfbfc297f
 
 $ docker ps
@@ -326,4 +326,3 @@ I am really looking forward to seeing features that allows you to you know on wh
 
 - [Docker Machine](https://github.com/docker/machine)
 - [Docker Swarm](https://github.com/docker/swarm/)
-
