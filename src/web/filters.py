@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 # vim: set fileencodings=utf-8
+# -*- coding: utf-8 -*-
 
 __docformat__ = "reStructuredText"
 
@@ -17,7 +17,7 @@ class DateTimeJSONEncoder(json.JSONEncoder):
 
     def default(self, obj):
         if isinstance(obj, datetime.datetime):
-            return obj.strftime('%Y-%m-%d %H:%M')
+            return obj.strftime('%Y-%m-%dT%H:%M:%S')
         return super(DateTimeJSONEncoder, self).default(obj)
 
 

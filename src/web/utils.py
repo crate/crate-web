@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 # vim: set fileencodings=utf-8
+# -*- coding: utf-8 -*-
 
 __docformat__ = "reStructuredText"
 
