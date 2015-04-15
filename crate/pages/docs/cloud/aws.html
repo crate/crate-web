@@ -63,13 +63,13 @@ HOSTS="ec2-54-99-254-104.us-west-1.compute.amazonaws.com:4300,ec2-54-208-251-24.
       <pre><code>$ docker run -d -p 4200:4200 -p 4300:4300 \
   --volume /data:/data \
   --env CRATE_HEAP_SIZE=8g \
-    crate crate \
+    crate crate:latest \
       -Des.path.data="/data/data1,/data/data2" \
       -Des.multicast.enabled=false \
       -Des.network.publish_host=$PRIVATE_IP \
       -Des.discovery.zen.ping.unicast.hosts=$HOSTS</code></pre>
 
-      <p>Run this one each instance, and you your cluster should be up and running.</p>
+      <p>Run this on each instance, and you your cluster should be up and running.</p>
 
       <h2>Verify the cluster</h2>
       <p>To verify the cluster is running properly and that all nodes have found each other, run the following curl command:</p>
