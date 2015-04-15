@@ -63,7 +63,7 @@ HOSTS="ec2-54-99-254-104.us-west-1.compute.amazonaws.com:4300,ec2-54-208-251-24.
       <pre><code>$ docker run -d -p 4200:4200 -p 4300:4300 \
   --volume /data:/data \
   --env CRATE_HEAP_SIZE=8g \
-    crate \
+    crate crate \
       -Des.path.data="/data/data1,/data/data2" \
       -Des.multicast.enabled=false \
       -Des.network.publish_host=$PRIVATE_IP \
@@ -106,4 +106,3 @@ HOSTS="ec2-54-99-254-104.us-west-1.compute.amazonaws.com:4300,ec2-54-208-251-24.
   </div>
 
 {% endblock %}
-
