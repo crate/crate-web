@@ -11,7 +11,7 @@ og_image: https://cdn.crate.io./media/1503/crate-logo-165.png
   <div class="container">
     <h1>Docker Machine:<br />Simplify Provisioning</h1>
     <p class="lead">Use Docker Machine to create a repeatable process for both local development and production deployment to the cloud</p>
-    <!-- <a href="{% url '/docs/docker.html' %}" class="btn btn-fp-white">Get your cluster up<br>and running now!</a> -->
+    <a href="{% url '/blog/deploying-crate-with-docker-machine-swarm.html' %}" class="btn btn-fp-white">Try Docker Machine<br>with Swarm!</a>
   </div>
 </div>
 {% endblock %}
@@ -41,8 +41,8 @@ og_image: https://cdn.crate.io./media/1503/crate-logo-165.png
       <div role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active"><a href="#aws" aria-controls="aws" role="tab" data-toggle="tab">Amazon Web Services</a></li>
-          <li role="presentation" class=""><a href="#azure" aria-controls="azure" role="tab" data-toggle="tab">Microsoft Azure</a></li>
           <li role="presentation" class=""><a href="#gce" aria-controls="gce" role="tab" data-toggle="tab">Google Compute Engine</a></li>
+          <li role="presentation" class=""><a href="#azure" aria-controls="azure" role="tab" data-toggle="tab">Microsoft Azure</a></li>
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="aws">
@@ -50,8 +50,8 @@ og_image: https://cdn.crate.io./media/1503/crate-logo-165.png
             <h4>Setup</h4>
             <p>To use Docker Machine with Amazon Web Services you will need four things, an Access Key ID, Secret Access Key, a VPC ID and to install Docker Machine on your local machine.</p>
             <ul>
-              <li><em>AWS Access Key ID</em> and <em>AWS Secret Access Key</em> - Inside the IAM console it is under Users > _username_ > User Actions > Manage Access Keys > Create Access Key.  This will create both a Access Key ID and a Secret Access Key. <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html">More information</a></li>
-              <li><em>AWS VPC ID</em> - This will be listed under Account Attributes or use the EC2 DescribeAccountAttributes API or CLI with the default-vpc flag</li>
+              <li><em>AWS Access Key ID</em> and <em>AWS Secret Access Key</em> - In the IAM console under Users > _username_ > User Actions > Manage Access Keys > Create Access Key.  This will create both a Access Key ID and a Secret Access Key. <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html">Get help</a></li>
+              <li><em>AWS VPC ID</em> - This will be listed under Account Attributes or use the EC2 DescribeAccountAttributes API or CLI with the default-vpc argument</li>
               <li><em>Docker Machine</em> - Download the latest binary from the github, <a href="https://github.com/docker/machine/releases">https://github.com/docker/machine/releases</a>. Rename the binary to docker-machine (optional) and add it into your system path.</li>
             </ul>
             

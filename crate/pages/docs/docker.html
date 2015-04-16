@@ -6,12 +6,12 @@ title: Install with Docker
 
   <div class="row">
     <div class="col-lg-12">
-      <p class="lead">Crate is ideal for containerized environments such as <a href="https://docker.com">Docker</a>.
+      <p class="lead">Crate is ideal for containerized environments such as <a href="{% url '/docker/index.html' %}">Docker</a>.
         You can get your own cluster running within minutes. Easy as cake!</p>
 
       <p>We host the Docker images for Crate on Docker&#8217;s own
         <a href="https://registry.hub.docker.com/_/crate/">Docker Hub Registry</a>.
-        After <a href="http://docs.docker.com">installing Docker</a> you can pull the latest image:</p>
+        After installing Docker you can pull the latest image:</p>
       <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">pull</span> <span class="ni">crate</span></pre>
       <p>To pull an image with a certain Crate version you can do:</p>
       <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">pull</span> <span class="ni">crate:X.Y.Z</span></pre>
@@ -108,6 +108,8 @@ cd778fa20410        crate:0.45          "crate"             12 seconds ago      
 
       <h2>Further Reading</h2>
       <ul>
+        <li><a href="{% url '/docker/index.html' %}">Docker</a></li>
+        <li><a href="{% url '/docker/machine.html' %}">Docker Machine</a></li>
         <li><a href="http://weaveblog.com/2015/01/07/crate-with-docker-weave/">Crate with Docker &amp; Weave</a></li>
         <li><a href="{% url '/docs/cloud/gce.html' %}">Crate &amp; Google Compute Engine</a></li>
       </ul>
