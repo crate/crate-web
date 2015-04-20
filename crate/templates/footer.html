@@ -2,15 +2,13 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-2 col-xs-4 col-md-2">
-	    <h4 class="c-footer-heading">Company</h4>
+	    <h4 class="c-footer-heading">Get Started</h4>
             <ul class="list-unstyled">
-              <li><a href="{% url '/about/index.html' %}" title="About">About</a></li>
-              <li><a href="{% url '/about/team.html' %}" title="Team">Team</a></li>
-              <li><a href="{% url '/jobs.html' %}" title="Jobs">Jobs</a></li>
-              <li><a href="{% url '/blog.html' %}" title="Blog">Blog</a></li>
-              <li><a href="{% url '/casestudies.html' %}" title="Blog">Case Studies</a></li>
-              <li><a href="{% url '/events.html' %}" title="Events">Events</a></li>
-              <li><a href="{% url '/about/contact.html' %}" title="Contact">Contact</a></li>
+              <li><a href="{% url '/docker/index.html' %}" title="Get Started with Crate and Docker">Docker</a></li>
+              <li><a href="{% url '/cloud/index.html' %}" title="Get Started with Crate in the Cloud">Cloud</a></li>
+              <li><a href="{% url '/docs/clients.html' %}" title="Crate has client libraries for Java, Python, Ruby, PHP, Scala, NodeJS, Erlang and more">Clients</a></li>
+              <li><a href="{% url '/docs.html' %}" title="Learn how to install Crate">Install</a></li>
+              <li><a href="{% url '/casestudies.html' %}" title="Case studies on Crate users">Case Studies</a></li>
             </ul>
           </div>
           <div class="col-sm-2 col-xs-4 col-md-2">
@@ -26,14 +24,14 @@
             </ul>
           </div>
           <div class="col-sm-2 col-xs-4 col-md-2 col-lg-4">
-	    <h4 class="c-footer-heading">Legal</h4>
+	    <h4 class="c-footer-heading">Company</h4>
             <ul class="list-unstyled">
-              <li><a href="{% url '/legal/trademarks.html' %}" title="Trademark">Trademark Guidelines</a></li>
-              <li><a href="{% url '/legal/privacy.html' %}" title="Privacy Policy">Privacy Policy</a></li>
-              <li><a href="{% url '/legal/terms-of-service.html' %}" title="Terms of Service">Terms of Service</a></li>
-              <li><a href="{% url '/legal/license.html' %}" title="License">License</a></li>
-              <li><a href="{% url '/legal/notice.html' %}" title="Notice">Notice</a></li>
-              <li><a href="{% url '/legal/imprint.html' %}" title="Imprint">Imprint</a></li>
+              <li><a href="{% url '/about/index.html' %}" title="About">About</a></li>
+              <li><a href="{% url '/about/team.html' %}" title="Team">Team</a></li>
+              <li><a href="{% url '/jobs.html' %}" title="Jobs">Jobs</a></li>
+              <li><a href="{% url '/blog.html' %}" title="Blog">Blog</a></li>
+              <li><a href="{% url '/events.html' %}" title="Events">Events</a></li>
+              <li><a href="{% url '/about/contact.html' %}" title="Contact">Contact</a></li>
             </ul>
           </div>
           <div class="col-sm-6 col-xs-12 col-md-6 col-lg-4">
@@ -56,6 +54,7 @@
         </div>
       </div>
       <div class="container">
-        <p class="copyright small text-muted">&copy; 2013-{% now "Y" %} CRATE Technology GmbH</p>
+         <p class="copyright small text-muted"><strong>Legal:</strong> <a href="{% url '/legal/trademarks.html' %}" title="Trademark" class="text-muted">Trademark Guidelines</a> | <a href="{% url '/legal/privacy.html' %}" title="Privacy Policy">Privacy Policy</a> | <a href="{% url '/legal/terms-of-service.html' %}" title="Terms of Service">Terms of Service</a> | <a href="{% url '/legal/license.html' %}" title="License">License</a> | <a href="{% url '/legal/notice.html' %}" title="Notice">Notice</a> | <a href="{% url '/legal/imprint.html' %}" title="Imprint">Imprint</a> <br />
+        &copy; 2013-{% now "Y" %} CRATE Technology GmbH</p>
       </div>
   </div>
