@@ -1,0 +1,62 @@
+title: Crate and Docker: Scale your database like your application
+description: Use Docker Swarm to create a Crate cluster in the cloud or locally in minutes.
+heroImg: wrapper-hero-frontpage
+og_image: https://cdn.crate.io./media/1503/crate-logo-165.png
+
+
+{% extends "base.html" %}
+
+{% block header %}
+<div class="wrapper wrapper-hero landing-page" id="{{ heroImg }}">
+  <div class="container">
+    <h1>Docker Swarm:<br />native Docker clustering</h1>
+    <p class="lead">Use Docker's native clustering tool to create a Crate cluster across several machines.</p>
+    <a href="{% url '/blog/deploying-crate-with-docker-machine-swarm.html' %}" class="btn btn-fp-white">Try Docker Swarm<br>with Machine!</a>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="wrapper wrapper-border wrapper-border-bottom">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>What is it?</h3>
+      <p>Docker Swarm is a tool that treats a group of individual hosts as one large virtual host.  Swarm can combine hosts from different data centers, various operating systems and diverse hardware configurations. The project is still in beta (and may change) but already supports multiple scheduling strategies and integrates with other tools like Mesosphere.  
+    </div>
+    <div class="col-sm-4">
+      <h3>Why use it?</h3>
+      <p>Using Docker Swarm will enable you easily to deploy images across a Docker cluster from only a few commands to the master node.  Swarm integrates with Docker Compose and Machine making a complete toolkit for Docker deployment, orchestration and management.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>How does Crate use it?</h3>
+      <p></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Get Started</h2>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-primary">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+    <h2 class="text-center">Get a Docker Machine cluster up and running with Swarm!</h2>
+    <p class="text-center">
+      <a href="{% url '/blog/deploying-crate-with-docker-machine-swarm.html' %}" class="btn btn-black btn-lg">Using Machine with Swarm</a>
+    </p>
+    <p class="text-center">
+      <a href="{% url '/about/contact.html' %}" class="black-link">Any questions? Feel free to get in touch with us</a>
+    </p>
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}
