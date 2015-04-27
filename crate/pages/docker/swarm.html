@@ -28,18 +28,18 @@ og_image: https://cdn.crate.io./media/1503/crate-logo-165.png
     </div>
     <div class="col-sm-4">
       <h3>Why use it?</h3>
-      <p>Using Docker Swarm will enable you easily to deploy images across a Docker cluster from only a few commands to the master node.  Swarm integrates with Docker Compose and Machine making a complete toolkit for Docker deployment, orchestration and management.</p>
+      <p>Using Docker Swarm will enable you to easily deploy images across a Docker cluster with only a few commands to the master node.  Swarm integrates with Docker Compose and Machine, making a complete toolkit for Docker deployment, orchestration and management.</p>
     </div>
     <div class="col-sm-4">
       <h3>How does Crate use it?</h3>
-      <p>Crate uses Docker Swarm to build clusters on AWS, GCE and locally because the affinity filter and spread strategy allows us to deploy an entire cluster of distributed nodes. We also use <a href="{% url '/blog/deploying-crate-with-docker-machine-swarm.html' %}">Machine with Swarm</a> to make this process even easier.</p>
+      <p>Crate uses Docker Swarm to build clusters on AWS, GCE and locally because the affinity filter and spread strategy allows us to deploy an entire cluster of distributed nodes. Using <a href="{% url '/blog/deploying-crate-with-docker-machine-swarm.html' %}">Machine with Swarm</a> makes this process even easier.</p>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12">
       <h2>Get Started</h2>
       <h4>Install</h4>
-      <p>There are two ways to install swarm, the docker image or directly.  This guide will follow the new Docker image installation; however, if you are using the binary install substitute "docker run --rm swarm" with "swarm"</p>
+      <p>There are two ways to install swarm, the docker image or directly.  This guide will follow the new Docker image installation, if you are using the binary install substitute "docker run --rm swarm" with "swarm"</p>
       <p><em>Docker Image</em>
       <pre><code>docker pull swarm</code></pre>
       </p>
@@ -50,30 +50,27 @@ $ cd ~/gocode
 $ go get -u github.com/docker/swarm
 </code></pre></p>
       <h4>Swarm Setup</h4>
-      <p>Create a swarm cluster as save the token it generates</p>
+      <p>Create a swarm cluster and save the token it generates:</p>
       <pre><code>docker run --rm swarm create</code></pre>
-      <p>Configure each node's Docker daemon to start connected to the Swarm Manager</p>
+      <p>Configure each node's Docker daemon to start connected to the Swarm Manager:</p>
       <pre><code>docker -H tcp://0.0.0.0:2375 -d</code></pre>
-      <p>From the Swarm Master add each Swarm Node by IP address and include the token generated with the create command</p>
+      <p>From the Swarm Master add each Swarm Node by IP address and include the token generated with the create command:</p>
       <pre><code>docker run -d swarm join --addr=_IP_:2375 token://_token_</code></pre>
       <h4>Start the Swarm manager</h4>
-      <p>From any computer with Docker installed, connect to the Swarm Master using the IP address and token</p>
+      <p>From any computer with Docker installed, connect to the Swarm Master using the IP address and token:</p>
       <pre><code>docker run -d -p --addr=_IP_:2375 token://_token_</code></pre>
       <br />
       <h2>Using the cluster</h2>
-      <p>With Swarm up and running and the nodes connected to the master, issue commands to the Swarm master similar to how you would issue commands to a single docker host</p>
+      <p>With Swarm up and running and the nodes connected to the master, issue commands to the Swarm master in the same way you would issue commands to a single docker host:</p>
       <pre><code>docker run --rm swarm list t--addr=_IP_:2375 token://_token_</code></pre>
       <h4>Filters</h4>
-      <p>Filters are used with the <code>--filter</code> flag and can be used to target individual hosts properties</p>
+      <p>Filters are used with the <code>--filter</code> flag and can be used to target individual hosts properties:</p>
       <pre><code>docker run constraint:storage==ssd --name db crate</code></pre>
       <h4>Strategies</h4>
-      <p>Docker Swarm supports several different strategies and each one affects which swarm node the swarm master chooses to provision new machines on. By default the <cdoe>--strategy</cdoe> used is <code>spread</code>.</p>
+      <p>Docker Swarm supports several different strategies and each one affects which swarm node the swarm master chooses to provision new machines on. By default the <code>--strategy</code> used is <code>spread</code>.</p>
       <pre><code>docker run --strategy=spread --name db crate
 docker run --strategy=binpack --name db crate
 docker run --strategy=random --name db crate</code></pre>
-
-
-
     </div>
   </div>
 </div>
