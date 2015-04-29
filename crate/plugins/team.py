@@ -31,7 +31,7 @@ def preBuildPage(site, page, context, data):
             ),
         dict(
             name="Julia Bundschuh",
-            title="Administration",
+            title="Executive Assistant",
             email="",
             ),
         dict(
