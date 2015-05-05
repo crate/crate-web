@@ -11,13 +11,20 @@ testing_version: 0.48.0
       <div class="col-sm-8">
 
         <h2><i class="fa fa-terminal"></i> Quick Install using Docker</h2>
-        <p>The most convenient and secure way to run Crate on your Linux host is the usage of <a href="https://docker.com" rel="nofollow">Docker</a>.</p>
+        <p>The most convenient and secure way to run Crate on your Linux host is the usage of <a href="{% url '/docker/index.html' %}">Docker</a>.</p>
         <p>It will not only keep your host system clean but also allows you to scale your backend from a single machine to a multi-node cluster easily.</p>
         <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">pull</span> <span class="ni">crate</span></pre>
         <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="ni">crate</span></pre>
         <p>Then visit your host on port <code>4200</code> in the browser,
           e.g. <code>http://127.0.0.1:4200/admin/</code>.</p>
         <p>Read more about <a href="{% url '/docs/docker.html' %}">Crate &amp; Docker here</a>.</p>
+
+        <hr />
+
+        <h2><i class="fa fa-terminal"></i> Click to Deploy with Google</h2>
+        <p>Use our Click-to-Deploy installer for the Google Cloud Platform to launch a Crate cluster in minutes.</p>
+        <p><code><a href="https://cloud.google.com/launcher/details/click-to-deploy-images:crate?q=crate">https://cloud.google.com/launcher/details/click-to-deploy-images:crate</a></code></p>
+        <p>Or check out our documentation for getting started with other <a href="{% url '/docs/cloud.html' %}">cloud providers</a>.</p>
 
         <hr />
 
