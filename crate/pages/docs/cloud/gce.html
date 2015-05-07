@@ -15,11 +15,11 @@ logo: /static/images/gce-logo.png
 
       {% filter markdown %}
 
-<p><strong>Want to run this all in one simple bash script? Check out the <a href="{% url '/docs/cloud/gce-bash-script.html' %}">Crate Cluster All-in-One Bash Script</a>!</strong></p>
+<p><strong>Try out on Google's Cloud Platform using the <a href="https://cloud.google.com/launcher/details/click-to-deploy-images:crate?q=crate">GCE Click-to-Deploy installer</a></strong></p>
 
-<h2>Getting Started:</h2>
+<h2>How to Set Up Crate with GCE:</h2>
 
-We assume that you've already got your local 'gcloud' environment up and running. If not, visit: <a href="https://cloud.google.com/compute/docs/gcloud-compute" target="_newbie">https://cloud.google.com/compute/docs/gcloud-compute</a> to get started.
+We assume that you've already got your local 'gcloud' environment up and running. If not, visit: <a href="https://cloud.google.com/compute/docs/gcloud-compute" target="_blank">https://cloud.google.com/compute/docs/gcloud-compute</a> to get started.
 
 First you'll need to build a cluster of Goolge Compute Engine (GCE) instances and the associated resources they require:
 
@@ -326,6 +326,12 @@ crate.service    dcb7f013.../10.240.224.27    active    running</pre>
     </div>
     <div class="col-sm-4">
       <img class="img-responsive" src="{% static logo %}" />
+      <hr />
+      <h3>Getting Started</h3>
+      <ul>
+        <li><a href="https://cloud.google.com/launcher/details/click-to-deploy-images:crate?q=crate">Click to Deploy installer</a></li>
+        <li><a href="{% url '/docs/cloud/gce-bash-script.html' %}">All-in-One Bash Script</a></li>
+      </ul>
       <hr />
       {% include "cloud-template-list.html" %}
     </div>
