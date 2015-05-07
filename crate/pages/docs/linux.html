@@ -20,17 +20,19 @@ title: Install on Linux
       <p id="instructions">&nbsp;</p>
       <div role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#yum" aria-controls="yum" role="tab" data-toggle="tab">RHEL/YUM</a></li>
+          <li role="presentation" class="active"><a href="#rhel6" aria-controls="rhel6" role="tab" data-toggle="tab" id="tab_rhel6">RHEL6/YUM</a></li>
+          <li role="presentation" class=""><a href="#rhel7" aria-controls="rhel7" role="tab" data-toggle="tab" id="tab_rhel7">RHEL7/YUM</a></li>
           <li role="presentation" class=""><a href="#ubuntu" aria-controls="ubuntu" role="tab" data-toggle="tab">Ubuntu</a></li>
           <li role="presentation" class=""><a href="#debian" aria-controls="debian" role="tab" data-toggle="tab">Debian</a></li>
           <li role="presentation" class=""><a href="#archlinux" aria-controls="archlinux" role="tab" data-toggle="tab">Arch Linux</a></li>
         </ul>
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="yum">
+          <div role="tabpanel" class="tab-pane active" id="rhel6">
             <h3>YUM Repository</h3>
-            <p>The Crate Team maintains the official YUM repositories for RPM-based releases. It is supported on Linux Distributions such as RedHat Enterprise Linux 6, CentOS 6 or Scientific Linux 6.</p>
-            <h4>How to enable the CRATE YUM repository</h4>
-            <p>All CRATE packages are signed with GPG. To verify the packages the public key must be installed to the system. After that, you can install the .rpm containing the YUM repository definition on your system.</p>
+            <p>The Crate Team maintains the official YUM repositories for RPM-based releases. It is supported on Linux Distributions such as RedHat Enterprise Linux 6, CentOS 6, or Scientific Linux 6. This version may be incompatible with RHEL7 based distributions, if you are using RHEL7 please use our <a href="#"
+            onClick="$('#tab_rhel7').click(); return false;">release for RHEL7</a>.</p>
+            <h4>How to enable the Crate YUM repository</h4>
+            <p>All Crate packages are signed with GPG. To verify the packages the public key must be installed to the system. After that, you can install the .rpm containing the YUM repository definition on your system.</p>
             <pre>sudo rpm --import https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate
 sudo rpm -Uvh https://cdn.crate.io/downloads/yum/6/x86_64/crate-release-6.5-1.noarch.rpm
 Retrieving https://cdn.crate.io/downloads/yum/6/x86_64/crate-release-6.5-1.noarch.rpm
@@ -51,6 +53,37 @@ Arch        : x86_64
 Version     : ...
 Release     : 1
 Size        : 42 M
+Repo        : crate
+Summary     : A shared nothing, fully searchable document oriented cluster datastore
+URL         : https://crate.io/</pre>
+            <h4>Testing/Unstable Releases</h4>
+            <p>The Crate Testing repository is disabled by default. It contains development builds and is frequently updated. The packages are waiting for feedback from testers as to their functionality and stability. Packages in this repository will come and go during the development period, so it should not be left enabled or used on production systems. If you want to enable the Testing repo on your server, set <code>enabled=1</code> in <code>/etc/yum.repos.d/crate.repo</code></p>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="rhel7">
+            <h3>YUM Repository</h3>
+            <p>The Crate Team maintains the official YUM repositories for RPM-based releases. It is supported on Linux Distributions such as RedHat Enterprise Linux 7, CentOS 7, or Scientific Linux 7.</p>
+            <h4>How to enable the Crate YUM repository</h4>
+            <p>All Crate packages are signed with GPG. To verify the packages the public key must be installed to the system. After that, you can install the .rpm containing the YUM repository definition on your system.</p>
+            <pre>sudo rpm --import https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate
+sudo rpm -Uvh https://cdn.crate.io/downloads/yum/7/noarch/crate-release-7.0-1.noarch.rpm
+Retrieving https://cdn.crate.io/downloads/yum/7/noarch/crate-release-7.0-1.noarch.rpm
+Preparing...                ########################################### [100%]
+   1:crate-release          ########################################### [100%]</pre>
+            <p>Make sure you are allowed to sudo. You can verify the GPG key, the installation of the repository and get details about available packages:</p>
+            <pre>rpm -qa gpg* | grep gpg-pubkey-06f6eaeb-52cbcb20
+gpg-pubkey-06f6eaeb-52cbcb20
+
+yum repolist | grep crate
+repo id  repo name                                       status
+crate    CRATE Packages for Enterprise Linux 7 - x86_64       2
+
+yum info crate
+Available Packages
+Name        : crate
+Arch        : noarch
+Version     : ...
+Release     : 1
+Size        : 49 M
 Repo        : crate
 Summary     : A shared nothing, fully searchable document oriented cluster datastore
 URL         : https://crate.io/</pre>

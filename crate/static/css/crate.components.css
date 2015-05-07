@@ -64,16 +64,14 @@ footer.wrapper {
   font-size: 16px;
   line-height: 16px;
 }
-.footer td a,
-.footer li a {
+.footer a {
   display: inline-block;
   margin-top: 4px;
   margin-bottom: 4px;
   color: #000000;
   text-decoration: none;
 }
-.footer td a:hover,
-.footer li a:hover {
+.footer a:hover {
   color: #7d7d7d;
   text-decoration: none;
 }
@@ -85,6 +83,10 @@ footer.wrapper {
 .footer .copyright {
   margin-top: 32px;
   text-align: center;
+}
+
+.footer .text-muted a {
+  color: #a7a7a7;
 }
 
 /**
@@ -229,6 +231,7 @@ img.max-320 {
 
 .team .caption {
   margin-bottom: 32px;
+  min-height: 105px;
 }
 
 .caption h3,

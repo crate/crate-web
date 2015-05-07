@@ -31,7 +31,7 @@ def preBuildPage(site, page, context, data):
             ),
         dict(
             name="Julia Bundschuh",
-            title="Administration",
+            title="Executive Assistant",
             email="",
             ),
         dict(
@@ -50,18 +50,18 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
-            name="Tom Kapanka",
-            title="Developer Advocate",
+            name="Eugene Pustovit",
+            title="Integrations",
+            email="",
+            ),
+        dict(
+            name="Spanky",
+            title="aka Tom Kapanka Developer Advocate",
             email="",
             ),
         dict(
             name="Tyler Randles",
-            title="Developer Advocate",
-            email="",
-            ),
-        dict(
-            name="Kenan Salihbegović",
-            title="Developer Advocate",
+            title="Developer Evangelist",
             email="",
             ),
         dict(

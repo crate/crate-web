@@ -8,7 +8,7 @@
      xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
   <channel>
     <title>Crate.IO Blog</title>
-    <description>CRATE - Your Elastic Datastore</description>
+    <description>Crate - The Distributed Database for Docker</description>
     <link>{{ CONFIG.site }}</link>
     <lastBuildDate>{{ date|date:"c" }}</lastBuildDate>
     <language>en-GB</language>

@@ -6,7 +6,7 @@ post_name: crate-with-mesosphere
 status: publish
 post_type: post
 tags: docker, mesosphere, marathon
-category: news
+category: news, developernews
 
 
 _This is a guest post originally published on <a href="{% url 'https://mesosphere.com/2015/02/25/deploying-crate-on-mesos-with-marathon/' %}">Mesosphere's Blog</a> on Feb 25, 2015._
@@ -103,7 +103,7 @@ On the `mesos-master` instance create a Marathon config file and call it for exa
   "cpus": 1,
   "mem": 2014,
   "uris": [],
-  "cmd": "crate -Des.cluster.name=mesos-unicast -Des.zen.discovery.minimum_master_nodes=2"
+  "cmd": "crate -Des.cluster.name=mesos-unicast -Des.zen.discovery.minimum_master_nodes=2",
   "env": {
     "CRATE_HOSTS": "mesos-slave-1:4300,mesos-slave-2:4300,mesos-slave-3:4300",
     "CRATE_HEAP_SIZE": "1024m"
