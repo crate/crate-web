@@ -19,8 +19,8 @@ description: Try Crate from your browser, no installation needed. The Crate Cube
     <div class="row">
       <div class="col-sm-12">
 	<h1>Try Crate</h1>
-	<p class="lead">Starting with Crate is a piece of cake! Simply try out our demo cluster console or use our installer on the Google Cloud Platform</p>
-  <p><a class="btn btn-default" href="https://cloud.google.com/launcher/details/click-to-deploy-images:crate?q=crate">Click-to-Deploy with Google</a></p>
+	<p class="lead">Starting with Crate is a piece of cake! Try out our demo cluster console below, or use our Click-To-Deploy installer on the Google Cloud Platform:</p>
+  <a class="c2d-button" href="https://cloud.google.com/launcher/details/click-to-deploy-images:crate?q=crate"></a>
       </div>
     </div>
   </div>
@@ -34,6 +34,8 @@ description: Try Crate from your browser, no installation needed. The Crate Cube
   <div class="row">
     <div class="col-lg-12">
 
+      <p class="text-right"><a class="btn btn-default" href="/docs/stable/sql/index.html" target="_docs"><i class="fa fa-book"></i> Crate SQL Help &raquo;</a></p>
+
       <div class="terminal">
         <div class="terminal-header">
           crate@play.crate.io | crash
@@ -45,10 +47,8 @@ description: Try Crate from your browser, no installation needed. The Crate Cube
           </div>
         </form>
       </div>
-      <p>&nbsp;</p>
-      <p class="text-right"><a class="btn btn-default" href="/docs/stable/sql/index.html" target="_docs"><i class="fa fa-book"></i> Crate SQL Help &raquo;</a></p>
 
-      <p>&nbsp;</p>
+      <h2>Try these sample SQL queries</h2>
 
       <p>Start off with exploring existing tables:</p>
       <pre class="tut">select schema_name, table_name, number_of_shards, number_of_replicas
