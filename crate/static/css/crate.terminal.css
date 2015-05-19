@@ -54,3 +54,16 @@ pre.terminal-history {
 pre.tut {
     cursor: pointer;
 }
+
+.c2d-button {
+    display: block;
+    height: 52px;
+    width: 180px;
+    background: transparent url("/static/images/c2d_default.png") center top no-repeat;
+}
+.c2d-button:hover {
+    background: transparent url("/static/images/c2d_hover.png");
+    opacity: 1;
+}
+
+
