@@ -6,7 +6,9 @@
     <div class="container">
       <ol class="nav navbar-nav navbar-subnav">
         <li class="{% if_current_page '/docs.html' 'active' '' %}">
-	  <a href="{% url '/docs.html' %}">Installation</a></li>
+	  <a href="{% url '/docs.html' %}">Documentation</a></li>
+        <li class="{% if_current_page '/docs/install.html' 'active' '' %}">
+    <a href="{% url '/docs/install.html' %}">Install</a></li>
         <li class="{% if_current_page '/docs/docker.html' 'active' '' %}">
 	  <a href="{% url '/docs/docker.html' %}">Docker</a></li>
         <li class="{% if_current_page '/docs/linux.html' 'active' '' %}">
