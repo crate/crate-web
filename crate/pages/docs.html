@@ -1,5 +1,5 @@
-title: Installing Crate
-description: Download Crate. Easy installation of Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext
+title: Crate Documentation
+description: Learn how to install and run Crate distributed clusters
 stable_version: 0.48.5
 stable_version_date: May 15th, 2015
 testing_version: 0.49.0
@@ -8,78 +8,46 @@ testing_version: 0.49.0
 
 {% block docs_content %}
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-12">
 
-        <h2><i class="fa fa-terminal"></i> Quick Install using Docker</h2>
-        <p>The most convenient and secure way to run Crate on your Linux host is the usage of <a href="{% url '/docker/index.html' %}">Docker</a>.</p>
-        <p>It will not only keep your host system clean but also allows you to scale your backend from a single machine to a multi-node cluster easily.</p>
-        <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">pull</span> <span class="ni">crate</span></pre>
-        <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="ni">crate</span></pre>
-        <p>Then visit your host on port <code>4200</code> in the browser,
-          e.g. <code>http://127.0.0.1:4200/admin/</code>.</p>
-        <p>Read more about <a href="{% url '/docs/docker.html' %}">Crate &amp; Docker here</a>.</p>
+        <h2>Installing Crate:</h2>
+
+        <p>One the major themes here at Crate.io is simplicity, in fact it's one of the primary reasons we buit Crate: the belief that running a scalable, distributed backend should be approachable by everyone. From a 2-person startup team to the enterprise company with a full IT staff, Crate is easy to install, manage, and scale.</p>
+
+        <p>Read more about <a href="{% url '/docs/install.html' %}">installing Crate</a>.</p>
 
         <hr />
 
-        <h2><i class="fa fa-terminal"></i> Click to Deploy with Google</h2>
-        <p>Use our Click-to-Deploy installer for the Google Cloud Platform to launch a Crate cluster in minutes.</p>
-        <p><code><a href="https://cloud.google.com/launcher/details/click-to-deploy-images:crate?q=crate">https://cloud.google.com/launcher/details/click-to-deploy-images:crate</a></code></p>
-        <p>Read our documentation for getting started with other <a href="{% url '/docs/cloud.html' %}">cloud providers</a>.</p>
+        <h2>Technical Documentation:</h2>
 
-        <hr />
+        <p>Want to get into the nitty-gritty of Crate? Learn about Crate's settings, SQL syntax, and usage in detail in the Server and Client documentation.</p>
 
-        <h2><i class="fa fa-terminal"></i> Try with Tarball</h2>
-        <p>Use our easy one-step command to launch Crate in a sandboxed environment: Hint: Launch it on two or more machine in the same network :)</p>
-        <pre class="codehighlight"><span class="nd">bash</span> <span class="o">-c</span> <span class="s">"<span class="nl">$(curl -L try.crate.io)</span>"</span></pre>
-        <p>Insert your data or play around with the live Twitter stream as sample data. Requires Java 7 (update 55 or later) or Java 8 (update 20 or later) on OS X or Linux. <i>Using earlier versions of Java may result in a loss of data.</i>
-          <a href="{% url '/docs/linux.html' %}#instructions">Step-by-step instructions</a> available.</p>
-
-        <hr />
-
-        <h2><i class="fa fa-download"></i> Download</h2>
-        <form class="well form-horizontal" id="form-download"
-              data-url="https://cdn.crate.io/downloads/releases/crate-{{ stable_version }}.tar.gz"
-              data-required="false">
-          <fieldset>
-            <p>Version <strong>{{ stable_version }}</strong><br /><small class="text-muted">Released on {{ stable_version_date }}</small></p>
-            <div class="form-group form-group-email">
-              <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-              <div class="col-lg-10">
-                <input name="email" id="download-email" type="email" placeholder="your.name@example.com" class="form-control" />
-                <span class="small text-danger hide">Please provide a valid email address.</span>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-lg-10 col-lg-offset-2">
-                <button type="submit" class="btn btn-primary" id="download-main"><i class="fa fa-download"></i> Download .tar.gz</button>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-        <!-- LeadLander -->
-        <script type="text/javascript">llfrmid=27658</script>
-        <script type="text/javascript" src="https://formalyzer.com/formalyze_init.js"></script>
-        <script type="text/javascript" src="https://formalyzer.com/formalyze_call_secure.js"></script>
-        <!-- @end LeadLander -->
-
-        <p>Testing builds of Crate should be used for testing upcoming new features only and should not be used in production.
-	<a href="https://cdn.crate.io/downloads/releases/crate-{{ testing_version }}.tar.gz" target="_blank">Download latest testing release.</a></p>
-        <p>Nightly builds of Crate are provided for testing purposes only.
-	You can download the latest builds <a href="https://cdn.crate.io/downloads/releases/nightly/" target="_blank">here</a>.</p>
-
-      </div>
-      <div class="col-sm-4">
-        <div class="well">
           <h4><i class="fa fa-book"></i> Server Manual</h4>
           <p>Stable Version <small class="text-muted">({{ stable_version }})</small> <a href="/docs/stable/">Read &raquo;</a>
           <br />Latest Version <small class="text-muted">({{ testing_version }})</small> <a href="/docs/en/latest/">Read &raquo;</a></p>
-        </div>
-        <div class="well">
+
           <h4><i class="fa fa-book"></i> Client Docs</h4>
-          <p>Find out about Crate client libraries for Java, Python, PHP and many other languages.
+          <p>Find out about Crate client libraries for Java, Python, PHP, Node, Ruby and many other languages.
           <br /><a href="{% url '/docs/clients.html' %}">Read &raquo;</a></p>
-        </div>
+
+        <hr />
+
+        <h2>Source Code:</h2>
+
+        <p>Crate.io is an open source company to the core, and we encourage everyone to delve into our code to see not only what we've written, but what work is in progress, and what has changed as we continue to develop. Open bugs, watch our development branches, or just star us. We love GitHub stars!</p>
+
+        <p>Check out all of the <a href="https://github.com/crate">Crate source code on GitHub</a>.</p>
+
+        <hr />
+
+        <h2>Contributing to Crate:</h2>
+
+        <p>Speaking of open source, the best part is that you can contribute to our codebase to improve Crate and provide value to the entire community.  We welcome new contributors and pull requests.</p>
+
+        <p>Learn more about how to <a href="{% url '/community/contribute.html' %}">contribute to Crate</a>.</p>
+
       </div>
+
     </div>
 
 {% endblock %}
