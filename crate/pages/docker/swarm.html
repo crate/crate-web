@@ -24,15 +24,15 @@ og_image: https://cdn.crate.io./media/1503/crate-logo-165.png
   <div class="row">
     <div class="col-sm-4">
       <h3>What is it?</h3>
-      <p>Docker Swarm is a tool that treats a group of singular hosts as one large virtual host. Swarm can combine hosts from different data centers, operating systems and hardware configurations. The project is still in beta but already supports multiple scheduling strategies and integrates with other tools like Mesosphere.  
+      <p>Docker Swarm is a tool that treats a group of singular hosts as one large virtual host. Swarm can combine hosts from different data centers, operating systems and hardware configurations. The project is still in beta but already supports multiple scheduling strategies and integrates with other tools like <a href="{% url '/blog/crate-with-mesosphere.html' %}">Mesosphere</a>.  
     </div>
     <div class="col-sm-4">
       <h3>Why use it?</h3>
-      <p>Using Docker Swarm will enable you to easily deploy images across a Docker cluster with only a few commands to the master node.  Swarm integrates with Docker Compose and Machine, making a complete toolkit for Docker deployment, orchestration and management.</p>
+      <p>Using Docker Swarm will enable you to easily deploy images across a Docker cluster with only a few commands to the master node. Swarm integrates with Docker Compose and <a href="{% url '/docker/machine.html' %}">Machine</a>, making a complete toolkit for Docker deployment, orchestration and management.</p>
     </div>
     <div class="col-sm-4">
       <h3>How does Crate use it?</h3>
-      <p>Crate uses Docker Swarm to build clusters on AWS, GCE and locally because the affinity filter and spread strategy allows us to deploy an entire cluster of distributed nodes. Using <a href="{% url '/blog/deploying-crate-with-docker-machine-swarm.html' %}">Machine with Swarm</a> makes this process even easier.</p>
+      <p>Crate uses Docker Swarm to build clusters on AWS, Google Cloud Platform, and locally because the affinity filter and spread strategy allows us to deploy an entire cluster of distributed nodes. Using <a href="{% url '/blog/deploying-crate-with-docker-machine-swarm.html' %}">Machine with Swarm</a> makes this process even easier.</p>
     </div>
   </div>
   <div class="row">
@@ -73,7 +73,20 @@ docker run --strategy=binpack --name db crate
 docker run --strategy=random --name db crate</code></pre>
     </div>
   </div>
+
+  <div class="row">
+    <h2>Next Steps: Installing Crate</h2>
+    <p>Now that you've learned how easy it is to get started with Docker Machine &amp; Swarm, you have a few options for where to go next. You can:</p>
+
+    <ul>
+      <li><a href="{% url '/docs/docker.html' %}">Learn to install Crate using Docker.</a></li>
+      <li><a href="{% url '/blog/deploying-crate-with-docker-machine-swarm.html' %}">Learn to deploy a Crate cluster using Docker Machine and Swarm.</a></li>
+    </ul>
+
+  </div>
 </div>
+
+<p></p>
 
 <div class="wrapper wrapper-border wrapper-border-bottom wrapper-bg-primary">
 <div class="container">
