@@ -12,11 +12,11 @@ testing_version: 0.49.0
 
         <p><strong>Table of Contents</strong></p>
         <p>
-        <li><a href="#docker">Quick Install using Docker</a></li>
-        <li><a href="#google">Click to Deploy with Google</a></li>
-        <li><a href="#sandbox">Play in a Sandbox</a></li>
+        <li><a href="#docker">Quick install using Docker</a></li>
+        <li><a href="#google">Click-to-Deploy with Google</a></li>
+        <li><a href="#sandbox">Play in a sandbox</a></li>
         <li><a href="#linux">Install on Linux</a></li>
-        <li><a href="#tarball">Download the Tarball</a></li>
+        <li><a href="#tarball">Download the tarball</a></li>
         </p>
 
 
@@ -27,14 +27,14 @@ testing_version: 0.49.0
         <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">run</span> <span class="o">-p</span> <span class="m">4200:4200</span> <span class="ni">crate</span></pre>
         <p>Then visit your host on port <code>4200</code> in the browser, e.g.<br/>
           <code>http://127.0.0.1:4200/admin/</code></p>
-        <p>Read more about <a href="{% url '/docs/docker.html' %}">installing Crate with Docker</a>.</p>
+        <p><strong>Read more in-depth about <a href="{% url '/docs/docker.html' %}">installing Crate with Docker</a> &raquo;</strong></p>
 
         <hr />
 
-        <h2><i class="fa fa-terminal"></i> <a name="google">Click to Deploy with Google</a></h2>
+        <h2><i class="fa fa-terminal"></i> <a name="google">Click-to-Deploy with Google</a></h2>
         <p>Use our Click-to-Deploy installer for the Google Cloud Platform to launch a Crate cluster in minutes.</p>
         <p><code><a href="https://cloud.google.com/launcher/details/click-to-deploy-images:crate?q=crate">https://cloud.google.com/launcher/details/click-to-deploy-images:crate</a></code></p>
-        <p>Read our documentation for getting started with other <a href="{% url '/docs/cloud.html' %}">cloud providers</a>.</p>
+        <p><strong>Read our documentation for <a href="{% url '/docs/cloud.html' %}">getting started with other cloud providers</a> &raquo;</strong></p>
 
         <hr />
 
@@ -49,17 +49,14 @@ testing_version: 0.49.0
 
         <h2><i class="fa fa-terminal"></i> <a name="linux">Install on Linux</a></h2>
 
-        <p>We support almost every major version of Linux in widespread use and their associated package managers. This is the best way to install Crate for production environments, especially if you're using a configuration management toolset such as Chef, Puppet, or Saltstack.<br />
+        <p>We support almost every major version of Linux in widespread use and their associated package managers. This is the best way to install Crate for production environments, especially if you're using a configuration management toolset such as Chef, Puppet, or Saltstack.</p>
 
-        <a href="{% url '/docs/linux.html' %}#instructions">Step-by-step instructions for Linux installation</a></p>
-
-        <hr />
-
-        <h2><i class="fa fa-terminal"></i> <a name="tarball">Download the Tarball</a></h2>
+        <p><strong><a href="{% url '/docs/linux.html' %}#instructions">Step-by-step instructions for Linux installation</a> &raquo;</strong></p>
 
         <hr />
 
-        <h2><i class="fa fa-download"></i> Download</h2>
+        <h2><i class="fa fa-download"></i> <a name="tarball">Download the Tarball</a></h2>
+
         <form class="well form-horizontal" id="form-download"
               data-url="https://cdn.crate.io/downloads/releases/crate-{{ stable_version }}.tar.gz"
               data-required="false">
@@ -85,10 +82,8 @@ testing_version: 0.49.0
         <script type="text/javascript" src="https://formalyzer.com/formalyze_call_secure.js"></script>
         <!-- @end LeadLander -->
 
-        <p>Testing builds of Crate should be used for testing upcoming new features only and should not be used in production.
-	<a href="https://cdn.crate.io/downloads/releases/crate-{{ testing_version }}.tar.gz" target="_blank">Download latest testing release.</a></p>
-        <p>Nightly builds of Crate are provided for testing purposes only.
-	You can download the latest builds <a href="https://cdn.crate.io/downloads/releases/nightly/" target="_blank">here</a>.</p>
+        <p>Testing builds of Crate should be used for testing upcoming new features only and should not be used in production. <a href="https://cdn.crate.io/downloads/releases/crate-{{ testing_version }}.tar.gz" target="_blank">Download latest testing release.</a></p>
+        <p>Nightly builds of Crate are provided for testing purposes only. You can also <a href="https://cdn.crate.io/downloads/releases/nightly/" target="_blank">download the latest builds</a>.</p>
 
       </div>
       <div class="col-sm-4">

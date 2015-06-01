@@ -20,7 +20,8 @@ heroImg: wrapper-hero-frontpage
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <p class="lead">No matter which cloud provider, with either Google Compute Engine, Amazon Web Services, IBM Softlayer, Microsoft Azure, Crate is the perfect combination for a highly scalable, distributed data store which enables you to focus on the development of your product and worry less about maintaining your database cluster.</p>
+      <p class="lead">No matter which cloud provider you use: <a href="{% url '/docs/cloud/gce.html' %}">Google Cloud Platform</a>, <a href="{% url '/docs/cloud/aws.html' %}">Amazon Web Services</a>, <a href="{% url '/docs/cloud/softlayer.html' %}">IBM Softlayer</a>, or <a href="{% url '/azure/index.html' %}">Microsoft Azure</a>, Crate is the perfect fit for a highly scalable, distributed data store. Crate enables you to focus on developing your product and worry less about maintaining your database cluster.</p>
+      <p><a href="{% url '/docs/cloud' %}">Learn how to install Crate on your favorite cloud provider &raquo;</a></p>
     </div>
     <div class="col-sm-6">
       <table id="cloudLogos">
@@ -48,11 +49,12 @@ heroImg: wrapper-hero-frontpage
       <img src="{% media '/media/1503/cloud_everywhere.png' %}" width="227">
     </div>
     <div class="col-sm-8">
-      <h2>Crate is simple to set up, scale, and query</h2>
+      <h2>Crate: Simple to set up, scale &amp; query</h2>
       <ul class="w-list-unstyled list-group">
-        <li class="list-group-item bright">Ideal for use in containerized, platform agnostic <strong>environments like Docker</strong></li>
-        <li class="list-group-item bright">Optimized for <strong>all major cloud platforms</strong></li><li class="list-group-item bright">No more unwieldy big centralized databases – Crate runs <strong>on your application servers</strong></li>
+        <li class="list-group-item bright">Ideal for use in containerized, platform-agnostic <strong><a href="{% url '/docker' %}">environments like Docker</a></strong></li>
+        <li class="list-group-item bright">Optimized for <strong><a href="{% url '/docs/cloud' %}">all major cloud platforms</a></strong></li><li class="list-group-item bright">No more unwieldy big centralized databases – Crate runs <strong>on your application servers</strong></li>
         <li class="list-group-item bright">Crate uses the <strong>familiar SQL Syntax</strong></li>
+        <li class="list-group-item bright"><strong><a href="{% url '/docs/cloud' %}">Get started now &raquo;</a></strong></li>
       </ul>
     </div>
     </div>
@@ -65,6 +67,7 @@ heroImg: wrapper-hero-frontpage
         <ul class="w-list-unstyled list-group">
           <li class="list-group-item bright"><strong>Friendly Admin UI</strong> shows the status of your cluster at any time</li>
           <li class="list-group-item bright"><strong>SQL</strong> console included</li><li class="list-group-item bright"><strong>Auto scaling, self healing and re-balancing</strong>.&nbsp;Yes we automatically take care of failed nodes, but most of the time nodes don't fail, clusters get scaled up and down.</li>
+          <li class="list-group-item bright"><strong><a href="{% url '/docs/cloud' %}">Get started now &raquo;</a></strong></li>
         </ul>
       </div>
     </div>
@@ -79,6 +82,7 @@ heroImg: wrapper-hero-frontpage
             <li class="list-group-item bright">A <strong>true shared nothing architecture</strong>, In Crate all nodes are equal</li>
             <li class="list-group-item bright">Queries are <strong>automatically parallelized</strong> across all nodes, resulting in sub-second queries on tabular data and semi-structured records</li>
             <li class="list-group-item bright">When running out of power, just add new nodes with <strong>a few command line inputs</strong>, Crate takes care of the rest.</li>
+            <li class="list-group-item bright"><strong><a href="{% url '/docs/cloud' %}">Get started now &raquo;</a></strong></li>
           </ul>
         </div>
       </div>
@@ -92,6 +96,7 @@ heroImg: wrapper-hero-frontpage
             <li class="list-group-item bright">Crate is <strong>Open Source</strong></li>
             <li class="list-group-item bright">Crate uses a variety of battle tested <strong>open source components</strong>: Presto, Elasticsearch, Lucene, Netty</li>
             <li class="list-group-item bright">We invest in and support Open Source <strong>communities.</strong></li>
+	        <li class="list-group-item bright"><strong><a href="{% url '/docs/cloud' %}">Get started now &raquo;</a></strong></li>
           </ul>
         </div>
       </div>
@@ -161,6 +166,7 @@ heroImg: wrapper-hero-frontpage
           </div>
         </div>
       </li>
+      <li class="list-group-item bright"><strong><a href="{% url '/docs/cloud' %}">Get started now &raquo;</a></strong></li>
     </ul>
   </div>
   </div>
