@@ -50,8 +50,8 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
-            name="Eugene Pustovit",
-            title="Integrations",
+            name="Michael Beer",
+            title="Developer Integrations",
             email="",
             ),
         dict(
