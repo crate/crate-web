@@ -74,6 +74,11 @@ def preBuildPage(site, page, context, data):
             title="Core Developer",
             email="",
             ),
+        dict(
+            name="Ruslan Kovalov",
+            title="Core Developer",
+            email="",
+            ),
         ]
 
     return context, data
