@@ -25,11 +25,6 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
-            name="Philipp Bogensberger",
-            title="Core Developer",
-            email="",
-            ),
-        dict(
             name="Julia Bundschuh",
             title="Executive Assistant",
             email="",
@@ -40,28 +35,18 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
+            name="Philipp Bogensberger",
+            title="Core Developer",
+            email="",
+            ),
+        dict(
             name="Mathias Fußenegger",
             title="Core Developer",
             email="",
             ),
         dict(
-            name="Christian Haudum",
-            title="Integrations",
-            email="",
-            ),
-        dict(
-            name="Michael Beer",
-            title="Developer Integrations",
-            email="",
-            ),
-        dict(
-            name="Spanky",
-            title="aka Tom Kapanka Developer Advocate",
-            email="",
-            ),
-        dict(
-            name="Chris Ward",
-            title="Developer Advocate",
+            name="Ruslan Kovalov",
+            title="Core Developer",
             email="",
             ),
         dict(
@@ -75,8 +60,23 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
-            name="Ruslan Kovalov",
-            title="Core Developer",
+            name="Michael Beer",
+            title="Developer Integrations",
+            email="",
+            ),
+        dict(
+            name="Christian Haudum",
+            title="Developer Integrations",
+            email="",
+            ),
+        dict(
+            name="Spanky",
+            title="aka Tom Kapanka Developer Advocate",
+            email="",
+            ),
+        dict(
+            name="Chris Ward",
+            title="Developer Advocate",
             email="",
             ),
         ]
