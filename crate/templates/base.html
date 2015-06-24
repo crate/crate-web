@@ -48,9 +48,9 @@
   <body>
 
     <header class="header wrapper wrapper-plain">
-      {% block navbar1 %}
-      {% include "navbar.html" %}
-      {% endblock %}
+      <!-- @start navbar -->
+{% block navbar1 %}{% include "navbar.html" %}{% endblock %}
+      <!-- @end navbar -->
     </header>
 
     <main class="main">
@@ -66,9 +66,9 @@
     </main>
 
     <footer class="wrapper">
-      {% block footer %}
-      {% include "footer.html" %}
-      {% endblock %}
+      <!-- @start footer -->
+{% block footer %}{% include "footer.html" %}{% endblock %}
+      <!-- @end footer -->
     </footer>
 
     <script src="{% static '/static/js/jquery-1.10.1.js' %}"></script>
