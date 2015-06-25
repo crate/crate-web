@@ -11,8 +11,7 @@ from django.utils.safestring import mark_safe
 
 register = Library()
 
-#CDN_URL = 'https://cdn.crate.io'
-CDN_URL = 'http://localhost:8001'
+CDN_URL = 'https://cdn.crate.io'
 
 def media(context, media_url):
     """
