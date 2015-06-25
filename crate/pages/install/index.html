@@ -10,30 +10,43 @@ testing_version: 0.49.2
     <div class="row">
       <div class="col-sm-8">
 
-        <p><strong>Table of Contents</strong></p>
+        <p><strong>Installation Options:</strong></p>
         <p>
         <li><a href="#google">Click-to-Deploy with Google</a></li>
         <li><a href="#cloud">Deploy in the Cloud</a></li>
         <li><a href="#docker">Quick install using Docker</a></li>
-        <li><a href="#sandbox">Play in a sandbox</a></li>
         <li><a href="#linux">Install on Linux</a></li>
+        <li><a href="#sandbox">Try in a local sandbox</a></li>
         <li><a href="#tarball">Download the tarball</a></li>
         </p>
 
-        <h2><i class="fa fa-terminal"></i> <a name="google">Click-to-Deploy with Google</a></h2>
-        <p>Use our Click-to-Deploy installer for the Google Cloud Platform to launch a Crate cluster in minutes.</p>
+        <h2>
+          <a name="google" href="{% url '/blog/click-to-deploy-crate-on-google-compute-engine.html' %}">
+            <i class="fa fa-terminal"></i> Click-to-Deploy with Google
+          </a>
+        </h2>
+        <p><strong>Absolutely the easiest way to get started with Crate</strong><br/>
+        Try Google's <a href="https://cloud.google.com/launcher/details/click-to-deploy-images:crate?q=crate">Click-to-Deploy installer</a> for the Google Cloud Platform to launch a Crate cluster in minutes. <em>(requires a Google cloud account)</em></p>
         <p><code><a href="https://cloud.google.com/launcher/details/click-to-deploy-images:crate?q=crate">https://cloud.google.com/launcher/details/click-to-deploy-images:crate</a></code></p>
-        <p><strong>Read our documentation for <a href="{% url '/install/cloud/index.html' %}">getting started with other cloud providers</a> &raquo;</strong></p>
+        <p><strong>Read our blog post on <a href="{% url '/blog/click-to-deploy-crate-on-google-compute-engine.html' %}">using Click-to-Deploy to install Crate</a> &raquo;</strong></p>
 
         <hr />
 
-        <h2><i class="fa fa-terminal"></i> <a name="cloud">Deploy in the Cloud</a></h2>
+        <h2>
+          <a name="cloud" href="{% url '/install/cloud/index.html' %}">
+            <i class="fa fa-terminal"></i> Deploy in the Cloud
+          </a>
+        </h2>
         <p>Cloud providers Amazon (AWS), Google (GCE), Microsoft Azure, and IBM Softlayer allow you to deploy Crate easily in the cloud.</p>
         <p><strong>Learn how to <a href="{% url '/install/cloud/index.html' %}">install Crate in the cloud</a> &raquo;</strong></p>
 
         <hr />
 
-        <h2><i class="fa fa-terminal"></i> <a name="docker">Quick Install using Docker</a></h2>
+        <h2>
+          <a name="docker" href="{% url '/install/docker.html' %}">
+            <i class="fa fa-terminal"></i> Quick Install using Docker
+          </a>
+        </h2>
         <p>The most convenient way to run Crate on your Linux host using <a href="{% url '/install/docker.html' %}">Docker</a>.</p>
         <p>It will not only keep your host system clean but also allows you to scale your backend from a single machine to a multi-node cluster easily.</p>
         <pre class="codehighlight"><span class="nd">docker</span> <span class="ni">pull</span> <span class="ni">crate</span></pre>
@@ -44,7 +57,10 @@ testing_version: 0.49.2
 
         <hr />
 
-        <h2><i class="fa fa-terminal"></i> <a name="sandbox">Play in a Sandbox</a></h2>
+        <h2>
+          <i class="fa fa-terminal"></i> 
+          <a name="sandbox">Try in a Local Sandbox</a>
+        </h2>
 
         <p>Use our easy one-step command to launch Crate in a sandboxed environment: Hint: Launch it on two or more machine in the same network :)</p>
         <pre class="codehighlight"><span class="nd">bash</span> <span class="o">-c</span> <span class="s">"<span class="nl">$(curl -L try.crate.io)</span>"</span></pre>
@@ -53,7 +69,11 @@ testing_version: 0.49.2
 
         <hr />
 
-        <h2><i class="fa fa-terminal"></i> <a name="linux">Install on Linux</a></h2>
+        <h2>
+          <a name="linux" href="{% url '/install/linux.html' %}#instructions">
+            <i class="fa fa-terminal"></i> Install on Linux
+          </a>
+        </h2>
 
         <p>We support almost every major version of Linux in widespread use and their associated package managers. This is the best way to install Crate for production environments, especially if you're using a configuration management toolset such as Chef, Puppet, or Saltstack.</p>
 
@@ -82,12 +102,6 @@ testing_version: 0.49.2
             </div>
           </fieldset>
         </form>
-        <!-- LeadLander -->
-        <script type="text/javascript">llfrmid=27658</script>
-        <script type="text/javascript" src="https://formalyzer.com/formalyze_init.js"></script>
-        <script type="text/javascript" src="https://formalyzer.com/formalyze_call_secure.js"></script>
-        <script>jQuery('#download-main').on('click', function(){formalyzer_call_onclick(27658);});</script>
-        <!-- @end LeadLander -->
 
         <p>Testing builds of Crate should be used for testing upcoming new features only and should not be used in production. <a href="https://cdn.crate.io/downloads/releases/crate-{{ testing_version }}.tar.gz" target="_blank">Download latest testing release.</a></p>
         <p>Nightly builds of Crate are provided for testing purposes only. You can also <a href="https://cdn.crate.io/downloads/releases/nightly/" target="_blank">download the latest builds</a>.</p>
