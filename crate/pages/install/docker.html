@@ -1,8 +1,8 @@
 title: Install with Docker
 
-{% extends "doc.html" %}
+{% extends "install.html" %}
 
-{% block docs_content %}
+{% block install_content %}
 
   <div class="row">
     <div class="col-lg-12">
@@ -68,17 +68,17 @@ title: Install with Docker
 
           </div>
           <div role="tabpanel" class="tab-pane" id="osx">
-          
+
             <h2>Installing a Crate cluster using Docker on OSX</h2>
 
             <p>Getting a Crate cluster running locally on OSX is a little more challenging than it should be because of the fact that Docker requires features of the Linux kernel which OSX does not provide.  Don't worry, we'll walk you through it.  Kudos to the <a href="http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide" target="_newbie">Docker on OSX Missing Manual</a> blog post for much of this information.  Please begin this by reading the first section of this post until you get to the "Common Problems" section, which is where we'll take over, otherwise I'm just going to be repeating a lot of directions. The only difference is that after you've run `boot2docker up` you will get three environment variables to export rather than just one.  Be sure to export all three or you'll get errors when trying to run Docker.</p>
-            
+
             <p>Now we'll assume you've gotten Docker and boot2docker installed and running locally.  First thing we'll do is pull down the latest Crate Docker image</p>
-            
+
             <pre class="codehighlight">&gt; docker pull crate:latest</pre>
 
             <p>Once the pull is complete, we'll need to start the containers.</p>
-            
+
             <pre class="codehighlight">
 &gt; docker run -d -P crate
 &gt; docker run -d -P crate
@@ -89,19 +89,19 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 f810bb007450        crate:0.45          "crate"             3 seconds ago       Up 2 seconds        0.0.0.0:4200->4200/tcp, 0.0.0.0:4300->4300/tcp     evil_pare
 370c8278791b        crate:0.45          "crate"             11 seconds ago      Up 9 seconds        0.0.0.0:49163->4200/tcp, 0.0.0.0:49164->4300/tcp   compassionate_ptolemy
 cd778fa20410        crate:0.45          "crate"             12 seconds ago      Up 11 seconds       0.0.0.0:49161->4200/tcp, 0.0.0.0:49162->4300/tcp   romantic_colden</pre>
-            
+
             <p>Here we've started two Crate instances and let Docker bind the Crate ports using the Docker port range (49000-49999), but then we bound the third one to the same port numbers on the boot2docker VM as the container (4200 & 4300). We can't bind all of the containers to the same port on the boot2docker VM because obviously the ports would conflict.  Since Docker is multicast enabled for containers on the same host, the nodes auto-discover each other. Binding only one exposes the cluster at the correct IP address to the boot2docker VM. As you can see below, we can verify the cluster by calling the API on the VM's IP address, using <code>$(boot2docker ip)</code>, on port 4200.</p>
-            
+
             <pre>&gt; curl -XPOST $(boot2docker ip):4200/_sql -d '{ "stmt": "select name from sys.nodes" }'
-{"cols":["name"],"duration":218,"rows":[["Shooting Star"],["Crimson"],["Scarlet Spiders"]],"rowcount":3}</pre>            
-            
+{"cols":["name"],"duration":218,"rows":[["Shooting Star"],["Crimson"],["Scarlet Spiders"]],"rowcount":3}</pre>
+
             <p>In this setup, you will always be interfacing with the same node, but this setup is mostly for playing with Crate locally. You can also still connect to the other nodes, they're just not exposed at port 4200. You can see the ports in the <code>`docker ps`</code> output above. In this example, they're 49163 and 49161</p>
-            
+
             <pre>&gt; curl -XPOST $(boot2docker ip):49163/_sql -d '{ "stmt": "select name from sys.nodes" }'
-{"cols":["name"],"duration":218,"rows":[["Shooting Star"],["Crimson"],["Scarlet Spiders"]],"rowcount":3}</pre>            
-            
+{"cols":["name"],"duration":218,"rows":[["Shooting Star"],["Crimson"],["Scarlet Spiders"]],"rowcount":3}</pre>
+
             <p>Now you have a 3-node cluster running locally that you can use to develop against Crate or just play around with a cluster.  You can add more nodes simply by instantiating more Docker containers and they'll automatically join the Crate cluster.</p>
-            
+
           </div>
         </div>
       </div>
@@ -111,7 +111,7 @@ cd778fa20410        crate:0.45          "crate"             12 seconds ago      
         <li><a href="{% url '/docker/index.html' %}">Docker</a></li>
         <li><a href="{% url '/docker/machine.html' %}">Docker Machine</a></li>
         <li><a href="http://weaveblog.com/2015/01/07/crate-with-docker-weave/">Crate with Docker &amp; Weave</a></li>
-        <li><a href="{% url '/docs/cloud/gce.html' %}">Crate &amp; Google Compute Engine</a></li>
+        <li><a href="{% url '/install/cloud/gce.html' %}">Crate &amp; Google Compute Engine</a></li>
       </ul>
 
     </div>

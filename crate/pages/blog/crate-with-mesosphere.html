@@ -17,7 +17,7 @@ Editor's Note: This guest post is written by Christian Haudum of Crate. Crate is
 
 Using <a href="{% url 'https://github.com/mesosphere/marathon' %}">Mesosphere's Marathon</a> to manage Crate containers makes it easy to deploy a containerized database cluster very efficiently and allocate database resources quickly depending on your demands, and therefore simplifies the management of elastic applications.
 
-In this post we'll quickly to through the necessary steps to set up a scalable Crate cluster. We'll skip over some of the basics, so you should take a look at the <a href="{% url 'http://mesosphere.com/docs/getting-started/' %}">Mesosphere documentation</a> and the <a href="{% url '/docs/docker.html' %}">Crate Docker installation guide</a> first if you aren't familiar with those.
+In this post we'll quickly to through the necessary steps to set up a scalable Crate cluster. We'll skip over some of the basics, so you should take a look at the <a href="{% url 'http://mesosphere.com/docs/getting-started/' %}">Mesosphere documentation</a> and the <a href="{% url '/install/docker.html' %}">Crate Docker installation guide</a> first if you aren't familiar with those.
 
 Ok, let's start!
 
@@ -238,7 +238,7 @@ sudo weave create-bridge
 sudo weave expose ${BRIDGE_CIDR}
 sudo service docker restart
 # we connect to the already existing network on mesos-master
-sudo weave launch mesos-master 
+sudo weave launch mesos-master
 ```
 
 Execute the script with the slave id, `1` for `mesos-slave-1`, and so on, on each node.
@@ -458,7 +458,7 @@ sudo weave create-bridge
 sudo ip addr add dev weave ${BRIDGE_CIDR}
 sudo service docker restart
 # we connect to the already existing network on mesos-master
-sudo weave launch mesos-master 
+sudo weave launch mesos-master
 ```
 
 ^ change also the 4th to last line to reflect the update

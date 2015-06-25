@@ -2,9 +2,9 @@ title: Crate & IBM Softlayer
 description: This combination makes SoftLayer an ideal hosting provider for your own Crate cluster, no matter if you just need a small cluster to play around or run your production cluster even across data centres.
 logo: /static/images/softlayer-logo.jpg
 
-{% extends "doc.html" %}
+{% extends "install.html" %}
 
-{% block docs_content %}
+{% block install_content %}
 
   <div class="row">
     <div class="col-sm-8">
@@ -15,18 +15,18 @@ This combination makes SoftLayer an ideal hosting provider for your own Crate cl
 
 We at CrateIO have been using [bare metal servers](https://www.softlayer.com/bare-metal-servers) to perform benchmarks on Crate. When using bare metal you have the advantage that you can mix and match hardware. On the other hand the setup/provisioning is more conventional (like on-premise-hosting), since it is not possible to launch/terminate instances in real-time.
 
-A balanced instance configuration for a production Crate host could look similar like that: 
+A balanced instance configuration for a production Crate host could look similar like that:
 
 * 8x 2.0GHz cores
 * >= 32 GB memory
 * >= 100 GB local SSD storage
 * 1000 Mbps public/private network interface
 
-We used [SaltStack](http://www.saltstack.com/)'s [Salt Cloud](http://docs.saltstack.com/en/latest/topics/cloud/) to launch and provision instances for the test cluster. Salt Cloud provides an abstraction layer for multiple cloud hosting providers, also for [SoftLayer](http://docs.saltstack.com/en/latest/topics/cloud/softlayer.html). 
+We used [SaltStack](http://www.saltstack.com/)'s [Salt Cloud](http://docs.saltstack.com/en/latest/topics/cloud/) to launch and provision instances for the test cluster. Salt Cloud provides an abstraction layer for multiple cloud hosting providers, also for [SoftLayer](http://docs.saltstack.com/en/latest/topics/cloud/softlayer.html).
 
 ### Server Provisioning With Salt Cloud
 
-Example of `/etc/salt/cloud.profiles`: 
+Example of `/etc/salt/cloud.profiles`:
 
     softlayer:
         provider: crate-softlayer-hw
@@ -45,22 +45,22 @@ Example of `/etc/salt/cloud.profiles`:
                 role:
                     - crate_softlayer
 
-Example of `/etc/salt/cloud.map`: 
+Example of `/etc/salt/cloud.map`:
 
     softlayer:
       - sl1
       - sl2
       - sl3
 
-Launching the instances defined in the cloud.map file is as easy as this command: 
+Launching the instances defined in the cloud.map file is as easy as this command:
 
     $ salt-cloud -m /etc/salt/cloud.map -P
 
-And once the instances are running you will be able to provision them by running the `highstate` on the crate_softlayer role that the instances are associated with. 
+And once the instances are running you will be able to provision them by running the `highstate` on the crate_softlayer role that the instances are associated with.
 
     $ salt -G 'role:crate_softlayer' state.highstate
 
-The `highstate` is defined in the **sls** (Salt State File). Here's an example of our init.sls: 
+The `highstate` is defined in the **sls** (Salt State File). Here's an example of our init.sls:
 
     crate_repo:
       pkgrepo.managed:

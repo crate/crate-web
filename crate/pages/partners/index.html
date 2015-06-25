@@ -1,0 +1,87 @@
+title: Crate.io Partners
+description: The Crate partner ecosystem
+
+{% extends "base.html" %}
+
+{% block navbar2 %}
+<div class="wrapper wrapper-plain">
+    <nav class="breadcrumb-container">
+      <div class="container">
+        <ol class="breadcrumb">
+          <li class="active">Our Partners</li>
+        </ol>
+      </div>
+    </nav>
+</div>
+{% endblock %}
+
+{% block header %}
+<div class="wrapper wrapper-border wrapper-blogpost-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+         <h1>Crate Partner Ecosystem</h1>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border">
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <p class="lead">Crate understands the importance of community. We couldn't be successful without our partnerships, integrations, and open source companions.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h2><a name="cloud">Cloud Providers</a></h2>
+      </div>
+
+    <div class="col-sm-4">
+      <div class="well">
+        <a class="black-link" href="{% url '/amazon/index.html' %}">
+          <h3>Amazon Web Services</h3>
+          <img class="img-responsive thumbnail" src="{% media '/media/1503/amazon-logo-182.png' %}" width="195" />
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="well">
+        <a class="black-link" href="{% url '/google/index.html' %}">
+          <h3>Google Cloud Platform</h3>
+          <img class="img-responsive thumbnail" src="{% media '/media/1503/google-logo-210.png' %}" width="196" />
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="well">
+        <a class="black-link" href="{% url '/azure/index.html' %}">
+          <h3>Microsoft Azure</h3>
+          <img class="img-responsive thumbnail" src="{% media '/media/1503/microsoft-logo-210.png' %}" width="195"/>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="well">
+        <a class="black-link" href="{% url '/install/cloud/softlayer.html' %}">
+          <h3>IBM Softlayer</h3>
+          <img class="img-responsive thumbnail" src="{% media '/media/1503/softlayer-logo-200.png' %}" width="196"/>
+        </a>
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+</div>
+</div>
+{% endblock %}
