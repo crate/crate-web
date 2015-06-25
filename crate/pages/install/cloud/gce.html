@@ -2,9 +2,9 @@ title: Crate & Google Cloud Platform
 description: We love using the Google Cloud Platform resources here at Crate.IO
 logo: /static/images/gce-logo.png
 
-{% extends "doc.html" %}
+{% extends "install.html" %}
 
-{% block docs_content %}
+{% block install_content %}
 
   <div class="row">
     <div class="col-sm-8">
@@ -317,7 +317,7 @@ crate.service    dcb7f013.../10.240.224.27    active    running</pre>
 
       <p>There you have it!  You can see that there are 3 Crate nodes running in this cluster.  Now if you add another node to the CoreOS cluster, it will automatically join the Crate cluster and Crate will take care of the rest.  Simple scalability FTW!</p>
 
-    </div>  
+    </div>
   </div>
 </div>
 
@@ -330,7 +330,7 @@ crate.service    dcb7f013.../10.240.224.27    active    running</pre>
       <h3>Getting Started</h3>
       <ul>
         <li><a href="https://cloud.google.com/launcher/details/click-to-deploy-images:crate?q=crate">Click to Deploy installer</a></li>
-        <li><a href="{% url '/docs/cloud/gce-bash-script.html' %}">All-in-One Bash Script</a></li>
+        <li><a href="{% url '/install/cloud/gce-bash-script.html' %}">All-in-One Bash Script</a></li>
       </ul>
       <hr />
       {% include "cloud-template-list.html" %}
