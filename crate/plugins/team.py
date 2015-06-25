@@ -25,11 +25,6 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
-            name="Philipp Bogensberger",
-            title="Core Developer",
-            email="",
-            ),
-        dict(
             name="Julia Bundschuh",
             title="Executive Assistant",
             email="",
@@ -40,17 +35,37 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
+            name="Philipp Bogensberger",
+            title="Core Developer",
+            email="",
+            ),
+        dict(
             name="Mathias Fußenegger",
             title="Core Developer",
             email="",
             ),
         dict(
-            name="Christian Haudum",
-            title="Integrations",
+            name="Ruslan Kovalov",
+            title="Core Developer",
+            email="",
+            ),
+        dict(
+            name="Sebastian Utz",
+            title="Core Developer",
+            email="",
+            ),
+        dict(
+            name="Matthias Wahl",
+            title="Core Developer",
             email="",
             ),
         dict(
             name="Michael Beer",
+            title="Developer Integrations",
+            email="",
+            ),
+        dict(
+            name="Christian Haudum",
             title="Developer Integrations",
             email="",
             ),
@@ -62,16 +77,6 @@ def preBuildPage(site, page, context, data):
         dict(
             name="Chris Ward",
             title="Developer Advocate",
-            email="",
-            ),
-        dict(
-            name="Sebastian Utz",
-            title="Core Developer",
-            email="",
-            ),
-        dict(
-            name="Matthias Wahl",
-            title="Core Developer",
             email="",
             ),
         ]
