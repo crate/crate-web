@@ -124,41 +124,6 @@
     </script>
     <!-- @end Twitter SDK -->
 
-    <!-- Optimizely -->
-    <script type="text/javascript">
-      (function() {
-          var projectId = 2233620880;
-          var protocol = ('https:' == document.location.protocol ?
-          'https://' : 'http://');
-          var scriptTag = document.createElement('script');
-          scriptTag.type = 'text/javascript';
-          scriptTag.async = true;
-          scriptTag.src = protocol + 'cdn.optimizely.com/js/' +
-          projectId + '.js';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(scriptTag, s);
-      })();
-      function optimizelyTimeout() {
-          window.optimizely = window.optimizely|| [];
-          if (!window.optimizely.data) {
-          window.optimizely.push("timeout");
-          }
-      }
-
-      setTimeout(optimizelyTimeout, 1000);
-    </script>
-    <!-- @end Optimizely -->
-
-    <!-- LeadLander -->
-    <script type="text/javascript" language="javascript">
-      var sf14gv = 27658;
-      (function() {
-      var sf14g = document.createElement('script'); sf14g.type = 'text/javascript'; sf14g.async = true;
-      sf14g.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 't.sf14g.com/sf14g.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-      })();
-    </script>
-    <!-- @end LeadLander -->
   </body>
 
   {% block scripts %}
