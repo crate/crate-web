@@ -39,11 +39,11 @@ docker pull crate:latest
 
       <h2>Set up the instances</h2>
       <p>Let’s set up three instances.  Don’t forget to put your key name in to the –key-name flag.  Notice that we pass the name of the user data script (above) to the argument –user-data:</p>
-      <pre><code>$ aws ec2 run-instances --count 3 --image-id ami-6e7bd919 \
+      <pre><code>$ aws ec2 run-instances --count 3 --image-id ami-4b6f650e \
   --instance-type m3.xlarge \
   --key-name YOUR_KEY_NAME \
-  --user-data file://docker-user-data.sh
-  --block-device-mappings "[{\"DeviceName\": \"/dev/xvda\",\"Ebs\":{\"SnapshotId\": \"snap-3efdf3c4\", \"VolumeSize\": 8, \"DeleteOnTermination\": true, \"VolumeType\": \"standard\"}}, {\"DeviceName\": \"/dev/sdb\",\"Ebs\":{\"VolumeSize\": 40, \"DeleteOnTermination\": true, \"VolumeType\": \"gp2\"}}, {\"DeviceName\": \"/dev/sdc\",\"Ebs\":{\"VolumeSize\": 40, \"DeleteOnTermination\": true, \"VolumeType\": \"gp2\"}}]"
+  --user-data file://docker-user-data.sh \
+  --block-device-mappings "[{\"DeviceName\": \"/dev/xvda\",\"Ebs\":{\"SnapshotId\": \"snap-14cff4d5\", \"VolumeSize\": 8, \"DeleteOnTermination\": true, \"VolumeType\": \"standard\"}}, {\"DeviceName\": \"/dev/sdb\",\"Ebs\":{\"VolumeSize\": 40, \"DeleteOnTermination\": true, \"VolumeType\": \"gp2\"}}, {\"DeviceName\": \"/dev/sdc\",\"Ebs\":{\"VolumeSize\": 40, \"DeleteOnTermination\": true, \"VolumeType\": \"gp2\"}}]"
       </code></pre>
       <p><em> If you’re not in the US West availability zone, you’ll need to look up the proper AMI image ID and EBS Snapshot ID for your zone.</em></p>
       <p>When you’re finished you’ll need to find the Public DNS names to SSH into the instances.  To get a list of instances you can look them up in the EC2 Management Console, or use the command line:</p>
