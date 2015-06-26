@@ -55,7 +55,7 @@ License: MIT License
 ### Raphael
 <http://raphaeljs.com>, from fork at <git@github.com:mobz/g.raphael.git>  
 Copyright (c) 2010 Dmitry Baranovskiy  
-License: MIT (<http://raphaeljs.com/license.htm>
+License: MIT (<http://raphaeljs.com/license.html>
 
 
 ### date-range-parser
