@@ -45,7 +45,7 @@ docker pull crate:latest
   --user-data file://docker-user-data.sh \
   --block-device-mappings "[{\"DeviceName\": \"/dev/xvda\",\"Ebs\":{\"SnapshotId\": \"snap-14cff4d5\", \"VolumeSize\": 8, \"DeleteOnTermination\": true, \"VolumeType\": \"standard\"}}, {\"DeviceName\": \"/dev/sdb\",\"Ebs\":{\"VolumeSize\": 40, \"DeleteOnTermination\": true, \"VolumeType\": \"gp2\"}}, {\"DeviceName\": \"/dev/sdc\",\"Ebs\":{\"VolumeSize\": 40, \"DeleteOnTermination\": true, \"VolumeType\": \"gp2\"}}]"
       </code></pre>
-      <p><em> If you’re not in the US West availability zone, you’ll need to look up the proper AMI image ID and EBS Snapshot ID for your zone.</em></p>
+      <p><em> If you’re not in the US West availability zone, you’ll need to look up the proper AMI image ID and EBS Snapshot ID for your zone.  The AMI to search for is "amzn-ami-hvm-2014.09.1.x86_64-ebs" and the snapshot is "amzn-ami-hvm-2014.09.1.x86_64".</em></p>
       <p>When you’re finished you’ll need to find the Public DNS names to SSH into the instances.  To get a list of instances you can look them up in the EC2 Management Console, or use the command line:</p>
       <pre><code>$ aws ec2 describe-instances</code></pre>
 
