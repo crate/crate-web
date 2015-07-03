@@ -3,69 +3,71 @@ description: Frequently Asked Questions about Crate
 
 {% extends "docs.html" %}
 
-{% block docs_content %}
+{% block docs_content %}   <div class="row">     <div class="col-sm-8">
 
-  <div class="row">
-    <div class="col-sm-8">
+  <h3>Q: What platform does Crate run on?</h3>
+  <p>Crate is written in Java and therefore platform independent (tested on Linux systems, OSX and Windows). Crate only needs a working Java 7 virtual machine. We recommend using Oracle’s Java on OSX and OpenJDK on Linux Systems. Check out the <a href="/docs/en/latest/installation.html">Installation</a> section in our documentation.</p>
+  <hr />
 
-      <h3>Q: What platform does Crate run on?</h3>
-      <p>Crate is written in Java and therefore platform independent (tested on Linux systems, OSX and Windows). Crate only needs a working Java 7 virtual machine. We recommend using Oracle’s Java on OSX and OpenJDK on Linux Systems. Check out the <a href="/docs/en/latest/installation.html">Installation</a> section in our documentation.</p>
-      <hr />
+  <h3>Q: How do I install Crate?</h3>
+  <p>Crate is easy to install. Visit the <a href="{% url '/install/index.html' %}">Download</a> page for instructions.</p>
+  <hr />
 
-      <h3>Q: How do I install Crate?</h3>
-      <p>Crate is easy to install. Visit the <a href="{% url '/install/index.html' %}">Download</a> page for instructions.</p>
-      <hr />
+  <h3>Q: What do I need to consider when setting up a Crate cluster?</h3>
+  <p>Crate is a distributed datastore by design so in a production environment you usually have a cluster of 3 or more nodes. We at Crate.IO try to make the cluster setup as easy as possible. You can find a <a href="/docs/en/latest/best_practice/multi_node_setup.html">step-by-step guide</a> in our documentation.</p>
+  <hr />
 
-      <h3>Q: What do I need to consider when setting up a Crate cluster?</h3>
-      <p>Crate is a distributed datastore by design so in a production environment you usually have a cluster of 3 or more nodes. We at Crate.IO try to make the cluster setup as easy as possible. You can find a <a href="/docs/en/latest/best_practice/multi_node_setup.html">step-by-step guide</a> in our documentation.</p>
-      <hr />
+  <h3>Q: Is there a limit on how many nodes a Crate cluster can have.</h3>
+  <p>No. You can add as many instances as you want to the cluster. The more nodes, the more powerful the cluster gets!</p>
+  <hr />
 
-      <h3>Q: Is there a limit on how many nodes a Crate cluster can have.</h3>
-      <p>No. You can add as many instances as you want to the cluster. The more nodes, the more powerful the cluster gets!</p>
-      <hr />
+  <h3>Q: Is there a limit of memory I can use?</h3>
+  <p>No. We recommend to set the maximum heap size so that there is still space for the file system cache. However it is not recommended to exceed a maximum heap size of 32GB, because more would disable the Java pointer compression of the JVM. For more information please check the <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html">Oracle Documentation</a> and the <a href="https://crate.io/docs/en/latest/configuration.html#crate-heap-size">Configuration</a> section in our documentation. If you want to increase the total memory of the cluster you should to add more nodes.</p>
+  <hr />
 
-      <h3>Q: Is there a limit of memory I can use?</h3>
-      <p>No. We recommend to set the maximum heap size so that there is still space for the file system cache. However it is not recommended to exceed a maximum heap size of 32GB, because more would disable the Java pointer compression of the JVM. For more information please check the <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html">Oracle Documentation</a> and the <a href="https://crate.io/docs/en/latest/configuration.html#crate-heap-size">Configuration</a> section in our documentation. If you want to increase the total memory of the cluster you should to add more nodes.</p>
-      <hr />
+  <h3>Q: How can I inspect my data?</h3>
+  <p>You can query your own data, the <a href="/docs/en/latest/sql/information_schema.html">information schema</a> and other <a href="/docs/en/latest/sql/system.html">system tables</a> using <a href="http://en.wikipedia.org/wiki/SQL">SQL</a>.</p>
+  <p>Crate also ships with a graphical user interface &#8211; or short <a href="https://github.com/crate/crate-admin/">Admin UI</a> &#8211; to inspect not only your data but also the current state of your cluster.  It's accessible from the browser on every node on port <code>4200</code> at the URL <code>/admin/</code> (e.g. <code>http://127.0.0.1:4200/admin/</code> for a local installation).</p>
+  <p>There is also a command line interface for Crate called crash written in Python. For installation instructions check out the <a href="https://github.com/crate/crash/">Github project</a> and read the <a href="https://crate.io/docs/projects/crash/stable/">documentation</a> for usage.</p>
+  <hr />
 
-      <h3>Q: How can I inspect my data?</h3>
-      <p>You can query your own data, the <a href="/docs/en/latest/sql/information_schema.html">information schema</a> and other <a href="/docs/en/latest/sql/system.html">system tables</a> using <a href="http://en.wikipedia.org/wiki/SQL">SQL</a>.</p>
-      <p>Crate also ships with a graphical user interface &#8211; or short <a href="https://github.com/crate/crate-admin/">Admin UI</a> &#8211; to inspect not only your data but also the current state of your cluster.  It is accessible from the browser on every node on port <code>4200</code> at the URL <code>/admin/</code> (e.g. <code>http://127.0.0.1:4200/admin/</code> for a local installation).</p>
-      <p>There is also a command line interface for Crate called crash written in Python. For installation instructions check out the <a href="https://github.com/crate/crash/">Github project</a> and read the <a href="https://crate.io/docs/projects/crash/stable/">documentation</a> for usage.</p>
-      <hr />
+  <h3>Q: What drivers are there that I can use in my application?</h3>
+  <p>Crate has drivers in several programming languages. Check out the <a href="{% url '/docs/index.html' %}">Download page</a> for a complete list of libraries.</p>
+  <hr />
 
-      <h3>Q: What drivers are there that I can use in my application?</h3>
-      <p>Crate has drivers in several programming languages. Check out the <a href="{% url '/docs/index.html' %}">Download page</a> for a complete list of libraries.</p>
-      <hr />
+  <h3>Q: What is the best way to migrate my data from MongoDB to Crate?</h3>
+  <p>We provide a <a href="/docs/en/latest/best_practice/migrating_from_mongodb.html">best practice how to migration your data from MongoDB</a> to Crate.</p>
+  <hr />
 
-      <h3>Q: What is the best way to migrate my data from MongoDB to Crate?</h3>
-      <p>We provide a <a href="/docs/en/latest/best_practice/migrating_from_mongodb.html">best practice how to migration your data from MongoDB</a> to Crate.</p>
-      <hr />
+  <h3>Q: What is the best way to migrate my data from MySQL to Crate?</h3>
+  <p>We also have a <a href="/docs/en/latest/best_practice/migrating_from_mysql.html">best practice how to migration from MySQL</a> to Crate.</p>
+  <hr />
 
-      <h3>Q: What is the best way to migrate my data from MySQL to Crate?</h3>
-      <p>We also have a <a href="/docs/en/latest/best_practice/migrating_from_mysql.html">best practice how to migration from MySQL</a> to Crate.</p>
-      <hr />
+  <h3>Q: Does Crate do transactions?</h3>
+  <p>No, Crate does not support transactions but does support <a href="http://en.wikipedia.org/wiki/Optimistic_concurrency_control">Optimistic Concurrency Control</a> which allows conflict resolution on the client side.</p>
+  <hr />
 
-      <h3>Q: Does Crate do transactions?</h3>
-      <p>No, Crate does not support transactions but does support <a href="http://en.wikipedia.org/wiki/Optimistic_concurrency_control">Optimistic Concurrency Control</a> which allows conflict resolution on the client side.</p>
-      <hr />
+  <h3>Q: Does Crate support JOINs?</h3>
+  <p>We have been working on getting JOINs into Crate for some time in the best and most performant way. We are ready for users to start helping us test this feature, so please sign up to our testers list and we'll be in touch with details.
 
-      <h3>Q: Does Crate support JOINs?</h3>
-      <p>Not yet. JOINs are on our roadmap and we try to do them the right way in usual quality and well performing.<br />
-        For a lot of use cases there are other ways to achieve the same result as with JOINs. The best way to start is to take a look at the <a href="/docs/en/latest/sql/data_types.html#array">ARRAY</a> and <a href="/docs/en/latest/sql/data_types.html#object">OBJECT</a> data types to denormalise your data.</p>
-      <hr />
+    {% include "mailchimp-joins.html" %}
+    <br/>
+    <em>For many use cases there are other ways to achieve the same result as a JOIN. Take a look at the <a href="/docs/en/latest/sql/data_types.html#array">ARRAY</a> and <a href="/docs/en/latest/sql/data_types.html#object">OBJECT</a> data types to denormalise your data.</em></p>
+    <hr />
 
-      <h3>Q: Does Crate have a built-in user/permission management?</h3>
-      <p>No. You will need to secure your Crate installation/cluster with the administration weapons of your choice, e.g. firewall rules. You find information about that in the documentation about <a href="/docs/en/latest/best_practice/multi_node_setup.html">Multi Node Setup</a>.</p>
-      <hr />
+    <h3>Q: Does Crate have a built-in user/permission management?</h3>
+    <p>No. You will need to secure your Crate installation/cluster with the administration weapons of your choice, e.g. firewall rules. You find information about that in the documentation about <a href="/docs/en/latest/best_practice/multi_node_setup.html">Multi Node Setup</a>.</p>
+    <hr />
 
-    </div>
-    <div class="col-sm-4">
-      <div class="well">
-        <h3>Still Questions?</h3>
-        <p>Get in contact via IRC <a href="http://webchat.freenode.net/?channels=crate">#crate</a> on freenode.net, <a href="http://github.com/crate/crate">Github</a> or <a href="http://stackoverflow.com/tags/crate/">Stackoverflow</a>.</p>
-      </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="well">
+      <h3>Still Questions?</h3>
+      <p>Get in contact via IRC <a href="http://webchat.freenode.net/?channels=crate">#crate</a> on freenode.net, <a href="http://github.com/crate/crate">Github</a> or <a href="http://stackoverflow.com/tags/crate/">Stackoverflow</a>.</p>
     </div>
   </div>
+  ```
+
+</div>
 
 {% endblock %}

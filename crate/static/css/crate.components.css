@@ -292,7 +292,11 @@ img.max-320 {
   padding-left: 8px;
 }
 
-.dynamic-content-well a {
+.dynamic-content-well p {
+  padding:8px;
+}
+
+.dynamic-content-well table a {
   color: #000000;
 }
 

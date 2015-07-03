@@ -34,6 +34,14 @@ description: Crate is the scalable database. Crate allows to query and compute d
       </div>
       <div class="col-sm-4">
         <div class="dynamic-content-well">
+          <h4 class=""><a href="#">JOINs are nearly ready!</a></h4>
+          <p>JOINs have been one of our most requested features and we would welcome your help testing them. Sign up to our testers list and we'll be in touch with details.
+
+          {% include "mailchimp-joins.html" %}
+
+          </p>
+        </div>
+        <div class="dynamic-content-well">
           <h4 class=""><a href="{% url '/blog.html' %}">The Latest Posts</a></h4>
           <table class="table">
             {% for post in posts|slice:":3" %}
@@ -41,7 +49,7 @@ description: Crate is the scalable database. Crate allows to query and compute d
               <td><a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
             </tr>
             {% endfor %}
-         </table>
+          </table>
         </div>
         <div class="dynamic-content-well">
           <h4 class=""><a href="{% url '/events.html' %}">Meet Us Here</a></h4>
@@ -51,7 +59,7 @@ description: Crate is the scalable database. Crate allows to query and compute d
               <td><a href="{{ event.url }}" title="{{ event.title|escape }}">{{ event.title }}</a></td>
             </tr>
             {% endfor %}
-         </table>
+          </table>
         </div>
       </div>
     </div>
@@ -63,16 +71,16 @@ description: Crate is the scalable database. Crate allows to query and compute d
     <div class="row">
       <div class="col-lg-12">
 
-	    <div class="col-lg-12">
-        	<h2>Crate vs MySQL</h2>
+        <div class="col-lg-12">
+          <h2>Crate vs MySQL</h2>
         </div>
         <div class="col-lg-12">
           <p>Crate makes scaling a breeze, while still using standard SQL syntax. It offers auto-sharding and replication, super-fast multi index queries, distributed aggregations and sort, lightning-fast full-text search, and super simple cluster management. Cut the number of nodes in half while gaining a 10-20x performance increase.</p>
           <br />
         </div>
 
-	    <div class="col-lg-12">
-        	<h2>Crate vs NoSQL Solutions</h2>
+        <div class="col-lg-12">
+          <h2>Crate vs NoSQL Solutions</h2>
         </div>
         <div class="col-lg-6">
           <p><strong>Crate vs Cassandra</strong></p>
@@ -141,7 +149,7 @@ description: Crate is the scalable database. Crate allows to query and compute d
           <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
             <a href="http://inventures.eu/crate-data-wins-at-2014-launchpad-competition">
               <img class="img-responsive" src="{% media '/media/1502/inventures.png' %}" />
-              </a>
+            </a>
           </div>
         </div>
       </div>
