@@ -144,3 +144,13 @@ cd crate</pre>
   </div>
 
 {% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+// Allow Page URL to activate a tab's ID
+	var taburl = document.location.toString();
+	if( taburl.match('#') ) {
+		$('.nav-tabs a[href=#'+taburl.split('#')[1]+']').tab('show');
+	}
+</script>
+{% endblock %}

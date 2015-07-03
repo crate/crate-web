@@ -1,64 +1,12 @@
-title: Installing Crate
-description: Download Crate. Easy installation of Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext
-stable_version: 0.49.5
-stable_version_date: July 7th, 2015
-testing_version: 0.50.0
+title: Install on your local machine
 
 {% extends "install.html" %}
 
-{% block header %}
-<div class="wrapper wrapper-border">
-  <div class="container">
-    <h1 id="{{ title|slugify }}">{{ title }}</h1>
-    <p class="lead">From a 2-person startup team to the enterprise company with a full IT staff, Crate is easy to install, manage, and scale. Choose:</p>
-  </div>
-</div>
-{% endblock %}
-
 {% block install_content %}
-
-<div class="install">
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active">
-      <a href="#local" aria-controls="local" role="tab" data-toggle="tab">
-        <div class="install-option">
-          <img class="img-responsive" src="{% static '/static/images/icon_local.png' %}" alt="Local installation" />
-        </div>
-        <p class="install-label">On your machine</p>
-      </a>
-    </li>
-
-    <li role="presentation">
-      <a href="#cloud" aria-controls="cloud" role="tab" data-toggle="tab">
-        <div class="install-option">
-          <img class="img-responsive" src="{% static '/static/images/icon_cloud.png' %}" alt="Cloud" />
-        </div>
-        <p class="install-label">In the cloud</p>
-      </a>
-    </li>
-
-    <li role="presentation">
-      <a href="#docker" aria-controls="docker" role="tab" data-toggle="tab">
-        <div class="install-option">
-          <img class="img-responsive" src="{% static '/static/images/icon_docker.png' %}" alt="Docker" />
-        </div>
-        <p class="install-label">On Docker</p>
-      </a>
-    </li>
-
-    <li role="presentation">
-      <a href="{% url '/install/overview.html' %}" >
-        <div class="install-option">
-          <img class="img-responsive" src="{% static '/static/images/icon_options.png' %}" alt="More options" />
-        </div>
-        <p class="install-label">More options &raquo;</p>
-      </a>
-    </li>
-  </ul>
 
   <div class="row">
   <!-- Tab panes -->
+
     <div class="col-sm-8 tab-content">
       <div role="tabpanel" class="tab-pane active" id="local">
         <h2><a name="sandbox">Try in a local sandbox</a></h2>
@@ -123,7 +71,6 @@ testing_version: 0.50.0
       {% include "mailchimp-small.html" %}
     </div>
   </div>
-</div>
 
 {% endblock %}
 
@@ -161,4 +108,5 @@ testing_version: 0.50.0
     });
   });
 </script>
+
 {% endblock %}
