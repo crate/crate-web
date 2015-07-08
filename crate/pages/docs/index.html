@@ -8,45 +8,48 @@ testing_version: 0.50.0
 
 {% block docs_content %}
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
+        <div class="well wrapper-bg-primary" style="min-height:280px; border-color:transparent;">
+          <h2>Server manual</h2>
+          <p>Want to get into the nitty-gritty of Crate? Learn about Crate's settings, SQL syntax, and usage in detail.</p>
+          <div class="text-center" style="margin-top:32px;">
+            <a href="/docs/stable/" class="btn btn-fp-white"> Stable Version {{ stable_version }}</a>
+            <p><a href="/docs/en/latest/">Latest Version ({{ testing_version }}) &raquo;</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="well wrapper-bg-gray" style="min-height:280px;">
+          <h2>Clients &amp; Utilities</h2>
+          <p>Find out about Crate client libraries for Java, Python, PHP, Node, Ruby, and many other languages.</p>
+          <div class="text-center" style="margin-top:32px;">
+            <a href="{% url '/docs/clients.html' %}" class="btn btn-fp-black"> Client Libraries</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <h2>Installing Crate:</h2>
-
-        <p>One the major themes here at Crate.io is simplicity, in fact it's one of the primary reasons we built Crate: the belief that running a scalable, distributed backend should be approachable by everyone. From a 2-person startup team to the enterprise company with a full IT staff, Crate is easy to install, manage, and scale.</p>
-
-        <p><strong>Read more about <a href="{% url '/install/index.html' %}">installing Crate</a> &raquo;</strong></p>
-
-        <hr />
-
-        <h2>Technical Documentation:</h2>
-
-        <p>Want to get into the nitty-gritty of Crate? Learn about Crate's settings, SQL syntax, and usage in detail in the Server and Client documentation.</p>
-
-          <h4><i class="fa fa-book"></i> Server Manual</h4>
-          <p>Stable Version <small class="text-muted">({{ stable_version }})</small> <a href="/docs/stable/">Read &raquo;</a>
-          <br />Latest Version <small class="text-muted">({{ testing_version }})</small> <a href="/docs/en/latest/">Read &raquo;</a></p>
-
-          <h4><i class="fa fa-book"></i> Client Docs</h4>
-          <p><strong>Find out about <a href="{% url '/docs/clients/index.html' %}">Crate client libraries</a> for Java, Python, PHP, Node, Ruby, and many other languages &raquo;</strong></p>
-
-        <hr />
-
-        <h2>Source Code:</h2>
-
+    <div class="row">
+      <div class="col-sm-8">
+        <h2>Source Code</h2>
         <p>Crate.io is an open source company to the core, and we encourage everyone to delve into our code to see not only what we've written, but what work is in progress, and what has changed as we continue to develop. Open bugs, watch our development branches, or just star us. We love GitHub stars!</p>
-
         <p><strong>Check out all of the <a href="https://github.com/crate">Crate source code on GitHub</a> &raquo;</strong></p>
-
         <hr />
 
-        <h2>Contributing to Crate:</h2>
-
+        <h2>Contributing to Crate</h2>
         <p>Speaking of open source, the best part is that you can contribute to our codebase to improve Crate and provide value to the entire community.  We welcome new contributors and pull requests.</p>
 
         <p><strong>Learn more about how to <a href="{% url '/community/contribute.html' %}">contribute to Crate</a> &raquo;</strong></p>
+      </div>
+      <div class="col-sm-4">
+        <div class="well">
+          <h4 style="margin-bottom:0;">Installing Crate</h4>
+          <p>Crate is easy to install, manage, and scale.</p>
+          <p><a href="{% url '/install/index.html' %}">How to install Crate &raquo;</a></p>
+        </div>
 
       </div>
-
     </div>
+
 
 {% endblock %}
