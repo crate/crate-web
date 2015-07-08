@@ -388,6 +388,11 @@ img.max-320 {
   margin-top: 10px;
 }
 
+.well{
+
+  padding: 8px 20px;
+}
+
 /**
   * Landing pages
   */
