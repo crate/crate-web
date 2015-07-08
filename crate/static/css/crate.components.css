@@ -151,6 +151,86 @@ img.max-320 {
 }
 
 /**
+ * Install
+ */
+
+.install {
+  margin-top: -16px;
+}
+
+.install > .nav-tabs{
+  border: none;
+  margin-right: -16px;
+}
+
+.install-label{
+  text-align: center;
+  color: #55d4f5;
+}
+
+.install > .nav-tabs > li > a {
+  margin-right: 16px;
+  line-height: 1.5;
+  border: 1px solid #e7e7e7;
+  border-radius: 0;
+  color:#000000;
+  }
+
+.install > .nav-tabs > li > a:hover {
+  background-color: rgba(85, 212, 245, 0.2);
+  border-color: transparent;
+  }
+
+.install > .nav-tabs > li.active > a {
+  background-color: rgba(85, 212, 245, 0.2);
+  border-color: transparent;
+}
+
+.install > .nav-tabs > li{
+  width: 25%;
+}
+
+.install-option {
+  height:100px;
+}
+
+.install-option > img {
+  width:120px;
+  margin: 16px auto;
+}
+
+.install .row {
+  padding-top: 48px;
+}
+
+.install-overview {
+  border-top: 1px solid #e7e7e7;
+  padding: 32px 0 0 0;
+}
+
+.icon-wrapper {
+  display:inline-block;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.icon-wrapper > img{
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.row.install-option-row {
+  margin-bottom: 32px;
+}
+
+.row.install-option-row img {
+  max-width: 200px;
+  margin-bottom: 16px;
+}
+
+
+
+/**
  * Blog post elements
  */
 
@@ -440,6 +520,54 @@ a.navbar-brand,
 @media (max-width: 991px) {
   .wrapper {
     overflow-x: hidden;
+  }
+
+
+  .install-option > img {
+    width:30px;
+    margin: 0;
+  }
+
+  .install-option {
+    height:auto;
+    float: left;
+    display: inline-block;
+    margin: 0 16px 0 0;
+  }
+
+
+  .install > .nav-tabs{
+    border: none;
+    margin-right: -16px;
+  }
+
+
+  .install > .nav-tabs > li > a {
+    margin-right: 16px;
+    line-height: 1.5;
+    border: 1px solid #e7e7e7;
+    border-radius: 0;
+    color:#000000;
+  }
+
+  .install > .nav-tabs > li{
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .install-label {
+    text-align: left;
+    margin: 0;
+  }
+
+  .install-overview .install-label {
+    text-align: center;
+  }
+
+  .icon-wrapper {
+    display:block;
+    text-align: center;
+    margin-bottom: 32px;
   }
 }
 

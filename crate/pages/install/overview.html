@@ -1,0 +1,199 @@
+title: All installation options
+description: Download Crate. Easy installation of Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext
+stable_version: 0.49.4
+stable_version_date: June 30th, 2015
+testing_version: 0.50.0
+
+{% extends "install.html" %}
+
+{% block header %}
+<div class="wrapper wrapper-border">
+  <div class="container">
+    <h1 id="{{ title|slugify }}">{{ title }}</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block install_content %}
+<div class="row install-overview">
+  <div class="col-sm-3">
+    <div class="icon-wrapper">
+        <img class="img-responsive" src="{% static '/static/images/icon_local.png' %}" alt="Local installation" />
+        <p class="install-label">On your machine</p>
+    </div>
+  </div>
+  <div class="col-sm-9">
+    <p>Use our easy one-step command to launch Crate in a sandboxed environment. (Make sure you have <a href="http://www.java.com/en/download/mac_download.jsp">Java</a> installed.) Hint: Launch it on two or more machine in the same network :)</p>
+    <p><a href="{% url '/install/local/' %}">More Information </a>&raquo;</p>
+  </div>
+</div>
+
+<div class="row install-overview">
+  <div class="col-sm-3">
+    <div class="icon-wrapper">
+        <img class="img-responsive" src="{% static '/static/images/icon_cloud.png' %}" alt="Cloud" />
+        <p class="install-label">In the cloud</p>
+    </div>
+  </div>
+  <div class="col-sm-9">
+    <div class="row install-option-row">
+      <div class="col-sm-4">
+        <a href="{% url '/install/cloud/aws/' %}"><img class="img-responsive" src="{% static '/static/images/aws-logo.png' %}" alt="Amazon Web Services" /></a>
+      </div>
+      <div class="col-sm-8">
+            <p>Amazon’s cloud (AWS) is a great way to run a Crate cluster. You can leverage all of the power of AWS’s EC2, EBS (and more) to build a truly elastic data store</p>
+        <p><a href="{% url '/install/cloud/aws/' %}">More Information </a>&raquo;</p>
+      </div>
+    </div>
+    <div class="row install-option-row">
+      <div class="col-sm-4">
+        <a href="{% url '/install/cloud/gce/' %}"><img class="img-responsive" src="{% static '/static/images/logo-google.png' %}" alt="Google Compute Engine" /></a>
+      </div>
+      <div class="col-sm-8">
+            <p>Absolutely the easiest way to get started with Crate. Try Google's Click-to-Deploy installer for the Google Cloud Platform to launch a Crate cluster in minutes. (requires a Google cloud account)</p>
+        <p><a href="{% url '/install/cloud/gce/' %}">More Information </a>&raquo;</p>
+      </div>
+    </div>
+    <div class="row install-option-row">
+      <div class="col-sm-4">
+        <a href="{% url '/install/cloud/softlayer/' %}"><img class="img-responsive" src="{% static '/static/images/logo_softlayer.png' %}" alt="IBM Softlayer" /></a>
+      </div>
+      <div class="col-sm-8">
+            <p>SoftLayer is an ideal hosting provider for your own Crate cluster, no matter if you just need a small cluster to play around or run your production cluster even across data centres.</p>
+        <p><a href="{% url '/install/cloud/softlayer/' %}">More Information </a>&raquo;</p>
+      </div>
+    </div>
+    <!--<div class="row install-option-row">
+      <div class="col-sm-4">
+          <img class="img-responsive" src="{% static '/static/images/logo_azure.png' %}" alt="Microsoft Azure" />
+      </div>
+      <div class="col-sm-8">
+            <p>...</p>
+        <p><a href="#">No Information </a>&raquo;</p>
+      </div>
+    </div>-->
+  </div>
+</div>
+
+<div class="row install-overview">
+  <div class="col-sm-3">
+    <div class="icon-wrapper">
+        <img class="img-responsive" src="{% static '/static/images/icon_container.png' %}" alt="Container" />
+        <p class="install-label">Container</p>
+    </div>
+  </div>
+  <div class="col-sm-9">
+    <div class="row install-option-row">
+      <div class="col-sm-4">
+        <a href="{% url '/install/docker/' %}"><img class="img-responsive" src="{% static '/static/images/logo_docker.png' %}" alt="Docker" /></a>
+      </div>
+      <div class="col-sm-8">
+            <p>Crate is ideal for containerized environments such as Docker. You can get your own cluster running within minutes. </p>
+        <p><a href="{% url '/install/docker/' %}">More Information </a>&raquo;</p>
+      </div>
+    </div>
+    <div class="row install-option-row">
+      <div class="col-sm-4">
+        <a href="https://zignar.net/2014/09/02/crate-data-on-core-os/"><img class="img-responsive" src="{% static '/static/images/logo_coreos.png' %}" alt="CoreOS" /></a>
+      </div>
+      <div class="col-sm-8">
+            <p><a href="https://github.com/mfussenegger/">Mathias</a>, one of our core developers wrote a blog post on running Crate on CoreOS.</p>
+        <p><a href="https://zignar.net/2014/09/02/crate-data-on-core-os/">Blogpost </a>&raquo;</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row install-overview">
+  <div class="col-sm-3">
+    <div class="icon-wrapper">
+        <img class="img-responsive" src="{% static '/static/images/icon_os.png' %}" alt="Operating System" />
+        <p class="install-label">Operating System</p>
+    </div>
+  </div>
+  <div class="col-sm-9">
+    <div class="row install-option-row">
+      <div class="col-sm-4">
+        <a href="{% url '/install/linux/' %}"><img class="img-responsive" src="{% static '/static/images/logo_redhat.png' %}" alt="Red Hat" /></a>
+      </div>
+      <div class="col-sm-8">
+            <p>The Crate Team maintains the official YUM repositories for RPM-based releases. It is supported on Linux Distributions such as RedHat Enterprise Linux, CentOS, or Scientific Linux. We are supporting <a href="{% url '/install/linux/#rhel6' %}">RHEL 6</a> and <a href="{% url '/install/linux/#rhel7' %}">RHEL 7</a>.</p>
+      </div>
+    </div>
+    <div class="row install-option-row">
+      <div class="col-sm-4">
+        <a href="{% url '/install/linux/#ubuntu' %}"><img class="img-responsive" src="{% static '/static/images/logo_ubuntu.png' %}" alt="Ubuntu" /></a>
+      </div>
+      <div class="col-sm-8">
+        <p>On our <a href="https://launchpad.net/~crate">Ubuntu team page</a> you can find our personal package archives (PPA). We maintain <a href="https://launchpad.net/~crate/+archive/ubuntu/stable">stable</a> and <a href="https://launchpad.net/~crate/+archive/ubuntu/testing">testing</a> channels.</p>
+        <p><a href="{% url '/install/linux/#ubuntu' %}">More Information </a>&raquo;</p>
+      </div>
+    </div>
+    <div class="row install-option-row">
+      <div class="col-sm-4">
+        <a href="{% url '/install/linux/#debian' %}"><img class="img-responsive" src="{% static '/static/images/logo_debian.png' %}" alt="Debian" /></a>
+      </div>
+      <div class="col-sm-8">
+            <p>We provide Debian packages for the Wheezy distribution (7.x). They are hosted on our own repository.</p>
+        <p><a href="{% url '/install/linux/#debian' %}">More Information </a>&raquo;</p>
+      </div>
+    </div>
+    <div class="row install-option-row">
+      <div class="col-sm-4">
+        <a href="{% url '/install/linux/#archlinux' %}"><img class="img-responsive" src="{% static '/static/images/logo_archlinux.png' %}" alt="ArchLinux" /></a>
+      </div>
+      <div class="col-sm-8">
+            <p>We also publish our buildfiles for Arch Linux AUR. Installing packages from the AUR is a relatively simple process (Full instructions are available on the Arch Linux <a href="https://wiki.archlinux.org/index.php/AUR_User_Guidelines">Wiki</a>).</p>
+        <p><a href="{% url '/install/linux/#archlinux' %}">More Information </a>&raquo;</p>
+      </div>
+    </div>
+    <div class="row install-option-row">
+      <div class="col-sm-4">
+        <a href="{% url '/install/local/' %}"><img class="img-responsive" src="{% static '/static/images/logo_osx.png' %}" alt="Mac OS X" /></a>
+      </div>
+      <div class="col-sm-8">
+            <p>On OS X it's best to use our tarball, or the simple try script. Be sure to install <a href="http://www.java.com/en/download/mac_download.jsp">Java</a> first.</p>
+        <p><a href="{% url '/install/local/' %}">More Information </a>&raquo;</p>
+      </div>
+    </div>
+    <!--<div class="row install-option-row">
+      <div class="col-sm-4">
+          <img class="img-responsive" src="{% static '/static/images/logo_windows.png' %}" alt="Windows" />
+      </div>
+      <div class="col-sm-8">
+            <p></p>
+        <p><a href="#">More Information </a>&raquo;</p>
+      </div>
+    </div>-->
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  jQuery.fn.selectText = function(){
+     var doc = document;
+     var element = this[0];
+     console.log(this, element);
+     if (doc.body.createTextRange) {
+         var range = document.body.createTextRange();
+         range.moveToElementText(element);
+         range.select();
+     } else if (window.getSelection) {
+         var selection = window.getSelection();
+         var range = document.createRange();
+         range.selectNodeContents(element);
+         selection.removeAllRanges();
+         selection.addRange(range);
+     }
+  };
+
+  $(document).ready( function(){
+    $(".click2select_ubuntu").click( function(){
+      $(this).find(".click2select_ubuntu_content").selectText();
+    });
+  });
+</script>
+{% endblock %}
+

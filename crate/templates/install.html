@@ -7,16 +7,23 @@
       <ol class="nav navbar-nav navbar-subnav">
         <li class="{% if_current_page '/install/index.html' 'active' '' %}">
           <a href="{% url '/install/index.html' %}">
+            Quickstart</a></li>
+        <li class="{% if_current_page '/install/overview.html' 'active' '' %}">
+          <a href="{% url '/install/overview.html' %}">
             Overview</a></li>
+        <li class="{% if_current_page '/install/local.html' 'active' '' %}">
+          <a href="{% url '/install/local.html' %}">
+            Local</a></li>
+        <li class="{% if_current_page '/install/cloud/index.html' 'active' '' %}">
+          <a href="{% url '/install/cloud/index.html' %}">
+            Cloud</a></li>
         <li class="{% if_current_page '/install/docker.html' 'active' '' %}">
           <a href="{% url '/install/docker.html' %}">
             Docker</a></li>
         <li class="{% if_current_page '/install/linux.html' 'active' '' %}">
           <a href="/install/linux/">
             Linux</a></li>
-        <li class="{% if_current_page '/install/cloud/index.html' 'active' '' %}">
-          <a href="{% url '/install/cloud/index.html' %}">
-            Cloud</a></li>
+
       </ol>
     </div>
   </nav>
