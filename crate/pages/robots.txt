@@ -1,6 +1,3 @@
-{% verbatim %}
-User-agent: *
+{% verbatim %}User-agent: *
 Disallow:
-
-Sitemap: sitemap.xml
-{% endverbatim %}
+Sitemap: sitemap.xml{% endverbatim %}
