@@ -4,14 +4,14 @@ title: Install on Linux
 
 {% block install_content %}
 
-  <div class="row">
-    <div class="col-lg-12">
-      <h2>Easy Install</h2>
-      <p>If you want to install Crate onto your Linux System, we recommend to use our prebuilt packages.
-        Right now we support RedHat Enterprise Linux 6 and 7, and compatible distributions as well as Ubuntu and Arch Linux.
-        Let our 1-step installer configure the appropriate package repository and install Crate:</p>
-        <pre class="codehighlight"><span class="nd">bash</span> <span class="o">-c</span> <span class="s">"<span class="nl">$(curl -L install.crate.io)</span>"</span></pre>
-      <p>After downloading, and installing, the Crate service will be started and Crate will listen on port <code>4200</code>.</p>
+<div class="row">
+  <div class="col-lg-12">
+    <h2>Easy Install</h2>
+    <p>If you want to install Crate onto your Linux System, we recommend using our prebuilt packages.
+      Currently we support RedHat Enterprise Linux 6 and 7 and compatible distributions as well as Ubuntu and Arch Linux.
+      If you use our 1-step installer it will configure the appropriate package repository and install Crate for you:</p>
+      <pre class="codehighlight"><span class="nd">bash</span> <span class="o">-c</span> <span class="s">"<span class="nl">$(curl -L install.crate.io)</span>"</span></pre>
+      <p>After downloading and installing, the Crate service will be started and will listen on port <code>4200</code>.</p>
     </div>
   </div>
 
@@ -30,23 +30,30 @@ title: Install on Linux
           <div role="tabpanel" class="tab-pane active" id="rhel6">
             <h3>YUM Repository</h3>
             <p>The Crate Team maintains the official YUM repositories for RPM-based releases. It is supported on Linux Distributions such as RedHat Enterprise Linux 6, CentOS 6, or Scientific Linux 6. This version may be incompatible with RHEL7 based distributions, if you are using RHEL7 please use our <a href="#"
-            onClick="$('#tab_rhel7').click(); return false;">release for RHEL7</a>.</p>
-            <h4>How to enable the Crate YUM repository</h4>
-            <p>All Crate packages are signed with GPG. To verify the packages the public key must be installed to the system. After that, you can install the .rpm containing the YUM repository definition on your system.</p>
-            <pre>sudo rpm --import https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate
-sudo rpm -Uvh https://cdn.crate.io/downloads/yum/6/x86_64/crate-release-6.5-1.noarch.rpm
+              onClick="$('#tab_rhel7').click(); return false;">release for RHEL7</a>.</p>
+              <h4>How to enable the Crate YUM repository</h4>
+              <p>All Crate packages are signed with GPG. To verify the packages the public key must be installed on the system. After that, you can install the <code>.rpm</code> containing the YUM repository definition on your system.</p>
+              <pre class="codehighlight">
+<span class="nd">sudo rpm</span> <span class="o">--import</span> <span class="nl">https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate</span>
+<span class="nd">sudo rpm</span> <span class="o">-Uvh</span> <span class="nl">https://cdn.crate.io/downloads/yum/6/x86_64/crate-release-6.5-1.noarch.rpm</span>
+
 Retrieving https://cdn.crate.io/downloads/yum/6/x86_64/crate-release-6.5-1.noarch.rpm
 Preparing...                ########################################### [100%]
-   1:crate-release          ########################################### [100%]</pre>
-            <p>Make sure you are allowed to sudo. You can verify the GPG key, the installation of the repository and get details about available packages:</p>
-            <pre>rpm -qa gpg* | grep gpg-pubkey-06f6eaeb-52cbcb20
-gpg-pubkey-06f6eaeb-52cbcb20
+1:crate-release          ########################################### [100%]
+</pre>
+                <p>Make sure you are allowed to use <code>sudo</code>. Verify the GPG key, the installation of the repository and get details about available packages:</p>
+                <pre class="codehighlight">
+<span class="nd">rpm</span> <span class="o">-qa</span> <span class="nl">gpg*</span> | <span class="nd">grep</span> <span class="nl">gpg-pubkey-06f6eaeb-52cbcb20</span>
 
-yum repolist | grep crate
+gpg-pubkey-06f6eaeb-52cbcb20</span>
+
+<span class="nd">yum</span> <span class="nl">repolist</span> | <span class="nd">grep</span> <span class="nl">crate</span>
+
 repo id  repo name                                       status
 crate    CRATE Packages for Enterprise Linux 6 - x86_64       2
 
-yum info crate
+<span class="nd">yum</span> <span class="nl">info</span> <span class="nl">crate</span>
+
 Available Packages
 Name        : crate
 Arch        : x86_64
@@ -55,29 +62,37 @@ Release     : 1
 Size        : 42 M
 Repo        : crate
 Summary     : A shared nothing, fully searchable document oriented cluster datastore
-URL         : https://crate.io/</pre>
-            <h4>Testing/Unstable Releases</h4>
-            <p>The Crate Testing repository is disabled by default. It contains development builds and is frequently updated. The packages are waiting for feedback from testers as to their functionality and stability. Packages in this repository will come and go during the development period, so it should not be left enabled or used on production systems. If you want to enable the Testing repo on your server, set <code>enabled=1</code> in <code>/etc/yum.repos.d/crate.repo</code></p>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="rhel7">
-            <h3>YUM Repository</h3>
-            <p>The Crate Team maintains the official YUM repositories for RPM-based releases. It is supported on Linux Distributions such as RedHat Enterprise Linux 7, CentOS 7, or Scientific Linux 7.</p>
-            <h4>How to enable the Crate YUM repository</h4>
-            <p>All Crate packages are signed with GPG. To verify the packages the public key must be installed to the system. After that, you can install the .rpm containing the YUM repository definition on your system.</p>
-            <pre>sudo rpm --import https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate
-sudo rpm -Uvh https://cdn.crate.io/downloads/yum/7/noarch/crate-release-7.0-1.noarch.rpm
+URL         : https://crate.io/
+</pre>
+                  <h4>Testing/Unstable Releases</h4>
+                  <p>The Crate Testing repository is disabled by default. It contains development builds and is frequently updated. The packages are waiting for feedback from testers on their functionality and stability. Packages in this repository will come and go during the development period, so it should not be left enabled or used on production systems. If you want to enable the Testing repo on your server, set <code>enabled=1</code> in <code>/etc/yum.repos.d/crate.repo</code></p>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="rhel7">
+                  <h3>YUM Repository</h3>
+                  <p>The Crate Team maintains the official YUM repositories for RPM-based releases. It is supported on Linux Distributions such as RedHat Enterprise Linux 7, CentOS 7, or Scientific Linux 7.</p>
+                  <h4>How to enable the Crate YUM repository</h4>
+                  <p>All Crate packages are signed with GPG. To verify the packages the public key must be installed on the system. After that, you can install the <code>.rpm</code> containing the YUM repository definition on your system.</p>
+                  <pre class="codehighlight">
+<span class="nd">sudo rpm</span> <span class="o">--import</span> <span class="nl">https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate</span>
+<span class="nd">sudo rpm</span> <span class="o">-Uvh</span> <span class="nl">https://cdn.crate.io/downloads/yum/7/noarch/crate-release-7.0-1.noarch.rpm</span>
+
 Retrieving https://cdn.crate.io/downloads/yum/7/noarch/crate-release-7.0-1.noarch.rpm
 Preparing...                ########################################### [100%]
-   1:crate-release          ########################################### [100%]</pre>
-            <p>Make sure you are allowed to sudo. You can verify the GPG key, the installation of the repository and get details about available packages:</p>
-            <pre>rpm -qa gpg* | grep gpg-pubkey-06f6eaeb-52cbcb20
-gpg-pubkey-06f6eaeb-52cbcb20
+1:crate-release          ########################################### [100%]
+</pre>
+                    <p>Make sure you are allowed to use <code>sudo</code>. Verify the GPG key, the installation of the repository and get details about available packages:</p>
+                    <pre class="codehighlight">
+<span class="nd">rpm</span> <span class="o">-qa</span> <span class="nl">gpg*</span> | <span class="nd">grep</span> <span class="nl">gpg-pubkey-06f6eaeb-52cbcb20</span>
 
-yum repolist | grep crate
+gpg-pubkey-06f6eaeb-52cbcb20</span>
+
+<span class="nd">yum</span> <span class="nl">repolist</span> | <span class="nd">grep</span> <span class="nl">crate</span>
+
 repo id  repo name                                       status
 crate    CRATE Packages for Enterprise Linux 7 - x86_64       2
 
-yum info crate
+<span class="nd">yum</span> <span class="nl">info</span> <span class="nl">crate</span>
+
 Available Packages
 Name        : crate
 Arch        : noarch
@@ -86,71 +101,85 @@ Release     : 1
 Size        : 49 M
 Repo        : crate
 Summary     : A shared nothing, fully searchable document oriented cluster datastore
-URL         : https://crate.io/</pre>
-            <h4>Testing/Unstable Releases</h4>
-            <p>The Crate Testing repository is disabled by default. It contains development builds and is frequently updated. The packages are waiting for feedback from testers as to their functionality and stability. Packages in this repository will come and go during the development period, so it should not be left enabled or used on production systems. If you want to enable the Testing repo on your server, set <code>enabled=1</code> in <code>/etc/yum.repos.d/crate.repo</code></p>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="ubuntu">
-            <h3>Ubuntu Personal Package Archive (PPA)</h3>
-            <p>We build packages for the Ubuntu versions Lucid Lync, Saucy Salamander and Precise Pangolin. They are available on our Launchpad page. To enable the Repository on your machine simply add the PPA:</p>
-            <pre>sudo apt-get install python-software-properties
-sudo add-apt-repository ppa:crate/stable
-sudo apt-get update
-sudo apt-get install crate</pre>
-            <h4>Testing/Unstable Releases</h4>
-            <p>The Crate Testing Repository contains development builds and is frequently updated. The packages are waiting for feedback from testers as to their functionality and stability. Packages in this repository will come and go during the development period, so it should not be left enabled or used on production systems. To enable the Testing Repository on your machine add the PPA:</p>
-            <pre>sudo apt-get install python-software-properties
-sudo add-apt-repository ppa:crate/testing
-sudo apt-get update
-sudo apt-get install crate</pre>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="debian">
-            <h3>APT Repository</h3>
-            <p>We provide Debian packages for the Wheezy distribution (7.x). They are hosted on our own repository.</p>
-            <p>Installing Crate from our repository requires just a few steps:</p>
-            <pre># install https support for apt
-sudo apt-get install apt-transport-https
+URL         : https://crate.io/
+</pre>
+
+                      <h4>Testing/Unstable Releases</h4>
+                      <p>The Crate Testing repository is disabled by default. It contains development builds and is frequently updated. The packages are waiting for feedback from testers as to their functionality and stability. Packages in this repository will come and go during the development period, so it should not be left enabled or used on production systems. If you want to enable the Testing repo on your server, set <code>enabled=1</code> in <code>/etc/yum.repos.d/crate.repo</code></p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="ubuntu">
+                      <h3>Ubuntu Personal Package Archive (PPA)</h3>
+                      <p>We build packages for the Ubuntu versions Lucid Lync, Saucy Salamander and Precise Pangolin. They are available on our <a href="https://launchpad.net/~crate">Launchpad page</a>. To enable the Repository on your machine simply add the PPA:</p>
+<pre>
+<span class="nd">sudo apt-get</span> install <span class="nl">python-software-properties</span>
+<span class="nd">sudo add-apt-repository</span> <span class="nl">ppa:crate/stable</span>
+<span class="nd">sudo apt-get</span> update
+<span class="nd">sudo apt-get</span> install <span class="nl">crate</span>
+</pre>
+                        <h4>Testing/Unstable Releases</h4>
+                        <p>The Crate Testing Repository contains development builds and is frequently updated. The packages are waiting for feedback from testers as to their functionality and stability. Packages in this repository will come and go during the development period, so it should not be left enabled or used on production systems. To enable the Testing Repository on your machine add the PPA:</p>
+<pre>
+<span class="nd">sudo apt-get</span> install <span class="nl">python-software-properties</span>
+<span class="nd">sudo add-apt-repository</span> <span class="nl">ppa:crate/testing</span>
+<span class="nd">sudo apt-get</span> update
+<span class="nd">sudo apt-get</span> install <span class="nl">crate</span>
+</pre>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="debian">
+                          <h3>APT Repository</h3>
+                          <p>We provide Debian packages for the Wheezy distribution (7.x). They are hosted on our own repository.</p>
+                          <p>Installing Crate from our repository requires a few steps:</p>
+                          <pre>
+# install https support for apt
+<span class="nd">sudo apt-get</span> install <span class="nl">apt-transport-https</span>
+
 # download and install gpg key
-wget https://cdn.crate.io/downloads/apt/DEB-GPG-KEY-crate
-sudo apt-key add DEB-GPG-KEY-crate
+<span class="nd">wget</span> <span class="nl">https://cdn.crate.io/downloads/apt/DEB-GPG-KEY-crate</span>
+<span class="nd">sudo apt-key</span> add <span class="nl">DEB-GPG-KEY-crate</span>
+
 # add repository to sources
-echo "
+<span class="nd">echo</span> "
 deb https://cdn.crate.io/downloads/apt/stable/ wheezy main
-deb-src https://cdn.crate.io/downloads/apt/stable/ wheezy main" >> /etc/apt/sources.list
+deb-src https://cdn.crate.io/downloads/apt/stable/ wheezy main" >> <span class="nl">/etc/apt/sources.list</span>
+
 # update sources and install crate
-sudo apt-get update
-sudo apt-get install crate</pre>
-            <h4>Testing/Unstable Releases</h4>
-            <p>Testing releases of Crate are also available for Debian. Use the following source URLs:</p>
-            <pre>deb https://cdn.crate.io/downloads/apt/testing/ wheezy main
-deb-src https://cdn.crate.io/downloads/apt/testing/ wheezy main</pre>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="archlinux">
-            <h3>Arch Linux User Repository (AUR)</h3>
-            <p>Since some of the Crate developers use Arch Linux, we also publish our buildfiles for <a href="https://aur.archlinux.org/packages/crate/">Arch Linux AUR</a>. Installing packages from the AUR is a relatively simple process (Full instructions are available on the Arch Linux <a href="https://wiki.archlinux.org/index.php/AUR_User_Guidelines">Wiki</a>).
-              Make sure build base-devel is installed (<code>pacman -S --needed base-devel</code>)</p>
-            <pre>mkdir ~/builds
-cd ~/builds
-curl -O https://aur.archlinux.org/packages/cr/crate/crate.tar.gz
-tar xzvf crate.tar.gz
-cd crate</pre>
-            <p>Build and install the package:</p>
-            <pre>makepkg -si</pre>
-            <p><a href="https://wiki.archlinux.org/index.php/AUR_Helpers">AUR Helpers</a> add seamless access to the AUR. They vary in their features but can ease in searching, fetching, building, and installing from PKGBUILDs found in the AUR. All of these scripts can be found in the AUR.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<span class="nd">sudo apt-get</span> update
+<span class="nd">sudo apt-get</span> install <span class="nl">crate</span>
+</pre>
+                            <h4>Testing/Unstable Releases</h4>
+                            <p>Testing releases of Crate are available for Debian. Use the following source URLs:</p>
+                            <pre>
+<span class="nd">deb</span> https://cdn.crate.io/downloads/apt/testing/ <span class="nl">wheezy main</span>
+<span class="nd">deb-src</span> https://cdn.crate.io/downloads/apt/testing/ <span class="nl">wheezy main</span></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="archlinux">
+                              <h3>Arch Linux User Repository (AUR)</h3>
+                              <p>Since some of the Crate developers use Arch Linux, we also publish our buildfiles for <a href="https://aur.archlinux.org/packages/crate/">Arch Linux AUR</a>. Installing packages from the AUR is a relatively simple process (Full instructions are available on the Arch Linux <a href="https://wiki.archlinux.org/index.php/AUR_User_Guidelines">Wiki</a>).
+                                Make sure <code>build base-devel</code> is installed (<code>pacman -S --needed base-devel</code>)</p>
+                                <pre>
+<span class="nd">mkdir</span> <span class="nl">~/builds</span>
+<span class="nd">cd</span> <span class="nl">~/builds</span>
+<span class="nd">curl</span> -O <span class="nl">https://aur.archlinux.org/packages/cr/crate/crate.tar.gz</span>
+<span class="nd">tar</span> xzvf <span class="nl">crate.tar.gz</span>
+<span class="nd">cd</span> <span class="nl">crate</span>
+</pre>
+                                  <p>Build and install the package:</p>
+                                  <pre><span class="nd">makepkg</span> -si</pre>
+                                  <p><a href="https://wiki.archlinux.org/index.php/AUR_Helpers">AUR Helpers</a> add seamless access to the AUR. They vary in their features but can ease in searching, fetching, building, and installing from PKGBUILDs found in the AUR. All of these scripts can be found in the AUR.</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
 
-{% endblock %}
+                        {% endblock %}
 
-{% block scripts %}
-<script type="text/javascript">
-// Allow Page URL to activate a tab's ID
-	var taburl = document.location.toString();
-	if( taburl.match('#') ) {
-		$('.nav-tabs a[href=#'+taburl.split('#')[1]+']').tab('show');
-	}
-</script>
-{% endblock %}
+                        {% block scripts %}
+                        <script type="text/javascript">
+                        // Allow Page URL to activate a tab's ID
+                        var taburl = document.location.toString();
+                        if( taburl.match('#') ) {
+                          $('.nav-tabs a[href=#'+taburl.split('#')[1]+']').tab('show');
+                        }
+                        </script>
+                        {% endblock %}
