@@ -161,6 +161,16 @@ To test Marathon's capability to retain the application cluster contraints that 
 
 ### Using Multicast Discovery
 
+***
+
+#### Update (July 20th, 2015)
+
+The following setup for multicast discovery utilizes the `--bridge=weave` Docker
+option, which turns out to have some major side effects, as Weave points out on
+their [blog post](http://blog.weave.works/2015/07/16/bridge-over-troubled-weavers/).
+
+***
+
 We've already written a <a href="{% url '/blog/crate-with-docker-and-weave.html' %}">blog post</a> on how to utilize Weave for multicast discovery for Crate.
 
 This time we'll go a little further and adopt the concept of automatic IP assignment of Docker containers laid out in the great blog post [Adventures with Weave and Docker](http://sttts.github.io/docker/weave/mesos/2015/01/22/weave.html) by Stefan Schimanski.
