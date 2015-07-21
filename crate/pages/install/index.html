@@ -1,8 +1,4 @@
 title: Installing Crate
-description: Download Crate. Easy installation of Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext
-stable_version: 0.49.6
-stable_version_date: July 16th, 2015
-testing_version: 0.50.1
 
 {% extends "install.html" %}
 
@@ -76,14 +72,14 @@ testing_version: 0.50.1
 
         <h2><a name="tarball">Download the Tarball</a></h2>
         <form class="well form-horizontal" id="form-download"
-        data-url="https://cdn.crate.io/downloads/releases/crate-{{ stable_version }}.tar.gz"
+        data-url="https://cdn.crate.io/downloads/releases/crate-{{ CONFIG.stable_version }}.tar.gz"
         data-required="false">
         <fieldset>
-          <p>Version <strong>{{ stable_version }}</strong><br /><small class="text-muted">Released on {{ stable_version_date }}</small></p>
+          <p>Version <strong>{{ CONFIG.stable_version }}</strong><br /><small class="text-muted">Released on {{ CONFIG.stable_version_date }}</small></p>
           <button type="submit" class="btn btn-primary" id="download-main"><i class="fa fa-download"></i> Download .tar.gz</button>
         </fieldset>
       </form>
-      <p>Test builds of Crate should only be used for testing upcoming new features not in production. <a href="https://cdn.crate.io/downloads/releases/crate-{{ testing_version }}.tar.gz" target="_blank">Download latest testing release.</a></p>
+      <p>Test builds of Crate should only be used for testing upcoming new features not in production. <a href="https://cdn.crate.io/downloads/releases/crate-{{ CONFIG.testing_version }}.tar.gz" target="_blank">Download latest testing release.</a></p>
       <p>Nightly builds of Crate are provided for testing purposes only. You can <a href="https://cdn.crate.io/downloads/releases/nightly/" target="_blank">download the latest builds here</a>.</p>
 
     </div>
@@ -119,7 +115,7 @@ testing_version: 0.50.1
     <div class="col-sm-4">
       <div class="well">
         <h4><i class="fa fa-book"></i> Documentation</h4>
-        <p>Server manual <small class="text-muted">({{ stable_version }})</small> <a href="/docs/stable/">Read &raquo;</a>
+        <p>Server manual <small class="text-muted">({{ CONFIG.stable_version }})</small> <a href="/docs/stable/">Read &raquo;</a>
           <br />Client Docs <a href="{% url '/docs/clients.html' %}">Read &raquo;</a></p>
         </div>
         {% include "mailchimp-small.html" %}
