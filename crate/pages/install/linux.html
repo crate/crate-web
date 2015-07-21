@@ -154,12 +154,12 @@ deb-src https://cdn.crate.io/downloads/apt/stable/ wheezy main" >> <span class="
                             </div>
                             <div role="tabpanel" class="tab-pane" id="archlinux">
                               <h3>Arch Linux User Repository (AUR)</h3>
-                              <p>Since some of the Crate developers use Arch Linux, we also publish our buildfiles for <a href="https://aur.archlinux.org/packages/crate/">Arch Linux AUR</a>. Installing packages from the AUR is a relatively simple process (Full instructions are available on the Arch Linux <a href="https://wiki.archlinux.org/index.php/AUR_User_Guidelines">Wiki</a>).
+                              <p>Since some of the Crate developers use Arch Linux, we also publish our buildfiles for <a href="https://aur4.archlinux.org/packages/crate/">Arch Linux AUR</a>. Installing packages from the AUR is a relatively simple process (Full instructions are available on the Arch Linux <a href="https://wiki.archlinux.org/index.php/AUR_User_Guidelines">Wiki</a>).
                                 Make sure <code>build base-devel</code> is installed (<code>pacman -S --needed base-devel</code>)</p>
                                 <pre>
 <span class="nd">mkdir</span> <span class="nl">~/builds</span>
 <span class="nd">cd</span> <span class="nl">~/builds</span>
-<span class="nd">curl</span> -O <span class="nl">https://aur.archlinux.org/packages/cr/crate/crate.tar.gz</span>
+<span class="nd">curl</span> -O <span class="nl">https://aur4.archlinux.org/cgit/aur.git/snapshot/crate.tar.gz</span>
 <span class="nd">tar</span> xzvf <span class="nl">crate.tar.gz</span>
 <span class="nd">cd</span> <span class="nl">crate</span>
 </pre>
