@@ -1,8 +1,5 @@
 title: Crate Documentation
 description: Download Crate. Easy installation of Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext
-stable_version: 0.49.6
-stable_version_date: July 16th, 2015
-testing_version: 0.50.1
 
 {% extends "docs.html" %}
 
@@ -13,8 +10,8 @@ testing_version: 0.50.1
           <h2>Server manual</h2>
           <p>Want to get into the nitty-gritty of Crate? Learn about Crate's settings, SQL syntax, and usage in detail.</p>
           <div class="text-center" style="margin-top:32px;">
-            <a href="/docs/stable/" class="btn btn-fp-white"> Stable Version {{ stable_version }}</a>
-            <p><a href="/docs/en/latest/">Latest Version ({{ testing_version }}) &raquo;</a></p>
+            <a href="/docs/stable/" class="btn btn-fp-white"> Stable Version {{ CONFIG.stable_version }}</a>
+            <p><a href="/docs/en/latest/">Latest Version ({{ CONFIG.testing_version }}) &raquo;</a></p>
           </div>
         </div>
       </div>
