@@ -21,6 +21,17 @@
 #wrapper-hero-overview {
   background-image: url('https://cdn.crate.io/media/1502/hero-bg-overview.jpg');
 }
+
+#wrapper-header-jobs {
+  background-image: url('https://cdn.crate.io/media/1507/header-bg-jobs.jpg');
+  height:220px;
+}
+
+#wrapper-header-jobs h1 {
+  font-size: 72px;
+  color: #ffffff;
+}
+
 .wrapper-plain {
   padding: 0;
 }
