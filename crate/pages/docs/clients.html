@@ -6,126 +6,126 @@ description: Download the latest version of Crate server, clients and utilities.
 {% block docs_content %}
 
 <!-- clients & utilities -->
-  <div class="row">
+<div class="row">
 
-    <div class="col-lg-4 col-sm-6 client-info">
-      <p class="text-center">
-        <img src="{% static '/static/images/lang-java.png' %}" alt="Java" />
-      </p>
-      <p>Our Java distributions are hosted on Bintray and available through JCenter. The JDBC driver requires Crate 0.38.0 or newer.</p>
-      <ul>
-        <li>Crate Java Client (<a href="https://bintray.com/crate/crate/crate-client/view">crate-client</a>) <a href="/docs/projects/crate-java/stable/">Documentation</a></li>
-        <li>Crate JDBC Driver (<a href="https://bintray.com/crate/crate/crate-jdbc/view">crate-jdbc</a>) <a href="/docs/projects/crate-jdbc/stable/">Documentation</a></li>
-      </ul>
-    </div>
-
-    <div class="col-lg-4 col-sm-6 client-info">
-      <p class="text-center">
-        <img src="{% static '/static/images/lang-python.png' %}" alt="Python" />
-      </p>
-      <p>Our Python projects are hosted on Python Packaging Index (PyPI):</p>
-      <ul>
-        <li>Crate <a href="https://pypi.python.org/pypi/crate">Python Client</a> (including SQLAlchemy Integration) <a href="/docs/projects/crate-python/stable/">Documentation</a></li>
-        <li>Crate Shell (<a href="https://pypi.python.org/pypi/crash">CraSh</a>) <a href="/docs/projects/crash/stable/">Documentation</a></li>
-      </ul>
-    </div>
-
-    <div class="col-lg-4 col-sm-6 client-info">
-      <p class="text-center">
-        <img src="{% static '/static/images/lang-ruby.gif' %}" alt="Ruby" />
-      </p>
-      <p>Our Ruby distributions are hosted on RubyGems. The initial Ruby driver and Activerecord adapter were written by <a href="https://twitter.com/corck">Christoph Klocker</a>.</p>
-      <ul>
-        <li>CrateRuby (<a href="http://rubygems.org/gems/crate_ruby">RubyGems</a>, <a href="https://github.com/crate/crate_ruby">Github</a>)</li>
-        <li>Activerecord Crate Adapter (<a href="https://rubygems.org/gems/activerecord-crate-adapter">RubyGems</a>, <a href="https://github.com/crate/activerecord-crate-adapter">Github</a>)</li>
-      </ul>
-    </div>
-
-    <div class="col-lg-4 col-sm-6 client-info">
-      <p class="text-center">
-        <img src="{% static '/static/images/lang-php.png' %}" alt="PHP" />
-      </p>
-      <p>Crate has a <a href="http://www.php.net/manual/en/intro.pdo.php">PDO</a> driver and a <a href="http://www.doctrine-project.org/projects/dbal.html">DBAL</a> Driver that depends on the PDO driver. From our community <a href="https://github.com/RatkoR/" target="_blank">RatkoR</a> created a driver for Laravel, a PHP framework.</p>
-      <ul>
-        <li>Crate PDO (<a href="https://packagist.org/packages/crate/crate-pdo">Packagist</a>, <a href="http://github.com/crate/crate-pdo">Github</a>)</li>
-        <li>Crate DBAL (<a href="https://packagist.org/packages/crate/crate-dbal">Packagist</a>, <a href="http://github.com/crate/crate-dbal">Github</a>)</li>
-        <li>Crate Laravel (<a href="https://github.com/RatkoR/laravel-crate.io">GitHub</a>, <a href="https://github.com/RatkoR/laravel-crate.io/blob/master/README.md">Documentation</a>)</li>
-      </ul>
-    </div>
-
-    <div class="col-lg-4 col-sm-6 client-info">
-      <p class="text-center">
-        <img src="{% static '/static/images/lang-scala.png' %}" alt="Scala" />
-      </p>
-      <p><a href="https://github.com/alexanderjarvis">Alexander Jarvis</a> (TravelAI) has written a Scala driver and Play plugin for Crate.</p>
-      <ul>
-        <li>Crate Scala (<a href="https://github.com/alexanderjarvis/crate-scala">Github</a>)</li>
-        <li>Play Crate (<a href="https://github.com/alexanderjarvis/play-crate">Github</a>)</li>
-      </ul>
-    </div>
-
-    <div class="col-lg-4 col-sm-6 client-info">
-      <p class="text-center">
-        <img src="{% static '/static/images/lang-nodejs.png' %}" alt="Node.js" />
-      </p>
-      <p>There are several drivers for Node.js written by community distributors. They are available via <a title="Node Package Manager" href="https://www.npmjs.com/">npm</a>.</p>
-      <ul>
-        <li>node-crate by @megastef (<a href="https://www.npmjs.com/package/node-crate">npm</a>, <a title="megastef/node-crate" href="https://github.com/megastef/node-crate">Github</a>)</li>
-        <li>crate-connect by @herenow (<a href="https://www.npmjs.com/package/crate-connect">npm</a>, <a title="herenow/crate-connect" href="https://github.com/herenow/crate-connect">Github</a>)</li>
-        <li>cratejs by @herenow (<a href="https://www.npmjs.com/package/cratejs">npm</a>, <a title="herenow/cratejs" href="https://github.com/herenow/cratejs">Github</a>)</li>
-      </ul>
-    </div>
-
-    <div class="col-lg-4 col-sm-6 client-info">
-      <p class="text-center">
-        <img src="{% static '/static/images/lang-loopback.png' %}" alt="Loopback Connector" />
-      </p>
-      <p><a title="lovelysystems.com" href="http://www.lovelysystems.com/en">Lovely Systems</a> created a connector to Crate for <a href="http://loopback.io/" target="_blank">Loopback</a>, the Node.js framework for connecting backend datasources.</p>
-      <ul>
-        <li>Crate Loopback Connector (<a title="Loopback Connector" href="https://github.com/lovelysystems/loopback-connector-crateio">Github</a>)</li>
-      </ul>
-    </div>
-
-    <div class="col-lg-4 col-sm-6 client-info">
-      <p class="text-center">
-        <img src="{% static '/static/images/lang-erlang.png' %}" alt="Erlang" />
-      </p>
-      <p>Craterl is a full-blown Crate Erlang client written by <a title="@matthias_wahl" href="https://twitter.com/matthias_wahl">Matthias Wahl</a>. Craterl brings full SQL support including parameters and bulk operations, full BLOB support, for GET, PUT, DELETE and HEAD requests.</p>
-      <ul>
-        <li>craterl (<a title="crate/craterl" href="https://github.com/crate/craterl">Github</a>)</li>
-      </ul>
-    </div>
-
-    <div class="col-lg-4 col-sm-6 client-info">
-      <p class="text-center">
-        <img src="{% static '/static/images/lang-mono.png' %}" alt="Mono/.NET" />
-      </p>
-      <p>crate-mono is a Mono/.NET client driver implementing the ADO.NET interface for Crate written by <a href="https://twitter.com/mfussenegger">Mathias Fussenegger</a>.</p>
-      <ul>
-        <li>crate-mono (<a title="mfussenegger/crate-mono" href="https://github.com/mfussenegger/crate-mono">Github</a>)</li>
-      </ul>
-    </div>
-
-    <div class="col-lg-4 col-sm-6 client-info">
-      <p class="text-center">
-        <img src="{% static '/static/images/lang-go.jpg' %}" alt="Go" />
-      </p>
-      <p><a title="@herenow" href="https://github.com/herenow">herenow</a> wrote a Golang driver for Crate that implements the Go sql interface package.</p>
-      <ul>
-        <li>go-crate (<a title="herenow/go-crate" href="https://github.com/herenow/go-crate">Github</a>)</li>
-      </ul>
-    </div>
-
-    <div class="col-lg-4 col-sm-6 client-info">
-      <p class="text-center">
-        <img src="{% static '/static/images/lang-vim.png' %}" alt="dbext.vim" />
-      </p>
-      <p><a title="@mfussenegger" href="https://twitter.com/mfussenegger">Mathias Fussenegger</a> forked dbext to support Crate.</p>
-      <ul>
-        <li>dbext.vim (<a title="mfussenegger/dbext.vim" href="https://github.com/mfussenegger/dbext.vim">Github</a>)</li>
-      </ul>
-    </div>
-
+  <div class="col-lg-4 col-sm-6 client-info">
+    <p class="text-center">
+      <img src="{% static '/static/images/lang-java.png' %}" alt="Java" />
+    </p>
+    <p>Our Java distributions are hosted on Bintray and available through JCenter. The JDBC driver requires Crate 0.38.0 or newer.</p>
+    <ul>
+      <li>Crate Java Client (<a href="https://bintray.com/crate/crate/crate-client/view">crate-client</a>) <a href="/docs/projects/crate-java/stable/">Documentation</a></li>
+      <li>Crate JDBC Driver (<a href="https://bintray.com/crate/crate/crate-jdbc/view">crate-jdbc</a>) <a href="/docs/projects/crate-jdbc/stable/">Documentation</a></li>
+    </ul>
   </div>
+
+  <div class="col-lg-4 col-sm-6 client-info">
+    <p class="text-center">
+      <img src="{% static '/static/images/lang-python.png' %}" alt="Python" />
+    </p>
+    <p>Our Python projects are hosted on Python Packaging Index (PyPI):</p>
+    <ul>
+      <li>Crate <a href="https://pypi.python.org/pypi/crate">Python Client</a> (including SQLAlchemy Integration) <a href="/docs/projects/crate-python/stable/">Documentation</a></li>
+      <li>Crate Shell (<a href="https://pypi.python.org/pypi/crash">CraSh</a>) <a href="/docs/projects/crash/stable/">Documentation</a></li>
+    </ul>
+  </div>
+
+  <div class="col-lg-4 col-sm-6 client-info">
+    <p class="text-center">
+      <img src="{% static '/static/images/lang-ruby.gif' %}" alt="Ruby" />
+    </p>
+    <p>Our Ruby distributions are hosted on RubyGems. The initial Ruby driver and Activerecord adapter were written by <a href="https://twitter.com/corck">Christoph Klocker</a>.</p>
+    <ul>
+      <li>CrateRuby (<a href="http://rubygems.org/gems/crate_ruby">RubyGems</a>, <a href="https://github.com/crate/crate_ruby">Github</a>)</li>
+      <li>Activerecord Crate Adapter (<a href="https://rubygems.org/gems/activerecord-crate-adapter">RubyGems</a>, <a href="https://github.com/crate/activerecord-crate-adapter">Github</a>)</li>
+    </ul>
+  </div>
+
+  <div class="col-lg-4 col-sm-6 client-info">
+    <p class="text-center">
+      <img src="{% static '/static/images/lang-php.png' %}" alt="PHP" />
+    </p>
+    <p>Crate has a <a href="http://www.php.net/manual/en/intro.pdo.php">PDO</a> driver and a <a href="http://www.doctrine-project.org/projects/dbal.html">DBAL</a> Driver that depends on the PDO driver. From our community <a href="https://github.com/RatkoR/" target="_blank">RatkoR</a> created a driver for Laravel, a PHP framework.</p>
+    <ul>
+      <li>Crate PDO (<a href="https://packagist.org/packages/crate/crate-pdo">Packagist</a>, <a href="http://github.com/crate/crate-pdo">Github</a>)</li>
+      <li>Crate DBAL (<a href="https://packagist.org/packages/crate/crate-dbal">Packagist</a>, <a href="http://github.com/crate/crate-dbal">Github</a>)</li>
+      <li>Crate Laravel (<a href="https://github.com/RatkoR/laravel-crate.io">GitHub</a>, <a href="https://github.com/RatkoR/laravel-crate.io/blob/master/README.md">Documentation</a>)</li>
+    </ul>
+  </div>
+
+  <div class="col-lg-4 col-sm-6 client-info">
+    <p class="text-center">
+      <img src="{% static '/static/images/lang-scala.png' %}" alt="Scala" />
+    </p>
+    <p><a href="https://github.com/alexanderjarvis">Alexander Jarvis</a> (TravelAI) has written a Scala driver and Play plugin for Crate.</p>
+    <ul>
+      <li>Crate Scala (<a href="https://github.com/alexanderjarvis/crate-scala">Github</a>)</li>
+      <li>Play Crate (<a href="https://github.com/alexanderjarvis/play-crate">Github</a>)</li>
+    </ul>
+  </div>
+
+  <div class="col-lg-4 col-sm-6 client-info">
+    <p class="text-center">
+      <img src="{% static '/static/images/lang-nodejs.png' %}" alt="Node.js" />
+    </p>
+    <p>There are several drivers for Node.js written by community distributors. They are available via <a title="Node Package Manager" href="https://www.npmjs.com/">npm</a>.</p>
+    <ul>
+      <li>node-crate by @megastef (<a href="https://www.npmjs.com/package/node-crate">npm</a>, <a title="megastef/node-crate" href="https://github.com/megastef/node-crate">Github</a>)</li>
+      <li>crate-connect by @herenow (<a href="https://www.npmjs.com/package/crate-connect">npm</a>, <a title="herenow/crate-connect" href="https://github.com/herenow/crate-connect">Github</a>)</li>
+      <li>cratejs by @herenow (<a href="https://www.npmjs.com/package/cratejs">npm</a>, <a title="herenow/cratejs" href="https://github.com/herenow/cratejs">Github</a>)</li>
+    </ul>
+  </div>
+
+  <div class="col-lg-4 col-sm-6 client-info">
+    <p class="text-center">
+      <img src="{% static '/static/images/lang-loopback.png' %}" alt="Loopback Connector" />
+    </p>
+    <p><a title="lovelysystems.com" href="http://www.lovelysystems.com/en">Lovely Systems</a> created a connector to Crate for <a href="http://loopback.io/" target="_blank">Loopback</a>, the Node.js framework for connecting backend datasources.</p>
+    <ul>
+      <li>Crate Loopback Connector (<a title="Loopback Connector" href="https://github.com/lovelysystems/loopback-connector-crateio">Github</a>)</li>
+    </ul>
+  </div>
+
+  <div class="col-lg-4 col-sm-6 client-info">
+    <p class="text-center">
+      <img src="{% static '/static/images/lang-erlang.png' %}" alt="Erlang" />
+    </p>
+    <p>Craterl is a full-blown Crate Erlang client written by <a title="@matthias_wahl" href="https://twitter.com/matthias_wahl">Matthias Wahl</a>. Craterl brings full SQL support including parameters and bulk operations, full BLOB support, for GET, PUT, DELETE and HEAD requests.</p>
+    <ul>
+      <li>craterl (<a title="crate/craterl" href="https://github.com/crate/craterl">Github</a>)</li>
+    </ul>
+  </div>
+
+  <div class="col-lg-4 col-sm-6 client-info">
+    <p class="text-center">
+      <img src="{% static '/static/images/lang-mono.png' %}" alt="Mono/.NET" />
+    </p>
+    <p>crate-mono is a Mono/.NET client driver implementing the ADO.NET interface for Crate written by <a href="https://twitter.com/mfussenegger">Mathias Fussenegger</a>.</p>
+    <ul>
+      <li>crate-mono (<a title="mfussenegger/crate-mono" href="https://github.com/mfussenegger/crate-mono">Github</a>)</li>
+    </ul>
+  </div>
+
+  <div class="col-lg-4 col-sm-6 client-info">
+    <p class="text-center">
+      <img src="{% static '/static/images/lang-go.jpg' %}" alt="Go" />
+    </p>
+    <p><a title="@herenow" href="https://github.com/herenow">herenow</a> wrote a Golang driver for Crate that implements the Go sql interface package.</p>
+    <ul>
+      <li>go-crate (<a title="herenow/go-crate" href="https://github.com/herenow/go-crate">Github</a>)</li>
+    </ul>
+  </div>
+
+  <div class="col-lg-4 col-sm-6 client-info">
+    <p class="text-center">
+      <img src="{% static '/static/images/lang-vim.png' %}" alt="dbext.vim" />
+    </p>
+    <p><a title="@mfussenegger" href="https://twitter.com/mfussenegger">Mathias Fussenegger</a> forked dbext to support Crate.</p>
+    <ul>
+      <li>dbext.vim (<a title="mfussenegger/dbext.vim" href="https://github.com/mfussenegger/dbext.vim">Github</a>)</li>
+    </ul>
+  </div>
+
+</div>
 
 {% endblock %}
