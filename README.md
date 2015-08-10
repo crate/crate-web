@@ -39,6 +39,10 @@ You can specify a specific port with the `--port` argument:
 
 ### Convert Wordpress content to Markdown
 
+You'll need to run buildout with a dev configuration:
+
+    $ bin/buildout -Nvc buildout-dev.cfg
+
 To convert the WP dump (.xml) to Markdown files we use
 [wp2md](https://github.com/dreikanter/wp2md).
 
