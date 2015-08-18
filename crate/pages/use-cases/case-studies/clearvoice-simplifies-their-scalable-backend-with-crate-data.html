@@ -22,13 +22,14 @@ about_name: ClearVoice
 post_type: post
 template: case-study.html
 category: casestudy
+tags: analytics
 
 As ClearVoice was preparing for its launch in June, it was looking for a backend data store for its application. In the meantime, it was using MySQL as its development database, but since the amount of data being stored was about to grow immensely once it launched, ClearVoice planned to de-normalize its data schema and store it in a distributed fashion, using MongoDB and Elasticsearch, Solr or another Lucene-based solution.
 
 > “We didn’t want to use a sharded and clustered MySQL database or Hadoop since maintaining it would have been labor intensive and use up our engineering resources”,
 says Jeff Nappi, ClearVoice’s Director of Engineering.
 
-Jeff then stumbled upon Crate in Hacker News and decided to check it out, especially since ClearVoice was using the SQLAlchemy ORM for Python and that is an official <a href="{% url '/docs/clients/index.html' %}">Crate Python driver</a>.
+Jeff then stumbled upon Crate in Hacker News and decided to check it out, especially since ClearVoice was using the SQLAlchemy ORM for Python and that is an official <a href="{% url '/docs/clients.html' %}">Crate Python driver</a>.
 
 > “I started looking at Crate and was impressed by the quality of the code. We submitted the pull request and got a response over the weekend. Switching from MySQL to Crate took a couple of days. Denormalizing the data was simple as we had already planned to flatten out the data beforehand and weren’t using many JOINs. It was very convenient to integrate Crate into our existing code base even though it was written into a different database”.
 

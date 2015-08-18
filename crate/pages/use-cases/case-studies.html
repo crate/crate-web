@@ -1,0 +1,34 @@
+title: Case Studies
+description: Crate is an open source database built with familiar SQL syntax with replication, sharding and Lucene indexes in one complete package.
+{% extends "base.html" %}
+
+
+{% block header %}
+<div class="wrapper wrapper-bg-primary">
+  <div class="container">
+    <h1>Case Studies</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+
+{% for case in cases|filter_by_category:"casestudy"|slice:":5" %}
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container cs-container">
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="cs-img-preview" style="background-image: url('{% media case.hero_image %}');"></div>
+      </div>
+      <div class="col-sm-7">
+        <p><img src="{% media case.image %}" width="{{ case.image_width }}" class="cs-logo-preview"></p>
+        <h2>{{ case.title }}</h2>
+        <p><a href="{{ case.url }}">Read more ...</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}
