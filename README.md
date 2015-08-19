@@ -108,4 +108,4 @@ Now you can deploy with:
     $ cd crate-web/crate
     $ ../bin/cactus deploy
 
-The first time you run this command Google will verify the account and you have to copy and paste a code from your browser into your terminal
+The first time you run this command Google will verify the account and you have to copy and paste a code from your browser into your terminal.
