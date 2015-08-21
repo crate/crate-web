@@ -77,42 +77,48 @@
     {% block extra_js %}
     {% endblock %}
     <script src="{% static '/static/js/main.js' %}"></script>
+{% if CONFIG.id_segment %}
+    <!-- Segment -->
+    <script>
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+        analytics.load("{{ CONFIG.id_segment }}");
+        analytics.page();
 
-    <!-- Segment.IO SDK -->
-    {% if CONFIG.segment_io %}
-    <script type="text/javascript">
-     window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
-     window.analytics.load("{{ CONFIG.segment_io }}");
-     (function(w,d,s,u){
-       var a=document.createElement(s); a.type="text/javascript", a.id='crate-utils', a.async=1, a.src=('https:'===document.location.protocol?'https:':'http:')+u;
-       var n=document.getElementsByTagName(s)[0]; n.parentNode.insertBefore(a,n);
-     })(window, document, 'script', '//cdn.crate.io/libs/crate/1.0.1/utils.js');
+        analytics.identify($.cookie('uid'), {}, {
+          'integrations': {
+            'Intercom': false
+          }
+        });
+
+      }}();
     </script>
-    {% endif %}
-    <!-- @end Segment.IO SDK -->
-
+    <!-- @end Segment -->
+{% endif %}{% if CONFIG.id_facebook %}
     <!-- Facebook SDK -->
     <div id="fb-root"></div>
-    <script type="text/javascript">
-     (function(d, s, id) {
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) return;
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=512200435519967&version=v2.0";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId: '{{ CONFIG.id_facebook }}',
+          xfbml: true,
+          version: 'v2.4'
+        });
+      };
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
     </script>
     <!-- @end Facebook SDK -->
-
+{% endif %}
     <!-- Twitter SDK -->
-    <script type="text/javascript">
+    <script>
      window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
     </script>
     <!-- @end Twitter SDK -->
-
   </body>
-
-  {% block scripts %}
-  {% endblock %}
-
+{% block scripts %}{% endblock %}
 </html>

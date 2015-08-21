@@ -1,6 +1,7 @@
 {
   "site": "https://staging.crate.io",
-  "segment_io": "qio2kmx6lv",
+  "id_segment": "qio2kmx6lv",
+  "id_facebook": "555437424606586",
   "description": "Download Crate. Easy installation of Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext",
   "stable_version": "0.50.3",
   "stable_version_date": "August 07th, 2015",
