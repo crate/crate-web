@@ -36,9 +36,7 @@ description: Crate is the scalable database. Crate allows to query and compute d
         <div class="dynamic-content-well">
           <h4 class=""><a href="#">JOINs are nearly ready!</a></h4>
           <p>JOINs have been one of our most requested features and we would welcome your help testing them. Sign up to our testers list and we'll be in touch with details.
-
-          {% include "mailchimp-joins.html" %}
-
+{% include "mailchimp-joins.html" %}
           </p>
         </div>
         <div class="dynamic-content-well">
@@ -186,5 +184,13 @@ description: Crate is the scalable database. Crate allows to query and compute d
     </div>
   </div>
 </div>
+{% endblock %}
 
+{% block scripts %}
+    <!-- @start mc_joins_form -->
+    <script>
+      var mc_joins_form = document.getElementById('mc-joins-form');
+      analytics.trackForm(mc_joins_form, 'subscribe_joins');
+    </script>
+    <!-- @end mc_joins_form -->
 {% endblock %}
