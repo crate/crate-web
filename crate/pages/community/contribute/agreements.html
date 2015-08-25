@@ -23,19 +23,19 @@ description:
       <div class="col-sm-4">
         <div class="well text-center contributor-type-box">
           <i class="fa-large fa fa-user"></i><br />
-          <a href="https://www.hellosign.com/s/711a2b80" target="_blank">Individual Contributor</a>
+          <a href="https://www.hellosign.com/s/711a2b80" id="icla-link" target="_blank">Individual Contributor</a>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="well text-center contributor-type-box">
           <i class="fa-large fa fa-building-o"></i><br />
-          <a href="https://www.hellosign.com/s/dbae117b" target="_blank">Company with employees contributing</a>
+          <a href="https://www.hellosign.com/s/dbae117b" id="ccla-link" target="_blank">Company with employees contributing</a>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="well text-center contributor-type-box">
           <i class="fa-large fa fa-briefcase"></i><br />
-          <a href="https://www.hellosign.com/s/23b147d9" target="_blank">Individual Corporate Contributor</a> under an existing company contributor agreement (your employer)
+          <a href="https://www.hellosign.com/s/23b147d9" id="iccla-link" target="_blank">Individual Corporate Contributor</a> under an existing company contributor agreement (your employer)
         </div>
       </div>
     </div>
@@ -48,4 +48,17 @@ description:
 
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+    <!-- @start cla_links -->
+    <script>
+      var link_icla  = document.getElementById('icla-link');
+      var link_ccla  = document.getElementById('ccla-link');
+      var link_iccla = document.getElementById('iccla-link');
+      analytics.trackLink(link_icla,  'link_cla_sign', { type: 'icla' });
+      analytics.trackLink(link_ccla,  'link_cla_sign', { type: 'ccla' });
+      analytics.trackLink(link_iccla, 'link_cla_sign', { type: 'iccla' });
+    </script>
+    <!-- @end cla_links -->
 {% endblock %}

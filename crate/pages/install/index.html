@@ -129,37 +129,47 @@ title: Installing Crate
   {% endblock %}
 
   {% block scripts %}
-  <script type="text/javascript">
-  jQuery.fn.selectText = function(){
-    var doc = document;
-    var element = this[0];
-    console.log(this, element);
-    if (doc.body.createTextRange) {
-      var range = document.body.createTextRange();
-      range.moveToElementText(element);
-      range.select();
-    } else if (window.getSelection) {
-      var selection = window.getSelection();
-      var range = document.createRange();
-      range.selectNodeContents(element);
-      selection.removeAllRanges();
-      selection.addRange(range);
-    }
-  };
+    <script>
+      // send page() event for activated tab
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        analytics.page({
+          url:  window.location.href + $(e.target).attr("href"),
+          path: window.location.pathname + window.location.search + $(e.target).attr("href")
+        });
+      });
+    </script>
 
-  $(document).ready( function(){
-    $(".click2select_try").click( function(){
-      $(this).find(".click2select_try_content").selectText();
+    <script type="text/javascript">
+    jQuery.fn.selectText = function(){
+      var doc = document;
+      var element = this[0];
+      console.log(this, element);
+      if (doc.body.createTextRange) {
+        var range = document.body.createTextRange();
+        range.moveToElementText(element);
+        range.select();
+      } else if (window.getSelection) {
+        var selection = window.getSelection();
+        var range = document.createRange();
+        range.selectNodeContents(element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    };
+
+    $(document).ready( function(){
+      $(".click2select_try").click( function(){
+        $(this).find(".click2select_try_content").selectText();
+      });
+      $(".click2select_install").click( function(){
+        $(this).find(".click2select_install_content").selectText();
+      });
+      $(".click2select_dockerPull").click( function(){
+        $(this).find(".click2select_dockerPull_content").selectText();
+      });
+      $(".click2select_dockerRun").click( function(){
+        $(this).find(".click2select_dockerRun_content").selectText();
+      });
     });
-    $(".click2select_install").click( function(){
-      $(this).find(".click2select_install_content").selectText();
-    });
-    $(".click2select_dockerPull").click( function(){
-      $(this).find(".click2select_dockerPull_content").selectText();
-    });
-    $(".click2select_dockerRun").click( function(){
-      $(this).find(".click2select_dockerRun_content").selectText();
-    });
-  });
-  </script>
+    </script>
   {% endblock %}
