@@ -56,9 +56,9 @@ description:
       var link_icla  = document.getElementById('icla-link');
       var link_ccla  = document.getElementById('ccla-link');
       var link_iccla = document.getElementById('iccla-link');
-      analytics.trackLink(link_icla,  'link_cla_sign', { type: 'icla' });
-      analytics.trackLink(link_ccla,  'link_cla_sign', { type: 'ccla' });
-      analytics.trackLink(link_iccla, 'link_cla_sign', { type: 'iccla' });
+      analytics.trackLink(link_icla,  'clicked_link_sign_cla', { detail: 'icla' });
+      analytics.trackLink(link_ccla,  'clicked_link_sign_cla', { detail: 'ccla' });
+      analytics.trackLink(link_iccla, 'clicked_link_sign_cla', { detail: 'iccla' });
     </script>
     <!-- @end cla_links -->
 {% endblock %}
