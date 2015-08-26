@@ -6,103 +6,74 @@ logo: /static/images/aws-logo.png
 
 {% block install_content %}
 
-  <div class="row">
-    <div class="col-sm-8">
-      <p>Amazon’s cloud (AWS) is a great way to run a Crate cluster.  You can leverage all of the power of AWS’s EC2, EBS (and more) to build a truly elastic data store.  Here, we’ll go over just the basics of getting a 3 node cluster running using Docker, although you can easily deploy Crate without Docker.  We’re just big fans of containers!</p>
-      <p>First, we’ll assume that you have your AWS command line interface (<a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html">awscli</a>) set up and running properly, and that you’re using the US West (N. Cal) availability zone.  If you’re using a different availability zone, you’ll need to look up some different image IDs to match your zone.  We’ll mention it when it comes up.</p>
-      <p>We’ll be setting up our instances using EC2-Classic, not VPC (Virtual Private Cloud).  You can do it either way, but for simplicity we’re just going to use classic EC2.  For more information on this, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html">AWS docs on EC2 & VPC</a>.</p>
+<div class="row">
+  <div class="col-sm-8">
 
-      <h2>Set up the user data script</h2>
-      <p>Before we can set up the instances we need to supply a configuration script.  This script is run on the instance after it is provisioned.  You don’t have to supply the script if, for example, you some other configuration tool like Puppet, Chef, Salt, etc.  But for this example, we need to put the following code in a file named <code>docker-user-data.sh</code>.</p>
-      <pre><code>#!/bin/bash
-# Update the instances:
-yum -y update
-# Crate the filesystems for Crate's data storage
-mkfs.ext4 /dev/sdb
-mkfs.ext4 /dev/sdc
-# Make the directories to mount the drives
-mkdir /data
-mkdir /data/data{1,2}
-# Mount the drives to the data directories
-mount /dev/sdb /data/data1
-mount /dev/sdc /data/data2
-# Add a crate user and give it ownership of the data directories
-adduser crate -s /sbin/nologin
-chown -R crate.crate /data
-# Install and start Docker
-yum install -y docker
-service docker start
-# Get the latest Crate container for Docker
-docker pull crate:latest
+    <p>
+      Amazon Web Services (AWS) is the worlds most popular cloud hosting provider with 1000s of options for platforms, applications and infrastructure.
+    </p>
+    <p>
+      An AMI (Amazon Machine Image) is a pre-configured virtual appliance optimized for a particular use. With the Crate AMI, this includes dependencies, optimization and configuration to get Crate running as quickly and efficiently as possible. Using the AMI is our recommended method for running Crate clusters on AWS.
+    </p>
+    <h2>With the AWS Command Line Interface</h2>
+    <p>
+      You can find the Crate AMI via the command line interface, in the format <i>crate-&lt;VERSION&gt;-&lt;REV&gt;-&lt;BASE_AMI&gt;</i>.
+    </p>
+    <p>
+      For example, to find all Crate AMIs available:
+    </p>
+    <pre><code>
+aws ec2 describe-images --filters "Name=name,Values=crate-*"
+    </code></pre>
+    <img class="img-responsive thumbnail" src="{% media '/media/1508/terminal-output.png' %}" />
+    <p>
+      If you are looking for particular Crate version, you can be more precise:
+    </p>
+    <pre><code>
+aws ec2 describe-images --filters "Name=name,Values=crate-0.51.1-1-amzn-*"
+    </code></pre>
+    <p>
+      To run instances based on your AMI of choice, run the following command with the <code>image-id</code> of the Crate version you wish to run, the name of a security group that allows the ports Crate requires (4200, 4300) and if you want to use the EC2 API for inter-node discovery, a link to a <code>user-data</code> script.
+    </p>
+
+    <pre><code>
+aws ec2 run-instances --image-id ami-96702de1 --count <i>x</i> --instance-type m3.medium --user-data $(base64 user-data.sh) --key-name <i>keyname</i> --security-groups <i>groupname</i>
       </code></pre>
-      <p>Since we aren’t able to use multicast discovery, that’s all we can do right now to set up Crate in advance.  Once we have the instances running, we can then tell Crate where to find the rest of the cluster’s nodes.</p>
 
-      <h2>Set up the instances</h2>
-      <p>Let’s set up three instances.  Don’t forget to put your key name in to the –key-name flag.  Notice that we pass the name of the user data script (above) to the argument –user-data:</p>
-      <pre><code>$ aws ec2 run-instances --count 3 --image-id ami-4b6f650e \
-  --instance-type m3.xlarge \
-  --key-name YOUR_KEY_NAME \
-  --user-data file://docker-user-data.sh \
-  --block-device-mappings "[{\"DeviceName\": \"/dev/xvda\",\"Ebs\":{\"SnapshotId\": \"snap-14cff4d5\", \"VolumeSize\": 8, \"DeleteOnTermination\": true, \"VolumeType\": \"standard\"}}, {\"DeviceName\": \"/dev/sdb\",\"Ebs\":{\"VolumeSize\": 40, \"DeleteOnTermination\": true, \"VolumeType\": \"gp2\"}}, {\"DeviceName\": \"/dev/sdc\",\"Ebs\":{\"VolumeSize\": 40, \"DeleteOnTermination\": true, \"VolumeType\": \"gp2\"}}]"
-      </code></pre>
-      <p><em> If you’re not in the US West availability zone, you’ll need to look up the proper AMI image ID and EBS Snapshot ID for your zone.  The AMI to search for is "amzn-ami-hvm-2014.09.1.x86_64-ebs" and the snapshot is "amzn-ami-hvm-2014.09.1.x86_64".</em></p>
-      <p>When you’re finished you’ll need to find the Public DNS names to SSH into the instances.  To get a list of instances you can look them up in the EC2 Management Console, or use the command line:</p>
-      <pre><code>$ aws ec2 describe-instances</code></pre>
+    <h2>With the AWS Web Interface</h2>
 
-      <h2>Start Crate</h2>
-      <p>So, now let’s log into an instance and get Crate configured and running:</p>
-      <pre><code>$ ssh -i ~/.ssh/YOUR_KEY_FILE ec2-user@ec2-54-99-254-104.us-west-1.compute.amazonaws.com</code></pre>
+    <p>
+      To use the AWS website to launch an instance, click the blue 'Launch Instance' button and find the available Crate AMIs under the <i>Community AMIs</i> section.
+    </p>
+    <img class="img-responsive thumbnail" src="{% media '/media/1508/crate-gui.png' %}" />
+    <p>
+      Click the 'select' button on the AMI you wish to use and set the instance configuration. The most important options here are the number of instances you require and selecting a security group that opens ports 4200 and 4300.
+    </p>
 
-      <p>First we’ll set up some arguments to pass to Docker.  We’ll need to pass it the IP address of the instance, as well as the DNS names of the other nodes:</p>
-      <pre><code>PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
-HOSTS="ec2-54-99-254-104.us-west-1.compute.amazonaws.com:4300,ec2-54-208-251-24.us-west-1.compute.amazonaws.com:4300,ec2-51-79-54-208.us-west-1.compute.amazonaws.com:4300"</code></pre>
-
-      <p>Obviously you’ll need to replace the DNS entries with yours, just don’t forget to add :4300 to the end of each entry.</p>
-      <p>Now we’re ready to start Crate’s Docker container:</p>
-
-      <pre><code>$ docker run -d -p 4200:4200 -p 4300:4300 \
-  --volume /data:/data \
-  --env CRATE_HEAP_SIZE=8g \
-    crate crate:latest \
-      -Des.path.data="/data/data1,/data/data2" \
-      -Des.multicast.enabled=false \
-      -Des.network.publish_host=$PRIVATE_IP \
-      -Des.discovery.zen.ping.unicast.hosts=$HOSTS</code></pre>
-
-      <p>Run this on each instance, and you your cluster should be up and running.</p>
-
-      <h2>Verify the cluster</h2>
-      <p>To verify the cluster is running properly and that all nodes have found each other, run the following curl command:</p>
-
-      <pre><code>$ curl -XPOST $PRIVATE_IP:4200/_sql?pretty -d '{ "stmt": "select name from sys.nodes" }'</code></pre>
-
-      <p>You should get output that lists all three nodes, like so:</p>
-
-      <pre><code>{
-  "cols" : [ "name" ],
-  "duration" : 23,
-  "rows" : [ [ "ElectroCute" ], [ "FooBar" ], [ "ToxicRainbow" ] ],
-  "rowcount" : 3
-}</code></pre>
-
-      <p>Your Crate cluster should be up and running!</p>
-
-      <p>As you can see, we had to do a bit of manual configuration to take into consideration
-        the we did not have multicast discovery enabled.  This causes us to have to know the
-        hostnames of the instances in advance, so the cluster nodes can discover each other.
-        You can <a href="http://www.ravellosystems.com/blog/cloud-networking-ip-broadcasting-multicasting-amazon-ec2/">learn more about multicast</a>
-        and see that it is not supported by cloud providers,
-        which is a bummer.  Please check out our blog post on how to use Weave with Crate to
-        circumvent this problem when using containers.  Weave is a software-defined networking
-        technology (SDN) that integrates with Docker.  By using Weave, you can easily set up a
-        truly elastic datastore leveraging all of the features of EC2.</p>
-
+    <h2>The User Data file</h2>
+    <p>
+      Amongst other configuration options, the User Data file is primarily used for setting your AWS credentials to make use of the EC2 API for inter-node discovery.</p>
+      <p>
+        For example:
+      </p>
+    </p>
+    <pre><code>
+#!/bin/bash
+echo "
+export AWS_ACCESS_KEY_ID='<your_access_key_id>'
+export AWS_SECRET_ACCESS_KEY='<your_secret_access_key>'
+" >> /etc/sysconfig/crate
+          </code></pre>
+        <h2>More Details</h2>
+        <p>
+          For more options and details on setting up a Crate cluster on AWS with our AMI, read <a href="/docs/en/latest/best_practice/crate_ami.html">our best practice guide</a>. For more details on running Crate with Docker on AWS, <a href="/blog/running-crate-with-docker-aws/">read our blog post</a>.
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <img class="img-responsive" src="{% static logo %}" />
+        <hr />
+        {% include "cloud-template-list.html" %}
+      </div>
     </div>
-    <div class="col-sm-4">
-      <img class="img-responsive" src="{% static logo %}" />
-      <hr />
-      {% include "cloud-template-list.html" %}
-    </div>
-  </div>
 
-{% endblock %}
+    {% endblock %}
