@@ -1,3 +1,9 @@
-{% verbatim %}User-agent: *
+{% if CONFIG.robots %}
+User-agent: *
 Disallow:
-Sitemap: https://crate.io/sitemap.xml{% endverbatim %}
+
+Sitemap: {{ CONFIG.site }}/sitemap.xml
+{% else %}
+User-agent: *
+Disallow: /
+{% endif %}

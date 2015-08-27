@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
-    <loc>https://crate.io/sitemap-web.xml</loc>
+    <loc>{{ CONFIG.site }}/sitemap-web.xml</loc>
   </sitemap>
   <sitemap>
-    <loc>https://crate.io/docs/sitemap.xml</loc>
+    <loc>{{ CONFIG.site }}/docs/sitemap.xml</loc>
   </sitemap>
   <sitemap>
-    <loc>https://crate.io/docs/clients/sitemap.xml</loc>
+    <loc>{{ CONFIG.site }}/docs/clients/sitemap.xml</loc>
   </sitemap>
   <sitemap>
-    <loc>https://crate.io/packages/sitemap.xml</loc>
+    <loc>{{ CONFIG.site }}/packages/sitemap.xml</loc>
   </sitemap>
 </sitemapindex>
