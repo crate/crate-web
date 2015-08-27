@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://crate.io/docs/projects/crate-java/stable/</loc>
+    <loc>{{ CONFIG.site }}/docs/projects/crate-java/stable/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
     <url>
-      <loc>https://crate.io/docs/projects/crate-java/stable/setup.html</loc>
+      <loc>{{ CONFIG.site }}/docs/projects/crate-java/stable/setup.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://crate.io/docs/projects/crate-java/stable/client.html</loc>
+      <loc>{{ CONFIG.site }}/docs/projects/crate-java/stable/client.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
 
   <url>
-    <loc>https://crate.io/docs/projects/crate-jdbc/stable/</loc>
+    <loc>{{ CONFIG.site }}/docs/projects/crate-jdbc/stable/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://crate.io/docs/projects/crate-python/stable/</loc>
+    <loc>{{ CONFIG.site }}/docs/projects/crate-python/stable/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
     <url>
-      <loc>https://crate.io/docs/projects/crate-python/stable/client.html</loc>
+      <loc>{{ CONFIG.site }}/docs/projects/crate-python/stable/client.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://crate.io/docs/projects/crate-python/stable/sqlalchemy.html</loc>
+      <loc>{{ CONFIG.site }}/docs/projects/crate-python/stable/sqlalchemy.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://crate.io/docs/projects/crate-python/stable/blobs.html</loc>
+      <loc>{{ CONFIG.site }}/docs/projects/crate-python/stable/blobs.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://crate.io/docs/projects/crate-python/stable/advanced_usage.html</loc>
+      <loc>{{ CONFIG.site }}/docs/projects/crate-python/stable/advanced_usage.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://crate.io/docs/projects/crate-python/stable/https.html</loc>
+      <loc>{{ CONFIG.site }}/docs/projects/crate-python/stable/https.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
 
   <url>
-    <loc>https://crate.io/docs/projects/crash/stable/</loc>
+    <loc>{{ CONFIG.site }}/docs/projects/crash/stable/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
     <url>
-      <loc>https://crate.io/docs/projects/crash/stable/usage.html</loc>
+      <loc>{{ CONFIG.site }}/docs/projects/crash/stable/usage.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://crate.io/docs/projects/crash/stable/cli.html</loc>
+      <loc>{{ CONFIG.site }}/docs/projects/crash/stable/cli.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://crate.io/docs/projects/crash/stable/formats.html</loc>
+      <loc>{{ CONFIG.site }}/docs/projects/crash/stable/formats.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
