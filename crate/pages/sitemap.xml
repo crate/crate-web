@@ -10,6 +10,9 @@
     <loc>{{ CONFIG.site }}/docs/clients/sitemap.xml</loc>
   </sitemap>
   <sitemap>
-    <loc>{{ CONFIG.site }}/packages/sitemap.xml</loc>
+    <loc>{{ CONFIG.site }}/packages/sitemap.xml?page=1</loc>
+  </sitemap>
+  <sitemap>
+    <loc>{{ CONFIG.site }}/packages/sitemap.xml?page=2</loc>
   </sitemap>
 </sitemapindex>
