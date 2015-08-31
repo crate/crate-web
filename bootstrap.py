@@ -1,16 +1,24 @@
-##############################################################################
+# -*- coding: utf-8; -*-
 #
-# Copyright (c) 2006 Zope Foundation and Contributors.
-# All Rights Reserved.
+# Licensed to Crate (https://crate.io) under one or more contributor
+# license agreements.  See the NOTICE file distributed with this work for
+# additional information regarding copyright ownership.  Crate licenses
+# this file to you under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.  You may
+# obtain a copy of the License at
 #
-# This software is subject to the provisions of the Zope Public License,
-# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
-# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
-# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
-# FOR A PARTICULAR PURPOSE.
+#   http://www.apache.org/licenses/LICENSE-2.0
 #
-##############################################################################
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+# However, if you have executed another commercial license agreement
+# with Crate these terms will supersede the license and you may use the
+# software solely pursuant to the terms of the relevant commercial agreement.
+
 """Bootstrap a buildout-based project
 
 Simply run this script in a directory containing a buildout.cfg.
@@ -35,7 +43,7 @@ Bootstraps a buildout-based project.
 Simply run this script in a directory containing a buildout.cfg, using the
 Python that you want bin/buildout to use.
 
-Note that by using --find-links to point to local resources, you can keep 
+Note that by using --find-links to point to local resources, you can keep
 this script from going over the network.
 '''
 
@@ -79,10 +87,10 @@ exec(urlopen('https://bootstrap.pypa.io/ez_setup.py').read(), ez)
 
 if not options.allow_site_packages:
     # ez_setup imports site, which adds site packages
-    # this will remove them from the path to ensure that incompatible versions 
+    # this will remove them from the path to ensure that incompatible versions
     # of setuptools are not in the path
     import site
-    # inside a virtualenv, there is no 'getsitepackages'. 
+    # inside a virtualenv, there is no 'getsitepackages'.
     # We can't remove these reliably
     if hasattr(site, 'getsitepackages'):
         for sitepackage_path in site.getsitepackages():

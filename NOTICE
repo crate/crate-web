@@ -1,0 +1,55 @@
+Crate Data Admin Interface
+
+Copyright 2013-2015 Crate.IO GmbH
+Prinzessinnenstr. 19-20, 10969 Berlin, Germany
+(referred to in this notice as "Crate")
+
+
+Third party dependencies:
+
+=========================================================================
+
+Cactus
+https://github.com/koenbok/Cactus
+Copyright (c) 2012 Koen Bok. All rights reserved.
+License: AS-IS
+
+=========================================================================
+
+Buildout
+http://www.buildout.org
+Copyright (c) 2006 Zope Foundation and Contributors.
+License: Zope Public License, Version 2.1 (ZPL)
+
+=========================================================================
+
+jQuery
+http://jquery.com/
+Copyright 2014 jQuery Foundation and other contributors
+License: MIT (http://opensource.org/licenses/MIT)
+
+=========================================================================
+
+Modernizr v2.6.2
+www.modernizr.com
+Copyright (c) Faruk Ates, Paul Irish, Alex Sexton
+Available under the BSD and MIT licenses
+
+=========================================================================
+
+Bootstrap
+http://getbootstrap.com
+Copyright (c) 2011-2014 Twitter, Inc
+License: MIT (http://opensource.org/licenses/MIT)
+Documentation License: Attribution 3.0 Unported (https://creativecommons.org/licenses/by/3.0/)
+
+=========================================================================
+
+Font Awesome
+http://fontawesome.io
+Copyright Dave Gandy
+License: MIT (http://opensource.org/licenses/MIT)
+Font License: SIL OFL 1.1 (URL: http://scripts.sil.org/OFL)
+Documentation License: CC BY 3.0 (URL: http://creativecommons.org/licenses/by/3.0/)
+
+=========================================================================
