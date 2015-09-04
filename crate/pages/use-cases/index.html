@@ -1,0 +1,148 @@
+title: Use Cases
+description: Crate is an open source database built with familiar SQL syntax with replication, sharding and Lucene indexes in one complete package.
+{% extends "base.html" %}
+
+
+{% block header %}
+<div class="wrapper wrapper-hero wrapper-cs" style="background-image: url('{% media '/media/1508/cs-overview.jpg'%}');">
+  <div class="container">
+    <h1 style="color:#FFFFFF;">{{title}}</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container uc-container">
+    <div class="row">
+      <div class="col-sm-12">
+        <p class="lead">
+          Crate has been designed to be a highly distributed high preforming data store. Before Crate organizations had to compromise on performance if they wanted to keep the ease of use benefits of using SQL stores or move to a No-SQL store and deal with the complexities of the query languages.<br />
+          With Crate you get the best of both worlds: the No-SQL performance you require and the SQL syntax you want. Crate can be used for a variety of use cases, here are the most common ones we encounter:
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container uc-container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Aggregation Across Large Data Sets</h2>
+        <p class="lead">
+          Performing data intensive functions like count, sum, and max become increasingly slow as data volumes grow. This is further complicated by analytical use cases where group by aggregation is a common requirement. For example: Find the average temperature by region over the past 20 years. With Crate you can distribute the underlying data and functions and perform distributed aggregation across these clusters. Crate enables super fast analysis and measurement of data in real time using the SQL syntax you already know.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container uc-container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Big Data Analytics</h2>
+        <p class="lead">
+          There is an explosion of data in the industry with projections that data production will be 44 times greater in 2020 than in 2009. Companies are seeing this data explosion as an opportunity for sophisticated analytics that discover new business opportunities and increase customer engagement. The problem is that the traditional SQL stores are not designed for these data volumes and the No-SQL Stores require a complete rewrite of existing logic and queries to extract the data. Crate offers the scalability and performance of a No-SQL database with a SQL layer, so you can use the same queries from your existing applications and direct integration from programming languages and frameworks.
+        </p>
+
+        <h3 class="blue">Case Study</h3>
+
+        {% for case in cases|filter_by_tag:"analytics"|slice:":1" %}
+        <div style="border: 1px solid #E7E7E7;">
+          <div class="row" style="margin:0;">
+            <div class="col-sm-3 uc-cs-image" style="background-image:url('{% media case.hero_image %}'); background-size: cover;"></div>
+            <div class="col-sm-3 uc-cs-logo"><img src="{% media case.image %}" width="{{ case.image_width }}"></div>
+            <div class="col-sm-6 uc-cs-title">
+              <div>
+                <p class="lead">{{ case.description }}</p>
+                <p><a href="{{ case.url }}">Read more</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container uc-container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Full text search</h2>
+        <p class="lead">
+          Applications that require searching of full text documents or text heavy data have traditionally had to use a text search engine like Apache Lucene. For example: Find how many times a customer name is referenced in the email archive. The problem with using text search engines is that they are complex to query because they use a propriety scripting languages, and they are separate from other data needed in the application. Crate's full text search provides powerful capabilities for analyzing, searching, sorting and querying text based on best in class technologies (like Lucene) with the productivity of a SQL interface.
+        </p>
+
+        <h3 class="blue">Case Study</h3>
+
+
+        {% for case in cases|filter_by_tag:"search"|slice:":1" %}
+        <div style="border: 1px solid #E7E7E7;">
+          <div class="row" style="margin:0;">
+            <div class="col-sm-3 uc-cs-image" style="background-image:url('{% media case.hero_image %}'); background-size: cover; background-position-x: -200px;"></div>
+            <div class="col-sm-3 uc-cs-logo"><img src="{% media case.image %}" width="{{ case.image_width }}"></div>
+            <div class="col-sm-6 uc-cs-title">
+              <div>
+                <p class="lead">{{ case.description }}</p>
+                <p><a href="{{ case.url }}">Read more</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container uc-container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Geospatial queries</h2>
+        <p class="lead">
+          Location data from mobile devices have increased the need for applications to store and process large sets of geospatial data and perform interesting analysis and queues of this data. For example:  Analyzing traffic congestion patterns and proactively proposing alternative routing options. Geospatial queries on large data sets causes performance degradation, but Crate solves these issues by providing support for geospatial data types and functions that work across the data clusters using SQL syntax for increased productivity and ease of use.
+        </p>
+
+        <h3 class="blue">Case Study</h3>
+
+        {% for case in cases|filter_by_tag:"geospatial"|slice:":1" %}
+        <div style="border: 1px solid #E7E7E7;">
+          <div class="row" style="margin:0;">
+            <div class="col-sm-3 uc-cs-image" style="background-image:url('{% media case.hero_image %}'); background-size: cover; background-position-x: -200px;"></div>
+            <div class="col-sm-3 uc-cs-logo"><img src="{% media case.image %}" width="{{ case.image_width }}"></div>
+            <div class="col-sm-6 uc-cs-title">
+              <div>
+                <p class="lead">{{ case.description }}</p>
+                <p><a href="{{ case.url }}">Read more</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="wrapper wrapper-bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>Crate is easy to install and integrate</h2>
+        <p><a class="btn btn-fp-white" href="{% url '/docs/index.html' %}">Start using Crate with your application now!</a></p>
+        <p>Any questions? Feel free to <a href="{% url '/about/contact.html' %}">get in touch with us</a>!</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

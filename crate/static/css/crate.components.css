@@ -354,8 +354,9 @@ img.max-320 {
   margin: 0 0 16px 0;
   padding: 16px 24px;
   transition: background-color 250ms ease 0s;
-  line-height: 1.0;
+  line-height: 1.2;
   min-width: 210px;
+  white-space: normal;
 }
 
 .btn-fp-white {
@@ -470,6 +471,104 @@ a.black-link {
 }
 
 /**
+ * Use Cases (Case Studies)
+ */
+
+.uc-cs-image, .uc-cs-logo, .uc-cs-title {
+  height:200px;
+}
+
+.uc-cs-logo img, .uc-cs-title div{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.uc-cs-logo {
+  text-align: center;
+}
+
+.uc-cs-logo img {
+  max-width: 100%
+}
+
+.wrapper-cs{
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.wrapper-cs .container {
+  background-color: transparent;
+  padding-bottom: 64px;
+  max-width: 972px;
+}
+
+.wrapper-cs-content .container{
+  background-color: #FFFFFF;
+  margin-top: -100px;
+  max-width: 972px;
+  padding: 32px;
+}
+
+.wrapper-highlight {
+  border-left: 1px solid #e7e7e7;
+  padding-left: 32px;
+}
+
+.table-noborder th, .table-noborder td{
+  padding: 0 24px 8px 0;
+  line-height: 1.5em;
+  vertical-align: top;
+}
+
+.quickfacts {
+  margin: 32px 0;
+}
+
+.quickfacts td {
+  border-left: 4px solid #55D4F5;
+  padding: 0 16px 0 16px;
+  width: 50%;
+  vertical-align: top;
+}
+
+.fact{
+  font-size:3em;
+}
+
+.fact-caption{
+  font-size:1.5em;
+  line-height: 1.2em;
+}
+
+.cs-img-preview{
+  width:100%;
+  height:368px;
+  background-size: cover;
+  display: block;
+}
+
+.cs-logo-preview{
+   padding: 64px 0 16px 0;
+}
+
+.uc-container, .cs-container {
+  padding: 64px 16px;
+}
+
+.uc-container h2 {
+  font-size: 3em;
+}
+
+.cs-container h2{
+  font-family: Helvetica, Arial;
+  font-weight: normal;
+  font-size: 1.5em;
+  text-transform: none;
+  line-height: 1.4em;
+}
+
+/**
  * Typography
  */
 
@@ -501,6 +600,37 @@ a.navbar-brand,
   margin-bottom: 0px;
 }
 
+ul, ol{
+    padding-left: 1em;
+}
+
+ul.quickfacts{
+
+}
+
+ul.highlight {
+  font-size: 1.5em;
+  color: #00AAD6;
+  padding-left: 0;
+}
+
+ul.highlight li{
+  list-style-type: none;
+  padding-bottom: 8px;
+
+}
+
+h3.blue{
+  font-size: 1.5em;
+  color: #00AAD6;
+  font-weight: normal;
+  margin-top: 40px;
+}
+
+blockquote {
+  margin: 32px 0 32px 0;
+}
+
 /**
  * Media Queries need to go last ...
  */
@@ -528,6 +658,53 @@ a.navbar-brand,
     min-height: 0;
   }
 
+  .uc-container, .cs-container {
+    padding: 32px 16px;
+  }
+
+  .uc-cs-image {
+    display: none;
+  }
+
+  .uc-cs-logo{
+    text-align: left;
+  }
+
+  .uc-cs-logo img, .uc-cs-title div{
+    position: relative;
+    top: initial;
+    transform: initial;
+  }
+
+  .uc-cs-logo, .uc-cs-title {
+    height: initial;
+    padding:32px 16px 0 16px;
+  }
+
+  .wrapper-cs-content .container{
+    padding: 0 16px;
+  }
+
+  .cs-container{
+    padding: 0 16px;
+  }
+
+  .cs-logo-preview{
+    padding: 32px 0 16px 0;
+  }
+
+  .cs-img-preview{
+    display: none;
+  }
+
+  .wrapper-highlight {
+    border-left: none;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    padding: 16px 0;
+    margin-top: 32px;
+}
+
 }
 
 /**
@@ -536,6 +713,14 @@ a.navbar-brand,
 @media (max-width: 991px) {
   .wrapper {
     overflow-x: hidden;
+  }
+
+  .wrapper-cs .container {
+    padding-bottom: 32px;
+  }
+
+  .wrapper-cs-content .container{
+    margin-top: 0;
   }
 
 

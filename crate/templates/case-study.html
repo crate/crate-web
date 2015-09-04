@@ -5,8 +5,8 @@
   <nav class="breadcrumb-container">
     <div class="container">
       <ol class="breadcrumb">
-        <li class=""><a href="{% url '/blog.html' %}">Blog</a> > </li>
-        <li class="active"><a href="{% url '/casestudies.html' %}">Case Studies</a></li>
+        <li class=""><a href="{% url '/use-cases/' %}">Use Cases</a> > </li>
+        <li class="active"><a href="{% url '/use-cases/case-studies.html' %}">Case Studies</a></li>
       </ol>
     </div>
   </nav>
@@ -14,15 +14,9 @@
 {% endblock %}
 
 {% block header %}
-<div class="wrapper wrapper-border wrapper-blogpost-header">
+<div class="wrapper wrapper-hero wrapper-cs" style="background-image: url('{% media hero_image %}');">
   <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="page-header">
-          <h1>{{ title }}</h1>
-        </div>
-      </div>
-    </div>
+    <h1 style="color: {{title_color}}">{{ title }}</h1>
   </div>
 </div>
 {% endblock %}
@@ -30,35 +24,61 @@
 {% block body %}
 
 {% block top_content %}
-<div class="wrapper wrapper-border">
+<div class="wrapper wrapper-border wrapper-cs-content">
   <div class="container">
     <div class="row">
-      <div class="col-sm-8">
-        <div id="post-content">
-          <p><img src="{% media image %}" /></p>
-          {{ body }}
-        </div>
+      <div class="col-sm-6">
+        <p><img src="{% media image %}" width="{{image_width}}" /></p>
+        <table width="100%" class="table-noborder">
+          <tr>
+            <th>Company</th>
+            <td><a href="{{casestudy_link}}" target="_blank">{{casestudy_company}}</a></td>
+          </tr>
+          <tr>
+            <th>Industry</th>
+            <td>{{casestudy_industry}}</td>
+          </tr>
+          <tr>
+            <th>Location</th>
+            <td>{{casestudy_location}}</td>
+          </tr>
+          <tr>
+            <th>Use Case</th>
+            <td>{{casestudy_usecase}}</td>
+          </tr>
+        </table>
+
+
       </div>
-      <div class="col-sm-4">
-        <div class="">
-          <h3>Case Study at a Glance</h3>
-          <ul>
-            <li><strong>Company</strong>: <a href="{{casestudy_link}}" target="_blank">{{casestudy_company}}</a></li>
-            <li><strong>Industry</strong>: {{casestudy_industry}}</li>
-            <li><strong>Location</strong>: {{casestudy_location}}</li>
-            <li><strong>Use Case</strong>: {{casestudy_usecase}}</li>
-          </ul>
-          <h3>Highlights</h3>
-          <ul>
+      <div class="col-sm-6">
+        <div class="wrapper-highlight">
+          <p><strong>Highlights</strong></p>
+          <ul class="highlight">
             <li>{{highlight_1}}</li>
             <li>{{highlight_2}}</li>
             <li>{{highlight_3}}</li>
             <li>{{highlight_4}}</li>
           </ul>
         </div>
+      </div>
+    </div>
+    <div class="row" style="padding-top:32px;">
+      <div class="col-md-4">
+        <p><strong>Details</strong></p>
+      </div>
+      <div class="col-md-8">
+        <div>
+            {{ body }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <hr />
-
+<div class="wrapper wrapper-border wrapper-border-bottom">
+  <div class="container" style="margin-top:-64px; padding-bottom:32px;">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-4">
         <div class="socialmedia">
           <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-dnt="true" data-related="CrateIO" data-size="large">Tweet</a>
           <a href="https://twitter.com/CrateIO" class="twitter-follow-button" data-show-count="false" data-dnt="true" data-size="large">Follow @CrateIO</a>
@@ -67,11 +87,28 @@
           <div class="fb-share-button" data-href="https://www.facebook.com/cratedata" data-layout="button"></div>
           <div class="fb-follow" data-href="https://www.facebook.com/cratedata" data-colorscheme="light" data-layout="button" data-show-faces="false"></div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border">
+  <div class="container" style="padding:16px 16px;">
+    <div class="row">
+      <div class="col-md-4">
+        <p><strong>About {{about_name}}</strong></p>
+      </div>
+      <div class="col-md-8">
+        <p><img src="{% media image %}" width="{{image_width}}" /></p>
+
+            {{ about|safe }}
 
       </div>
     </div>
   </div>
 </div>
+
+
 {% endblock %}
 
 <div class="wrapper wrapper-bg-primary">
