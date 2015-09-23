@@ -37,13 +37,13 @@ chown crate:crate /path/to/persistent/disk
 By default Crate uses the ports 4200 and 4300. To receive resource offers from Mesos you need to add the resource reservation for a port range that includes these ports. This happens when starting the framework and can be done by writing to the resources file:
 
 ```
-echo 'ports(*)[31000-31099, 31101-32000, 4200-4399]' > /etc/mesos-slave/resources
+echo 'ports(*):[31000-31099, 31101-32000, 4200-4399]' > /etc/mesos-slave/resources
 ```
 
 Or by starting the slave with the option:
 
 ```
---resources=ports(*)[31000-31099, 31101-32000, 4200-4399]
+--resources=ports(*):[31000-31099, 31101-32000, 4200-4399]
 ```
 
 Restart the slave and clean the old slave state if necessary (`rm -f /tmp/mesos/meta/slaves/latest`).
