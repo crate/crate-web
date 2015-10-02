@@ -127,8 +127,8 @@ URL         : https://crate.io/
                         </div>
                         <div role="tabpanel" class="tab-pane" id="debian">
                           <h3>APT Repository</h3>
-                          <p>We provide Debian packages for the Wheezy distribution (7.x). They are hosted on our own repository.</p>
-                          <p>Installing Crate from our repository requires a few steps:</p>
+                          <p>We provide Debian packages for the Wheezy (7.x) and Jessie (8.x) distributions. They are hosted on our own repository.</p>
+                          <p>Installing Crate from our repository requires a few steps. Use the following for Debian Wheezy:</p>
                           <pre>
 # install https support for apt
 <span class="nd">sudo apt-get</span> install <span class="nl">apt-transport-https</span>
@@ -146,11 +146,39 @@ deb-src https://cdn.crate.io/downloads/apt/stable/ wheezy main" >> <span class="
 <span class="nd">sudo apt-get</span> update
 <span class="nd">sudo apt-get</span> install <span class="nl">crate</span>
 </pre>
+
+<p>And for Debian Jessie:</p>
+
+<pre>
+# install https support for apt
+<span class="nd">sudo apt-get</span> install <span class="nl">apt-transport-https</span>
+
+# download and install gpg key
+<span class="nd">wget</span> <span class="nl">https://cdn.crate.io/downloads/apt/DEB-GPG-KEY-crate</span>
+<span class="nd">sudo apt-key</span> add <span class="nl">DEB-GPG-KEY-crate</span>
+
+# add repository to sources
+<span class="nd">echo</span> "
+deb https://cdn.crate.io/downloads/apt/stable/ jessie main
+deb-src https://cdn.crate.io/downloads/apt/stable/ jessie main" >> <span class="nl">/etc/apt/sources.list</span>
+
+# update sources and install crate
+<span class="nd">sudo apt-get</span> update
+<span class="nd">sudo apt-get</span> install <span class="nl">crate</span>
+</pre>
                             <h4>Testing/Unstable Releases</h4>
-                            <p>Testing releases of Crate are available for Debian. Use the following source URLs:</p>
+                            <p>Testing releases of Crate are available for Debian. Use the following source URLs for Debian Wheezy:</p>
                             <pre>
 <span class="nd">deb</span> https://cdn.crate.io/downloads/apt/testing/ <span class="nl">wheezy main</span>
 <span class="nd">deb-src</span> https://cdn.crate.io/downloads/apt/testing/ <span class="nl">wheezy main</span></pre>
+
+<p>And for Debian Jessie:</p>
+
+<pre>
+<span class="nd">deb</span> https://cdn.crate.io/downloads/apt/testing/ <span class="nl">jessie main</span>
+<span class="nd">deb-src</span> https://cdn.crate.io/downloads/apt/testing/ <span class="nl">jessie main</span></pre>
+
+
                             </div>
                             <div role="tabpanel" class="tab-pane" id="archlinux">
                               <h3>Arch Linux User Repository (AUR)</h3>

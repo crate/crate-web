@@ -47,7 +47,7 @@ description: Crate.IO is hiring! We work for two things: technology excellence a
             <td>Berlin in Germany</td>
           </tr>
         </table>
-        <p><a class="btn btn-primary btn-sm" href="/jobs/java-software-engineer/">Check out the job spec &raquo;</a></p>
+        <p><a class="btn btn-primary btn-sm" href="{% url '/jobs/java-software-engineer.html' %}">Check out the job spec &raquo;</a></p>
       </div>
       <div class="col-sm-6">
         <h3>Developer Advocate</h3>
@@ -69,17 +69,45 @@ description: Crate.IO is hiring! We work for two things: technology excellence a
             <td>Berlin in Germany</td>
           </tr>
         </table>
-        <p><a class="btn btn-primary btn-sm" href="/jobs/developer-advocate-developer-relations/">Check out the job spec  &raquo;</a></p>
+        <p><a class="btn btn-primary btn-sm" href="{% url '/jobs/developer-advocate-developer-relations.html' %}">Check out the job spec  &raquo;</a></p>
+      </div>
+      <div class="col-sm-6">
+        <h3>Online Marketing Specialist</h3>
+        <table class="table">
+          <tr>
+            <td>Team or role:</td>
+            <td>Online Marketing Specialist</td>
+          </tr>
+          <tr>
+            <td>Job type:</td>
+            <td>Full-time</td>
+          </tr>
+          <tr>
+            <td>Last updated:</td>
+            <td>September 19th, 2015</td>
+          </tr>
+          <tr>
+            <td>Job location(s):</td>
+            <td>Berlin, Dornbirn or San Francisco</td>
+          </tr>
+        </table>
+        <p><a class="btn btn-primary btn-sm" href="{% url '/jobs/online-marketing-specialist.html' %}">Check out the job spec  &raquo;</a></p>
       </div>
     </div>
 
     <div class="row" style="margin-top:32px;">
       <div class="col-lg-12">
-        <p>Please send your resume and application to jobs@crate.io and we’ll be in touch with you!</p>
+        <p>Please send your resume and application to jobs@crate.io and we'll be in touch with you!</p>
         <p>Links to other web sites and resources where we might learn more about you (personal blog, Twitter, GitHub, Stackoverflow, etc.) are greatly appreciated.</p>
       </div>
     </div>
 
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+      analytics.track('visit_jobs');
+    </script>
 {% endblock %}
