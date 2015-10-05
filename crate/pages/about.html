@@ -1,0 +1,468 @@
+title: About
+description: We are about building a new kind of data store: a zero administration data store that is massively scalable and dead simple to use.
+
+{% extends "base.html" %}
+
+{% block header %}
+<div class="wrapper wrapper-hero wrapper-img" style="background-image: url('{% media '/media/1509/about-crate.jpg'%}');">
+  <div class="container">
+    <h1 style="color:#FFFFFF;">{{title}}</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border wrapper-border-bottom">
+<div class="container">
+  <div class="row" style="padding-top:32px;padding-bottom:32px;">
+    <div class="col-sm-6">
+      <div class="lead">
+        We are about building a new kind of data store: a zero administration data store that is massively scalable and dead simple to use.
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <p>Crate.IO was founded in 2013 by Jodok Batlogg, Christian Lutz, and Bernd Dorn. Our prior experience was all about working with large data sets and setting up the elements to support them. Our experience taught us to pay attention to ease of use, from simple installation to painless operation of huge clusters. Data stores should be simple for developers to use. Big Data mountains grow everywhere. Yet it is still difficult to design, develop, and operate back-end services that truly scale. Underlying traditional databases don’t scale well; solutions are expensive.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
+  <h2>The awesome Team behind Crate</h2>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="blue">Founders</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/jodok-batlogg.jpg' %}" alt="Jodok Batlogg" />
+        <div class="caption">
+          Jodok Batlogg
+          <p class="people-info">Founder and CEO
+          <br /><a href="mailto:jodok@crate.io">jodok@crate.io</a>
+          <br />+43 664 9636 963</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/christian-lutz.jpg' %}" alt="Christian Lutz" />
+        <div class="caption">
+          Christian Lutz
+          <p class="people-info">Founder and COO
+          <br /><a href="mailto:christian@crate.io">christian@crate.io</a>
+          <br />+43 676 5000 144</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/bernd-dorn.jpg' %}" alt="Bernd Dorn" />
+        <div class="caption">
+          Bernd Dorn
+          <p class="people-info">Founder and CTO
+          <br /><a href="mailto:bernd@crate.io">bernd@crate.io</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <p><strong>Jodok</strong> has deep experience and wide recognition for his expertise in open source and big data. He is the former CTO at StudiVZ (Germany’s Facebook), the former CTO at Sevenload and CEO of Lovely Systems. He is also a director of the Plone &amp; Zope foundations. Jodok loves his skis and his chainsaw and is an adventurous eater.</p>
+    </div>
+    <div class="col-sm-4">
+      <p><strong>Christian</strong> is a successful builder of software companies, including enterprise delivery platforms and big consumer portals. He was co-founder and COO of the Impossible Project (owner of the last Polaroid factory; bringing Instant Photography back), CEO of ucp morgen, SVP Qpass Inc, CEO at uboot.com &amp; sms.at and President Fatfoogoo. Christian is a serial entrepreneur, freerider, and mountaineer at heart.</p>
+    </div>
+    <div class="col-sm-4">
+      <p><strong>Bernd</strong> is Crate’s hardcore architect and hacker with more than a decade of experience in distributed systems, enterprise data store solutions, and open source. Before Crate, Bernd led the technical team of Lovely systems, building big data solutions for many enterprises. Whatever Bernd starts he excels in, be it kite surfing, tennis, building his house, or designing Crate.</p>
+    </div>
+  </div>
+
+
+   <div class="row">
+    <div class="col-sm-12">
+      <h3 class="blue">Core Team</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/philipp-bogensberger.jpg' %}" alt="Philipp Bogensberger" />
+        <div class="caption">
+          Philipp Bogensberger
+          <p class="people-info">Core Developer</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/mathias-fuenegger.jpg' %}" alt="Mathias Fußenegger" />
+        <div class="caption">
+          Mathias Fußenegger
+           <p class="people-info">Core Developer</p>
+        </div>
+      </div>
+    </div>
+        <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/ruslan-kovalov.jpg' %}" alt="Ruslan Kovalov" />
+        <div class="caption">
+          Ruslan Kovalov
+           <p class="people-info">Core Developer</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/sebastian-utz.jpg' %}" alt="Sebastian Utz" />
+        <div class="caption">
+          Sebastian Utz
+           <p class="people-info">Core Developer</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/matthias-wahl.jpg' %}" alt="Matthias Wahl" />
+        <div class="caption">
+          Matthias Wahl
+          <p class="people-info">Core Developer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="lead">
+        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget risus varius blandit sit amet non magna. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nulla vitae elit libero, a pharetra augue. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="blue">Integrations</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/michael-beer.jpg' %}" alt="Michael Beer" />
+        <div class="caption">
+          Michael Beer
+          <p class="people-info">Developer Integrations</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/christian-haudum.jpg' %}" alt="Christian Haudum" />
+        <div class="caption">
+          Christian Haudum
+          <p class="people-info">Developer Integrations</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/chris-ward.jpg' %}" alt="Chris Ward" />
+        <div class="caption">
+          Chris Ward
+          <p class="people-info">Developer Advocate</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="lead">
+        <p>Donec sed odio dui. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget metus. Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper nulla non metus auctor fringilla.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="blue">Administration</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/julia-bundschuh.jpg' %}" alt="Julia Barta" />
+        <div class="caption">
+          Julia Barta
+          <p class="people-info">Executive Assistant</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/sarah-fischli.jpg' %}" alt="Sarah Fischli" />
+        <div class="caption">
+          Sarah Fischli
+          <p class="people-info">Project Management</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="lead">
+        <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Sed posuere consectetur est at lobortis. Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="blue">Board of Directors</h3>
+      <p style="margin-top:-16px;margin-bottom:40px;">In addition to Jodok Batlogg and Christian Lutz, our Board of Directors consists of:</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/nikolaj-nyholm.jpg' %}" alt="Nikolaj Nyholm" />
+        <div class="caption">
+          Nikolaj Nyholm
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/stuart-chapman.jpg' %}" alt="Stuart Chapman" />
+        <div class="caption">
+          Stuart Chapman
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="thumb-people">
+        <img class="img-responsive" src="{% static '/static/images/tom-peruzzi.jpg' %}" alt="Tom Peruzzi" />
+        <div class="caption">
+          Tom Peruzzi
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <p><a href="http://sunstone.eu/team-members/nikolaj-nyholm/"><b>Nikolaj Nyholm</b></a> is a partner at Sunstone and the quintessential university dropout turned technology entrepreneur.</p>
+      <p>At Sunstone, Nikolaj has invested in open source, gaming and web service companies with engagements in Neo Technology, Podio, MakieLab, and Seriously to mention a few. Nikolaj joined Sunstone in 2010 from image recognition company Polar Rose (acquired by Apple), and previously founded Speednames/Ascio (acquired by Group NBT); Imity (acquired by Zyb/Vodafone); and Organic Network, a now-defunct Wi-Fi startup whose legacy is OpenWRT.org, the leading open source Wi-Fi project.</p>
+    </div>
+    <div class="col-sm-4">
+      <p><a href="http://www.draperesprit.com/#section=team"><b>Stuart Chapman</b></a> Prior to co-founding Draper Esprit in 2005 Stuart was a partner of 3i Ventures where he was also a founding partner of their Menlo Park office.</p>
+      <p>Over his 13 years at 3i he was responsible for investments in Neutec Pharma (LSE), Network Technology (LSE), The Cloud, Searchspace, and Magic 4. Stuart served as a member of the BVCA Council and Chairman of the Venture Committee and before 3i he was involved in software and systems implementations in the Banking sector. He is a graduate of Loughborough University and serves as a Board Member of the Loughborough School of Business and Economics.</p>
+    </div>
+    <div class="col-sm-4">
+      <p><a href="https://angel.co/tom-peruzzi"><b>Tom Peruzzi</b></a>, Founder of @aicooma, advisor to different digital startups in Mid Europe and Russia, micro-investor in cool digital stuff delivers strong business and tech background.</p>
+      <p>Tom started and built aicooma, an operations consulting company for digital and media in Europe with all major players as customers, with an exit in 2011.</p>
+      <p>He then successfully invested in several companies (avocadostore, vater hostcom, gpixs360) and helped them build business, adequate technology and grow. As interim CTO, Tom helped building one of the first commercial IoT devices in Europe.</p>
+    </div>
+  </div>
+
+  <div id="investors">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="blue">Investors</h3>
+    </div>
+  </div>
+
+  <div class="row row-list-item">
+    <div class="col-sm-3">
+      <a href="http://sunstone.eu"><img style="max-width:130px;" class="img-responsive" src="{% static '/static/images/sunstone-capital.jpg' %}" alt="Sunstone Capital" /></a>
+    </div>
+    <div class="col-sm-8 col-sm-offset-1">
+      <p>Headquartered in Copenhagen, <a href="http://sunstone.eu"><b>Sunstone Capital</b></a> is an early-stage Life Science and Technology venture capital company investing in European start-up companies with strong potential to achieve global success in their markets. Since our establishment in 2007, we have built a strong portfolio currently totaling 50 companies and have completed several successful trade sales and IPOs.
+      <br />With approximately EUR 700 million in funds under management, Sunstone is today one of the leading and most active independent venture capital investors in the European and Nordic market.</p>
+    </div>
+  </div>
+  <div class="row row-list-item">
+    <div class="col-sm-3">
+      <a href="http://www.draperesprit.com"><img style="max-width:200px;" class="img-responsive" src="{% static '/static/images/draper-esprit.gif' %}" alt="Draper Esprit" /></a>
+    </div>
+    <div class="col-sm-8 col-sm-offset-1">
+      <p><a href="http://www.draperesprit.com"><b>Draper Esprit</b></a>, (formerly DFJ Esprit) member of the The DFJ Network of Partner Funds, is a unique global venture capital model providing global reach through local presence. It encompasses over 140 venture capital professionals in more than 30 cities throughout the US, Asia (including China and India), Europe, Israel, South America, and Russia, with more than 600 portfolio companies funded and over $7 billion of capital under management.
+      <br />Draper Esprit is a single team of partners all of whom benefit from and contribute to the success of our investments. We are entrepreneurs ourselves and we are proud to have built our firm to its current size and are passionate about continually moving forward, which means backing winning companies and doing everything we can to help them achieve and exceed their ambitions.</p>
+    </div>
+  </div>
+  <div class="row row-list-item">
+    <div class="col-sm-3">
+      <a href="http://speedinvest.com"><img style="max-width:200px;" class="img-responsive" src="{% static '/static/images/speedinvest.png' %}" alt="SpeedInvest" /></a>
+    </div>
+    <div class="col-sm-8 col-sm-offset-1">
+      <p>Europe is filled with technology and talent. Global innovation in the last century has been driven by European minds: Tesla, Siemens, Einstein, Planck. Today, Europe still consistently produces world-class talent, but there is a gap between raw ability and the resources required to build competitive technology and companies.<br />
+      <a href="http://speedinvest.com"><b>SpeedInvest</b></a> not only invests capital in world-class talent, but also provides the entrepreneurial know-how, and operational experience that is rare outside of a place like Silicon Valley, but is so essential to building great companies.</p>
+    </div>
+  </div>
+  </div>
+
+</div>
+</div>
+
+<div class="wrapper wrapper-bg-gray">
+<div class="container">
+  <h2>Our Culture</h2>
+
+    <div class="row">
+    <div class="col-sm-12">
+    <!-- Wrapper for slides -->
+    <div class="carousel-culture">
+      <div>
+        <img class="img-responsive" src="{% media '/media/1510/culture-food.jpg'%}" alt="Food" />
+        <div>
+          For some of us cooking is quite big.
+        </div>
+      </div>
+      <div>
+        <img class="img-responsive" src="{% media '/media/1510/culture-drink.jpg'%}" alt="Drink" />
+        <div>
+          For others the drinking part is what it’s all about.
+        </div>
+      </div>
+      <div>
+        <img class="img-responsive" src="{% media '/media/1510/culture-together.jpg'%}" alt="Together" />
+        <div>
+          But we definetely all enjoy doing both together.
+        </div>
+      </div>
+      <div>
+        <img class="img-responsive" src="{% media '/media/1510/culture-sport.jpg'%}" alt="Sport" />
+        <div>
+          Sometimes we even get sporty together… well, sort of…
+        </div>
+      </div>
+      <div>
+        <img class="img-responsive" src="{% media '/media/1510/culture-gear.jpg'%}" alt="Gear" />
+        <div>
+          We love trying out new gear…
+        </div>
+      </div>
+      <div>
+        <img class="img-responsive" src="{% media '/media/1510/culture-testing.jpg'%}" alt="Testing" />
+        <div>
+          … and properly testing it is mandatory.
+        </div>
+      </div>
+      <div>
+        <img class="img-responsive" src="{% media '/media/1510/culture-sleep.jpg'%}" alt="Sleep" />
+        <div>
+          Some advice from us: monitor your work/sleep load.
+        </div>
+      </div>
+      <div>
+        <img class="img-responsive" src="{% media '/media/1510/culture-wild.jpg'%}" alt="Wild" />
+        <div>
+          Coding out in the wild keeps you hungry.
+        </div>
+      </div>
+      <div>
+        <img class="img-responsive" src="{% media '/media/1510/culture-nutrition.jpg'%}" alt="Nutrition" />
+        <div>
+          Never let your nutrition stack run empty.
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="lead" style="margin-top:40px;">
+        <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Sed posuere consectetur est at lobortis. Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="wrapper wrapper-border">
+<div class="container">
+  <h2>Locations</h2>
+  <div class="row" id="locations">
+    <div class="col-sm-4">
+      <h3 class="blue">Berlin, D</h3>
+      <img class="img-responsive" src="{% static '/static/images/location-berlin.png' %}" alt="Office Berlin" />
+      <div>
+        Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Donec id elit non mi porta gravida at eget metus.
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <h3 class="blue">San Francisco, USA</h3>
+      <img class="img-responsive" src="{% static '/static/images/location-san-francisco.png' %}" alt="Office San Francisco" />
+      <div>
+        Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui.
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <h3 class="blue">Dornbirn, A</h3>
+      <img class="img-responsive" src="{% static '/static/images/location-dornbirn.png' %}" alt="Office Dornbirn" />
+      <div>
+        Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Sed posuere consectetur est at lobortis.
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function($) {
+      $('.carousel-culture').slick({
+        dots: true,
+        infinite: false,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              infinite: false,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              infinite: false,
+              dots: true
+            }
+          }
+          // You can unslick at a given breakpoint now by adding:
+          // settings: "unslick"
+          // instead of a settings object
+        ]
+      });
+    });
+</script>
+
+
+
+{% endblock %}

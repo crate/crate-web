@@ -2,39 +2,32 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-2 col-xs-4 col-md-2">
-        <h4 class="c-footer-heading"><a href="{%url '/community/index.html' %}" title="Community">
-          Community</a></h4>
         <ul class="list-unstyled">
-          <li><a href="{% url '/events.html' %}" title="Events">
+          <li><a href="{% url '/about.html' %}" title="About">
+            About</a></li>
+          <li><a href="{% url '/jobs.html' %}" title="Jobs">
+            Jobs</a></li>
+          <li><a href="{%url '/events.html' %}" title="Events">
             Events</a></li>
+          <li><a href="{% url '/contact.html' %}" title="Contact">
+            Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 col-xs-4 col-md-2">
+        <ul class="list-unstyled">
           <li><a href="{% url '/community/support.html' %}" title="Support">
             Support</a></li>
           <li><a href="{% url '/community/contribute.html' %}" title="Contribute">
             Contribute</a></li>
-        </ul>
-        <h4 class="c-footer-heading"><a href="{%url '/enterprise/index.html' %}" title="Enterprise">
-          Enterprise</a></h4>
-      </div>
-      <div class="col-sm-2 col-xs-4 col-md-2">
-        <h4 class="c-footer-heading"><a href="{% url '/about/index.html' %}" title="About">
-            About us</a>
-        </h4>
-        <ul class="list-unstyled">
-          <li><a href="{% url '/about/team.html' %}" title="Team">
-            Team</a></li>
-          <li><a href="{% url '/jobs.html' %}" title="Jobs">
-            Jobs</a></li>
-          <li><a href="{%url '/partners/index.html' %}" title="Partners">
-            Partners</a></li>
-          <li><a href="{% url '/about/contact.html' %}" title="Contact">
-            Contact</a></li>
+          <li><a rel="nofollow" href="https://github.com/crate">
+            Crate on GitHub</a></li>
+          <li><a href="{%url '/enterprise/index.html' %}" title="Enterprise">
+          Enterprise</a>
+
+          </li>
         </ul>
       </div>
       <div class="col-sm-2 col-xs-4 col-md-2 col-lg-4">
-        <h4 class="c-footer-heading">
-          <a href="{% url '/legal/index.html' %}" title="Legal">
-            Legal</a>
-        </h4>
         <ul class="list-unstyled">
           <li><a href="{% url '/legal/trademark.html' %}" title="Trademark Statement" class="text-muted">
             Trademark</a></li>
@@ -49,7 +42,7 @@
       <div class="col-sm-6 col-xs-12 col-md-6 col-lg-4">
         <h4 class="c-footer-heading">
           Connect</h4>
-        <table style="width:100%;">
+        <table style="width:100%;margin-bottom:16px;">
           <tr>
             <td><a rel="nofollow" href="https://github.com/crate"><i class="fa fa-github"></i>
               Github</a></td>
