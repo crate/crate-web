@@ -5,7 +5,7 @@
     <nav class="breadcrumb-container">
       <div class="container">
 	<ol class="breadcrumb">
-	  <li class="active"><a href="{% url '/jobs.html' %}">Jobs at Crate.IO</a></li>
+    <li class="active"><a href="{% url '/jobs.html' %}">Jobs at Crate.IO</a></li>
 	</ol>
       </div>
     </nav>
@@ -61,4 +61,10 @@
   </div>
 </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+      analytics.track('visit_jobs');
+    </script>
 {% endblock %}
