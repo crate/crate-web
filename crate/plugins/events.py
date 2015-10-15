@@ -33,7 +33,7 @@ from markdown2 import markdown
 from django.template import Context
 from django.template.base import Library
 from django.template.loader import get_template, add_to_builtins
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
 from web.utils import toDict, parseDate, parsePost
@@ -72,8 +72,8 @@ def preBuild(site):
     today = datetime.today()
     EVENTS = sorted(EVENTS, key=lambda x: x['date_from'])
     EVENTS.reverse()
-    PAST_EVENTS= filter(lambda x: x['date_to'] < today, EVENTS)
-    UPCOMING_EVENTS = filter(lambda x: x['date_to'] >= today, EVENTS)
+    PAST_EVENTS = list(filter(lambda x: x['date_to'] < today, EVENTS))
+    UPCOMING_EVENTS = list(filter(lambda x: x['date_to'] >= today, EVENTS))
     UPCOMING_EVENTS.reverse()
 
 
@@ -89,7 +89,7 @@ def preBuildPage(site, page, context, data):
     for ctx in EVENTS:
         if ctx['path'] == page.path:
             tpl = get_template(ctx.get('template', 'event.html'))
-            raw = force_unicode(ctx['raw_body'])
+            raw = force_text(ctx['raw_body'])
             ctx['body'] = mark_safe(markdown(raw, extras=["fenced-code-blocks"]))
             context['__CACTUS_CURRENT_PAGE__'] = page
             context['CURRENT_PAGE'] = page

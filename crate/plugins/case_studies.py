@@ -13,7 +13,7 @@ from markdown2 import markdown
 from django.template import Context
 from django.template.base import Library
 from django.template.loader import get_template
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
 from web.utils import toDict, parseDate, parsePost
@@ -64,7 +64,7 @@ def preBuild(site):
     CASES = sorted(CASES, key=lambda x: x['date'])
     CASES.reverse()
 
-    indexes = xrange(0, len(CASES))
+    indexes = range(0, len(CASES))
 
     for i in indexes:
         if i+1 in indexes: CASES[i]['prev_post'] = CASES[i+1]
@@ -82,7 +82,7 @@ def preBuildPage(site, page, context, data):
     for case in CASES:
         if case['path'] == page.path:
             tpl = get_template(case.get('template', 'case-study.html'))
-            raw = force_unicode(case['raw_body'])
+            raw = force_text(case['raw_body'])
             case['body'] = mark_safe(markdown(raw,
                 extras=["fenced-code-blocks","header-ids"]))
             context['__CACTUS_CURRENT_PAGE__'] = page

@@ -25,14 +25,18 @@ import re
 import hashlib
 import logging
 
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    # python 3
+    from io import StringIO
+
 from datetime import datetime
 from markdown2 import markdown
 
 from django.utils.html import strip_tags
 from django.utils.text import Truncator
-from django.utils.encoding import force_unicode
-from django.utils.safestring import mark_safe
+from django.utils.encoding import force_text
 
 logger = logging.getLogger(__name__)
 HEADER_RE = r'(\w+)\:\s([\S\s]*)\n'
@@ -41,7 +45,7 @@ HEADER_RE = r'(\w+)\:\s([\S\s]*)\n'
 def toDict(conf, posts):
     site = conf.get('site', '')
     return [dict(
-        id = hashlib.md5(x['url']).hexdigest(),
+        id = hashlib.md5(x['url'].encode()).hexdigest(),
         title = x['title'],
         date = x['date'],
         tags = x['tags'],

@@ -31,7 +31,7 @@ from markdown2 import markdown
 from django.template import Context
 from django.template.base import Library
 from django.template.loader import get_template
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
 from web.utils import toDict, parseDate, parsePost
@@ -86,7 +86,7 @@ def preBuild(site):
     POSTS = sorted(POSTS, key=lambda x: x['date'])
     POSTS.reverse()
 
-    indexes = xrange(0, len(POSTS))
+    indexes = range(0, len(POSTS))
 
     for i in indexes:
         if i+1 in indexes: POSTS[i]['prev_post'] = POSTS[i+1]
@@ -109,7 +109,7 @@ def preBuildPage(site, page, context, data):
     for post in POSTS:
         if post['path'] == page.path:
             tpl = get_template(post.get('template', 'post.html'))
-            raw = force_unicode(post['raw_body'])
+            raw = force_text(post['raw_body'])
             post['body'] = mark_safe(markdown(raw,
                 extras=["fenced-code-blocks","header-ids"]))
             context['__CACTUS_CURRENT_PAGE__'] = page

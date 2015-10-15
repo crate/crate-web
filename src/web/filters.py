@@ -45,13 +45,19 @@ def json_dump(value):
 
 @register.filter(is_safe=True)
 def filter_by_category(items, needle):
+    if not items:
+        return []
     return filter(lambda x: needle in x['category'], items)
 
 @register.filter(is_safe=True)
 def filter_by_tag(items, needle):
+    if not items:
+        return []
     return filter(lambda x: needle in x['tags'], items)
 
 @register.filter(is_safe=True)
 def filter_by_author(items, author):
+    if not items:
+        return []
     return filter(lambda x: author == x['author'], items)
 
