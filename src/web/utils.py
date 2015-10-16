@@ -52,7 +52,7 @@ def toDict(conf, posts):
         category = x['category'],
         permalink = '{0}{1}'.format(site, x['url']),
         content = u'',
-        excerpt = Truncator(strip_tags(markdown(force_unicode(x['raw_body']), safe_mode=True))).words(25),
+        excerpt = Truncator(strip_tags(markdown(force_text(x['raw_body']), safe_mode=True))).words(25),
         author = x['author'],
     ) for x in posts]
 
