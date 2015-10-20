@@ -16,11 +16,10 @@ from django.template.loader import get_template
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
-from web.utils import toDict, parseDate, parsePost
+from web.utils import parseDate, parsePost
 
 DIR = 'use-cases/case-studies/'
 CASES = []
-CONFIG = {}
 
 # https://github.com/trentm/python-markdown2/wiki/link-patterns
 link_patterns=[(re.compile(r'((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+(:[0-9]+)?|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)'),r'\1')]
@@ -32,11 +31,6 @@ def filterCases(cases, categ):
 def preBuild(site):
 
     global CASES
-
-    global CONFIG
-
-    conf = os.path.join(site.path, 'config.json')
-    CONFIG = json.load(open(conf,'r'))
 
     # Build all the cases
     for case in site.pages():
@@ -77,7 +71,6 @@ def preBuildPage(site, page, context, data):
     access them from wherever on the site.
     """
     context['cases'] = CASES
-    context['CONFIG'] = CONFIG
 
     for case in CASES:
         if case['path'] == page.path:

@@ -36,7 +36,7 @@ from django.template.loader import get_template, add_to_builtins
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
-from web.utils import toDict, parseDate, parsePost
+from web.utils import parseDate, parsePost
 
 logger = logging.getLogger(__name__)
 

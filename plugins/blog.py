@@ -40,7 +40,6 @@ DIR = 'blog/'
 POSTS = []
 NEWS_JSON = []
 DEVELOPER_NEWS_JSON = []
-CONFIG = {}
 
 # https://github.com/trentm/python-markdown2/wiki/link-patterns
 link_patterns=[(re.compile(r'((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+(:[0-9]+)?|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)'),r'\1')]
@@ -54,11 +53,6 @@ def preBuild(site):
     global POSTS
     global NEWS_JSON
     global DEVELOPER_NEWS_JSON
-
-    global CONFIG
-
-    conf = os.path.join(site.path, 'config.json')
-    CONFIG = json.load(open(conf,'r'))
 
     # Build all the posts
     for page in site.pages():
@@ -92,8 +86,9 @@ def preBuild(site):
         if i+1 in indexes: POSTS[i]['prev_post'] = POSTS[i+1]
         if i-1 in indexes: POSTS[i]['next_post'] = POSTS[i-1]
 
-    NEWS_JSON = toDict(CONFIG, filterPosts(POSTS, 'news'))
-    DEVELOPER_NEWS_JSON = toDict(CONFIG, filterPosts(POSTS, 'developernews'))
+    settings = site.config.get('settings', {})
+    NEWS_JSON = toDict(settings, filterPosts(POSTS, 'news'))
+    DEVELOPER_NEWS_JSON = toDict(settings, filterPosts(POSTS, 'developernews'))
 
 
 def preBuildPage(site, page, context, data):
@@ -104,7 +99,6 @@ def preBuildPage(site, page, context, data):
     context['posts'] = POSTS
     context['news_json'] = NEWS_JSON
     context['developer_news_json'] = DEVELOPER_NEWS_JSON
-    context['CONFIG'] = CONFIG
 
     for post in POSTS:
         if post['path'] == page.path:

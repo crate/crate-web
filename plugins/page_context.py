@@ -19,20 +19,20 @@
 # with Crate these terms will supersede the license and you may use the
 # software solely pursuant to the terms of the relevant commercial agreement.
 
-__docformat__ = "reStructuredText"
+def preBuildPage(page, context, data):
+    """
+    Updates the context of the page to include: the page itself as {{ CURRENT_PAGE }}
+    """
 
-import os
-import sys
-import json
+    # This will run for each page that Cactus renders.
+    # Any changes you make to context will be passed to the template renderer for this page.
 
-if __name__ == '__main__':
-    BASE = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-    conf = {}
-    with open(os.path.join(BASE, 'config','local.json'), 'r') as fp:
-        conf.update(json.load(fp))
-    extra_path = os.path.join(BASE, 'config','{0}.json'.format(sys.argv[1]))
-    if os.path.exists(extra_path):
-        with open(extra_path, 'r') as fp:
-            conf.update(json.load(fp))
-    env = json.dumps(conf, indent=2)
-    print(env)
+    config = context['__CACTUS_SITE__'].config
+    extra = {
+        "CURRENT_PAGE": page,
+        # Add your own dynamic context elements here!
+        "CONFIG": config.get('settings', {}),
+    }
+
+    context.update(extra)
+    return context, data
