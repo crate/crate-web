@@ -43,6 +43,11 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
+            name="Chris Chabot",
+            title="Head of Developer Relations",
+            email="",
+            ),
+        dict(
             name="Michael Beer",
             title="Developer Integrations",
             email="",
@@ -58,13 +63,13 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
-            name="Chris Chabot",
-            title="Developer Relations",
+            name="Sarah Fischli",
+            title="Project Management",
             email="",
             ),
         dict(
-            name="Sarah Fischli",
-            title="Project Management",
+            name="Jacob Fisher",
+            title="Developer Relations",
             email="",
             ),
         dict(
@@ -80,6 +85,11 @@ def preBuildPage(site, page, context, data):
         dict(
             name="Ruslan Kovalov",
             title="Core Developer",
+            email="",
+            ),
+        dict(
+            name="Johannes Moser",
+            title="Product Owner, Scrum Master",
             email="",
             ),
         dict(
