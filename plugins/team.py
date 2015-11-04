@@ -107,6 +107,11 @@ def preBuildPage(site, page, context, data):
             title="Developer Advocate",
             email="",
             ),
+        dict(
+            name="Claus Matzinger",
+            title="Developer Integrations",
+            email="",
+            )
         ]
 
     return context, data
