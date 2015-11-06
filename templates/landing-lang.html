@@ -70,7 +70,7 @@
 </div>
 {% endif %}
 
-{% if posts|filter_by_tag:slug|length %}
+{% if blog.pages|filter_by_tag:slug|length %}
 <div class="wrapper wrapper-bg-light">
   <div class="container">
     <div class="row">
@@ -78,7 +78,7 @@
         <div class="dynamic-content-well">
           <h3>Recent Posts</h3>
           <table class="table">
-            {% for post in posts|filter_by_tag:slug|slice:":5" %}
+            {% for post in blog.pages|filter_by_tag:slug|slice:":5" %}
             <tr>
               <td><i class="fa fa-book"></i> <a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
             </tr>

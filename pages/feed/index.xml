@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
     <generator>Cactus Static Website Generator (https://github.com/koenbok/Cactus)</generator>
-    {% for post in posts %}
+    {% for post in blog.pages %}
     <item>
       <title>{{ post.title }}</title>
       <description>{{ post.raw_body|markdown|striptags|truncatewords:50 }}</description>

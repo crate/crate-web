@@ -42,7 +42,7 @@ description: Crate is the scalable database. Crate allows to query and compute d
         <div class="dynamic-content-well">
           <h4 class=""><a href="{% url '/blog.html' %}">The Latest Posts</a></h4>
           <table class="table">
-            {% for post in posts|slice:":3" %}
+            {% for post in blog|slice:":3" %}
             <tr>
               <td><a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
             </tr>

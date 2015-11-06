@@ -26,7 +26,7 @@ description:  Subscribe to our monthly newsletter announcing new features, event
         <p>Read the latest news on our <a href="{% url '/blog.html' %}">blog</a>.</p>
       </div>
       <ul class="list-unstyled">
-        {% for post in posts|slice:":3" %}
+        {% for post in blog.pages|slice:":3" %}
         <li>
           <h4>{{ post.title }}<br /><small>{{ post.date|date }}</small></h4>
           <p><a href="{{ post.url }}" title="Read">Read &raquo;</a></p>

@@ -23,7 +23,6 @@ var/
 *.egg
 *.eggs/
 bin/
-config.json
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
