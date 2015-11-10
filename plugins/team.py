@@ -88,6 +88,11 @@ def preBuildPage(site, page, context, data):
             email="",
             ),
         dict(
+            name="Claus Matzinger",
+            title="Developer Integrations",
+            email="",
+            ),
+        dict(
             name="Johannes Moser",
             title="Product Owner, Scrum Master",
             email="",
@@ -105,11 +110,6 @@ def preBuildPage(site, page, context, data):
         dict(
             name="Chris Ward",
             title="Developer Advocate",
-            email="",
-            ),
-        dict(
-            name="Claus Matzinger",
-            title="Developer Integrations",
             email="",
             )
         ]
