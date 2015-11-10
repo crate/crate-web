@@ -41,7 +41,7 @@ def preBuild(site):
                 continue
 
             # Parse headers and markdown body
-            headers, body = parsePost(case)
+            headers, body = parsePost(case.data())
 
             # Build a context for each post
             caseContext = Context()

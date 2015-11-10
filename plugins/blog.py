@@ -63,7 +63,7 @@ def preBuild(site):
                 continue
 
             # Parse headers and markdown body
-            headers, body = parsePost(page)
+            headers, body = parsePost(page.data())
 
             # Build a context for each post
             postContext = Context()
@@ -112,4 +112,3 @@ def preBuildPage(site, page, context, data):
             data = tpl.render(context)
 
     return context, data
-
