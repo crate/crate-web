@@ -47,11 +47,12 @@ class Collection(object):
     CONTEXT_RAW_KEY = 'raw_body'
     CONTEXT_OUTPUT_KEY = 'body'
 
-    def __init__(self, title, path, template, pages=[], config={}):
+    def __init__(self, title, path, template, root_path, pages=[], config={}):
         self.title = title
         self.path = path
         self.template = template
         self.config = config
+        self.root_path = root_path
         self.pages = self.create_contexts(self._apply_filter(pages))
         self._build_page_index()
 
@@ -107,6 +108,7 @@ class Collection(object):
     def sort(self, key=None, toc=None, reverse=False):
         if not key and toc:
             self.pages = self._sort_by_toc(toc)
+            self.pages.reverse()
         elif key and not toc:
             self.pages = sorted(self.pages, key=lambda x: x[key])
             if reverse:
@@ -115,8 +117,14 @@ class Collection(object):
 
     def _sort_by_toc(self, toc_file):
         """Orders the page contexts as defined in a toc file."""
+        if os.path.isabs(toc_file):
+            filepath = toc_file
+        else:
+            filepath = os.path.abspath(os.path.join(self.root_path, 'pages', toc_file))
+
+        print (filepath)
         lines = []
-        with open(toc_file) as fp:
+        with open(filepath) as fp:
             [lines.append(line.rstrip()) for line in fp]
 
         sorted_pages = [None for x in range(len(lines))]
@@ -160,7 +168,7 @@ def preBuild(site):
     global COLLECTIONS
     global COLLECTIONS_JSON
     for name, conf in collections.items():
-        coll = Collection(conf['title'], conf['path'], conf['template'],
+        coll = Collection(conf['title'], conf['path'], conf['template'], site.path,
                           pages=site.pages(), config=site.config)
         order = conf.get('order')
         if order:
