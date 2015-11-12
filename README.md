@@ -26,9 +26,20 @@ Collections are configured in the `config.json`. Collection objects must contain
 following key-value pairs: `title` (name of the collection), `path` (directory
 in which pages for this collection are located), `template` (default template for
 pages).
-The `order` object is optional and must contain `key` and `reverse` if present,
-where `key` is the header after which should be sorted.
+The `order` object is optional and must contain `key` or `file` and `reverse` if present,
+where `key` is the header after which should be sorted.  
+The `file` attribute receives an absolute or relative file path to a file that 
+contains the table of contents (toc). The order of the sites is defined as they 
+are listed in the toc-file.
 
+`doc/toc`
+```
+index.html
+docs/faq.html
+docs/clients.html
+```
+
+`config.json`
 ```json
 {
   ...
@@ -40,6 +51,14 @@ where `key` is the header after which should be sorted.
       "order": {
         "key": "date",
         "reverse": true
+      }
+    },
+    "doc": {
+      "title": "Doc",
+      "path": "doc/",
+      "template": "doc.html",
+      "order": {
+        "file": "doc/toc",
       }
     }
   },
