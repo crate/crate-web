@@ -28,7 +28,7 @@ in which pages for this collection are located), `template` (default template fo
 pages).
 The `order` object is optional and must contain `key` or `file` and `reverse` if present,
 where `key` is the header after which should be sorted.  
-The `file` attribute receives an absolute or relative file path to a file that 
+The `toc` attribute receives an absolute or relative file path to a file that 
 contains the table of contents (toc). The order of the sites is defined as they 
 are listed in the toc-file.
 
@@ -58,7 +58,7 @@ docs/clients.html
       "path": "doc/",
       "template": "doc.html",
       "order": {
-        "file": "doc/toc",
+        "toc": "doc/toc",
       }
     }
   },
