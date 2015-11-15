@@ -1,5 +1,5 @@
-title: Scalable SQL Database with the NoSQL Goodies
-description: Crate is the scalable database. Crate allows to query and compute data with SQL in real time by providing a distributed aggregation engine, native search and super simple scalability.
+title: Put data to work. Simply.
+description: We live in a fast moving, data rich world that's only getting faster and more complex by the day. Which is why we've crafted a new kind of data solution: a super simple, infinitely scalable SQL database that functions at the speed of your business, delivering instant results.
 
 {% extends "base.html" %}
 
@@ -8,8 +8,8 @@ description: Crate is the scalable database. Crate allows to query and compute d
 {% block header %}
 <div class="wrapper wrapper-hero" id="wrapper-hero-frontpage">
   <div class="container">
-    <h1>Scalable SQL Database with the NoSQL Goodies</h1>
-    <p class="lead">Crate allows to query and compute data with SQL in real time by providing a distributed aggregation engine, native search and super simple scalability.</p>
+    <h1>Put data to work. Simply.</h1>
+    <p class="lead">We live in a fast moving, data rich world that's only getting faster and more complex by the day. Which is why we've crafted a new kind of data solution: a super simple, infinitely scalable SQL database that functions at the speed of your business, delivering instant results.</p>
     <p><a class="btn btn-fp-white" href="{% url '/overview.html' %}">Overview</a><a class="btn btn-fp-black" href="{% url '/try.html' %}">Try Crate now!</a></p>
   </div>
 </div>
@@ -19,110 +19,69 @@ description: Crate is the scalable database. Crate allows to query and compute d
 <div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
-      <div class="col-sm-4">
-        <p><a href="{% url '/overview.html' %}"><img class="img-responsive thumbnail" src="{% media '/media/1502/sql.png' %}" /></a></p>
-        <h2>Distributed SQL</h2>
-        <p class="">Use familiar SQL syntax for real time distributed queries across a cluster. Crate is based on the Lucene / Elasticsearch ecosystem with built-in support for binary objects (BLOBs).</p>
-        <p>Read more about <a href="{% url '/overview.html' %}">Crate's features</a> or <a href="{% url '/install/index.html' %}">learn how to install Crate anywhere!</a></p>
-      </div>
-      <div class="col-sm-4">
-        <p><a href="{% url '/install/cloud/index.html' %}"><img class="img-responsive thumbnail" src="{% media '/media/1502/shared_nothing.png' %}" /></a></p>
-        <h2>Worry-free setup</h2>
-        <p class="">Easy to setup distributed database for apps and services at scale. The perfect fit for ephemeral distributed environments like Docker. Ready-to use for SQL and ORM users.</p>
-        <p>Migrate with <a href="https://crate.io/docs/stable/best_practice/index.html">best practice tips</a>.</p>
-        <p>Learn how to <a href="{% url '/install/cloud/index.html' %}">install Crate in the cloud</a>.</p>
-      </div>
-      <div class="col-sm-4">
-        <div class="dynamic-content-well">
-          <h4 class=""><a href="#">JOINs are nearly ready!</a></h4>
-          <p>JOINs have been one of our most requested features and we would welcome your help testing them. Sign up to our testers list and we'll be in touch with details.
-{% include "mailchimp-joins.html" %}
-          </p>
-        </div>
-        <div class="dynamic-content-well">
-          <h4 class=""><a href="{% url '/blog.html' %}">The Latest Posts</a></h4>
-          <table class="table">
-            {% for post in blog|slice:":3" %}
-            <tr>
-              <td><a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title }}</a></td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
-        <div class="dynamic-content-well">
-          <h4 class=""><a href="{% url '/events.html' %}">Meet Us Here</a></h4>
-          <table class="table">
-            {% for event in upcoming_events|slice:":3" %}
-            <tr>
-              <td><a href="{{ event.url }}" title="{{ event.title|escape }}">{{ event.title }}</a></td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
+      <div class="col-sm-12">
+        <p class="lead">
+          Crate.IO fits snugly into your existing architecture, putting your data to work seamlessly alongside your applications. And sustains your business as it grows.
+        </p>
       </div>
     </div>
   </div>
 </div>
-
 <div class="wrapper wrapper-bg-gray">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
-
-        <div class="col-lg-12">
-          <h2>Crate vs MySQL</h2>
-        </div>
-        <div class="col-lg-12">
-          <p>Crate makes scaling a breeze, while still using standard SQL syntax. It offers auto-sharding and replication, super-fast multi index queries, distributed aggregations and sort, lightning-fast full-text search, and super simple cluster management. Cut the number of nodes in half while gaining a 10-20x performance increase.</p>
-          <br />
-        </div>
-
-        <div class="col-lg-12">
-          <h2>Crate vs NoSQL Solutions</h2>
-        </div>
-        <div class="col-lg-6">
-          <p><strong>Crate vs Cassandra</strong></p>
-          <p>Cassandra is great for writes but not so much for reads and requires more constraining schema definitions. Crate offers outstanding full-text search, SQL interface, dynamic cluster resizing, auto-rebalancing, powerful concurrent reads and writes, and the flexibility to grow by allowing aggregates and sorting fields to be changed at anytime.</p>
-        </div>
-        <div class="col-lg-6">
-          <p><strong>Crate vs MongoDB</strong></p>
-          <p>No need for a team of specialists to run and scale your cluster. A Crate cluster is extremely simply to scale and manage. Faster aggregations, powerful full-text search, binary object store (BLOB) support, a permissive license, the ability to combine schemas with JSON (unstructured) in one database, as well as the ability to query with SQL standard syntax make Crate a better choice.</p>
-        </div>
+      <div class="col-sm-4">
+        <h2>Super simple</h2>
+        <p>We make scaling and accessing data super simple, regardless of volume, type, or complexity. Crate.IO feels and functions like the SQL databases you know. And unlike more complicated solutions, Crate.IO makes scaling and operating ridiculously easy.</p>
+        <p><a href="/try/">Try it yourself!</a></p>
+      </div>
+      <div class="col-sm-4">
+        <h2>Plays well with others</h2>
+        <p>While Crate.IO can be a standalone database, it works great when you plug it into your existing architecture — e.g. Hadoop, MongoDB or MySQL. Crate.IO is open source and runs anywhere. We work closely with our customers, partners, and community to make working with data easy and accessible for anyone.</p>
+        <p><a href="#">See how</a></p>
+      </div>
+      <div class="col-sm-4">
+        <h2>Delivers fast results</h2>
+        <p>From the speed of integration to the speed of querying, Crate.IO delivers real results, real fast, in real time. There's no lengthy, complex set up. Plug it in and it's raring to go, instantly giving you what you need.</p>
+        <p><a href="#">Get fast results</a></p>
       </div>
     </div>
   </div>
 </div>
-
-<div class="wrapper wrapper-border">
+<div class="wrapper  wrapper-border">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
-        <h2 class="">Crate rocks ...</h2>
-        <ul class="list-group">
-          <li class="list-group-item">
-            ... as a resilient, distributed SQL database for container and microservice-driven environments with automatic sharding and replication.
-          </li>
-          <li class="list-group-item">
-            ... as a "post-Hadoop/next-gen Vertica" solution with accurate distributed distinct aggregations and real time MapReduce via standard SQL queries built on top of Lucene / Elasticsearch.ecosystem.
-          </li>
-          <li class="list-group-item">
-            ... to drastically increase performance and scalability of your MySQL or MongoDB cluster while supporting structured and unstructured data.
-          </li>
-          <li class="list-group-item">
-            ... if you process semistructured/dynamic data, including geospatial data. Crate supports binary objects as well.
-          </li>
-          <li class="list-group-item">
-            ... as a horizontally scaling database for applications that require powerful full-text search and flexible schemas.
-          </li>
-          <li class="list-group-item">
-            ... as flexible deployment solution either local (for dev), on bare metal, cloud VMs, containers.
-          </li>
-        </ul>
+      <div class="col-sm-4">
+        <p class="text-center"><a href="/use-cases/case-studies/clearvoice-simplifies-their-scalable-backend-with-crate-data/"><img class="center-block img-responsive thumbnail" src="{% media '/media/1508/cs-logo-clearvoice.png' %}" /></a></p>
+        <h2>Big Data Analytics</h2>
+        <p>ClearVoice simplifies their scalable backend with Crate.</p>
+        <p><a href="/use-cases/case-studies/clearvoice-simplifies-their-scalable-backend-with-crate-data/">Read more</a></p>
+      </div>
+      <div class="col-sm-4">
+        <p class="text-center"><a href="/use-cases/case-studies/how-voipstudio-searches-multiple-cloud-systems-with-crate/"><img class="center-block img-responsive thumbnail" src="{% media '/media/1508/cs-logo-voipstudio.png' %}" style="max-height: 58px" /></a></p>
+        <h2>Full Text Search</h2>
+        <p>VoIPstudio uses Crate for querying text in hundreds of millions of customer call records distributed across world with millisecond response rates.</p>
+        <p><a href="/use-cases/case-studies/how-voipstudio-searches-multiple-cloud-systems-with-crate/">Read more</a></p>
+      </div>
+      <div class="col-sm-4">
+        <p class="text-center"><a href="/use-cases/case-studies/avuxi-ranks-everywhere-on-earth-with-crate/"><img class="center-block img-responsive thumbnail" src="{% media '/media/1508/cs-logo-avuxi.png' %}"  style="max-height: 58px"/></a></p>
+        <h2>Geospatial Queries</h2>
+        <p>AVUXI uses Crate to analyze 20 million geolocation events a day providing location based marketing intelligence.</p>
+        <p><a href="/use-cases/case-studies/avuxi-ranks-everywhere-on-earth-with-crate/">Read more</a></p>
       </div>
     </div>
   </div>
 </div>
-
+<div class="wrapper wrapper-bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2><a href="/blog/crate-io-wins-techcrunch-disrupt-startup-battle-2/">Crate.IO wins Techcrunch Disrupt Startup Battle!</a></h2>
+        <div style="background-image: url({% media '/media/1410/B0fM7-ZIgAE3y-A.png-large.png' %}); background-position: cover; background-repeat: no-repeat; height: 300px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="wrapper wrapper-border">
   <div class="container">
     <div class="row">
