@@ -1,0 +1,110 @@
+title: Support Enquiry
+description: This document gives you instructions on how to provide relevant information for support enquiries when reporting issues with your Crate installation.
+
+{% extends "base.html" %}
+
+{% block body %}
+<div class="wrapper wrapper-bg-primary">
+  <div class="container">
+    <h1>Reporting Issues</h1>
+    <p class="lead">{{ description }}</p>
+  </div>
+</div>
+
+<div class="wrapper wrapper-border">
+  <div class="container">
+      <p>If you have general questions about Crate, e.g. how to use certain Crate specific data types or how to perform fulltext search, etc. just go ahead and drop us an email at <a href="mailto:support@crate.io"><b>support@crate.io</b></a>, join our <a href="https://www.hipchat.com/g7Pc2CYwi">Crate.IO Support Hipchat</a> or chat using the <a href="https://intercom.io">Intercom widget</a> on our website.</p>
+
+    <p>If you experience any issues with a Crate cluster you're already running you can submit a report that will help us better understand and solve your problem.</p>
+    <p>Because in the end we're happy when our users are happy!</p>
+
+    <p><b>Ideally your report would include the following points (if applicable):</b></p>
+
+    <ul>
+        <li>Crate logs with the relevant lines</li>
+        <li>Stack trace from server or client</li>
+        <li>System/cluster information gathered using <a href="http://pypi.python.org/pypi/crash">Crash</a></li>
+    </ul>
+
+    <p>The first two points are self explanatory, but the third point can be difficult, especially when you don't know what you're looking for.
+    So we've built a tool which finds what you don't know you're looking for. All you need to do is copy/paste the output into the email.</p>
+
+    <p><b>Here's how it works:</b></p>
+
+    <h2>Provide System/Cluster Information</h2>
+
+    <p>You can generate the report by simply running crash with the <code>--sysinfo</code> argument:</p>
+    <pre><code>$ crash <b>--sysinfo</b> <em>--hosts example.com:4200</em></code></pre>
+    <div class="codehilite">
+      <pre><code>number_of_shards  | 128
+number_of_records | 495750944
+number_of_nodes   | 8
+number_of_tables  | 76
+--------------------------------------------------------------------------------
+
+name            | st7
+hostname        | st7.p.fir.io
+crate_version   | 0.55.0
+total_heap_mb   | 16301
+total_memory_mb | 64238
+cpus            | 12
+uptime_s        | 12598003
+os_info         | Linux - 3.10.0-229.11.1.el7.x86_64 (amd64)
+jvm_info        | java version "1.8.0_65" Oracle Corporation OpenJDK 64-Bit Server VM (build 25.65-b01)
+--------------------------------------------------------------------------------
+...
+For debugging purposes you can send above listed information to support@crate.io</code></pre>
+    </div>
+
+    <p>You can either copy the output into an email or pipe it into a file and attach the file to your email:</p>
+    <pre><code>$ crash <b>--sysinfo</b> <em>--hosts example.com:4200</em> &gt; report.txt</code></pre>
+    <pre><code>$ cat report.txt</code></pre>
+    <div class="codehilite">
+      <pre><code>number_of_shards  | 128
+number_of_records | 495750944
+number_of_nodes   | 8
+number_of_tables  | 76
+--------------------------------------------------------------------------------
+
+name            | st7
+hostname        | st7.p.fir.io
+crate_version   | 0.55.0
+total_heap_mb   | 16301
+total_memory_mb | 64238
+cpus            | 12
+uptime_s        | 12598003
+os_info         | Linux - 3.10.0-229.11.1.el7.x86_64 (amd64)
+jvm_info        | java version "1.8.0_65" Oracle Corporation OpenJDK 64-Bit Server VM (build 25.65-b01)
+--------------------------------------------------------------------------------
+...
+For debugging purposes you can send above listed information to support@crate.io</code></pre>
+    </div>
+
+    <p>Alternatively, while using Crash simply type <code>\sysinfo</code> and hit enter:</p>
+    <pre><code>$ crash <em>--hosts example.com:4200</em></code></pre>
+    <pre><code>cr&gt; \sysinfo</code></pre>
+
+    <h3>Requirements</h3>
+
+    <ul>
+        <li>Crate version &gt;= 0.54.0</li>
+        <li>Crash &gt;= 0.15.x</li>
+    </ul>
+
+    <h2>Additional Information</h2>
+
+    <p>Usually we also ask for additional information, such as:</p>
+
+    <ul>
+        <li>Disk type (HDD, SSD, etc.)</li></li>
+        <li>Network interface</li></li>
+        <li>Cloud environment (AWS, Azure, GCE, etc.)</li></li>
+    </ul>
+
+    <p>This helps us to deal with your issues faster and more effectively.</p>
+    
+    If you have a lower version of Crash (< 0.15) or Crate (< 0.54) you can also try to run our external sysinfo-queries which is hosted on <a href="https://github.com/crate/crate-utils/tree/master/sysinfo">Github</a>.
+  </div>
+</div>
+
+{% endblock %}
