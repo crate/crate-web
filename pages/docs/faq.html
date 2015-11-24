@@ -51,12 +51,11 @@ description: Frequently Asked Questions about Crate
     <hr />
 
     <h3>Q: Does Crate support JOINs?</h3>
-    <p>We have been working on getting JOINs into Crate for some time in the best and most performant way. We are ready for users to start helping us test this feature, so please sign up to our testers list and we'll be in touch with details.
-
-      {% include "mailchimp-joins.html" %}
-      <br/>
-      <em>For many use cases there are other ways to achieve the same result as a JOIN. Take a look at the <a href="/docs/en/latest/sql/data_types.html#array">ARRAY</a> and <a href="/docs/en/latest/sql/data_types.html#object">OBJECT</a> data types to denormalise your data.</em></p>
-      <hr />
+    <p>Yes, Crate does have a first, basic support for JOINs since version <code>0.53.0</code>.
+    Please consulte the <a href="/docs/en/latest/sql/joins.html">JOIN</a> page in the documentation for further details.
+    We're working on improving the performance and adding a more complete support for all types of JOINs.</p>
+    <p>However, for many use cases there are other ways to achieve the same result as a JOIN. Take a look at the <a href="/docs/en/latest/sql/data_types.html#array">ARRAY</a> and <a href="/docs/en/latest/sql/data_types.html#object">OBJECT</a> data types to denormalise your data.</p>
+    <hr />
 
       <h3>Q: Does Crate have a built-in user/permission management?</h3>
       <p>No. You will need to secure your Crate installation/cluster with the administration weapons of your choice, e.g. firewall rules. You find information about that in the documentation about <a href="/docs/en/latest/best_practice/multi_node_setup.html">Multi Node Setup</a>.</p>
