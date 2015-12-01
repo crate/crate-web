@@ -41,6 +41,14 @@ COLLECTIONS_JSON = dict()
 NEWS_JSON = []
 DEVELOPER_NEWS_JSON = []
 
+# For a full list of available extras see
+# https://github.com/trentm/python-markdown2/wiki/Extras
+MARKDOWN_EXTRAS = [
+    "fenced-code-blocks",
+    "code-friendly",
+    "header-ids",
+    "tables",
+]
 
 class Collection(object):
 
@@ -200,7 +208,7 @@ def preBuildPage(site, page, context, data):
             tpl = get_template(ctx.get('template', collection.template))
             raw = force_text(ctx[Collection.CONTEXT_RAW_KEY])
             ctx[Collection.CONTEXT_OUTPUT_KEY] = mark_safe(
-                markdown(raw, extras=["fenced-code-blocks", "header-ids"])
+                markdown(raw, extras=MARKDOWN_EXTRAS)
             )
             context.update(ctx)
             data = tpl.render(context)
