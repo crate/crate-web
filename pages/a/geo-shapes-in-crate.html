@@ -1,0 +1,194 @@
+title: Berlin and Geo Shapes in Crate
+link: https://crate.io/blog/geo-shapes-in-crate
+author: Claus Matzinger
+description: Crate.IO adds support for geo_shapes
+created: 2015-12-10
+post_name: geo-shapes-in-crate
+status: publish
+post_type: post
+tags: geo_shape, geo, gis, geojson, shape
+category: developernews
+
+In [our last blogpost][1] about Crate's spatial and geographic features we announced the support for the `geo_point` data type and related operations.
+
+Since that post, we have greatly improved our geographic features and starting with Crate _0.53.0_ we have added a `geo_shape` type ([documentation][4]) to store and work with shapes of all kinds. Together with [JOINs][8] working with geo-spatial data now becomes much easier. First of all, let us look at the new data definition:
+
+## Defining the Data
+
+To define a column of type `geo_shape`, add it as a type:
+
+```sql
+CREATE TABLE geo_shapes.all_shapes (
+  "geometry" geo_shape,
+  "type" string,
+  properties object AS (
+    "name" string
+  )
+);
+```
+
+Additionally it's possible to add further options to customize indexing:
+
+```sql
+CREATE TABLE geo_shapes2.all_shapes (
+  "geometry" geo_shape INDEX USING geohash WITH (PRECISION='50m', distance_error_pct=0.025),
+  "type" string,
+  properties object AS (
+    "name" string
+  )
+);
+```
+
+In the above statement, the `geohashing` algorithm ([wikipedia][5]) is used to create an index of each shape with the precision parameter controlling its accuracy (More on that [here][4] and [here][6]). This index will 'rasterize' all data with the defined `PRECISION` - hence a single point becomes a square of a certain size. Similarly, the percentage provided in `distance_error_pct` will control how precise the borders of a shape are stored.
+
+## Operations
+
+### Within
+
+`Within` finds out if a point (or shape) is contained within another shape. Since this can be a costly operation we provide two variants of this operation. Via `match` ([documentation][9]) or by `within`([documentation][10]). The former uses a 'fast' approximate matching (on a grid) which cannot be used to JOIN tables, whereas the latter can be used for JOINs but will also be more expensive since it uses vectors.
+
+### Intersects
+
+If two `geo_shape` planes share any point, this operation will return true. Similar to `within` there's two ways to call this operation. `match` and `intersects`. As before, the `match` variant is faster but less precise.
+
+### Disjoint
+
+`disjoint` is the opposite of `intersects`, it only matches shapes that do not share any points.
+
+## Example: Locations in Berlin
+
+As a short demonstration, we'll use the Google Places API to gather a few locations in central Berlin. After importing and indexing everything with Crate, we can run queries based on GIS data!
+
+### Setup
+
+We are going to use two tables, the first of which will provide information on 60 different localities (gathered from [Google's Places API][2]):
+
+```sql
+CREATE TABLE geo_shapes.places (
+  "types" array(string),
+  "name" string,
+  "geometry" geo_point
+);
+```
+
+The second table will store the geographical information about Berlin's 12 districts:
+
+```sql
+CREATE TABLE geo_shapes.districts (
+  geometry geo_shape INDEX USING geohash WITH (PRECISION='10m', distance_error_pct=0.025),
+  "type" string,
+  "name" string
+);
+```
+
+You can find the GeoJSON data for the districts in this Gist:
+
+<script src="https://gist.github.com/chaudum/e8097ab9873ec71666b2.js"></script>
+
+### Museums in Berlin-Mitte
+
+Mitte is the central part of Berlin where a lot of the well-known sights, government buildings and museums are located. Since we have location information on both the districts and sights, we can ask Crate for a list of museums:
+
+```sql
+select p.name as name
+from geo_shapes.places p, geo_shapes.districts d
+where d.properties['name'] = 'Mitte' and
+      'museum'= ANY( p.types) and
+      within(p.geometry, d.geometry)
+order by 1;
+```
+
+Which results in a nice list of 8 museums (or 7 and a church/museum):
+
+```
++-----------------------------------------+
+| name                                    |
++-----------------------------------------+
+| Altes Museum                            |
+| Berlin Wall Memorial                    |
+| DDR Museum                              |
+| Gemäldegalerie                          |
+| Memorial to the Murdered Jews of Europe |
+| Museum für Naturkunde                   |
+| Pergamonmuseum                          |
+| St. Hedwig's Cathedral                  |
++-----------------------------------------+
+SELECT 8 rows in set (0.038 sec)
+```
+
+### The Berlin Wall
+
+During Berlin's separation, there were 23 districts of varying sizes in the city. It was not until 2001 that the number finaly reduced to 12! As a result the Berlin Wall runs along the 'old' district borders and seemingly splits some districts - but which of them were affected? Having the [Berlin Wall][12] handy as a [WKT string][11], Crate can use the [match predicate][10] to quickly find all districts:
+
+```sql
+select properties['name'] as district
+from geo_shapes.districts
+where match(geometry, 'LINESTRING (
+  13.36755741412572 52.62579516291058,
+  ...
+  13.515443690349803 52.40179020052256, 13.515486605693416 52.401633099079156 )')
+    using intersects
+order by 1;
+```
+
+By using `intersects` as a match option, we get all districts that share a location with the wall. Interestingly, exactly half of them were affected:
+
+```
++--------------------------+
+| district                 |
++--------------------------+
+| Friedrichshain-Kreuzberg |
+| Mitte                    |
+| Neukölln                 |
+| Pankow                   |
+| Reinickendorf            |
+| Treptow-Köpenick         |
++--------------------------+
+SELECT 6 rows in set (0.334 sec)
+```
+
+We can also find the districts which do not have anything in common with the (inner) wall:
+
+```sql
+select properties['name'] as district
+from geo_shapes.districts
+where match(geometry, 'LINESTRING (
+  13.36755741412572 52.62579516291058,
+  ...
+  13.515443690349803 52.40179020052256, 13.515486605693416 52.401633099079156 )')
+    using disjoint
+order by 1;
+```
+
+As expected, these are the remaining six:
+
+```
++----------------------------+
+| district                   |
++----------------------------+
+| Charlottenburg-Wilmersdorf |
+| Lichtenberg                |
+| Marzahn-Hellersdorf        |
+| Spandau                    |
+| Steglitz-Zehlendorf        |
+| Tempelhof-Schöneberg       |
++----------------------------+
+SELECT 6 rows in set (0.337 sec)
+```
+
+## Conclusion
+
+A `geo_shape` is a flexible way to handle geographical information in Crate and as shown in the Berlin example, can move a significant portion of business logic to the database. We hope that you try this feature out yourself and tell us what you think!
+
+[1]: https://crate.io/blog/geospatial-queries-with-crate-data/
+[2]: https://developers.google.com/places/web-service/
+[3]: http://geojson.org
+[4]: https://crate.io/docs/en/latest/sql/data_types.html#geo-shape
+[5]: https://en.wikipedia.org/wiki/Geohash
+[6]: https://crate.io/docs/en/latest/sql/data_types.html#geo-shape-data-type-index
+[7]: https://crate.io/docs/en/latest/sql/dml.html#import-export
+[8]: https://crate.io/docs/en/latest/sql/joins.html
+[9]: https://crate.io/docs/en/latest/sql/geo.html#exact-queries
+[10]: https://crate.io/docs/en/latest/sql/geo.html#match-predicate
+[11]: https://en.wikipedia.org/wiki/Well-known_text
+[12]: https://gist.github.com/celaus/38405c958d9d368c6d57
