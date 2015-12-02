@@ -14,7 +14,7 @@
     "doc": {
       "title": "Doc",
       "path": "docs/",
-      "template": "doc.html",
+      "template": "docs.html",
       "order": {
         "toc": "docs/toc"
       }

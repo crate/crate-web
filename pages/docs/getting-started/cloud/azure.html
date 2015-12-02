@@ -1,0 +1,82 @@
+title: Azure
+author: Chris W.
+date: 2015-11-30
+
+# Azure
+Microsoft Azure is the second largest and fastest growing provider of Cloud Services in the world. It offers a wide variety of options including Windows servers, containers, application images and much more.
+
+Getting Crate working on Azure with Linux or Windows is a simple process. You can use Azure's management console or CLI interface ([Learn how to install here](https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/)).
+
+## Azure & Linux
+### Create a Virtual Network
+To create a cluster of Crate nodes on cloud hosting we need to rely on unicast for inter-node communcation, as multicast will not be available.
+
+The easiest way to get Unicast communication working with Azure is to create a Virtual Network (_Network Services -> Virtual Network -> Custom Create_) so that all of our nodes exist on the same IP range. Give the network a name, a region and let Azure handle all the remaining settings by clicking the next arrow on each screen.
+
+![Create Virtual Network](azure-vpc.png)
+
+### Create Virtual Machines
+Next create virtual machines to act as your Crate nodes. In this tutorial, I chose two low-specification Ubuntu 14.04 servers, but you likely have your own preferred configurations. The important step is number 4, where we need to select the Virtual Network created earlier.
+
+![Select Virtual Network](azure-vn-select.png)
+
+Also at stage 4 we can create the endpoints required for opening the ports Crate uses. These are 4300 for inter-node communication and 4200 for http. You should end up with something like:
+
+![Endpoints](azure-step4.png)
+
+### Install Crate
+_Note that these instructions need to be followed on each VM in your cluster._
+
+To Install Crate, ssh into your VMs and follow [the standard process for Linux installation](https://crate.io/install/linux/), this will automatically start an instance of Crate, which we will need to restart after the next step.
+
+### Configure Crate
+_Note that these instructions need to be followed on each VM in your cluster._
+
+To set the Unicast hosts for the Crate cluster we change the default configuration file at _/etc/crate/crate.yml_.
+
+Uncomment / add these lines:
+
+```yaml
+discovery.zen.ping.multicast.enabled: false
+
+discovery.zen.ping.unicast.hosts:
+      - internal-ip-address:4300
+      - internal-ip-address:4300
+```
+
+_You might want to try DNS based discovery for inter-node documentation, [find more details](/docs/stable/configuration.html#conf-srv-discovery) in our documentation._
+
+Uncomment and set the cluster name
+
+```yaml
+cluster.name: crate
+```
+
+Restart Crate `service crate restart`.
+
+## Azure & Windows
+### Create a Virtual Network
+Follow the same steps as for Azure and Linux.
+
+### Create Virtual Machines
+Similar steps to creating Virtual Machines for Azure and Linux, but create the VM based on the 'Windows Server 2012 R2 Datacenter' image.
+
+### Install Crate
+_Note that these instructions need to be followed on each VM in your cluster._
+
+To install Crate on Windows Server, you will need a [Java JDK installed](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). Ensure that the `JAVA_HOME` environment variable is set.
+
+![Environment Variables](azure-envvar.png)
+
+Next [download the Crate Tarball](/install/#tarball), expand it and move to a convenient location.
+
+### Configure Crate and Windows
+_Note that these instructions need to be followed on each VM in your cluster._
+
+Edit the _config/crate.yml_ configuration file in the expanded directory to make the same changes noted above in running Crate on Azure & Linux.
+
+We need to allow the ports Crate uses through the Windows Firewall
+
+![Firewall configuration](azure-port.gif)
+
+Finally start crate by running `bin/crate`.

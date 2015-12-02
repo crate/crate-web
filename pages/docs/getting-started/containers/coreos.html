@@ -1,0 +1,69 @@
+title: CoreOS
+author: Chris W.
+date: 2015-11-30
+
+# CoreOS
+As a Linux distribution targetted at cloud and cluster based environments, CoreOS is a prefect fit for a Crate.IO cluster.eetctl.
+
+## Pre-requisites
+We assume you have a CoreOS cluster running and can access the `fleetctl` tool installed on your local system or on a node in the CoreOS cluster.
+
+## Create the Crate Service
+Create a service file called _crate@.service_ with the following contents:
+
+```
+[Unit]
+Description=crate
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutSec=180
+ExecStartPre=/usr/bin/mkdir -p /data/crate
+ExecStartPre=/usr/bin/docker pull crate/crate
+
+ExecStart=/usr/bin/docker run \
+    --name %p-%i \
+    --publish 4200:4200 \
+    --publish 4300:4300 \
+    --volumne /data/crate:/data \
+    crate/crate \
+    /crate/bin/crate \
+    -Des.node.name=%p%i \
+
+ExecStop=/usr/bin/docker stop %p-%i
+ExecStop=/usr/bin/docker rm %p-%i
+
+[X-Fleet]
+X-Conflicts=%p@*.service
+```
+
+The `TimeoutSec` setting is important because pulling a docker image for the first time takes some time and might cause a time out.
+
+If you're familiar with systemd service files you'll notice that the crate service file looks similar to a regular systemd service file. The only difference is the `[X-Fleet]` section that ensures only one service named _crate@x.service_ is assigned per node.
+
+Submit it to the cluster using fleet (assuming a 3 node cluster):
+
+```bash
+fleetctl submit crate@{1,2,3}.service
+```
+
+Start the service across the cluster (assuming a 3 node cluster):
+
+```bash
+fleetctl start crate@{1,2,3}.service
+```
+
+Once a crate service starts a folder named _/data/crate_ will be created on each CoreOS node. The crate docker image is pulled and once finished the container launches.
+
+Check Status:
+
+```bash
+fleetctl list-units
+```
+
+## Multicast across CoreOS Hosts
+_Wondering if to mention this? Are there other options now?_<br>Assembled from:
+- [https://zignar.net/2014/09/02/crate-data-on-core-os/](https://zignar.net/2014/09/02/crate-data-on-core-os/)
+- [https://coreos.com/fleet/docs/latest/launching-containers-fleet.html](https://coreos.com/fleet/docs/latest/launching-containers-fleet.html)
+- [https://coreos.com/docs/launching-containers/launching/getting-started-with-systemd/](https://coreos.com/docs/launching-containers/launching/getting-started-with-systemd/)

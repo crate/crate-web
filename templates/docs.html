@@ -1,1 +1,51 @@
 {% extends "wf_docs.html" %}
+
+{% block navbar2 %}
+{% comment %}
+<ul class="w-list-unstyled">
+	<li class="navleft-item"><a href="#">Main</a></li>
+	<li class="navleft-item">
+		<a href="#">Main</a>
+		<ul class="w-list-unstyled navleft-list-level">
+			<li class="navleft-item"><a href="#">Sub</a></li>
+		</ul>
+	</li>
+</ul>
+{% endcomment %}
+<ul class="w-list-unstyled">
+	<li class="navleft-item"><a href="/docs/introduction/">Introduction</a></li>
+	<li class="navleft-item"><a href="/docs/getting-started/">Getting Started</a>
+		<ul class="w-list-unstyled navleft-list-level">
+			<li class="navleft-item"><a href="/docs/getting-started/crash/">Crash</a></li>
+			<li class="navleft-item"><a href="/docs/getting-started/admin_ui/">Admin UI</a></li>
+			<li class="navleft-item">Containers
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="/docs/getting-started/containers/containership/">Containership</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/containers/coreos/">CoreOS</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/containers/docker/">Docker</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/containers/tutum/">Tutum</a></li>
+				</ul>
+			</li>
+			<li class="navleft-item">Cloud
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="/docs/getting-started/cloud/aws/">AWS</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/cloud/azure/">Azure</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/cloud/softlayer/">Softlayer</a></li>
+				</ul>
+			</li>
+			<li class="navleft-item"><a href="/docs/getting-started/local/">Local</a>
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="/docs/getting-started/local/linux/">Linux</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/local/mac/">Mac</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/local/windows/">Windows</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/local/tarball/">Tarball</a></li>
+				</ul>
+			</li>
+		</ul>		
+	</li>
+	<li class="navleft-item"><a href="/docs/performance/">Performance</a></li>
+	<li class="navleft-item"><a href="/docs/reference/">Reference</a></li>
+	<li class="navleft-item"><a href="/docs/search/">Search</a></li>
+	<li class="navleft-item"><a href="/docs/support/">Support</a></li>
+</ul>
+{% endblock %}
