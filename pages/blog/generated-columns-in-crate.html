@@ -1,184 +1,185 @@
-title: Generated Columns in Crate.IO 0.54.0
-link: https://crate.io/blog/generated-columns-in-crate/
-author: Ruslan Kovalov
-description: New Crate.IO release with the new ``Generated Columns`` feature is out!
-created: 2015-12-01
-post_name: generated-columns-in-crate
-status: publish
-post_type: post
-tags: generated columns, generation expression
-category: developernews
+title: Generated Columns in Crate.IO 0.54.0 link: [https://crate.io/blog/generated-columns-in-crate/](https://crate.io/blog/generated-columns-in-crate/) author: Ruslan Kovalov description: New Crate.IO release with the Generated Columns feature is available created: 2015-12-04 post_name: generated-columns-in-crate status: publish post_type: post tags: generated columns, generation expression category: developernews
 
-_December 01, 2015 – Dornbirn, Austria_
+Crate are pleased to announce the support of generated columns. The new functionality will be available from the fresh **0.54.0** testing release!
 
+The idea behind generated columns is to have its values computed from _generation expressions_ provided at the time when _columns_ are defined, unlike regular columns, where values are set explicitly.
 
-We are pleased to announce the support of `generated columns` in **Crate.io**. The new functionality will be available in the fresh **0.54.0** testing release!
+Generated columns have their values computed from _generation expressions_ when they are defined, unlike regular columns, where values are set explicitly. Defining expressions is flexible. It's possible to create complex expressions, reference values of other columns and providing a data type for columns is optional and can be inferred by the return type of the supplied expression.
 
-The idea behind *generated columns* is to have its values computed from *generation expressions* provided at the time when the *columns* are defined, unlike regular columns, which values are set explicitly.
-
-*Generated columns* provide us with flexibility in defining *generation expressions*, where it is also possible to create complex expressions as well as reference values of other columns.
-Providing a data type for such columns is optional. It is inferred by the return type of the supplied expression.
-
-*Crate.io* supports only *virtual generated columns* which are the read-only and computed internally columns.
-
+Crate supports _virtual generated columns_ which are columns that are read-only and computed internally.
 
 ## Use cases
-
-With *generated columns* we get an effortless way to solve a variety of problems. Let us take a closer look at a couple of them:
+Generated columns provide an effortless way to solve a variety of problems, let's take a closer look at a couple:
 
 ### Partition by expression
+Imagine that you have to analyze time-based data, e.g. a 10gb log file, where only records in particular time slices have a value. Due to the size and nature of data the queries run against the log are too slow.
 
-Imagine that you have to analyze time-based data, e.g. a log of enormous size, where only records containing in particular time slices would have a value for you. The problem you will encountered here is that the queries you run against the log, due to the size and nature of data, are way to slow. You will definitely try to come up with a smart solution to improve the query speed. One convenient way to accomplish that is to look up for data in those sliced data samples which contain the records of your interest, instead of iterating over all existing records. That is where [partitioned tables](https://crate.io/docs/en/latest/sql/partitioned_tables.html) come to the rescue. Having this functionality let you have separate partitions but still query them like a single table.
+A smart solution is needed to improve the query speed. One way to acheive this is to look up data in the sliced samples which contain the records of interest, instead of iterating over all existing records. That is where [partitioned tables](https://crate.io/docs/en/latest/sql/partitioned_tables.html) come to the rescue. This functionality lets you have separate partitions but still query them like a single table.
 
-For our log data use case and imaginary analyzing queries the most suitable way would be to partition the table by a column containing a timestamp. But what if the column in the [partitioned by](https://crate.io/docs/en/latest/sql/reference/create_table.html#partitioned-by-clause) clause has rather low granularity or it does not really suit our queries well enough. In both cases we won't be happy that much. We would definitely end up either with too many partitions in the table or find ourselves performing an additional work to adopt the queries.
+For our log data and analyzing queries use case, the most suitable method would be to partition the table by a column containing a timestamp. But what if the column in the [partitioned by](https://crate.io/docs/en/latest/sql/reference/create_table.html#partitioned-by-clause) clause has low granularity or does not suit our queries well enough. In both cases we would end up either with too many partitions in the table or find ourselves performing additional work to adopt the queries.
 
-With *generated columns* the challenge we have faced can be addressed in a simple manner. Let's create an example of analyzing data logs on a monthly basis, while having day granularity for the timestamped column.
+With _generated columns_ the challenge can be addressed simply. Let's create an example of analyzing data logs on a monthly basis, while having day granularity for the timestamped column.
 
-First, create the `log` table with the new generated column `month` and put the last into [partitioned by](https://crate.io/docs/en/latest/sql/reference/create_table.html#partitioned-by-clause) clause
+First, create a `log` table with the new generated column `month` and put it into [partitioned by](https://crate.io/docs/en/latest/sql/reference/create_table.html#partitioned-by-clause) clause
 
-    cr> create table logs(
-    ...     log string,
-    ...     created timestamp,
-    ...     month as date_trunc('month', created)
-    ... ) partitioned by (month);
-    CREATE OK (... sec)
+```bash
+cr> create table logs(
+      log string,
+      created timestamp,
+      month as date_trunc('month', created)
+    ) partitioned by (month);
+CREATE OK (... sec)
+```
 
-In the next step, we insert few log records into the table.
+In the next step, we insert log records into the table.
 
-    cr> insert into logs (log, created) values
-    ...     ('log_2015_01_01', '2015-01-01'),
-    ...     ('log_2015-01_02', '2015-01-02'),
-    ...     ('log_2015_02_01', '2015-02-01'),
-    ...     ('log_2015_02_02', '2015-02-02'),
-    ...     ('log_2015_03_01', '2015-03-01');
-    INSERT OK, 5 row affected (... sec)
+```bash
+cr> insert into logs (log, created) values
+      ('log_2015_01_01', '2015-01-01'),
+      ('log_2015-01_02', '2015-01-02'),
+      ('log_2015_02_01', '2015-02-01'),
+      ('log_2015_02_02', '2015-02-02'),
+      ('log_2015_03_01', '2015-03-01');
+INSERT OK, 5 row affected (... sec)
+```
 
-Finally, table has been partitioned by the generated month column indeed.
+We can see the table has been partitioned by the generated `month` column.
 
-    cr> select table_name, partition_ident, "values"
-    ... from information_schema.table_partitions
-    ... WHERE table_name = 'logs’;
-    +------------+--------------------------+--------------------------+
-    | table_name | partition_ident          | values                   |
-    +------------+--------------------------+--------------------------+
-    | log        | 04732d1i6kojce1g60o30c1g | {"month": 1425168000000} |
-    | log        | 04732d1i60o3ec1k60o30c1g | {"month": 1420070400000} |
-    | log        | 04732d1i68rj8e1o60o30c1g | {"month": 1422748800000} |
-    +------------+--------------------------+--------------------------+
-    SELECT 3 rows in set (... sec)
+```bash
+cr> select table_name, partition_ident, 'values'
+      from information_schema.table_partitions
+      WHERE table_name = 'logs';
++------------+--------------------------+--------------------------+
+| table_name | partition_ident          | values                   |
++------------+--------------------------+--------------------------+
+| log        | 04732d1i6kojce1g60o30c1g | {'month': 1425168000000} |
+| log        | 04732d1i60o3ec1k60o30c1g | {'month': 1420070400000} |
+| log        | 04732d1i68rj8e1o60o30c1g | {'month': 1422748800000} |
++------------+--------------------------+--------------------------+
+SELECT 3 rows in set (... sec)
+```
 
-Looks good! Now we can analyze log data on a monthly base and utilize all benefits of having a partitioned table. As you can see the combination of [partitioned tables](https://crate.io/docs/en/latest/sql/partitioned_tables.html) and [generated columns](https://crate.io/docs/en/latest/sql/generated-columns.html) provides a great instrument in the Crate of tools.
+Looks good! Now we can analyze the log data on a monthly basis and utilize all the benefits of having a partitioned table. As you can see the combination of [partitioned tables](https://crate.io/docs/en/latest/sql/partitioned_tables.html) and [generated columns](https://crate.io/docs/en/latest/sql/generated-columns.html) provides a great tool in the Crate toolkit.
 
+### Query optimization on generated column partitions
+The implementation of _generated columns_ for the [partitioned by](https://crate.io/docs/en/latest/sql/reference/create_table.html#partitioned-by-clause) clause has been optimized for special cases.
 
-#### Query optimisation on generated column partitions
+Selection on _generated columns_ uses current optimization.
 
-The implementation of *generated columns* for the [partitioned by](https://crate.io/docs/en/latest/sql/reference/create_table.html#partitioned-by-clause) clause has been optimised for special cases.
+_Generated columns_ utilize the same optimization implemented for regular columns in a `partitioned by` clause. Thus filtering log records on the generated column `month`, which is part of the `partitioned by` clause, would result in effecting only the specific partition. This behavior is expected from regular columns under the same circumstances.
 
-* Selection on *generated columns* uses current optimization
+```
+    cr> select log,
+    ... date_format('%Y-%m-%d', created) as created,
+    ... date_format('%Y-%m-%d', month) as month
+    ... from logs
+    ... where month = '2015-01';
+    +----------------+------------+---------+
+    | log            | created    | month   |
+    +----------------+------------+---------+
+    | log_2015_01_01 | 2015-01-01 | 2015-01 |
+    | log_2015-01_02 | 2015-01-02 | 2015-01 |
+    +----------------+------------+---------+
+    SELECT 2 rows in set (... sec)
+```
 
-    *Generated columns* utilize the optimization implemented for regular columns in `partitioned by` clause. Thus, filtering log records on the generated column `month`, which is part of the `partitioned by` clause, would result in effecting only the certain partition. This behavior is expected from regular columns under the same circumstances.
+```
+The execution of the given query effects the `2015-01` partition only.
+```
 
-        cr> select log,
-        ... date_format('%Y-%m-%d', created) as created,
-        ... date_format('%Y-%m-%d', month) as month
-        ... from logs
-        ... where month = '2015-01';
-        +----------------+------------+---------+
-        | log            | created    | month   |
-        +----------------+------------+---------+
-        | log_2015_01_01 | 2015-01-01 | 2015-01 |
-        | log_2015-01_02 | 2015-01-02 | 2015-01 |
-        +----------------+------------+---------+
-        SELECT 2 rows in set (... sec)
+- Selection on a column which is part of a generated column/Query rewrite
 
-    The execution of the given query effects the `2015-01` partition only.
+    The `created` column is used for generation the `month` column on which the table is partitioned. The optimization we have added allows querying the column used in _generation expression_ of the generated column and still hit only the partition right where this value belongs. The query bellow demonstrates it:
 
-* Selection on a column which is part of a generated column/Query rewrite
-
-    The `created` column is used for generation the `month` column on which the table is partitioned. The optimization we have added allows querying the column used in *generation expression* of the generated column and still hit only the partition right where this value belongs. The query bellow demonstrates it:
-
-        cr> select log,
-        ... date_format('%Y-%m-%d', created) as created,
-        ... date_format('%Y-%m', month) as month
-        ... from logs
-        ... where created = '2015-02-01';
-        +----------------+------------+---------+
-        | log            | created    | month   |
-        +----------------+------------+---------+
-        | log_2015_02_01 | 2015-02-01 | 2015-02 |
-        +----------------+------------+---------+
-        SELECT 1 row in set (... sec)
+  ```
+    cr> select log,
+    ... date_format('%Y-%m-%d', created) as created,
+    ... date_format('%Y-%m', month) as month
+    ... from logs
+    ... where created = '2015-02-01';
+    +----------------+------------+---------+
+    | log            | created    | month   |
+    +----------------+------------+---------+
+    | log_2015_02_01 | 2015-02-01 | 2015-02 |
+    +----------------+------------+---------+
+    SELECT 1 row in set (... sec)
+  ```
 
 The only effected partition by the query is `2015-02`.
 
-
 ### Calculated columns
+_Generated columns_ are computed internally upon [INSERT](https://crate.io/docs/stable/sql/dml.html#inserting-data) and [UPDATE](https://crate.io/docs/stable/sql/dml.html#updating-data). A great application of _generated columns_ is the computation of the columns values on the fly.
 
-*Generated columns* are computed internally upon [INSERT](https://crate.io/docs/stable/sql/dml.html#inserting-data) and [UPDATE](https://crate.io/docs/stable/sql/dml.html#updating-data). A great application of *generated columns* is the computation of the columns values on the fly.
+Additionally to our demonstration, we will create a table with few cities and its current temperature measured in `celsius`. It would not hurt by any means to have a possibility to get temperature results not only in `celsius`, but in `fahrenheit` and `kelvin` as well, without having any preliminary computation on the application layer and caring about handling it once records are inserted or updated.
 
-Additionally to our demonstration, we will create a table with few cities and its current temperature measured in `celsius`. It would not hurt by any means to have a possibility to get temperature results not only in `celsius`, but in `fahrenheit ` and `kelvin` as well, without having any preliminary computation on the application layer and caring about handling it once records are inserted or updated.
+The encountered requirement can be dealt by defining two _generated columns_ `kelvin` and `fahrenheit`, and providing them with the _generation expressions_ needed for the conversions.
 
-The encountered requirement can be dealt by defining two *generated columns* `kelvin` and `fahrenheit`, and providing them with the *generation expressions* needed for the conversions.
-
-    cr> create table weather (
-    ...     city string,
-    ...     celsius double,
-    ...     kelvin as (celsius + 273.15),
-    ...     fahrenheit as (celsius * 9/5 + 32)
-    ... );
-    CREATE OK (... sec)
+```
+cr> create table weather (
+...     city string,
+...     celsius double,
+...     kelvin as (celsius + 273.15),
+...     fahrenheit as (celsius * 9/5 + 32)
+... );
+CREATE OK (... sec)
+```
 
 #### On insert calculation
-
 First of all, let's populate the `weather` table with a few records.
 
-    cr> insert into weather (city, celsius) values
-    ...     ('Dornbirn', 9),
-    ...     ('Berlin', 7),
-    ...     ('London', 14),
-    ...     ('San Francisco', 8);
-    INSERT OK, 2 row affected (... sec)
+```
+cr> insert into weather (city, celsius) values
+...     ('Dornbirn', 9),
+...     ('Berlin', 7),
+...     ('London', 14),
+...     ('San Francisco', 8);
+INSERT OK, 2 row affected (... sec)
+```
 
 After the execution of the insert query we select all columns of the newly generated `weather` table.
 
-    cr> select city, celsius, kelvin, fahrenheit
-    ... from weather;
-    +---------------+---------+--------+------------+
-    | city          | celsius | kelvin | fahrenheit |
-    +---------------+---------+--------+------------+
-    | Berlin        |     7.0 | 280.15 |       44.6 |
-    | San Francisco |     8.0 | 281.15 |       46.4 |
-    | London        |    14.0 | 287.15 |       57.2 |
-    | Dornbirn      |     9.0 | 282.15 |       48.2 |
-    +---------------+---------+--------+------------+
-    SELECT 4 rows in set (... sec)
+```
+cr> select city, celsius, kelvin, fahrenheit
+... from weather;
++---------------+---------+--------+------------+
+| city          | celsius | kelvin | fahrenheit |
++---------------+---------+--------+------------+
+| Berlin        |     7.0 | 280.15 |       44.6 |
+| San Francisco |     8.0 | 281.15 |       46.4 |
+| London        |    14.0 | 287.15 |       57.2 |
+| Dornbirn      |     9.0 | 282.15 |       48.2 |
++---------------+---------+--------+------------+
+SELECT 4 rows in set (... sec)
+```
 
-and focus our attention on the `kelvin` and `fahrenheit` columns. We can see here that the values of the *generated columns* have been computed on the fly by *generation expressions*.
+and focus our attention on the `kelvin` and `fahrenheit` columns. We can see here that the values of the _generated columns_ have been computed on the fly by _generation expressions_.
 
 #### On update calculation
-
 The weather has changed recently. Therefore, the corresponding changes have to be reflected in the `weather` table!
 
-    cr> update weather set celsius = -1
-    ... where city = 'Dornbirn';
-    UPDATE OK, 1 row affected (... sec)
+```
+cr> update weather set celsius = -1
+... where city = 'Dornbirn';
+UPDATE OK, 1 row affected (... sec)
+```
 
 After applying the update, we query the `weather` table for all columns again.
 
-    cr> select city, celsium, kelvin, fahrenheit
-    ... from weather;
-    +---------------+---------+--------+------------+
-    | city          | celsius | kelvin | fahrenheit |
-    +---------------+---------+--------+------------+
-    | Berlin        |     7.0 | 280.15 |       44.6 |
-    | San Francisco |     8.0 | 281.15 |       46.4 |
-    | London        |    14.0 | 287.15 |       57.2 |
-    | Dornbirn      |    -1.0 | 252.15 |       30.2 |
-    +---------------+---------+--------+------------+
-    SELECT 4 rows in set (... sec)
+```
+cr> select city, celsium, kelvin, fahrenheit
+... from weather;
++---------------+---------+--------+------------+
+| city          | celsius | kelvin | fahrenheit |
++---------------+---------+--------+------------+
+| Berlin        |     7.0 | 280.15 |       44.6 |
+| San Francisco |     8.0 | 281.15 |       46.4 |
+| London        |    14.0 | 287.15 |       57.2 |
+| Dornbirn      |    -1.0 | 252.15 |       30.2 |
++---------------+---------+--------+------------+
+SELECT 4 rows in set (... sec)
+```
 
-As it was expected, the newly calculated values of `kelvin` and `fahrenheit` columns by *generation expressions* are shown in the query's output where the name of the city is Dornbirn.
-<br></br>
+As it was expected, the newly calculated values of `kelvin` and `fahrenheit` columns by _generation expressions_ are shown in the query's output where the name of the city is Dornbirn. <br></br>
 
 For more detailed information, please read the **[generated columns documentation](https://crate.io/docs/en/latest/sql/generated-columns.html)**.
 
