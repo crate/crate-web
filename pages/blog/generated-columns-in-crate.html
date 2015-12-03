@@ -24,15 +24,15 @@ Providing a data type for such columns is optional. It is inferred by the return
 
 ## Use cases
 
-With *Generated columns* we get an effortless way to solve a variety of problems. Let us take a closer look at couple of them:
+With *generated columns* we get an effortless way to solve a variety of problems. Let us take a closer look at a couple of them:
 
 ### Partition by expression
 
-Imagine that you have to analyze time-based data, e.g. a log of enormous size, where only records containing in particular time slices would have a value for you. The problem you have encountered here is that the queries you run against the log, due to the size and nature of data, are way to slow. You will definitely try to come up with a smart solution to improve the query speed. One convenient way to accomplish that is to look up for data in those sliced data samples which contain the records of your interest, instead of iterating over all existing records. That is where [partitioned tables](https://crate.io/docs/en/latest/sql/partitioned_tables.html) come to the rescue. Having this functionality let you have separate partitions but still query them like a single table.
+Imagine that you have to analyze time-based data, e.g. a log of enormous size, where only records containing in particular time slices would have a value for you. The problem you will encountered here is that the queries you run against the log, due to the size and nature of data, are way to slow. You will definitely try to come up with a smart solution to improve the query speed. One convenient way to accomplish that is to look up for data in those sliced data samples which contain the records of your interest, instead of iterating over all existing records. That is where [partitioned tables](https://crate.io/docs/en/latest/sql/partitioned_tables.html) come to the rescue. Having this functionality let you have separate partitions but still query them like a single table.
 
 For our log data use case and imaginary analyzing queries the most suitable way would be to partition the table by a column containing a timestamp. But what if the column in the [partitioned by](https://crate.io/docs/en/latest/sql/reference/create_table.html#partitioned-by-clause) clause has rather low granularity or it does not really suit our queries well enough. In both cases we won't be happy that much. We would definitely end up either with too many partitions in the table or find ourselves performing an additional work to adopt the queries.
 
-With *Generated columns* the challenge we have faced can be addressed in a simple manner. Let's create an example of analyzing data logs on a monthly basis, while having day granularity for the timestamped column.
+With *generated columns* the challenge we have faced can be addressed in a simple manner. Let's create an example of analyzing data logs on a monthly basis, while having day granularity for the timestamped column.
 
 First, create the `log` table with the new generated column `month` and put the last into [partitioned by](https://crate.io/docs/en/latest/sql/reference/create_table.html#partitioned-by-clause) clause
 
@@ -53,7 +53,7 @@ In the next step, we insert few log records into the table.
     ...     ('log_2015_03_01', '2015-03-01');
     INSERT OK, 5 row affected (... sec)
 
-Finally, check if the table has been indeed partitioned on the generated column which has granularity of month.
+Finally, table has been partitioned by the generated month column indeed.
 
     cr> select table_name, partition_ident, "values"
     ... from information_schema.table_partitions
@@ -98,8 +98,8 @@ The implementation of *generated columns* for the [partitioned by](https://crate
     The `created` column is used for generation the `month` column on which the table is partitioned. The optimization we have added allows querying the column used in *generation expression* of the generated column and still hit only the partition right where this value belongs. The query bellow demonstrates it:
 
         cr> select log,
-        ...        date_format('%Y-%m-%d', created) as created,
-        ...        date_format('%Y-%m', month) as month
+        ... date_format('%Y-%m-%d', created) as created,
+        ... date_format('%Y-%m', month) as month
         ... from logs
         ... where created = '2015-02-01';
         +----------------+------------+---------+
