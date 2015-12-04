@@ -16,7 +16,7 @@
       "path": "docs/",
       "template": "docs.html",
       "order": {
-        "toc": "docs/toc"
+        "key": "date"
       }
     }
   },

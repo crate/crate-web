@@ -12,13 +12,13 @@
 	</li>
 </ul>
 {% endcomment %}
-<ul class="w-list-unstyled">
+<ul id="nav" class="w-list-unstyled">
 	<li class="navleft-item"><a href="/docs/introduction/">Introduction</a></li>
 	<li class="navleft-item"><a href="/docs/getting-started/">Getting Started</a>
 		<ul class="w-list-unstyled navleft-list-level">
 			<li class="navleft-item"><a href="/docs/getting-started/crash/">Crash</a></li>
 			<li class="navleft-item"><a href="/docs/getting-started/admin_ui/">Admin UI</a></li>
-			<li class="navleft-item">Containers
+			<li class="navleft-item"><span>Containers</span>
 				<ul class="w-list-unstyled navleft-list-level">
 					<li class="navleft-item"><a href="/docs/getting-started/containers/containership/">Containership</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/containers/coreos/">CoreOS</a></li>
@@ -26,7 +26,7 @@
 					<li class="navleft-item"><a href="/docs/getting-started/containers/tutum/">Tutum</a></li>
 				</ul>
 			</li>
-			<li class="navleft-item">Cloud
+			<li class="navleft-item"><span>Cloud</span>
 				<ul class="w-list-unstyled navleft-list-level">
 					<li class="navleft-item"><a href="/docs/getting-started/cloud/aws/">AWS</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/cloud/azure/">Azure</a></li>
@@ -48,4 +48,12 @@
 	<li class="navleft-item"><a href="/docs/search/">Search</a></li>
 	<li class="navleft-item"><a href="/docs/support/">Support</a></li>
 </ul>
+<script>
+	window.onload = function() {
+		var $nav = $('#nav');
+		var $element = $nav.find('a[href="' + window.location.pathname + '"]').addClass('link-active');
+		var $uls = $element.parents('ul');
+		for(var i = 0; i < $uls.length; i++) $($uls[i]).prev().addClass('link-active');
+	};
+</script>
 {% endblock %}
