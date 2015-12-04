@@ -8,14 +8,14 @@ date: 2015-11-30
 ## Connect Hosting
 First, from the _Providers -> Hosting_ menu, connect your hosting accounts. The current options are AWS, Digital Ocean, Joyent, Packet and Rackspace.
 
-![](cos-providers.png)
+![Connect Accounts](http://cdn.crate.io/media/1512/cos-providers.png)
 
 ## Create Cluster
 Next we need to create our cluster, the VMs that our Crate cluster will be added to. Click on the _Infrastructure -> Clusters_ menu and then the 'Create Cluster' button in the top right of the dashboard screen. Select your hosting provider and the appropriate configuration options for region, authentication and memory/cpu.
 
-![](cos-menu.png)
+![Create Cluster](http://cdn.crate.io/media/1512/cos-menu.png)
 
-![](cos-create-cluster.png)
+![Create Cluster](cos-create-cluster.png)
 
 ContainerShip uses the concept of 'Leaders' and 'Followers', that handle management of containers and applications and the actual containers and applications respectively. Read more about these concepts in [ContainerShip's documentation](https://docs.containership.io/v0.2.4/docs/terminology).
 
@@ -24,7 +24,7 @@ After a few minutes waiting for the cluster to come online, we can create our Ap
 
 Choose the cluster you wish to install Crate in and set its memory and CPU options. You should now see Crate listed underneath the 'Applications' section, it will be set up on the follower Hosts, so two nodes. Copy one of the Follower Host IP addresses, and open it in a browser with _:4200/admin_ appended and you will see the Crate admin UI.
 
-![](cos-add-crate.png)
+![Add Crate](http://cdn.crate.io/media/1512/cos-add-crate.png)
 
 ## Scaling
 There are two methods for scaling your cluster with ContainerShip, the number of containers per VM, or the number of VMs.
