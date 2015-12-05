@@ -43,17 +43,25 @@
 			</li>
 		</ul>		
 	</li>
+	<li class="navleft-item">
+		<span>Clients</span>
+		<ul class="w-list-unstyled navleft-list-level">
+			<li class="navleft-item"><a href="/docs/clients/java/">Java</a></li>
+			<li class="navleft-item"><a href="/docs/clients/python/">Python</a></li>
+			<li class="navleft-item"><a href="/docs/clients/ruby/">Ruby</a></li>
+			<li class="navleft-item"><a href="/docs/clients/php/">PHP</a></li>
+			<li class="navleft-item"><a href="/docs/clients/scala/">Scala</a></li>
+			<li class="navleft-item"><a href="/docs/clients/nodejs/">NodeJS</a></li>
+			<li class="navleft-item"><a href="/docs/clients/mono/">Mono</a></li>
+			<li class="navleft-item"><a href="/docs/clients/go/">Go</a></li>
+			<li class="navleft-item"><a href="/docs/clients/perl/">Perl</a></li>
+			<li class="navleft-item"><a href="/docs/clients/odbc/">ODBC</a></li>
+			<li class="navleft-item"><a href="/docs/clients/http-endpoint/">HTTP-Endpoint</a></li>
+		</ul>
+	</li>
 	<li class="navleft-item"><a href="/docs/performance/">Performance</a></li>
-	<li class="navleft-item"><a href="/docs/reference/">Reference</a></li>
+	<li class="navleft-item"><a href="https://crate.io/docs/stable/">Reference</a></li>
 	<li class="navleft-item"><a href="/docs/search/">Search</a></li>
 	<li class="navleft-item"><a href="/docs/support/">Support</a></li>
 </ul>
-<script>
-	window.onload = function() {
-		var $nav = $('#nav');
-		var $element = $nav.find('a[href="' + window.location.pathname + '"]').addClass('link-active');
-		var $uls = $element.parents('ul');
-		for(var i = 0; i < $uls.length; i++) $($uls[i]).prev().addClass('link-active');
-	};
-</script>
 {% endblock %}

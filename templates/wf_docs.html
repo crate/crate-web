@@ -76,6 +76,18 @@
       </div>
     </div>
   </div>
+  <div class="w-section section">
+    <div class="w-container container">
+      <div class="w-row">
+        <div class="w-col w-col-4"><a href="#" id="docs-previous">&lt; Previous</a>
+        </div>
+        <div class="w-col w-col-4 align-center"><a href="#" id="docs-top">Top</a>
+        </div>
+        <div class="w-col w-col-4 align-right"><a href="#" id="docs-next">Next &gt;</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <footer class="w-section footer">
     <div class="w-container">
       <div class="w-clearfix">
@@ -136,6 +148,47 @@
   </footer>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script type="text/javascript" src="../js/webflow.js"></script>
+  <script>
+  $(document).ready(function() {
+    var $nav = $('#nav');
+    var $element = $nav.find('.w--current').addClass('link-active');
+    var $uls = $element.parents('ul');
+    for(var i = 0; i < $uls.length; i++)
+      $($uls[i]).prev().addClass('link-active');
+
+    $as = $nav.find('a');
+    var position
+    for(var i = 0; i < $as.length; i++) {
+      if($as[i] == $element[0]) {
+        position = i;
+      }
+    }
+
+    console.log(position);
+    console.log($uls);
+
+    //prev
+    if(position == 0)
+      $('#docs-previous').hide();
+    else
+      $('#docs-previous').attr('href', $($as[position-1]).attr('href'));
+
+    //next
+    if(position == $as.length)
+      $('#docs-next').hide();
+    else
+      $('#docs-next').attr('href', $($as[position+1]).attr('href'));
+
+    //top
+    console.log($($uls[0]).prev('a'));
+    if($uls.length > 0 && $($uls[0]).prev('a').length > 0)
+      $('#docs-top').attr('href', $($uls[0]).prev('a').attr('href'));
+    else
+      $('#docs-top').hide();
+
+  });
+  </script>
+
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
   <!-- Segment -->
   <script async>
