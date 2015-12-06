@@ -2,9 +2,9 @@
   "prettify": true,
   "fingerprint": [],
   "collections": {
-    "blog": {
-      "title": "Blog",
-      "path": "blog/",
+    "article": {
+      "title": "Articles",
+      "path": "a/",
       "template": "post.html",
       "order": {
         "key": "date",

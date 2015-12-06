@@ -1,4 +1,4 @@
-# -*- coding: utf-8; -*-
+    # -*- coding: utf-8; -*-
 #
 # Licensed to Crate (https://crate.io) under one or more contributor
 # license agreements.  See the NOTICE file distributed with this work for
@@ -179,11 +179,11 @@ def preBuild(site):
 
     global NEWS_JSON
     NEWS_JSON = toDict(settings,
-        COLLECTIONS['blog'].filter('news', key='category'))
+        COLLECTIONS['article'].filter('news', key='category'))
 
     global DEVELOPER_NEWS_JSON
     DEVELOPER_NEWS_JSON = toDict(settings,
-        COLLECTIONS['blog'].filter('developernews', key='category'))
+        COLLECTIONS['article'].filter('developernews', key='category'))
 
 
 def preBuildPage(site, page, context, data):
