@@ -1,55 +1,6 @@
-{% extends "base.html" %}
-
-{% block navbar2 %}
-<div class="wrapper wrapper-plain">
-  <nav class="breadcrumb-container">
-    <div class="container">
-      <ol class="nav navbar-nav navbar-subnav">
-        <li class="{% if_current_page '/install/index.html' 'active' '' %}">
-          <a href="{% url '/install/index.html' %}">
-            Quickstart</a></li>
-        <li class="{% if_current_page '/install/overview.html' 'active' '' %}">
-          <a href="{% url '/install/overview.html' %}">
-            Overview</a></li>
-        <li class="{% if_current_page '/install/local.html' 'active' '' %}">
-          <a href="{% url '/install/local.html' %}">
-            Local</a></li>
-        <li class="{% if_current_page '/install/cloud/index.html' 'active' '' %}">
-          <a href="{% url '/install/cloud/index.html' %}">
-            Cloud</a></li>
-        <li class="{% if_current_page '/install/docker.html' 'active' '' %}">
-          <a href="{% url '/install/docker.html' %}">
-            Docker</a></li>
-        <li class="{% if_current_page '/install/linux.html' 'active' '' %}">
-          <a href="/install/linux/">
-            Linux</a></li>
-
-      </ol>
-    </div>
-  </nav>
-</div>
-{% endblock %}
-
-{% block header %}
-<div class="wrapper wrapper-border wrapper-blogpost-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="page-header">
-          <h1 id="{{ title|slugify }}">{{ title }}</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% endblock %}
+{% extends "docs.html" %}
 
 {% block body %}
-<div class="wrapper wrapper-border">
-  <div class="container">
-    {% block install_content %}
-    <!-- @install_content -->
-    {% endblock %}
-  </div>
-</div>
+	{% block install_content %}
+	{% endblock %}
 {% endblock %}

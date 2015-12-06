@@ -1,0 +1,133 @@
+title: PHP
+author: Chris Ward
+date: 2015-11-30
+
+# PHP
+## PDO
+Install by adding to your _composer.json_ file:
+
+```json
+{
+  "require": {
+    "crate/crate-pdo":"~0.3.0"
+  }
+}
+```
+
+And installing with `composer intall`.
+
+Then to represent this query:
+
+```sql
+SELECT count(*) AS quantity,
+       user['verified']
+FROM tweets
+GROUP BY user['verified']
+ORDER BY quantity DESC ;
+```
+
+- [Demo App](#)
+
+## DBAL
+Install by adding to your _composer.json_ file:
+
+```json
+{
+  "require": {
+    "crate/crate-dbal":"~0.2.0"
+  }
+}
+```
+
+And installing with `composer intall`.
+
+Then to represent this query:
+
+```sql
+SELECT count(*) AS quantity,
+       user['verified']
+FROM tweets
+GROUP BY user['verified']
+ORDER BY quantity DESC ;
+```
+
+```php
+
+require_once __DIR__.'/vendor/autoload.php';
+
+$params = array(
+    'driverClass' => 'Crate\DBAL\Driver\PDOCrate\Driver',
+    'host' => '192.168.99.100',
+    'port' => 4200
+);
+$connection = \Doctrine\DBAL\DriverManager::getConnection($params);
+$queryBuilder = $connection->createQueryBuilder();
+
+$queryBuilder
+    ->select('text', 'user')
+    ->from('tweets');
+
+$query = $queryBuilder->execute();
+$result = $query->fetchAll();
+$rowCount = $query->rowCount();
+
+var_dump($rowCount);
+```
+
+**Differences between Doctrine DBAL and ORM?**
+
+### Limitations
+- Full Text indices
+- JOINs
+
+Further reading:
+- [https://github.com/crate/crate-dbal](https://github.com/crate/crate-dbal)
+- [Doctrine Query builder](http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html)
+- [Demo App](#)
+
+## Laravel
+Add a require to your _composer.json_:
+
+```json
+{
+    "require": {
+        "ratkor/laravel-crate.io": "*"
+    }
+}
+```
+
+Install with `composer intall`.
+
+After composer downloads your package, you'll have to register this new Crate DB provider in Laravel. Open _config/app.php_ and add:
+
+```php
+RatkoR\Crate\CrateServiceProvider,
+```
+
+to the list of providers.
+
+Laravel 5.1 users can add:
+
+```php
+RatkoR\Crate\CrateServiceProvider::class,
+```
+
+Open _config/database.php_ and add a new crate database connection (with config values to match your setup):
+
+```php
+'crate' => array(
+    'driver'   => 'crate',
+    'host'     => 'localhost',
+    'database' => 'doc',
+    'port'     => 4200,
+),
+```
+
+Next, change default database connection to "crate".
+
+```php
+'default' => 'crate',
+```
+
+- [Demo App](#)
+- [Further Reading](https://github.com/RatkoR/laravel-crate.io/blob/master/README.md)

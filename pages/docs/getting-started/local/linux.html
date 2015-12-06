@@ -1,0 +1,210 @@
+title: Installing Crate.IO on Linux
+author: Chris Ward
+date: 2015-11-30
+
+# Linux
+Crate maintains official packages for Arch Linux, Debian, RedHat Enterprise Linux and Ubuntu. We recommend you use our 1-step installer that will configure the appropriate package repository and install Crate for you.
+
+```bash
+bash -c "$(curl -L install.crate.io)"
+```
+
+If you like to do things manually, here's how.
+
+## Arch Linux
+Crate publishes build files to [Arch Linux AUR](https://aur4.archlinux.org/packages/crate/). If you have any problems installing packages from the AUR, full instructions are available on the Arch Linux [Wiki](https://wiki.archlinux.org/index.php/AUR_User_Guidelines)). Make sure you have installed `build base-devel` with the `pacman -S --needed base-devel` command.
+
+### Download the package
+
+```bash
+mkdir ~/builds
+cd ~/builds
+curl -O https://aur4.archlinux.org/cgit/aur.git/snapshot/crate.tar.gz
+tar xzvf crate.tar.gz
+```
+
+### Build and install the package
+
+```bash
+cd crate
+makepkg -si
+```
+
+### Start Crate
+
+```bash
+sudo systemctl enable crate.service
+sudo systemctl start crate.service
+```
+
+## Debian
+We provide Debian packages for the Wheezy (7.x) and Jessie (8.x) distributions. Installing Crate from our repository requires a couple of steps.
+
+### Testing/Unstable Releases
+And for Debian Jessie:
+
+```bash
+deb https://cdn.crate.io/downloads/apt/testing/ jessie main
+deb-src https://cdn.crate.io/downloads/apt/testing/ jessie main
+```
+
+### Debian Wheezy
+#### Install https support for apt
+
+```bash
+sudo apt-get install apt-transport-https
+```
+
+#### Download and install gpg key:
+
+```bash
+wget https://cdn.crate.io/downloads/apt/DEB-GPG-KEY-crate
+sudo apt-key add DEB-GPG-KEY-crate
+```
+
+#### Add repository to sources:
+
+```bash
+sudo su -c "echo 'deb https://cdn.crate.io/downloads/apt/stable/ wheezy main
+deb-src https://cdn.crate.io/downloads/apt/stable/ wheezy main' >> /etc/apt/sources.list"
+```
+
+##### Testing Releases
+Testing releases of Crate are available for Debian. Use the following source URLs for Debian Wheezy:
+
+```bash
+sudo su -c "echo 'deb https://cdn.crate.io/downloads/apt/testing/ wheezy main deb-src https://cdn.crate.io/downloads/apt/testing/ wheezy main' >> /etc/apt/sources.list"
+```
+
+#### Update sources and install crate
+
+```bash
+sudo apt-get update
+sudo apt-get install crate
+```
+
+#### Start Crate
+
+```bash
+sudo /etc/init.d/crate start
+```
+
+### Debian Jessie
+#### Install https support for apt
+
+```bash
+sudo apt-get install apt-transport-https
+```
+
+#### Download and install gpg key
+
+```bash
+wget https://cdn.crate.io/downloads/apt/DEB-GPG-KEY-crate
+sudo apt-key add DEB-GPG-KEY-crate
+```
+
+#### Add repository to sources
+
+```bash
+sudo su -c "echo 'deb https://cdn.crate.io/downloads/apt/stable/ jessie main
+deb-src https://cdn.crate.io/downloads/apt/stable/ jessie main' >> /etc/apt/sources.list"
+```
+
+##### Testing Releases
+Testing releases of Crate are available for Debian. Use the following source URLs for Debian Wheezy:
+
+```bash
+sudo su -c "echo 'deb https://cdn.crate.io/downloads/apt/testing/ jessie main deb-src https://cdn.crate.io/downloads/apt/testing/ jessie main' >> /etc/apt/sources.list"
+```
+
+#### Update sources and install crate:
+
+```bash
+sudo apt-get update
+sudo apt-get install crate
+```
+
+#### Start Crate
+
+```bash
+sudo /etc/init.d/crate start
+```
+
+## Red Hat
+The Crate Team maintains the official YUM repositories for RPM-based releases, supporting Linux Distributions such as RedHat Enterprise Linux 6, CentOS 6 and Scientific Linux 6.
+
+### RHEL6
+#### Enable the Crate YUM repository
+All Crate packages are signed with GPG. To verify packages, the public key must be installed and then install the `.rpm` containing the YUM repository definition.
+
+```bash
+sudo rpm --import https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate
+sudo rpm -Uvh https://cdn.crate.io/downloads/yum/6/x86_64/crate-release-6.5-1.noarch.rpm
+```
+
+##### Testing and Unstable Releases
+The Crate Testing repository is disabled by default, it contains development builds and is frequently updated. The packages are waiting for feedback from testers on functionality and stability. Packages in this repository will change during development, so it should be disabled on production systems. If you want to enable the Testing repo on your server, set `enabled=1` in _/etc/yum.repos.d/crate.repo_.
+
+#### Install Crate
+
+```bash
+yum install crate
+```
+
+#### Start Crate
+
+```bash
+sudo service crate start
+```
+
+### RHEL7
+The Crate Team maintains the official YUM repositories for RPM-based releases. It's supported on Linux Distributions such as RedHat Enterprise Linux 7, CentOS 7, or Scientific Linux 7.
+
+#### Enable the Crate YUM repository
+All Crate packages are signed with GPG. To verify packages, the public key must be installed and then you can install the `.rpm` containing the YUM repository definition.
+
+```bash
+sudo rpm --import https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate
+sudo rpm -Uvh https://cdn.crate.io/downloads/yum/7/noarch/crate-release-7.0-1.noarch.rpm
+```
+
+#### Install Crate
+
+```bash
+sudo yum install crate
+```
+
+#### Start Crate
+
+```bash
+sudo /bin/systemctl status crate.service
+```
+
+## Ubuntu
+We build packages for the Ubuntu versions Lucid Lync, Saucy Salamander and Precise Pangolin. They are available on our [Launchpad page](https://launchpad.net/~crate). Adding the repository and installing Crate requires the following commands:
+
+### Install Crate
+
+```bash
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:crate/stable
+sudo apt-get update
+sudo apt-get install crate
+```
+
+#### Testing and Unstable Releases
+The Crate Testing repository is disabled by default, it contains development builds and is frequently updated. The packages are waiting for feedback from testers on functionality and stability. Packages in this repository will change during development, so it should be disabled on production systems. If you want to enable the Testing repo on your server. To enable the Testing Repository on your machine add the PPA:
+
+```bash
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:crate/testing
+sudo apt-get update
+sudo apt-get install crate
+```
+
+### Start Crate
+Waiting on fix from integrations team...
+
+```bash
+
+```

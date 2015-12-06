@@ -1,54 +1,67 @@
-{% extends "base.html" %}
+{% extends "wf_docs.html" %}
 
 {% block navbar2 %}
-<div class="wrapper wrapper-plain">
-  <nav class="breadcrumb-container">
-    <div class="container">
-      <ol class="nav navbar-nav navbar-subnav">
-        <li class="{% if_current_page '/docs/index.html' 'active' '' %}">
-          <a href="{% url '/docs/index.html' %}">
-            Overview</a></li>
-        <li class="{% if_current_page '/install/index.html' 'active' '' %}">
-          <a href="{% url '/install/index.html' %}">
-            Installation</a></li>
-        <li class="{% if_current_page '/docs/stable/' 'active' '' %}">
-          <a href="/docs/stable/">
-            Server</a></li>
-        <li class="{% if_current_page '/docs/clients/index.html' 'active' '' %}">
-          <a href="{% url '/docs/clients/index.html' %}">
-            Clients</a></li>
-        <li class="{% if_current_page '/docs/faq.html' 'active' '' %}">
-          <a href="{% url '/docs/faq.html' %}">
-            FAQ</a></li>
-        <li class=""><a href="https://github.com/crate/crate" target="_blank">
-          <i class="fa fa-github"></i> Source</a></li>
-      </ol>
-    </div>
-  </nav>
-</div>
+{% comment %}
+<ul class="w-list-unstyled">
+	<li class="navleft-item"><a href="#">Main</a></li>
+	<li class="navleft-item">
+		<a href="#">Main</a>
+		<ul class="w-list-unstyled navleft-list-level">
+			<li class="navleft-item"><a href="#">Sub</a></li>
+		</ul>
+	</li>
+</ul>
+{% endcomment %}
+<ul id="nav" class="w-list-unstyled">
+	<li class="navleft-item"><a href="/docs/introduction/">Introduction</a></li>
+	<li class="navleft-item"><a href="/docs/getting-started/">Getting Started</a>
+		<ul class="w-list-unstyled navleft-list-level">
+			<li class="navleft-item"><a href="/docs/getting-started/crash/">Crash</a></li>
+			<li class="navleft-item"><a href="/docs/getting-started/admin_ui/">Admin UI</a></li>
+			<li class="navleft-item"><span>Containers</span>
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="/docs/getting-started/containers/containership/">Containership</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/containers/coreos/">CoreOS</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/containers/docker/">Docker</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/containers/tutum/">Tutum</a></li>
+				</ul>
+			</li>
+			<li class="navleft-item"><span>Cloud</span>
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="/docs/getting-started/cloud/aws/">AWS</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/cloud/azure/">Azure</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/cloud/softlayer/">Softlayer</a></li>
+				</ul>
+			</li>
+			<li class="navleft-item"><a href="/docs/getting-started/local/">Local</a>
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="/docs/getting-started/local/linux/">Linux</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/local/mac/">Mac</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/local/windows/">Windows</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/local/tarball/">Tarball</a></li>
+				</ul>
+			</li>
+		</ul>		
+	</li>
+	<li class="navleft-item">
+		<span>Clients</span>
+		<ul class="w-list-unstyled navleft-list-level">
+			<li class="navleft-item"><a href="/docs/clients/java/">Java</a></li>
+			<li class="navleft-item"><a href="/docs/clients/python/">Python</a></li>
+			<li class="navleft-item"><a href="/docs/clients/ruby/">Ruby</a></li>
+			<li class="navleft-item"><a href="/docs/clients/php/">PHP</a></li>
+			<li class="navleft-item"><a href="/docs/clients/scala/">Scala</a></li>
+			<li class="navleft-item"><a href="/docs/clients/nodejs/">NodeJS</a></li>
+			<li class="navleft-item"><a href="/docs/clients/mono/">Mono</a></li>
+			<li class="navleft-item"><a href="/docs/clients/go/">Go</a></li>
+			<li class="navleft-item"><a href="/docs/clients/perl/">Perl</a></li>
+			<li class="navleft-item"><a href="/docs/clients/odbc/">ODBC</a></li>
+			<li class="navleft-item"><a href="/docs/clients/http-endpoint/">HTTP-Endpoint</a></li>
+		</ul>
+	</li>
+	<li class="navleft-item"><a href="/docs/performance/">Performance</a></li>
+	<li class="navleft-item"><a href="https://crate.io/docs/stable/">Reference</a></li>
+	<li class="navleft-item"><a href="/docs/search/">Search</a></li>
+	<li class="navleft-item"><a href="/docs/support/">Support</a></li>
+</ul>
 {% endblock %}
-
-{% block header %}
-<div class="wrapper wrapper-border wrapper-blogpost-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="page-header">
-          <h1 id="{{ title|slugify }}">{{ title }}</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% endblock %}
-
-{% block body %}
-<div class="wrapper wrapper-border">
-  <div class="container">
-    {% block docs_content %}
-    <!-- @docs_content -->
-    {% endblock %}
-  </div>
-</div>
-{% endblock %}
-
