@@ -10,7 +10,7 @@ youtube_id: WEitDkuzmYg
 Docker recently started pushing towards a complete solution for orchestrating distributed applications.
 Machine and Swarm are two projects that let you manage cluster instances and deploy Docker containers onto them.
 
-This post shows you how to set up a Swarm cluster on the Google Cloud Platform using <a href="{% url '/docker/machine.html' %}">Docker Machine</a> and then run a Crate cluster using Docker Swarm.
+This post shows you how to set up a Swarm cluster on the Google Cloud Platform using <a href="{% url '/docs/getting-started/containers/docker.html' %}#machine">Docker Machine</a> and then run a Crate cluster using Docker Swarm.
 All instructions in this post refer to docker-machine version `0.1.0-rc5`.
 
 First and foremost, you'll have to create the firewall rules so Swarm is able to talk to its instances. Unfortunately it's using the public IP addresses for communication so we have to allow certain ports to be used.
@@ -37,7 +37,7 @@ $ gcloud compute instances create machine-master \
     --metadata-from-file startup-script=startup-master.sh
 ```
 
-The script `startup-master.sh` will install Docker, <a href="{% url '/docker/machine.html' %}">docker-machine</a>, and all necessary dependencies when launching the instance.
+The script `startup-master.sh` will install Docker, <a href="{% url '/docs/getting-started/containers/docker.html' %}#machine %}">docker-machine</a>, and all necessary dependencies when launching the instance.
 
 ```sh
 #!/bin/bash -x
@@ -324,6 +324,6 @@ I am really looking forward to seeing features that allows you to you know on wh
 
 <h3>Resources</h3>
 
-- <a href="{% url '/docker/index.html' %}">Docker</a>
-- <a href="{% url '/docker/machine.html' %}">Docker Machine</a>
+- <a href="{% url '/docs/getting-started/containers/docker.html' %} %}">Docker</a>
+- <a href="{% url '/docs/getting-started/containers/docker.html' %}#machine %}">Docker Machine</a>
 - [Docker Swarm](https://github.com/docker/swarm/)

@@ -13,11 +13,11 @@ _This is a guest post originally published on <a href="{% url 'https://mesospher
 
 Editor's Note: This guest post is written by Christian Haudum of Crate. Crate is a venture-funded startup that has built a container-native distributed database for large and real-time datasets. We're proud of the thriving ecosystem of third-party datacenter services being built around Mesos and the Mesosphere DCOS, and we wanted to give Crate an opportunity to share their new product with our audience.
 
-<a href="{% url '/index.html' %}">Crate</a> is a distributed database designed to work seamlessly in containerized environments. Due to its shared-nothing architecture it's a perfect fit as a persistence layer for clustered applications. Crate gives you the resilient database cluster with automatic sharding and replication without forcing you to give up the simplicity of SQL as a query language. You will also benefit from the capability of automatic healing if nodes should fail.
+<a href="https://crate.io/">Crate.IO</a> is a distributed database designed to work seamlessly in containerized environments. Due to its shared-nothing architecture it's a perfect fit as a persistence layer for clustered applications. Crate gives you the resilient database cluster with automatic sharding and replication without forcing you to give up the simplicity of SQL as a query language. You will also benefit from the capability of automatic healing if nodes should fail.
 
 Using <a href="{% url 'https://github.com/mesosphere/marathon' %}">Mesosphere's Marathon</a> to manage Crate containers makes it easy to deploy a containerized database cluster very efficiently and allocate database resources quickly depending on your demands, and therefore simplifies the management of elastic applications.
 
-In this post we'll quickly to through the necessary steps to set up a scalable Crate cluster. We'll skip over some of the basics, so you should take a look at the <a href="{% url 'http://mesosphere.com/docs/getting-started/' %}">Mesosphere documentation</a> and the <a href="{% url '/install/docker.html' %}">Crate Docker installation guide</a> first if you aren't familiar with those.
+In this post we'll quickly to through the necessary steps to set up a scalable Crate cluster. We'll skip over some of the basics, so you should take a look at the <a href="{% url 'http://mesosphere.com/docs/getting-started/' %}">Mesosphere documentation</a> and the <a href="{% url '/getting-started/containers/docker.html' %}">Crate Docker installation guide</a> first if you aren't familiar with those.
 
 Ok, let's start!
 
@@ -171,7 +171,7 @@ their [blog post](http://blog.weave.works/2015/07/16/bridge-over-troubled-weaver
 
 ***
 
-We've already written a <a href="{% url '/blog/crate-with-docker-and-weave.html' %}">blog post</a> on how to utilize Weave for multicast discovery for Crate.
+We've already written a <a href="{% url '/a/crate-with-docker-and-weave.html' %}">blog post</a> on how to utilize Weave for multicast discovery for Crate.
 
 This time we'll go a little further and adopt the concept of automatic IP assignment of Docker containers laid out in the great blog post [Adventures with Weave and Docker](http://sttts.github.io/docker/weave/mesos/2015/01/22/weave.html) by Stefan Schimanski.
 
