@@ -17,7 +17,7 @@
   <meta name="generator" content="Webflow">
 
   <base href="/static/css/">
-  
+
   <link rel="stylesheet" type="text/css" href="../css/normalize.css">
   <link rel="stylesheet" type="text/css" href="../css/webflow.css">
   <link rel="stylesheet" type="text/css" href="../css/crateio.css">
@@ -38,14 +38,14 @@
     <div class="w-container">
       <div data-collapse="small" data-animation="default" data-duration="400" data-contain="1" class="w-nav navbar">
         <div class="w-container">
-          <a href="../index.html" class="w-nav-brand brand">
+          <a href="/" class="w-nav-brand brand">
             <img width="217" src="../images/crate-logo_1.png">
           </a>
           <nav role="navigation" class="w-nav-menu w-clearfix">
-            <a href="../use-cases.html" class="w-nav-link navlink">Use Cases</a>
-            <a href="../docs.html" class="w-nav-link navlink">Docs</a>
-            <a href="../not-a-developer.html" class="w-nav-link navlink">Not a Developer?</a>
-            <a href="../articles.html" class="w-nav-link navlink">Articles</a>
+            <a href="/use-cases" class="w-nav-link navlink">Use Cases</a>
+            <a href="/docs" class="w-nav-link navlink">Docs</a>
+            <a href="/not-a-developer" class="w-nav-link navlink">Not a Developer?</a>
+            <a href="/articles" class="w-nav-link navlink">Articles</a>
             <div class="w-form wrapper-search">
               <form id="wf-form-Search" name="wf-form-Search" data-name="Search">
                 <input id="Search" type="text" placeholder="Search" name="Search" data-name="Search" class="w-input textfield-search">
@@ -113,19 +113,19 @@
         </ul>
         <ul class="w-list-unstyled footer-list">
           <li class="footer-listitem link-list">
-            <a href="../about.html" class="footer-link">About</a>
+            <a href="/about" class="footer-link">About</a>
           </li>
           <li class="footer-listitem link-list">
-            <a href="../jobs.html" class="footer-link">Jobs</a>
+            <a href="/jobs" class="footer-link">Jobs</a>
           </li>
           <li class="footer-listitem link-list">
-            <a href="../legal/trademark.html" class="footer-link">Legal</a>
+            <a href="/legal/trademark" class="footer-link">Legal</a>
           </li>
           <li class="footer-listitem link-list">
-            <a href="../imprint.html" class="footer-link">Imprint</a>
+            <a href="/imprint" class="footer-link">Imprint</a>
           </li>
           <li class="footer-listitem link-list">
-            <a href="../contact.html" class="footer-link">Contact</a>
+            <a href="/contact" class="footer-link">Contact</a>
           </li>
         </ul>
         <a href="#" class="w-inline-block brand footer-brand">
@@ -146,29 +146,5 @@
     }}();
   </script>
   <!-- @end Segment -->
-  <!-- Facebook SDK -->
-  <script async>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '555421237941538',
-        xfbml      : true,
-        version    : 'v2.5'
-      });
-    };
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-  </script>
-  <!-- @end Facebook SDK -->
-  <!-- Twitter SDK -->
-  <script async>
-    window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
-  </script>
-  <!-- @end Twitter SDK -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">{% block script %} {% endblock %}
 </body>
 </html>
