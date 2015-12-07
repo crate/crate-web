@@ -97,7 +97,7 @@ packages:
     - user: root
     - mode: 644
 ```
-
+{% verbatim %}
 Example of `crate.yml`:
 
 ```
@@ -116,3 +116,4 @@ discovery.zen.ping.unicast.hosts:
 {%- for server, addrs in salt['mine.get']('*', 'network.ip_addrs').items() %}
 {% if server.startswith("sl") %}  - {{ addrs[0] }}:4300{% endif -%}{% endfor %}
 ```
+{% endverbatim %}
