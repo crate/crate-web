@@ -131,7 +131,7 @@
             <a href="/jobs" class="footer-link">Jobs</a>
           </li>
           <li class="footer-listitem link-list">
-            <a href="/legal/trademark" class="footer-link">Legal</a>
+            <a href="/legal" class="footer-link">Legal</a>
           </li>
           <li class="footer-listitem link-list">
             <a href="/imprint" class="footer-link">Imprint</a>
@@ -190,6 +190,8 @@
   </script>
 
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+
+  <script type="text/javascript" src="//cdn.crate.io/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
   <!-- Segment -->
   <script async>
     !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","page","once","off","on","setAnonymousId"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.1.0";
@@ -199,6 +201,7 @@
     }}();
   </script>
   <!-- @end Segment -->
+  <link rel="stylesheet" href="//cdn.crate.io/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 {% block script %} {% endblock %}
 </body>
 </html>
