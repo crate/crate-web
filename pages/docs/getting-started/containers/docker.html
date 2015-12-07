@@ -2,7 +2,6 @@ title: Getting Started with Crate.IO on Docker
 author: Chris Ward
 date: 2015-11-30
 
-# Docker
 Docker allows developers to package applications and dependencies into standard, shippable units, great for easy deployments across platforms and constantly changing needs. Crate is available as a Docker image and is a perfect data store for Docker based applications.
 
 if you don't have Docker setup yet, find [instructions for all platforms here](https://docs.docker.com/).
@@ -88,6 +87,3 @@ node:
 ```
 
 Here we create one Crate instance with the ports manually allocated, a shared file system volume, an environment variable set for the heap size and override the default crate command to give the cluster a name and a config file. We then create another instance that joins the other in a cluster and a node.js instance that links to a Crate instance.
-
-## Docker Machine and Swarm
-Crate works with Machine and Swarm for creating large scale Docker instances across hosting providers. If you are creating a Crate cluster across hosting providers you should [read our guide on xx](#).

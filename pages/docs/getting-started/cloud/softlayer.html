@@ -2,7 +2,6 @@ title: Getting Started with Crate.IO on Softlayer
 author: Chris Ward
 date: 2015-11-30
 
-# Softlayer
 [SoftLayer](http://softlayer.com/), IBM's cloud platform, has a slightly different take on "the cloud". They are focusing on high performance (physical) hardware embedded in the best possible infrastructure, because "computing doesn't come out of the sky". However, besides their strong physical hardware that you can choose from, SoftLayer also offers virtual machines with a wide range of configuration possibilities.
 
 This combination makes SoftLayer an ideal hosting provider for your own Crate cluster, no matter if you just need a small cluster to play around or run your production cluster even across data centres.
@@ -10,11 +9,13 @@ This combination makes SoftLayer an ideal hosting provider for your own Crate cl
 We at CrateIO have been using [bare metal servers](https://www.softlayer.com/bare-metal-servers) to perform benchmarks on Crate. When using bare metal you have the advantage that you can mix and match hardware. On the other hand the setup/provisioning is more conventional (like on-premise-hosting), since it is not possible to launch/terminate instances in real-time.
 
 A balanced instance configuration for a production Crate host could look similar like that:
-- 8x 2.0GHz cores
-  > = 32 GB memory
-  > = 100 GB local SSD storage
 
-- 1000 Mbps public/private network interface
+```
+8x 2.0GHz cores
+= 32 GB memory
+= 100 GB local SSD storage
+1000 Mbps public/private network interface
+```
 
 We used [SaltStack](http://www.saltstack.com/)'s [Salt Cloud](http://docs.saltstack.com/en/latest/topics/cloud/) to launch and provision instances for the test cluster. Salt Cloud provides an abstraction layer for multiple cloud hosting providers, also for [SoftLayer](http://docs.saltstack.com/en/latest/topics/cloud/softlayer.html).
 
@@ -97,7 +98,6 @@ packages:
     - mode: 644
 ```
 
-{% verbatim %}
 Example of `crate.yml`:
 
 ```
@@ -116,4 +116,3 @@ discovery.zen.ping.unicast.hosts:
 {%- for server, addrs in salt['mine.get']('*', 'network.ip_addrs').items() %}
 {% if server.startswith("sl") %}  - {{ addrs[0] }}:4300{% endif -%}{% endfor %}
 ```
-{% endverbatim %}
