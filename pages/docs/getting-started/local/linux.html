@@ -190,7 +190,15 @@ sudo apt-get update
 sudo apt-get install crate
 ```
 
-#### Testing and Unstable Releases
+### Start Crate
+Crate should have been started automatically by upstart and can be stopped or restarted with:
+
+```bash
+sudo service crate stop
+sudo service crate restart
+```
+
+### Testing and Unstable Releases
 The Crate Testing repository is disabled by default, it contains development builds and is frequently updated. The packages are waiting for feedback from testers on functionality and stability. Packages in this repository will change during development, so it should be disabled on production systems. If you want to enable the Testing repo on your server. To enable the Testing Repository on your machine add the PPA:
 
 ```bash
