@@ -2,7 +2,7 @@ title: Generated Columns in Crate.IO 0.54.0
 link: https://crate.io/blog/generated-columns-in-crate
 author: Ruslan Kovalov
 description: New Crate.IO release with the Generated Columns feature is available
-created: 2015-12-04
+created: 2015-12-12
 post_name: generated-columns-in-crate
 status: publish
 post_type: post
@@ -13,9 +13,7 @@ Crate are pleased to announce the support of generated columns. The new function
 
 The idea behind generated columns is to have its values computed from _generation expressions_ provided at the time of definition, unlike regular columns, where values are set explicitly.
 
-Defining expressions is flexible. It's possible to create complex expressions, reference values of other columns and providing a data type for columns is optional and can be inferred by the return type of the supplied expression.
-
-Crate supports _virtual generated columns_ which are columns that are read-only and computed internally.
+Defining expressions is flexible. It's possible to create complex expressions, reference values of other columns and providing a data type for columns is optional and can be inferred by the return type of the supplied expression, but the values must be equal.
 
 ## Use cases
 Generated columns provide an effortless way to solve a variety of problems, let's take a closer look at a couple:
