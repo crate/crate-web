@@ -1,0 +1,23 @@
+title: Connecting to Crate with Python
+author: Chris Ward
+
+## Install
+
+Use [pip](https://pypi.python.org/pypi/pip) to install the Crate Python package:
+
+```bash
+pip install crate
+```
+
+Import the client module from the Crate Package:
+
+```python
+from crate import client
+```
+## Connect to Crate
+
+Use the client module to create a connection:
+
+```python
+connection = client.connect(SERVER_IP)
+```
