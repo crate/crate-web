@@ -13,32 +13,32 @@
 </ul>
 {% endcomment %}
 <ul id="nav" class="w-list-unstyled">
-	<li class="navleft-item"><a href="/docs/introduction/">Introduction</a></li>
-	<li class="navleft-item"><a href="/docs/getting-started/">Getting Started</a>
+	<li class="navleft-item"><a href="{% url '/docs/introduction/index.html' %}">Introduction</a></li>
+	<li class="navleft-item"><a href="{% url '/docs/getting-started/index.html' %}">Getting Started</a>
 		<ul class="w-list-unstyled navleft-list-level">
-			<li class="navleft-item"><a href="/docs/getting-started/crash/">Crash</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/admin_ui/">Admin UI</a></li>
+			<li class="navleft-item"><a href="{% url '/docs/getting-started/crash.html' %}">Crash</a></li>
+			<li class="navleft-item"><a href="{% url '/docs/getting-started/admin_ui.html' %}">Admin UI</a></li>
 			<li class="navleft-item"><span>Containers</span>
 				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="/docs/getting-started/containers/containership/">Containership</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/containers/coreos/">CoreOS</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/containers/docker/">Docker</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/containers/tutum/">Tutum</a></li>
+					<li class="navleft-item"><a href="{%url '/docs/getting-started/containers/containership.html' %}">Containership</a></li>
+					<li class="navleft-item"><a href="{%url '/docs/getting-started/containers/coreos.html' %}">CoreOS</a></li>
+					<li class="navleft-item"><a href="{%url '/docs/getting-started/containers/docker.html' %}">Docker</a></li>
+					<li class="navleft-item"><a href="{%url '/docs/getting-started/containers/tutum.html' %}">Tutum</a></li>
 				</ul>
 			</li>
 			<li class="navleft-item"><span>Cloud</span>
 				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="/docs/getting-started/cloud/aws/">AWS</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/cloud/azure/">Azure</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/cloud/softlayer/">Softlayer</a></li>
+					<li class="navleft-item"><a href="{%url '/docs/getting-started/cloud/aws.html' %}">AWS</a></li>
+					<li class="navleft-item"><a href="{%url '/docs/getting-started/cloud/azure.html' %}">Azure</a></li>
+					<li class="navleft-item"><a href="{%url '/docs/getting-started/cloud/softlayer.html' %}">Softlayer</a></li>
 				</ul>
 			</li>
-			<li class="navleft-item"><a href="/docs/getting-started/local/">Local</a>
+			<li class="navleft-item"><span>Local</span>
 				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="/docs/getting-started/local/linux/">Linux</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/local/mac/">Mac</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/local/windows/">Windows</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/local/tarball/">Tarball</a></li>
+					<li class="navleft-item"><a href="{%url '/docs/getting-started/local/linux.html' %}">Linux</a></li>
+					<li class="navleft-item"><a href="{%url '/docs/getting-started/local/mac.html' %}">Mac</a></li>
+					<li class="navleft-item"><a href="{%url '/docs/getting-started/local/windows.html' %}">Windows</a></li>
+					<li class="navleft-item"><a href="{%url '/docs/getting-started/local/tarball.html' %}">Tarball</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -46,21 +46,21 @@
 	<li class="navleft-item">
 		<span>Clients</span>
 		<ul class="w-list-unstyled navleft-list-level">
-			<li class="navleft-item"><a href="/docs/getting-started/clients#java">Java</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients#python">Python</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients#ruby"/>Ruby</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients#php">PHP</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients#scala">Scala</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients#nodejs">NodeJS</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients#mono">Mono</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients#go">Go</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients#perl">Perl</a></li>
-			<li class="navleft-item"><a href="/docs/reference/sql/rest.html">HTTP-Endpoint</a></li>
+			<li class="navleft-item"><a href="{%url '/docs/getting-started/clients.html' %}#java">Java</a></li>
+			<li class="navleft-item"><a href="{%url '/docs/getting-started/clients.html' %}#python">Python</a></li>
+			<li class="navleft-item"><a href="{%url '/docs/getting-started/clients.html' %}#ruby"/>Ruby</a></li>
+			<li class="navleft-item"><a href="{%url '/docs/getting-started/clients.html' %}#php">PHP</a></li>
+			<li class="navleft-item"><a href="{%url '/docs/getting-started/clients.html' %}#scala">Scala</a></li>
+			<li class="navleft-item"><a href="{%url '/docs/getting-started/clients.html' %}#nodejs">NodeJS</a></li>
+			<li class="navleft-item"><a href="{%url '/docs/getting-started/clients.html' %}#mono">Mono</a></li>
+			<li class="navleft-item"><a href="{%url '/docs/getting-started/clients.html' %}#go">Go</a></li>
+			<li class="navleft-item"><a href="{%url '/docs/getting-started/clients.html' %}#perl">Perl</a></li>
+			<li class="navleft-item"><a href="{%url '/docs/reference/sql/rest.html">HTTP-Endpoint</a></li>
 		</ul>
 	</li>
-	<li class="navleft-item"><a href="/docs/performance/">Performance</a></li>
-	<li class="navleft-item"><a href="https://crate.io/docs/stable/">Reference</a></li>
-	<li class="navleft-item"><a href="/docs/search/">Search</a></li>
-	<li class="navleft-item"><a href="/docs/support/">Support</a></li>
+	<li class="navleft-item"><a href="{%url '/docs/performance/index.html' %}">Performance</a></li>
+	<li class="navleft-item"><a href="/docs/reference/">Reference</a></li>
+	<li class="navleft-item"><a href="{%url '/docs/search/index.html' %}">Search</a></li>
+	<li class="navleft-item"><a href="{%url '/docs/support/index.html' %}">Support</a></li>
 </ul>
 {% endblock %}
