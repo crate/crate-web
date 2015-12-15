@@ -1,1 +1,15 @@
 {% extends "wf_base.html" %}
+
+{% block content %}
+<div class="w-section section hero bg-blue">
+  <div class="w-container container">
+    <h1 class="heading hero">{% block title %}{{ title }}{% endblock %}</h1>
+    <p class="lead">{% block subline %}{{ subline }}{% endblock %}</p>
+  </div>
+</div>
+<div class="w-section section">
+  <div class="w-container container">
+    <div>{% block body %}{{ body }}{% endblock %}</div>
+  </div>
+</div>
+{% endblock %}
