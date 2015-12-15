@@ -190,7 +190,7 @@ blockquote {
 
 .section.hero {
   position: relative;
-  height: 220px;
+  min-height: 200px;
   margin-top: 0px;
   margin-bottom: 0px;
   padding-top: 64px;
