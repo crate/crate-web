@@ -6,7 +6,7 @@ Amazon Web Services (AWS) is the worlds most popular cloud hosting provider with
 An AMI (Amazon Machine Image) is a pre-configured virtual appliance optimized for a particular use. With the Crate AMI, this includes dependencies, optimization and configuration to get Crate running as quickly and efficiently as possible. Using the AMI is our recommended method for running Crate clusters on AWS.
 
 ## With the AWS Command Line Interface
-You can find the Crate AMI via the command line interface, in the format _crate-<VERSION>-<REV>-<BASE_AMI>_.
+You can find the Crate AMI via the command line interface, in the format `crate-<VERSION>-<REV>-<BASE_AMI>`.
 
 For example, to find all Crate AMIs available:
 
@@ -14,7 +14,7 @@ For example, to find all Crate AMIs available:
 aws ec2 describe-images --filters "Name=name,Values=crate-*"
 ```
 
-![Terminal Output](http://cdn.crate.io/media/1512/aws-terminal-output.png)
+![Terminal Output](https://cdn.crate.io/media/1512/aws-terminal-output.png)
 
 If you are looking for particular Crate version, you can be more precise:
 
@@ -31,7 +31,7 @@ aws ec2 run-instances --image-id ami-96702de1 --count x --instance-type m3.mediu
 ## With the AWS Web Interface
 To use the AWS website to launch an instance, click the blue 'Launch Instance' button and find the available Crate AMIs under the _Community AMIs_ section.
 
-![AWS GUI](http://cdn.crate.io/media/1512/aws-crate-gui.png)
+![AWS GUI](https://cdn.crate.io/media/1512/aws-crate-gui.png)
 
 Click the 'select' button on the AMI you wish to use and set the instance configuration. The most important options here are the number of instances you require and selecting a security group that opens ports 4200 and 4300.
 
