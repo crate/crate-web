@@ -46,8 +46,6 @@
 </footer>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="{% static '/static/js/dl.js' %}"></script>
-
 <script type="text/javascript" src="{% static '/static/js/webflow.js' %}"></script>
 <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 <script type="text/javascript" src="https://cdn.crate.io/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -59,5 +57,30 @@
     analytics.page();
   }}();
 </script>
+{% block end_body %}
+    <script>
+
+    ;(function($){
+      /**
+      * Crate.IO dl.js
+      */
+
+      var ga = window.ga || function(){ console.warn('GA not enabled'); };
+
+      $('form#form-download').on('submit', function(e){
+        var url = $(this).data('url');
+        e.preventDefault();
+
+        if (url) {
+          // ga('send', 'event', 'button', 'click', 'download_download', 1);
+          analytics.track('visit_download');
+
+          window.open(url, '_blank');
+          this.reset();
+        }
+      });
+    }(jQuery));
+    </script>
+{% endblock %}
 <!-- @end Segment -->
 <link rel="stylesheet" href="https://cdn.crate.io/libs/font-awesome/4.5.0/css/font-awesome.min.css">
