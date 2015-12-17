@@ -4,6 +4,9 @@
     <loc>{{ CONFIG.site }}/sitemap.xml</loc>
   </sitemap>
   <sitemap>
+    <loc>{{ CONFIG.site }}/sitemap-webflow-collections.xml</loc>
+  </sitemap>
+  <sitemap>
     <loc>{{ CONFIG.site }}/sitemap-cactus.xml</loc>
   </sitemap>
   <sitemap>
