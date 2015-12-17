@@ -22,7 +22,8 @@
 var Term = function(elem){
 
   var prefix = "cr>";
-  var pfLen = prefix.length + 1;
+  //console.log(consolequery);
+  var pfLen = prefix.length + consolequery.length + 1;
 
   var _form = elem;
   var form = $(elem);
@@ -85,7 +86,7 @@ var Term = function(elem){
   };
 
   prompt.focus();
-  prompt[0].value = prefix + ' ';
+  prompt[0].value = prefix + ' ' + consolequery;
   prompt[0].setSelectionRange(pfLen, pfLen);
   prompt.on('keyup', function(e){
     var len = e.target.value.length;
@@ -98,6 +99,7 @@ var Term = function(elem){
   form.on('submit', function(e){
     e.preventDefault();
     var stmt = e.target.input.value.substr(prefix.length+1);
+    console.log(stmt);
     execute(stmt);
     return false;
   });

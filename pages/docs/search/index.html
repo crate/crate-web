@@ -1,5 +1,7 @@
 title: Search
 author: Chris Ward
+console: true
+consolequery: SELECT date_format('%Y-%m', date_trunc('month', created_at)) AS date, count(*) AS cnt_pos FROM github WHERE match(record_ft, 'hallelujah hurray bingo amused cheerful excited glad proud') AND TYPE = 'PushEvent' AND (created_at >= '2012-01-01' AND created_at <= '2015-09-01') GROUP BY date ORDER BY date ASC
 
 ## Find the Answers you Need, Instantly
 Crate offers a comprehensive selection of tools to suit the needs of many business requirements. From analyzing large data sets and text records in real-time to find the details you need, to storing and retrieving media files, Crate has what you're looking for.
@@ -14,8 +16,7 @@ Crate includes comprehensive built-in full text search features alongside SQL an
 ## Full Text Search
 With Crate, full text search and analysis of column values is comprehensive and fast. Let's look at a couple of examples.
 
-{% include "includes/interactive_console.html" %}
-
+{% include "includes/interactive_console.html" with query=consolequery %}
 
 ```sql
 SELECT count(*)
