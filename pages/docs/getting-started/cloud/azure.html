@@ -11,16 +11,16 @@ To create a cluster of Crate nodes on cloud hosting we need to rely on unicast f
 
 The easiest way to get Unicast communication working with Azure is to create a Virtual Network (_Network Services -> Virtual Network -> Custom Create_) so that all of our nodes exist on the same IP range. Give the network a name, a region and let Azure handle all the remaining settings by clicking the next arrow on each screen.
 
-![Create Virtual Network](https://cdn.crate.io/media/1512/azure-vpc.png)
+![Create Virtual Network]({% media '/media/1512/azure-vpc.png' %})
 
 ### Create Virtual Machines
 Next create virtual machines to act as your Crate nodes. In this tutorial, I chose two low-specification Ubuntu 14.04 servers, but you likely have your own preferred configurations. The important step is number 4, where we need to select the Virtual Network created earlier.
 
-![Select Virtual Network](https://cdn.crate.io/media/1512/azure-vn-select.png)
+![Select Virtual Network]({% media '/media/1512/azure-vn-select.png' %})
 
 Also at stage 4 we can create the endpoints required for opening the ports Crate uses. These are 4300 for inter-node communication and 4200 for http. You should end up with something like:
 
-![Endpoints](https://cdn.crate.io/media/1512/azure-step4.png)
+![Endpoints]({% media '/media/1512/azure-step4.png' %})
 
 ### Install Crate
 _Note that these instructions need to be followed on each VM in your cluster._
@@ -64,7 +64,7 @@ _Note that these instructions need to be followed on each VM in your cluster._
 
 To install Crate on Windows Server, you will need a [Java JDK installed](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). Ensure that the `JAVA_HOME` environment variable is set.
 
-![Environment Variables](https://cdn.crate.io/media/1512/azure-envvar.png)
+![Environment Variables]({% media '/media/1512/azure-envvar.png' %})
 
 Next [download the Crate Tarball](/install/#tarball), expand it and move to a convenient location.
 
@@ -75,6 +75,6 @@ Edit the _config/crate.yml_ configuration file in the expanded directory to make
 
 We need to allow the ports Crate uses through the Windows Firewall
 
-![Firewall configuration](https://cdn.crate.io/media/1512/azure-port.gif)
+![Firewall configuration]({% media '/media/1512/azure-port.gif' %})
 
 Finally start crate by running `bin/crate`.

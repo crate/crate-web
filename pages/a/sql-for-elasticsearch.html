@@ -10,7 +10,7 @@ tags: aggregations, elasticsearch, sql
 category: news
 
 
-![SQL for ElasticSearch](https://cdn.crate.io/media/1409/sql.jpg)
+![SQL for ElasticSearch]({% media '/media/1409/sql.jpg' %})
 
 When we started Crate.IO, we understood the power of Elasticsearch for searching through mountains of data. We wanted to leverage that power and use the core technology as a database, but we also wanted to make using it very simple. What better way to give developers access to such a powerful system than to use something that’s familiar, battle-tested, and straightforward: SQL!
 
@@ -30,7 +30,7 @@ The same goes for `INSERT` queries, which is not supported by Elasticsearch out-
 
 ## (Auto) Partitioned Tables
 
-With Crate, each table translates to a Lucene index and, by the nature of Elasticsearch, this means each table (index) is automatically sharded and replicated across the cluster. Crate offers the ability to define circumstances when to create new tables based on values in your data. We call this a partitioned table, a concept borrowed from Hive. For example, you can tell Crate: every time there is a new (distinct) value in the column “City”, make that into its own partition. Since this partition is really just an index, it is sharded and replicated as usual. To accomplish this one would use a `CREATE TABLE` statement like so: 
+With Crate, each table translates to a Lucene index and, by the nature of Elasticsearch, this means each table (index) is automatically sharded and replicated across the cluster. Crate offers the ability to define circumstances when to create new tables based on values in your data. We call this a partitioned table, a concept borrowed from Hive. For example, you can tell Crate: every time there is a new (distinct) value in the column “City”, make that into its own partition. Since this partition is really just an index, it is sharded and replicated as usual. To accomplish this one would use a `CREATE TABLE` statement like so:
 
 ```sql
 CREATE TABLE ... PARTITIONED BY (column, ...);
@@ -45,7 +45,7 @@ _(Keep in mind that with Crate we mostly talk about data in terms of tables, and
 
 Due to the way data is sharded and distributed by Elasticsearch into Lucene indices, it is difficult to determine cardinality (the number of distinct values in a set) of a value, for example, determining the number of unique values in a field called “username” in a table of blog posts. In a traditional table/column/row database, this would be a `COUNT`/`GROUP BY` query, and you would either iterate over all of the values and count the unique values (or it might already be cached by the system).
 
-For example, with a MySQL database, you might write: 
+For example, with a MySQL database, you might write:
 
 ```sql
 SELECT username, COUNT(*) FROM posts GROUP BY username ORDER BY 2 DESC;
@@ -57,7 +57,7 @@ Since `COUNT`/`GROUP BY` is a staple of SQL, Crate has worked to solve this prob
 
 Essentially the request is sent to all nodes as usual, but the responses are fed through this distribution layer. Each node hashes the values that were returned from the query and distributes each row (with all the values) to the other nodes based on the hash value. This way every node reduces its distinct part of the data down to a single value, since it knows that no other node has data with the same values. Once all of the hash values have been counted across the cluster, the results are sent back to the requesting node for final processing as usual. This results in the final returned payload being much more reasonable to process than if all of the nodes had returned the all of the raw values (possibly billions!) to the one node. In the Crate scenario, all of the nodes participate in distributing the workload for calculating the result, spreading the load across the cluster and reducing the impact on any one node. You can think of it as a distributed map/reduce job.
 
-By approaching the problem this way, Crate can deliver 100% accurate results for `COUNT`/`GROUP BY` type queries, as one would expect with a SQL query to a RDBMS. 
+By approaching the problem this way, Crate can deliver 100% accurate results for `COUNT`/`GROUP BY` type queries, as one would expect with a SQL query to a RDBMS.
 
 
 ## Import/Export
