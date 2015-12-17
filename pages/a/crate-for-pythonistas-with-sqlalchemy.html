@@ -3,7 +3,7 @@ link: https://crate.io/blog/crate-for-pythonistas-with-sqlalchemy/
 author: Philipp Bogensberger
 description: In this tutorial I want you to show how to interact with Crate using SQLAlchemy.
 created: 2014/07/18 12:19:34
-post_name: crate_sqlalchemy
+post_name: crate-for-pythonistas-with-sqlalchemy
 status: publish
 post_type: post
 tags: python, sqlalchemy
@@ -12,7 +12,7 @@ category: news, developernews
 
 In this tutorial I want you to show how to interact with Crate using SQLAlchemy. SQLAlchemy is a Python SQL toolkit and Object Relational Mapper.
 
-Crate is a scaling document based database with an sql interface which you can just use out of the box. It's perfect for people who don't want to worry about sharding, replication and scalability. 
+Crate is a scaling document based database with an sql interface which you can just use out of the box. It's perfect for people who don't want to worry about sharding, replication and scalability.
 
 ## Installing Crate
 
@@ -65,9 +65,9 @@ DBSession.configure(bind=engine)
 Base.metadata.bind = engine
 ```
 
-Crate is a clustered database that usually consists of multiple nodes. It's recommended to add all nodes into `servers` lists. This enables the DB-API layer to use round-robin to distribute the load and skip a server if it becomes unavailable. 
+Crate is a clustered database that usually consists of multiple nodes. It's recommended to add all nodes into `servers` lists. This enables the DB-API layer to use round-robin to distribute the load and skip a server if it becomes unavailable.
 
-Now that we have a running database connection, we can create the Book model. The model has a primary key called id. We use random [UUID](http://de.wikipedia.org/wiki/Universally_Unique_Identifier)'s as keys. It also has two string fields, title and author and a publication_date timestamp. Unlike other databases that are usually used with SQLAlchemy, Crate isn't a RDBMS but instead it is document oriented which means that the database should be modeled without relationships. 
+Now that we have a running database connection, we can create the Book model. The model has a primary key called id. We use random [UUID](http://de.wikipedia.org/wiki/Universally_Unique_Identifier)'s as keys. It also has two string fields, title and author and a publication_date timestamp. Unlike other databases that are usually used with SQLAlchemy, Crate isn't a RDBMS but instead it is document oriented which means that the database should be modeled without relationships.
 
 Crate supports complex objects and arrays. We'll use an array of strings for the categories.
 
