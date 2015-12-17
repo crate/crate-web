@@ -3,17 +3,9 @@ author: Chris Ward
 
 ## Latest Stable Release
 
-<form class="well form-horizontal" id="form-download"
-data-url="https://cdn.crate.io/downloads/releases/crate-{{ CONFIG.stable_version }}.tar.gz"
-data-required="false">
-<fieldset>
-  Version <strong>{{ CONFIG.stable_version }}</strong><br /><small class="text-muted">Released on {{ CONFIG.stable_version_date }}</small>
+Version <strong>{{ CONFIG.stable_version }}</strong><br /><small class="text-muted">Released on {{ CONFIG.stable_version_date }}</small>
 
-  <p>
-    <button type="submit" class="btn btn-primary" id="download-main"><i class="fa fa-download"></i> Download .tar.gz</button>
-  </p>
-</fieldset>
-</form>
+<a class="btn btn-primary" href="https://cdn.crate.io/downloads/releases/crate-{{ CONFIG.stable_version }}.tar.gz">Download latest stable release.</a>
 
 <a name="testing"></a>
 ## Testing Releases

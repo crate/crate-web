@@ -57,26 +57,5 @@
     analytics.page();
   }}();
 </script>
-{% block end_body %}
-    <script>
-
-    ;(function($){
-
-      var ga = window.ga || function(){ console.warn('GA not enabled'); };
-
-      $('form#form-download').on('submit', function(e){
-        var url = $(this).data('url');
-        e.preventDefault();
-
-        if (url) {
-          analytics.track('visit_download');
-
-          window.open(url, '_blank');
-          this.reset();
-        }
-      });
-    }(jQuery));
-    </script>
-{% endblock %}
 <!-- @end Segment -->
 <link rel="stylesheet" href="https://cdn.crate.io/libs/font-awesome/4.5.0/css/font-awesome.min.css">
