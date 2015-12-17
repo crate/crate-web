@@ -61,9 +61,6 @@
     <script>
 
     ;(function($){
-      /**
-      * Crate.IO dl.js
-      */
 
       var ga = window.ga || function(){ console.warn('GA not enabled'); };
 
@@ -72,7 +69,6 @@
         e.preventDefault();
 
         if (url) {
-          // ga('send', 'event', 'button', 'click', 'download_download', 1);
           analytics.track('visit_download');
 
           window.open(url, '_blank');
