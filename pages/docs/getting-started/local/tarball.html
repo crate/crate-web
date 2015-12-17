@@ -1,17 +1,14 @@
 title: Installing Crate.IO from a Tarball
 author: Chris Ward
 
-<form class="well form-horizontal" id="form-download" data-url="#" data-required="false">
+## Latest Stable Release
 
-<fieldset>
+Version <strong>{{ CONFIG.stable_version }}</strong><br /><small class="text-muted">Released on {{ CONFIG.stable_version_date }}</small>
 
-Version **0.x.x**
-<small class="text-muted">Released on November xth, 2015</small>
+<a class="btn btn-primary" href="https://cdn.crate.io/downloads/releases/crate-{{ CONFIG.stable_version }}.tar.gz">Download latest stable release.</a>
 
-<button type="submit" class="btn btn-primary" id="download-main">Download .tar.gz</button></fieldset>
+<a name="testing"></a>
+## Testing Releases
+Test builds of Crate should only be used for testing upcoming new features not in production. <a href="https://cdn.crate.io/downloads/releases/crate-{{ CONFIG.testing_version }}.tar.gz" target="_blank">Download latest testing release.</a>
 
-</form>
-
-Test builds of Crate should only be used for testing upcoming new features not in production. [Download latest testing release.](#)
-
-Nightly builds of Crate are provided for testing purposes only. You can [download the latest builds here](https://cdn.crate.io/downloads/releases/nightly/).
+Nightly builds of Crate are provided for testing purposes only. You can <a href="https://cdn.crate.io/downloads/releases/nightly/" target="_blank">download the latest builds here</a>.
