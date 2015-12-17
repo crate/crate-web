@@ -1,4 +1,4 @@
-{% extends "wf_docs.html" %}
+{% extends "base_docs.html" %}
 
 {% block navbar2 %}
 {% comment %}
@@ -41,18 +41,18 @@
 					<li class="navleft-item"><a href="/docs/getting-started/local/tarball/">Tarball</a></li>
 				</ul>
 			</li>
+			<li class="navleft-item">
+				<span>Clients</span>
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="/docs/getting-started/clients/java">Java</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/clients/python">Python</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/clients/php">PHP</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/clients/rest">HTTP-Endpoint</a></li>
+				</ul>
+			</li>
 		</ul>
 	</li>
-	<li class="navleft-item">
-		<span>Clients</span>
-		<ul class="w-list-unstyled navleft-list-level">
-			<li class="navleft-item"><a href="/docs/getting-started/clients/java">Java</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients/python">Python</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients/php">PHP</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients/erlang">Erlang</a></li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients/rest">HTTP-Endpoint</a></li>
-		</ul>
-	</li>
+
 	<li class="navleft-item"><a href="/docs/performance/">Performance</a></li>
 	<li class="navleft-item"><a href="https://crate.io/docs/stable/">Reference</a></li>
 	<li class="navleft-item"><a href="/docs/search/">Search</a></li>
