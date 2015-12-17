@@ -1,0 +1,67 @@
+title: Introducing "Partial Exports"
+author: Michael Beer
+description: Introducing new "Partial Exports" feature in COPY TO
+created: 2015/12/17 18:00:00
+tags: copy to, backup, data export, partial export
+category: news, developernews
+
+Just in time before christmas - the built-in [COPY TO] statement does now supports "**Partial Exports**". With this feature it is possible to export only "parts" of table contents to one or more files. This saves you a lot of time during exporting and reduces your backup size. It is available in ``Crate >= 0.54.0``.
+
+## Use Case
+In this demo i will show you how to could use "partial exports" in an effective way. For this purpose we will assume the following case:  
+
+We have a big table in Crate (200 mio. records with 33 GB size) that stores information of every user who is visiting our website. Our table schema looks like this:
+
+```sql
+CREATE TABLE crate.uservisits (
+   "UserAgent" STRING,
+   "cCode" STRING,
+   "duration" INTEGER,
+   "sourceIP" STRING,
+   "visitDate" TIMESTAMP
+)
+```
+
+To get a feeling of how the data is look like I print a small set of data as an example:
+
+```sql
+cr> select * from crate.uservisits limit 5;
+```
+```
++--------------------------------------------------------------------------------------------------------+-------+----------+-----------------+--------------+
+| UserAgent                                                                                              | cCode | duration | sourceIP        |    visitDate |
++--------------------------------------------------------------------------------------------------------+-------+----------+-----------------+--------------+
+| Fudybefib/5.7                                                                                          | CHE   |       10 | 152.154.243.223 | 399358800000 |
+| Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)                                                     | EST   |        5 | 68.121.13.204   | 240728400000 |
+| Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2)                                                     | SAU   |       10 | 167.6.194.126   | 635493600000 |
+| Mozilla/5.0 (Windows; U; Windows NT 5.2) AppleWebKit/525.13 (KHTML like Gecko) Chrome/xxx              | DZA   |        2 | 55.80.235.203   | 913788000000 |
+| Mozilla/5.0 (Windows; U; Windows NT 5.2)AppleWebKit/525.13 (KHTML like Gecko) Version/3.1Safari/525.13 | KOR   |        8 | 226.183.162.107 | 646722000000 |
++--------------------------------------------------------------------------------------------------------+-------+----------+-----------------+--------------+
+SELECT 5 rows in set (0.006 sec)
+
+```
+
+If we want to backup the full table and export a huge amount of data it is recommended to use the ``COPY TO`` command of Crate. In this case exporting the complete table is quite annoying since it is costs your valuable time and a lot of space on your backup disk.  
+
+Running a backup of the full table in Crash takes this time nearly 5 minutes.
+
+```sql
+cr> copy crate.uservisits to directory '/tmp' with (compression='gzip');
+COPY OK, 133970799 rows affected (252.432 sec)
+```
+
+## Using Partial Export
+However, why we should save the complete table if we could just save newly inserted data that has not been saved since a year ago? Let's try this out with the new "Partial Export" feature that allows us to backup only the newly registered users that have visited our site.
+
+The ``COPY TO`` statement gets extended with a ``WHERE`` clause that is follow the same syntax as used in SELECT statements. Therefore the ``COPY TO`` statement for this use-case will look like this:
+
+```sql
+cr> copy uservisits_cj where "visitDate" <= CURRENT_TIMESTAMP and "visitDate" >= '2014-01-01' to directory '/tmp/' with (compression='gzip');
+COPY OK, 3178494 rows affected (6.145 sec)
+```
+
+Good job! The result shows, that only 2% of the full table data gets exported and this results in a much quicker backup-time.
+
+This is a simple example of using "Partial Exports" in a common use-case. We are looking forward to hear your experiences with this new super-cool-feature.
+
+[COPY TO]: https://crate.io/docs/reference/en/latest/sql/reference/copy_to.html#copy-to
