@@ -1,0 +1,63 @@
+title: Connecting to Crate with Java
+author: Chris Ward
+
+## JDBC
+
+### Add Crate to your Project
+A simple way to configure your project to connect to a Crate cluster is to visit the JDBC driver page on [Bintray](https://bintray.com/crate/crate/crate-jdbc/view) and click the 'Set Me Up' button. This will give you a Maven or Gradle configuration that can be pasted into your current project or downloaded for a new project.
+
+For manual configuration follow these steps depending on your build system of choice.
+
+#### Maven
+
+Add the following to your _pom.xml_ file:
+
+```xml
+...
+<repositories>
+    ...
+    <repository>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+        <id>central</id>
+        <name>bintray</name>
+        <url>http://dl.bintray.com/crate/crate</url>
+    </repository>
+</repositories>
+...
+<dependencies>
+    ...
+    <dependency>
+        <groupId>io.crate</groupId>
+        <artifactId>crate-jdbc</artifactId>
+        <version>...</version>
+    </dependency>
+</dependencies>
+...
+```
+
+#### Gradle
+Add Crate as a dependency to your Gradle file:
+
+```gradle
+   repositories {
+        ...
+        jcenter()
+    }
+
+    dependencies {
+        compile 'io.crate:crate-jdbc:...'
+        ...
+    }
+```
+
+### Connect to Crate
+The Crate JDBC driver class is `io.crate.client.jdbc.CrateDriver`.
+
+Connect to your Crate cluster with the Java DriverManager:
+
+```java
+Class.forName("io.crate.client.jdbc.CrateDriver");
+Connection conn = DriverManager.getConnection("crate://SERVER_IP:4300");
+```
