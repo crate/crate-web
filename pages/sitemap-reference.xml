@@ -1,254 +1,254 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/installation.html</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/installation.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/configuration.html</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/configuration.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/cli.html</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/cli.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/hello.html</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/hello.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/sql/index.html</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/sql/index.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/ddl.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/ddl.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/dml.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/dml.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/dql.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/dql.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/queries.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/queries.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/refresh.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/refresh.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/fulltext.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/fulltext.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/data_types.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/data_types.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/aggregation.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/aggregation.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/scalar.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/scalar.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/arithmetic.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/arithmetic.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/occ.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/occ.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/partitioned_tables.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/partitioned_tables.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/rest.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/rest.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/analyzer.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/analyzer.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/information_schema.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/information_schema.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/system.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/system.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/sql/sql.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/sql/sql.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/lexical_structure.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/lexical_structure.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/select.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/select.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/insert.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/insert.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/update.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/update.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/copy_from.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/copy_from.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/copy_to.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/copy_to.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/delete.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/delete.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/refresh.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/refresh.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/create_table.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/create_table.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/alter_table.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/alter_table.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/create_blob_table.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/create_blob_table.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/drop_table.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/drop_table.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/create_analyzer.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/create_analyzer.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/set.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/set.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
       <url>
-        <loc>{{ CONFIG.site }}/docs/stable/sql/reference/kill.html</loc>
+        <loc>{{ CONFIG.site }}/docs/reference/sql/reference/kill.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
       </url>
 
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/blob.html</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/blob.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/plugins.html</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/plugins.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/udc.html</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/udc.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/storage_consistency.html</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/storage_consistency.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/best_practice/index.html</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/best_practice/index.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/best_practice/data_import.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/best_practice/data_import.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/best_practice/cluster_upgrade.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/best_practice/cluster_upgrade.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/best_practice/multi_node_setup.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/best_practice/multi_node_setup.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/best_practice/migrating_from_mysql.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/best_practice/migrating_from_mysql.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/best_practice/migrating_from_mongodb.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/best_practice/migrating_from_mongodb.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>{{ CONFIG.site }}/docs/stable/best_practice/multi_zone_setup.html</loc>
+      <loc>{{ CONFIG.site }}/docs/reference/best_practice/multi_zone_setup.html</loc>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
     </url>
   <url>
-    <loc>{{ CONFIG.site }}/docs/stable/integration/index.html</loc>
+    <loc>{{ CONFIG.site }}/docs/reference/integration/index.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
