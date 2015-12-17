@@ -11,7 +11,7 @@ category: news, developernews
 
 
 > #### UPDATE
-> **There is now a best practice in our documentation on how to [Use Crate in a Multi Node Setup](/docs/en/latest/best_practice/multi_node_setup.html).**  
+> **There is now a best practice in our documentation on how to [Use Crate in a Multi Node Setup](/docs/en/latest/best_practice/multi_node_setup.html).**
 Please check the documentation first, because this blog post might become out of date.
 
 
@@ -19,33 +19,33 @@ Before the Crate.IO team started developing Crate, we faced one and the same pro
 
 One major goal at Crate.IO is to provide a database solution that is as easy to maintain with one node as with multiple nodes, and to keep the administration overhead as little as possible.
 
-In this blog post I'd like to illustrate how to use Crate in a multi-node setup and point out the key settings to run the cluster smoothly. 
+In this blog post I'd like to illustrate how to use Crate in a multi-node setup and point out the key settings to run the cluster smoothly.
 
 ## Shared Nothing Architecture
 
-Crate is designed in a [shared nothing architecture](http://en.wikipedia.org/wiki/Shared_nothing_architecture), in which all nodes are equal and each node is independent self-sufficient. That means that nodes work on their own, and all nodes in a cluster are configured equally, the same way as they would be as a single-node instance. Having this in mind you'll design your architecture differently to conventional setups. 
+Crate is designed in a [shared nothing architecture](http://en.wikipedia.org/wiki/Shared_nothing_architecture), in which all nodes are equal and each node is independent self-sufficient. That means that nodes work on their own, and all nodes in a cluster are configured equally, the same way as they would be as a single-node instance. Having this in mind you'll design your architecture differently to conventional setups.
 
 ### Old/Conventional Setup
 
 Let's assume we have a scenario with three app servers that are connected to single database master with three slaves.
 
-![2014-07-17 09-47](https://cdn.crate.io/media/1407/2014-07-17-09-47.png)
+![2014-07-17 09-47]({% media '/media/1407/2014-07-17-09-47.png' %})
 
-In this scenario the database master is single point of failure (SPoF) and when the database master breaks down the complete system is affected. We believe: old master-slave setup equals bad setup! 
+In this scenario the database master is single point of failure (SPoF) and when the database master breaks down the complete system is affected. We believe: old master-slave setup equals bad setup!
 
 ### Shared Nothing Setup with Crate
 
 In this example every deployed app server has its "own" database instance and there isn't a SPoF. A single node may fail - both app server and database instance - but as long as there is replication, nothing really bad will happen. Also, if you deploy an instance of Crate together with every new app server you will be able to dynamically scale up and down your database backend depending on your application needs.
 
-![2014-07-17 09-46](https://cdn.crate.io/media/1407/2014-07-17-09-46.png)
+![2014-07-17 09-46]({% media '/media/1407/2014-07-17-09-46.png' %})
 
 ## Node Settings
 
-Now that we know how the set up Crate with your application, it is time to look at the most important settings. Note that all settings are made on a node level. This is, again, due to the nature of the shared nothing architecture. If you have used Elasticsearch before, the following settings will sound familiar to you ;-) 
+Now that we know how the set up Crate with your application, it is time to look at the most important settings. Note that all settings are made on a node level. This is, again, due to the nature of the shared nothing architecture. If you have used Elasticsearch before, the following settings will sound familiar to you ;-)
 
 ### Cluster Name
 
-Only instances with the same cluster name will join the cluster. So the simplest thing to prevent other nodes from joining your cluster is to give it a unique name. 
+Only instances with the same cluster name will join the cluster. So the simplest thing to prevent other nodes from joining your cluster is to give it a unique name.
 
 ```yaml
 cluster.name: my_special_application
@@ -53,13 +53,13 @@ cluster.name: my_special_application
 
 ### Multicast vs Unicast
 
-By default multicast discovery is enabled. This has the advantage that you can fire up a few instances within the same network and they will discover each other automatically using the zen discovery module from Elasticsearch. Although there are benefits of multicast over unicast in performance and efficiency there are also drawbacks such as sending duplicates, no network congestion avoidance and best effort delivery. Moreover some network environments do not support multicast, so we strongly recommend to disable it and use unicast. 
+By default multicast discovery is enabled. This has the advantage that you can fire up a few instances within the same network and they will discover each other automatically using the zen discovery module from Elasticsearch. Although there are benefits of multicast over unicast in performance and efficiency there are also drawbacks such as sending duplicates, no network congestion avoidance and best effort delivery. Moreover some network environments do not support multicast, so we strongly recommend to disable it and use unicast.
 
 ```yaml
 discovery.zen.ping.multicast.enabled: false
 ```
 
-Then manually add the hosts of the cluster - either as IP or FQDN - to the list of unicast hosts: 
+Then manually add the hosts of the cluster - either as IP or FQDN - to the list of unicast hosts:
 
 ```yaml
 discovery.zen.ping.unicast.hosts:
@@ -68,27 +68,27 @@ discovery.zen.ping.unicast.hosts:
   - crate3.example.com:4300
 ```
 
-To fine tune fault tolerance and discovery you can refer to the documentation of Elasticsearch's [zen discovery module](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-discovery-zen.html). 
+To fine tune fault tolerance and discovery you can refer to the documentation of Elasticsearch's [zen discovery module](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-discovery-zen.html).
 
 ### Master Node Election
 
-Although all Crate nodes in a cluster are equal, there is one node elected as master. Like any other peer-to-peer system, nodes communicate with each other directly. However the master node is responsible for making changes to and publishing the global cluster state, as well as for delegating redistribution of shards when nodes join or leave the cluster. By default all nodes are eligible to become master. The settings minimum_master_nodes defines how many nodes need to be available in the cluster to elect a master. We highly recommend to set the minimum master nodes as follows: 
+Although all Crate nodes in a cluster are equal, there is one node elected as master. Like any other peer-to-peer system, nodes communicate with each other directly. However the master node is responsible for making changes to and publishing the global cluster state, as well as for delegating redistribution of shards when nodes join or leave the cluster. By default all nodes are eligible to become master. The settings minimum_master_nodes defines how many nodes need to be available in the cluster to elect a master. We highly recommend to set the minimum master nodes as follows:
 
 ```yaml
 minimum_master_nodes: (N / 2) + 1
 ```
 
-where N is the cluster size. That will ensure a full recovery of the cluster state. In our 3-node example it would mean that at least 2 nodes need to be started before they elect the master. 
+where N is the cluster size. That will ensure a full recovery of the cluster state. In our 3-node example it would mean that at least 2 nodes need to be started before they elect the master.
 
 ```yaml
 discovery.zen.minimum_master_nodes: 2
 ```
 
-If you want to take control which nodes are eligible to become master and which not, you can still do so. The crate.yml that is shipped with Crate.IO describes different possibilities in the 'Node' section. 
+If you want to take control which nodes are eligible to become master and which not, you can still do so. The crate.yml that is shipped with Crate.IO describes different possibilities in the 'Node' section.
 
 ### Node Name
 
-The only setting that differs on every node is the node name - what a surprise ;-) If this setting is omitted the node name is generated dynamically on startup. 
+The only setting that differs on every node is the node name - what a surprise ;-) If this setting is omitted the node name is generated dynamically on startup.
 
 ```yaml
 node.name: crate1
@@ -96,7 +96,7 @@ node.name: crate1
 
 ### Full Example
 
-To sum up the necessary settings a full working crate.yml configuration file would look similar like that: 
+To sum up the necessary settings a full working crate.yml configuration file would look similar like that:
 
 ```yaml
 node.name: crate1

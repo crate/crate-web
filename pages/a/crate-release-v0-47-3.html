@@ -10,7 +10,7 @@ tags: crate, release, on duplicate key, aggregation functions, CURRENT_TIMESTAMP
 category: developernews
 
 
-![Yoda approves](https://cdn.crate.io/media/1502/yoda.jpg)
+![Yoda approves]({% media '/media/1502/yoda.jpg' %})
 
 We're pleased to announce that Crate `0.47.3` is stable! You can find a summary of changes in the [CHANGES.txt](https://github.com/crate/crate/blob/0.47/CHANGES.txt) file in our GitHub repository. If you find this to not be the case, please do not hesitate to [contact us](https://crate.io/about/contact/) and let us know.
 
@@ -57,7 +57,7 @@ The ON DUPLICATE KEY UPDATE clause is used to update the existing row if inserti
     +----------+--------+------------+
     SELECT 2 rows in set (... sec)
 <!---->
-    
+
     cr> insert into uservisits (id, name, visits, last_visit) values
     ... (
     ...     0,
@@ -69,7 +69,7 @@ The ON DUPLICATE KEY UPDATE clause is used to update the existing row if inserti
     ...     last_visit = '2015-01-12';
     INSERT OK, 1 row affected (... sec)
 <!---->
-   
+
     cr> select
     ...     name,
     ...     visits,
@@ -117,7 +117,7 @@ It’s possible to refer to values which would be inserted if no duplicate-key c
 
 ## Added support for the ``std_dev``, ``variance`` and ``geometric_mean`` aggregation functions:
 
-The geometric_mean aggregation function computes the geometric mean, a mean for positive numbers. 
+The geometric_mean aggregation function computes the geometric mean, a mean for positive numbers.
 [Geometric mean](http://en.wikipedia.org/wiki/Geometric_mean) is defined on all numeric types and on timestamp. It always returns double values. If a value is negative, all values were null or we got no value at all NULL is returned. If any of the aggregated values is 0 the result will be 0.0 as well.
 
 
@@ -169,7 +169,7 @@ Precision must be a positive integer between 0 and 3. The default value is 3. It
 **[Download instructions for Crate 0.47.3](https://crate.io/download/)**
 
 If you need help, please refer to our [Google group](https://groups.google.com/forum/#!forum/crateio) or send us an E-mail to <support@crate.io>
-    
+
 That’s all we have to report today, see you next release!
 
 _~Kenan &amp; the CrateIO Team_
