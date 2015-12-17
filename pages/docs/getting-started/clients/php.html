@@ -21,7 +21,10 @@ And install with `composer intall`.
 To connect to your cluster, Crate follows standard PDO syntax to form a data source name string ([dsn](https://en.wikipedia.org/wiki/Data_source_name)) and then connect to it.
 
 ```php
-$dsn = 'crate:host=SERVER_IP;dbname=doc';
+require_once __DIR__.'/vendor/autoload.php';
+use Crate\PDO\PDO as PDO;
+
+$dsn = 'crate:SERVER_IP:4200';
 $connection = new PDO($dsn, null, null, null);
 ```
 
@@ -39,10 +42,10 @@ Install the driver by adding a dependency to your _composer.json_ file:
 }
 ```
 
-And installing with `composer intall`.
+And install with `composer intall`.
 
 ### Connect to Crate
-To connect to your cluster, Crate follows standard DBAL syntax to create an array of parameters and then create a connection.
+To connect to your cluster, Crate follows standard [DBAL syntax](http://doctrine-orm.readthedocs.org/projects/doctrine-dbal/en/latest/reference/configuration.html) to create an array of parameters and then create a connection.
 
 ```php
 $params = array(
@@ -66,6 +69,9 @@ If you are using Doctrine's ORM features, then an extra dependency is needed in 
   }
 }
 ```
+
+And install with `composer intall`.
+
 
 To create a connection:
 
