@@ -10,7 +10,7 @@ tags: blob storage, distributed aggregations, elastic search, sharding, sql
 category: news, developernews
 
 
-People ask us whether Crate.IO is a SQL layer on top of Elasticsearch. Although we use Elasticsearch as a framework Crate is a data store, and as a result has some noticeable differences. Crate is a distributed system that runs on one machine or a cluster of machines. Crate comes in one complete install package. It includes solid established open source components (Presto, Elasticsearch, Lucene, Netty) and extends those with added core functionalities like read/write support, SQL language, dashboard and query console. Here are some of the differences between Crate.IO, as a datastore, and using Elasticsearch:
+People ask us whether Crate.IO is "just" a SQL layer on top of Elasticsearch. Although we use Elasticsearch as a framework (eg for cluster management, node discovery & communication, ...) Crate has completley replaced the Elasticsearch query engine with its own distributed SQL query engine. Crate is a database and as a result has some notable differences. Crate is a distributed, highly scalabe SQL database that runs on one machine or better a cluster of machines in the cloud or on premise. Crate comes in one complete install package. It includes solid established open source components (Presto, Elasticsearch, Lucene, Netty) and extends those with added core functionalities like read/write support, SQL language, dashboard and query console. Here are some of the differences between Crate.IO, as a database, and using Elasticsearch:
 
 ## Full Array Support
 
@@ -38,9 +38,9 @@ Elasticsearch supports creating aliases of a table which can be used to achieve 
 
 ## Import/Export
 
-Crate.IO supports `COPY FROM` / `TO` sql statements for exporting or importing data.
+Crate.IO supports `COPY FROM` / `TO` sql statements for exporting or importing data in a JSON form, making it easily processable with common tools if needed.
 
-Compared to Elasticsearch’s backup feature, Crate doesn’t take snapshots of the lucene indices, but exports/imports the data in a JSON format, making it easily processable with common tools if needed.
+In addition Crate supports backups with incremental snapshots, which can be managed in repositories. CRATE supports different repository types: fs, hdfs, and url, plus further types can be added using Plugins.
 
 ## Update by Query
 
