@@ -1,6 +1,72 @@
 title: Connecting to Crate with Java
 author: Chris Ward
 
+## Java Client
+### Add Crate to you Project
+A simple way to configure your project to connect to a Crate cluster is to visit the Java client page on [Bintray](https://bintray.com/crate/crate/crate-client/view) and click the 'Set Me Up' button. This will give you a Maven or Gradle configuration that can be pasted into your current project or downloaded for a new project.
+
+For manual configuration follow these steps depending on your build system of choice.
+
+#### Maven
+
+Add the following to your *pom.xml* file:
+
+```xml
+...
+<repositories>
+  ...
+  <repository>
+      <snapshots>
+          <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>bintray</name>
+      <url>http://dl.bintray.com/crate/crate</url>
+  </repository>
+</repositories>
+...
+<dependencies>
+  ...
+  <dependency>
+      <groupId>io.crate</groupId>
+      <artifactId>crate-client</artifactId>
+      <version>VERSION</version>
+  </dependency>
+</dependencies>
+...
+```
+
+#### Gradle
+Add Crate as a dependency to your Gradle file:
+
+```gradle
+repositories {
+  ...
+  jcenter()
+}
+
+dependencies {
+  compile 'io.crate:crate-client:VERSION'
+  ...
+}
+```
+
+### Connect to Crate
+
+Import the Crate client and create a new client object:
+
+```java
+import io.crate.client.CrateClient;
+...
+CrateClient client = new CrateClient(
+    "NODE1_IP:4300",
+    "NODE2_IP:4300"
+    ...
+);
+```
+
+Whilst it's possible to just connect to one node in a cluster, we recommend specifying all nodes to allow for automatic routing to another node if one becomes available.
+
 ## JDBC
 
 ### Add Crate to your Project
@@ -10,7 +76,7 @@ For manual configuration follow these steps depending on your build system of ch
 
 #### Maven
 
-Add the following to your _pom.xml_ file:
+Add the following to your *pom.xml* file:
 
 ```xml
 ...
@@ -31,7 +97,7 @@ Add the following to your _pom.xml_ file:
     <dependency>
         <groupId>io.crate</groupId>
         <artifactId>crate-jdbc</artifactId>
-        <version>...</version>
+        <version>VERSION</version>
     </dependency>
 </dependencies>
 ...
@@ -47,7 +113,7 @@ Add Crate as a dependency to your Gradle file:
     }
 
     dependencies {
-        compile 'io.crate:crate-jdbc:...'
+        compile 'io.crate:crate-jdbc:VERSION'
         ...
     }
 ```
