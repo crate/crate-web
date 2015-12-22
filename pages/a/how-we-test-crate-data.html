@@ -12,13 +12,13 @@ category: news, developernews
 
 Testing is an integral component of software development, especially when you develop a database that is used by developers to store millions of records. That is huge a leap of faith!
 
-We've already written about [test driven development with Crate](/blog/test-driven-development-with-pyramids-crate-data-and-sqlalchemy/) some time ago. This time we will look at how we test Crate internally and how it influences our development process. The post will cover both aspects of unit testing and integration tests. 
+We've already written about [test driven development with Crate](/blog/test-driven-development-with-pyramids-crate-data-and-sqlalchemy/) some time ago. This time we will look at how we test Crate internally and how it influences our development process. The post will cover both aspects of unit testing and integration tests.
 
 ## Unit Testing
 
 ### Writing Unit Tests with JUnit
 
-If you are new to Java unit testing, you probably want to take a look at the test framework [JUnit](http://junit.org/) first. A super basic example of a test case could be: 
+If you are new to Java unit testing, you probably want to take a look at the test framework [JUnit](http://junit.org/) first. A super basic example of a test case could be:
 
 ```java
 public class AwesomeCrateClass {
@@ -48,7 +48,7 @@ public class AwesomeCrateClassTest {
 
 We at Crate.IO use unit tests to test discrete functionality of components throughout the code base.
 
-For example, for a recent feature, we had to evaluate an input string, if it is contained in a set of possible allowed values. The `StringSetting` class has an attribute `allowedValues` which is of type `Set<String>` and a method validate which takes a `String` as its input value. It should return `null` if the set of `allowedValues` contains the input value, otherwise it should return a message of type `String`. 
+For example, for a recent feature, we had to evaluate an input string, if it is contained in a set of possible allowed values. The `StringSetting` class has an attribute `allowedValues` which is of type `Set<String>` and a method validate which takes a `String` as its input value. It should return `null` if the set of `allowedValues` contains the input value, otherwise it should return a message of type `String`.
 
 ```java
 package io.crate.metadata.settings;
@@ -136,7 +136,7 @@ Let's take a look at an actual implementation how mocking can be used to simulat
 
 Due to the extensive usage of [guice](https://github.com/google/guice) we can easily mock single components/classes of dependencies for tests what would hardly be possible otherwise.
 
-In order to inject the mocked dependency instance the test case class includes a concrete implementation of a Module. The `ReferenceResolver` then uses the bound instances that are mocked in the test setup phase. The resolver is later used in the test to obtain various `SysObjectReferences`. The actual mocking takes place in the configure method of the module: 
+In order to inject the mocked dependency instance the test case class includes a concrete implementation of a Module. The `ReferenceResolver` then uses the bound instances that are mocked in the test setup phase. The resolver is later used in the test to obtain various `SysObjectReferences`. The actual mocking takes place in the configure method of the module:
 
 ```java
 OsService osService = mock(OsService.class);
@@ -194,9 +194,9 @@ public void testMemory() throws Exception {
 }
 ```
 
-The full test can be found on [Github](https://github.com/crate/crate/blob/master/sql/src/test/java/io/crate/operation/reference/sys/TestSysNodesExpressions.java). 
+The full test can be found on [Github](https://github.com/crate/crate/blob/master/sql/src/test/java/io/crate/operation/reference/sys/TestSysNodesExpressions.java).
 
-In general you should try to test single components as encapsulated as possible. There is a tendency to miss edge cases if a single test covers multiple functionalities at once. And keep in mind that there are still integration tests. 
+In general you should try to test single components as encapsulated as possible. There is a tendency to miss edge cases if a single test covers multiple functionalities at once. And keep in mind that there are still integration tests.
 
 ## Integration Tests
 
@@ -240,7 +240,7 @@ What we’ve looked at so far is all good, but nothing special. However, the pro
 
 Take some time and take a look at our documentation on <http://crate.io/docs/stable/>. All the pages that you see there, with all the code examples, are actually integration tests that pass when you run them. That ensures that their integrity is given at any time and that the documentation for different versions is always accurate.
 
-![Documentation](https://cdn.crate.io/media/1409/Documentation.png)
+![Documentation]({% media '/media/1409/Documentation.png' %})
 
 To achieve this we have integration tests that are written as [doctests](http://en.wikipedia.org/wiki/Doctest) – a Python module for testing textual documents. This type of tests in conjunction with [ReStructuredText](http://docutils.sourceforge.net/rst.html) gives you the possibility to deploy them as rendered HTML using the [Sphinx](http://sphinx-doc.org/) documentation generator.
 
@@ -315,11 +315,11 @@ When adding new features we even write the documentation ahead of the implementa
 
 Another aspect of our testing setup are automated tests. On the one hand we use [Travis CI](https://travis-ci.org/), that invokes a test run whenever someone commits to the repository. Due to the tight integration into Github you can see test results directly on Github and warns you if the code of a pull request does not pass the tests.
 
-![TravisCI](https://cdn.crate.io/media/1409/Travis-CI.png)
+![TravisCI]({% media '/media/1409/Travis-CI.png' %})
 
 Additionally we have configured a webhook to trigger a test run on our Jenkins server to monitor the test coverage of our Java tests with [JaCoCo](http://www.gradle.org/docs/current/userguide/jacoco_plugin.html).
 
-![Jacoco](https://cdn.crate.io/media/1409/Test-Coverage-Details.png)
+![Jacoco]({% media '/media/1409/Test-Coverage-Details.png' %})
 
 ## Summary
 

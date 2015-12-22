@@ -11,13 +11,13 @@ category: news
 
 ## Admin User Interface
 
-![Admin UI Screenshot](https://cdn.crate.io/media/1404/Screen-Shot-2014-04-10-at-18.13.23.png)
+![Admin UI Screenshot]({% media '/media/1404/Screen-Shot-2014-04-10-at-18.13.23.png' %})
 
-Now you can see the memory distribution and disk space of your cluster. The Coxcomb diagram provides a fast and easy overview. You might notice in the right corner of Chrome: The Chrome Extension of Conny, Christian and Manfred has been accepted by Google. Download it from the [Chrome Webstore](http://cr8.is/1sIsqNi). 
+Now you can see the memory distribution and disk space of your cluster. The Coxcomb diagram provides a fast and easy overview. You might notice in the right corner of Chrome: The Chrome Extension of Conny, Christian and Manfred has been accepted by Google. Download it from the [Chrome Webstore](http://cr8.is/1sIsqNi).
 
 ## User Defined Functions (UDF)
 
-Today Christoph helped Mathias to add support for Ruby UDFs as well. Below you can find an easy sample for an Ruby UDF. 
+Today Christoph helped Mathias to add support for Ruby UDFs as well. Below you can find an easy sample for an Ruby UDF.
 
 ```ruby
 class RubyMathMin
@@ -52,19 +52,19 @@ end
 
 ## cratex
 
-![cratex](https://cdn.crate.io/media/1409/PastedGraphic-1.png)
+![cratex]({% media '/media/1409/PastedGraphic-1.png' %})
 
-News from the OS X client: Display of results in a table, fullscreen support, health status, multiple windows and server connections. Our App Store Account is still waiting for approval. 
+News from the OS X client: Display of results in a table, fullscreen support, health status, multiple windows and server connections. Our App Store Account is still waiting for approval.
 
 ## Benchmark Suite
 
-Benchmarks can now be named and also work on multinode features. The COPY benchmarks against the two NUC clusters showed that the refresh_interval can have a huge impact on the cluster indexing performance. The generated reports can be exposed by an http server so the user can display and comparing graphs. 
+Benchmarks can now be named and also work on multinode features. The COPY benchmarks against the two NUC clusters showed that the refresh_interval can have a huge impact on the cluster indexing performance. The generated reports can be exposed by an http server so the user can display and comparing graphs.
 
 ## NUC Performance
 
-![Intel NUC](https://cdn.crate.io/media/1409/nuc-kit-d34010wyb-10500194-2x1.jpg.rendition.cq5dam.webintel.310.155.jpg)
+![Intel NUC]({% media '/media/1409/nuc-kit-d34010wyb-10500194-2x1.jpg.rendition.cq5dam.webintel.310.155.jpg' %})
 
-We built up two small NUC Clusters (2 Nodes each). NUCs are Intels latest Mini PCs. All four NUCs were configured with Intel 530 SSD drives (120GB mSATA). Two NUCs were powered by an i3 processor (and 8GB RAM), the remaining two NUCs had an i5 processor (16GB RAM). To test the performance we used a very simple data set. 80M records like below: 
+We built up two small NUC Clusters (2 Nodes each). NUCs are Intels latest Mini PCs. All four NUCs were configured with Intel 530 SSD drives (120GB mSATA). Two NUCs were powered by an i3 processor (and 8GB RAM), the remaining two NUCs had an i5 processor (16GB RAM). To test the performance we used a very simple data set. 80M records like below:
 
 ```json
 {"ident":1111111111111168827,"name":"VTokmgLBIACBHj1E1f6Fx","uuid":"6741eed2c09011e39733c03fd563408b"}
@@ -72,7 +72,7 @@ We built up two small NUC Clusters (2 Nodes each). NUCs are Intels latest Mini P
 {"ident":1111111111111125493,"name":"gYVQQTOBk7aNzDjgNylCy","uuid":"6741f47cc09011e39733c03fd563408b"}
 ```
 
-Using the `COPY FROM` command the two i3 NUCs were able to index 31K records per second, the i5 NUCs about 38K records per second. CPU was the limiting factor. To do a quick test on query performance we did a distinct count. 
+Using the `COPY FROM` command the two i3 NUCs were able to index 31K records per second, the i5 NUCs about 38K records per second. CPU was the limiting factor. To do a quick test on query performance we did a distinct count.
 
 ```sql
 select count(*), ident from generated group by ident order by count(*) desc limit 10;
