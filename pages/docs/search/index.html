@@ -19,20 +19,15 @@ With Crate, full text search and analysis of column values is comprehensive and 
 {% include "includes/interactive_console.html" with query=consolequery %}
 
 ```sql
-SELECT count(*)
-FROM tweets
-WHERE match(source, 'Android iPhone');
+SELECT date_format('%Y-%m', date_trunc('month', created_at)) AS date,
+  count(*) AS cnt_pos
+  FROM github
+  WHERE match(record_ft, 'hallelujah hurray bingo amused cheerful excited glad proud')
+  AND TYPE = 'PushEvent' AND (created_at >= '2012-01-01' AND created_at <= '2015-09-01')
+  GROUP BY date ORDER BY date ASC;
 ```
 
-This query searches the `source` field of a tweet to count how many users were using mobile clients to send their 140 characters.
-
-```sql
-SELECT count(*)
-FROM tweets
-WHERE NOT match(source, 'Twitter');
-```
-
-Whereas this query searches the same field to count how many users were not using official Twitter clients.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eum qui audiebant, quoad poterant, defendebant sententiam suam. Sed ego in hoc resisto; Ne amores quidem sanctos a sapiente alienos esse arbitrantur. Quae diligentissime contra Aristonem dicuntur a Chryippo. Duo Reges: constructio interrete.
 
 The `match()` statement is where the magic happens and allows for a [wide variety of analysis](https://crate.io/docs/stable/sql/analyzer.html) options.
 
