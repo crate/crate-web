@@ -21,7 +21,7 @@ And here are the new instances on Digital Ocean (in my case).
 ## Create Services
 Next we need to setup our services. Tutum provide an amazing selection of configuration and management options through their UI, but by far the easiest and quickest method for getting a Crate cluster deployed is by using a 'Stack' file. This allows us to set some options that Crate needs to function correctly and then you can analyse the resulting services to see what Tutum is capable of.
 
-Click on the _Stacks_ tab, give your Stack a name and add the following code:
+Click on the *Stacks* tab, give your Stack a name and add the following code:
 
 ```yaml
 crate1:
@@ -46,7 +46,7 @@ Click the green 'Create stack' button and you will see a list of the resulting s
 
 Click the green 'Start' button and after a few moments you will see our 3 node Crate cluster spread across containers and nodes. We have used Tutum's default approach to load balancing (Emptiest Node) but [there are many to choose from](https://support.tutum.co/support/solutions/articles/5000050235-load-balancing-a-web-service). As we are setting one set of ports manually, this will limit some of our potential deployment strategies.
 
-Click the 'Endpoints' tab to see the cluster URL and open the link ending in port 4200, adding _/admin_ to access the Crate admin interface. You should see a 3 node cluster, indicated by the '3' in the top right of the window.
+Click the 'Endpoints' tab to see the cluster URL and open the link ending in port 4200, adding */admin* to access the Crate admin interface. You should see a 3 node cluster, indicated by the '3' in the top right of the window.
 
 To double check what is happening, click the 'Nodes' tab, you should see our two VMs, one with 1 container and 1 with 2.
 
