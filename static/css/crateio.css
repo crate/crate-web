@@ -819,6 +819,7 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
     padding-left: 64px;
   }
   .textfield {
+    padding-bottom: 32px;
     border: 1px solid rgba(0, 0, 0, 0.25);
   }
   .heading.hero {
@@ -832,4 +833,14 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
   src: url('../fonts/BlenderPro-BoldWeb.woff') format('woff');
   font-weight: 800;
   font-style: normal;
+}
+
+table {
+  Width:100%;
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+thead {
+  border-bottom: 1px solid rgba(0,0,0,.1);
 }
