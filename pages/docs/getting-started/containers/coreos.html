@@ -7,7 +7,7 @@ As a Linux distribution targetted at cloud and cluster based environments, CoreO
 We assume you have a CoreOS cluster running and can access the `fleetctl` tool installed on your local system or on a node in the CoreOS cluster.
 
 ## Create the Crate Service
-Create a service file called _crate@.service_ with the following contents:
+Create a service file called *crate@.service* with the following contents:
 
 ```
 [Unit]
@@ -38,7 +38,7 @@ X-Conflicts=%p@*.service
 
 The `TimeoutSec` setting is important because pulling a docker image for the first time takes some time and might cause a time out.
 
-If you're familiar with systemd service files you'll notice that the crate service file looks similar to a regular systemd service file. The only difference is the `[X-Fleet]` section that ensures only one service named _crate@x.service_ is assigned per node.
+If you're familiar with systemd service files you'll notice that the crate service file looks similar to a regular systemd service file. The only difference is the `[X-Fleet]` section that ensures only one service named *crate@x.service* is assigned per node.
 
 Submit it to the cluster using fleet (assuming a 3 node cluster):
 
@@ -52,7 +52,7 @@ Start the service across the cluster (assuming a 3 node cluster):
 fleetctl start crate@{1,2,3}.service
 ```
 
-Once a crate service starts a folder named _/data/crate_ will be created on each CoreOS node. The crate docker image is pulled and once finished the container launches.
+Once a crate service starts a folder named */data/crate* will be created on each CoreOS node. The crate docker image is pulled and once finished the container launches.
 
 Check Status:
 

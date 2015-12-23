@@ -8,13 +8,13 @@ if you don't have Docker setup yet, find [instructions for all platforms here](h
 ## Kitematic
 Kitematic is Docker's visual interface for creating Docker instances on Windows and Mac. Crate can be found in the list of default images in Kitematic.
 
-Click the _Create_ button and Kitematic will download the image file from Docker hub and by default set port allocation between Docker and the host machine automatically.
+Click the *Create* button and Kitematic will download the image file from Docker hub and by default set port allocation between Docker and the host machine automatically.
 
 ![kitematic overview]({% media '/media/1512/kitematic.png' %})
 
 ![Downloading image]({% media '/media/1512/kitematic-dl.png' %})
 
-To override settings for a Docker instance, click the _Settings_ tab. For example to manually allocate ports and set a shared volume between Docker and the local machine:
+To override settings for a Docker instance, click the *Settings* tab. For example to manually allocate ports and set a shared volume between Docker and the local machine:
 
 ![Assign Ports]({% media '/media/1512/kitematic-ports.png' %})
 
@@ -28,7 +28,7 @@ To use the command line to create Crate instances, first fetch the latest Crate 
 docker pull crate
 ```
 
-Specify versions of the image by applying the `:version_number` tag.
+Specify versions of the image by applying the `:version*number` tag.
 
 ### Start Crate Instances.
 
@@ -40,7 +40,7 @@ docker run -p 4200:4200 -p 4300:4300 crate
 
 In this example we create three instances. Two set the port allocation between Docker and the host automatically and one sets ports manually. These three instances will discover each other automatically.
 
-Then visit your Docker IP address on port 4200, e.g. _http://DOCKER_IP:4200/admin_
+Then visit your Docker IP address on port 4200, e.g. *http://DOCKER_IP:4200/admin*
 
 The above is a simple example, to make better use of Crate with Docker, we should set some other parameters.
 
