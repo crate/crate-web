@@ -1,8 +1,21 @@
 title: Connecting to Crate with Erlang
 author: Chris Ward
 
+The Crate Erlang client is built using [rebar3](https://github.com/rebar/rebar3) and we recommend you use it in your project for compiling and testing.
 
 ## Add Crate to your Project
+To add Crate as a dependency, add the following to your _rebar.config_ file.
 
+```erlang
+{deps,[
+  {craterl,"0.2.3"}
+]}.
+```
+
+And run:
+
+```bash
+rebar update
+```
 
 ## Connect to Crate
