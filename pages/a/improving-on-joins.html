@@ -5,7 +5,7 @@ created: 2015/12/16 18:00:00
 tags: join, inner join, performance, limitations
 category: news, developernews
 
-tl;dr ... We've sped up JOIN queries by more than 100 percent. Well, at least for certain queries ;)
+We've doubled the JOINs performance for almost all queries, and removed many of the previously existing restrictions!
 
 Since the first public release of JOINs in Crate we've been working hard to remove limitations and improve query speed. These improvements will be available in the upcoming testing release of Crate `0.54.0`.
 
@@ -52,10 +52,10 @@ ORDER BY
 ```
 
 ## Optimizing for Speed
-By removing the requirement for ordering by all expressions in the select list, query time changed greatly - in a positive way!
+By removing the requirement for ordering by all expressions in the select list, query time has accelerated greatly!
 
 ### Example: Weather Data
-To show this in an example I am using data from the **German Weather Service** which [Matthias](https://github.com/mfelsche/) used to write a blog post about [Analyzing Germany's weather with Crate](http://blog.m7w3.de/how-was-the-weather-in-germany.html).
+To show this in an example I am using data from the **German Weather Service** which [Matthias](https://github.com/mfelsche/) wrote a blog post about [Analyzing Germany's weather with Crate](http://blog.m7w3.de/how-was-the-weather-in-germany.html).
 
 ![Weather Satellite Image (c) DWD]({% media '/media/1512/german_satellite_dwd.jpg' %})
 
@@ -68,7 +68,7 @@ german_climate.stations |    1455
 
 We want to query the top 10 hottest weather records and their station names.
 
-With the "ORDER BY limitation" the query looked like this:
+With the old "ORDER BY limitation" the query looked like this:
 
 ```sql
 SELECT stations.name, data.temp, data.air_pressure, date_format(data.date)
@@ -135,6 +135,6 @@ And the result:
 SELECT 10 rows in set (2.578 sec)
 ```
 
-As you can see, by removing the additional unused order by fields the query time reduced ~6.9 seconds to ~2.6 seconds, which is a **decrease of more than 60%**!
+As you can see, by removing the additional unused order by fields the query time shrank from ~6.9 seconds to ~2.6 seconds, which is an **increase in speed of over 165%**!
 
-This is a simple example of a minor optimization. There are still a lot of (bigger) optimizations for implementating `JOIN`s on our roadmap. We're looking forward to delivering a highly performant JOIN experience in the future!
+This is a simple example of a minor optimization. We're working on bigger optimizations for implementating `JOIN`s, and look forward to sharing them with you soon! 
