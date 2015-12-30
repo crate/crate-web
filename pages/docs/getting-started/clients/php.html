@@ -5,7 +5,7 @@ Crate supports integration with the [PDO](http://php.net/manual/en/intro.pdo.php
 
 ## PDO
 ### Installation
-Install the driver by adding a dependency to your *composer.json* file:
+Install the driver by adding a dependency to your _composer.json_ file:
 
 ```json
 {
@@ -32,7 +32,7 @@ As Crate doesn't support authentication, the other parameters can be left null.
 
 ## DBAL
 ### Installation
-Install the driver by adding a dependency to your *composer.json* file:
+Install the driver by adding a dependency to your _composer.json_ file:
 
 ```json
 {
@@ -59,7 +59,7 @@ $schemaManager = $connection->getSchemaManager();
 ```
 
 ### ORM
-If you are using Doctrine's ORM features, then an extra dependency is needed in your *composer.json* file.
+If you are using Doctrine's ORM features, then an extra dependency is needed in your _composer.json_ file.
 
 ```json
 {
@@ -71,7 +71,6 @@ If you are using Doctrine's ORM features, then an extra dependency is needed in 
 ```
 
 And install with `composer intall`.
-
 
 To create a connection:
 
@@ -96,3 +95,8 @@ $entityManager = EntityManager::create($params, $config);
 ```
 
 Setting up the Doctrine ORM requires some extra steps, and we suggest reading [the official Doctrine documentation](http://doctrine-orm.readthedocs.org/en/latest/index.html) to get started.
+
+## Want to Know More?
+
+- The *Crate Sample App* demonstrates features of Crate and [how to use them in your PHP application](https://github.com/crate/crate-sample-apps/tree/master/php).
+- Full documentation for the PHP PDO library can be found [here](https://github.com/crate/crate-sample-apps/blob/master/php/documentation.md).
