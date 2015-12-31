@@ -14,7 +14,7 @@ If you've ever developed an application that used a traditional database for sto
 Crate includes comprehensive built-in full text search features alongside SQL and BLOB storage, available in queries with other fields in the same tables.
 
 ## Full Text Search
-With Crate, full text search and analysis of column values is comprehensive and fast. Let's look at a couple of examples.
+With Crate, full text search and analysis of column values is comprehensive and fast. Let's look at an example.
 
 {% include "includes/interactive_console.html" with query=consolequery %}
 
@@ -27,7 +27,7 @@ SELECT date_format('%Y-%m', date_trunc('month', created_at)) AS date,
   GROUP BY date ORDER BY date ASC;
 ```
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eum qui audiebant, quoad poterant, defendebant sententiam suam. Sed ego in hoc resisto; Ne amores quidem sanctos a sapiente alienos esse arbitrantur. Quae diligentissime contra Aristonem dicuntur a Chryippo. Duo Reges: constructio interrete.
+This query searches our GitHub archive data set for commit messages pushed to repositories that contained positive words between the beginning of 2012 and September 2015 and splits them per month. Of course searching for these words doesn't necessarily mean the commit messages were positive, but for example purposes it's perfect.
 
 The `match()` statement is where the magic happens and allows for a [wide variety of analysis](https://crate.io/docs/stable/sql/analyzer.html) options.
 
