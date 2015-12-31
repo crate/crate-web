@@ -12,13 +12,33 @@ To connect to your Crate cluster, open the following url:
 
 ![Crate Admin UI]({% media '/media/1512/admin_ui.png' %})
 
-## Admin UI Overview
-You will see five tabs on the left hand side of the browser window :
+## Admin UI Features
+### Overview Bar and Tab
+![Crate Admin UI Nav Bar]({% media '/media/1512/admin_ui_infobar.png' %})
 
-- **Overview**: Displays an overview of your cluster state, load across the nodes in the cluster and its general health based on data replication and availability.
-- **Get Started**: Provides a button to import the latest tweets from Twitters public timeline for a data set to experiment with.
-- **Console**: An interactive terminal to try queries and view the results.
-- **Tables**: Displays Table and partition schema and health.
-- **Cluster**: A more detailed view of the health and load of each node in the cluster.
+At the top of the browser window is overview information about the cluster that shows, from left to right:
 
-The *Console* tab is most useful right now, allowing the issuing of SQL commands for testing Crate.
+- The name of the cluster, find out [how to change its value our configuration documentation](https://crate.io/docs/reference/configuration.html#cluster-name)
+- The version of Crate that the cluster is running.
+- The number of nodes in the cluster.
+- The health of the data in the cluster. Green indicates that all data is replicated and available, yellow that there are unreplicated records and red that data is unavailable.
+- Potential configuration problems and recommendations for the cluster.
+- Average cluster load over the past 1, 5 and 15 minutes.
+- Link to Crate documentation.
+- Latest news from Crate.
+
+The overview tab displays similar information to the bar but with more details on data availability, cluster load and problems.
+
+On the left hand side of the window you will see four further tabs.
+
+### Get Started Tab
+Provides an easy way to import the latest tweets from Twitters public timeline for a data set to experiment with.
+
+### Console Tab
+An interactive terminal to try querying data sets and view the results.
+
+### Tables Tab
+Gives an overview of document and blob tables present in the Crate cluster. This includes schema, shards, partitions, size and the data availability across the table.
+
+### Cluster Tab
+Provides an overview of nodes in the cluster including details such as load, CPU usage, shards on the node and hostname.
