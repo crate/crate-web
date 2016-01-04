@@ -51,14 +51,14 @@
 <script type="text/javascript" src="https://cdn.crate.io/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 {% if console %}
 {% block extra_js %}
-<script type="text/javascript">
-    var consolequery = "{{ consolequery | safe }}";
-</script>
 <script type="text/javascript" src="{% static '/js/ascii-table.js' %}"></script>
 <script type="text/javascript" src="{% static '/js/highlight.pack.js' %}"></script>
 <script type="text/javascript" src="{% static '/js/terminal.js' %}"></script>
 <script type="text/javascript">
-  var term = new Term(document.querySelector("form.crate-cli"));
+  $(document).ready(function(e){
+    var term = new Term(document.querySelector("form.crate-cli"));
+    term.setStatement("{{ consolequery|safe }}");
+  });
 </script>
 {% endblock %}
 {% block extra_css %}
