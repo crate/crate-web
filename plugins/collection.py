@@ -199,8 +199,20 @@ def preBuildPage(site, page, context, data):
     Add collections to every page context so we can
     access them from wherever on the site.
     """
+
+    config = context['__CACTUS_SITE__'].config
+    extra = {
+        "CURRENT_PAGE": page,
+        "CONFIG": config.get('settings', {}),
+        # TODO: make this more generic!
+        "news_json": NEWS_JSON,
+        "developer_news_json": DEVELOPER_NEWS_JSON,
+    }
+    context.update(extra)
+
     for name, collection_json in COLLECTIONS_JSON.items():
         context[name+'_json'] = collection_json
+
     for name, collection in COLLECTIONS.items():
         context[name] = collection
         if collection.contains_page(page):
@@ -212,9 +224,5 @@ def preBuildPage(site, page, context, data):
             )
             context.update(ctx)
             data = tpl.render(context)
-
-    # TODO: make this more generic!
-    context['news_json'] = NEWS_JSON
-    context['developer_news_json'] = DEVELOPER_NEWS_JSON
 
     return context, data
