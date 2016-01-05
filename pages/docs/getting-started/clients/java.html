@@ -3,12 +3,11 @@ author: Chris Ward
 
 ## Java Client
 ### Add Crate to you Project
-A simple way to configure your project to connect to a Crate cluster is to visit the Java client page on [Bintray](https://bintray.com/crate/crate/crate-client/view) and click the 'Set Me Up' button. This will give you a Maven or Gradle configuration that can be pasted into your current project or downloaded for a new project.
+A simple way to configure your project to connect to a Crate cluster is to visit the Java client page on [Bintray](https://bintray.com/crate/crate/crate-client/view) and click the *Set Me Up* button. This will give you a Maven or Gradle configuration that can be pasted into your current project or downloaded for a new project.
 
 For manual configuration follow these steps depending on your build system of choice.
 
 #### Maven
-
 Add the following to your *pom.xml* file:
 
 ```xml
@@ -52,7 +51,6 @@ dependencies {
 ```
 
 ### Connect to Crate
-
 Import the Crate client and create a new client object:
 
 ```java
@@ -68,14 +66,12 @@ CrateClient client = new CrateClient(
 Whilst it's possible to just connect to one node in a cluster, we recommend specifying all nodes to allow for automatic routing to another node if one becomes available.
 
 ## JDBC
-
 ### Add Crate to your Project
-A simple way to configure your project to connect to a Crate cluster is to visit the JDBC driver page on [Bintray](https://bintray.com/crate/crate/crate-jdbc/view) and click the 'Set Me Up' button. This will give you a Maven or Gradle configuration that can be pasted into your current project or downloaded for a new project.
+A simple way to configure your project to connect to a Crate cluster is to visit the JDBC driver page on [Bintray](https://bintray.com/crate/crate/crate-jdbc/view) and click the *Set Me Up* button. This will give you a Maven or Gradle configuration that can be pasted into your current project or downloaded for a new project.
 
 For manual configuration follow these steps depending on your build system of choice.
 
 #### Maven
-
 Add the following to your *pom.xml* file:
 
 ```xml
@@ -128,8 +124,7 @@ Class.forName("io.crate.client.jdbc.CrateDriver");
 Connection conn = DriverManager.getConnection("crate://SERVER_IP:4300");
 ```
 
+## Sample Application
 
-## Want to Know More?
-
-- The *Crate Sample App* demonstrates features of Crate and [how to use them in your JDBC application](https://github.com/crate/crate-sample-apps/tree/master/java).
-- Full documentation for the JDBC library can be found [here](https://github.com/crate/crate-sample-apps/blob/master/jdbc/documentation.md).
+- The **Crate Sample App** demonstrates features of Crate and [how to use them in a JDBC based application](https://github.com/crate/crate-sample-apps/tree/master/java).
+- An explanation of how the JDBC library is used in the sample application can be found [here](https://github.com/crate/crate-sample-apps/blob/master/jdbc/documentation.md).
