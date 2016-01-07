@@ -40,6 +40,7 @@
 .terminal pre, .terminal code, .terminal input, .terminal textarea {
     font-family: Consolas, Menlo, "Courier New", monospace;
     font-size: 14px;
+    line-height: 16px;
 }
 
 pre.terminal-history {
@@ -75,7 +76,8 @@ pre.tut {
     cursor: pointer;
 }
 
-.terminal .text-comment {
+.terminal .text-comment,
+.terminal .text-muted {
     white-space: normal;
 }
 .terminal .text-muted {
@@ -86,6 +88,9 @@ pre.tut {
 }
 .terminal .text-danger {
     color: #c66363;
+}
+.terminal .text-sql {
+    line-height: 100%;
 }
 
 .terminal-bullet {
