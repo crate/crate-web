@@ -14,6 +14,7 @@
 {% endcomment %}
 <ul id="nav" class="w-list-unstyled">
 	<li class="navleft-item"><a href="/docs/getting-started/">Getting Started</a>
+		{% if DIRECTORY_PATH.1 == "getting-started" %}
 		<ul class="w-list-unstyled navleft-list-level">
 			<li class="navleft-item"><span>Containers</span>
 				<ul class="w-list-unstyled navleft-list-level">
@@ -50,11 +51,51 @@
 				</ul>
 			</li>
 		</ul>
+		{% endif %}
 	</li>
 	<li class="navleft-item"><a href="/docs/performance/">Performance</a></li>
 	<li class="navleft-item"><a href="/docs/search/">Search</a></li>
 	<li class="navleft-item"><a href="https://github.com/crate/crate-sample-apps">Sample Applications</a></li>
-	<li class="navleft-item"><a href="https://crate.io/docs/stable/">Reference</a></li>
+	<li class="navleft-item"><a href="/docs/reference/">Reference</a>
+		{% if DIRECTORY_PATH.1 == "reference" %}
+		<ul class="w-list-unstyled navleft-list-level">
+			<li class="navleft-item"><a href="#">Core</a>
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+				</ul>
+			</li>
+			<li class="navleft-item"><a href="#">Crash</a>
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+				</ul>
+			</li>
+			<li class="navleft-item"><span>Clients</span>
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="#">Java</a></li>
+					<li class="navleft-item"><a href="#">Python</a></li>
+					<li class="navleft-item"><a href="#">PHP</a></li>
+					<li class="navleft-item"><a href="#">REST API</a></li>
+				</ul>
+			</li>
+			<li class="navleft-item">
+				<span>Item</span>
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+					<li class="navleft-item"><a href="#">Sub Item</a></li>
+				</ul>
+			</li>
+		</ul>
+		{% endif %}
+	</li>
 	<li class="navleft-item"><a href="/docs/support/">Support</a></li>
 </ul>
 {% endblock %}

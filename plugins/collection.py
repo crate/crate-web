@@ -203,6 +203,7 @@ def preBuildPage(site, page, context, data):
     Add collections to every page context so we can
     access them from wherever on the site.
     """
+    directory_path = page.path.split("/")
 
     config = context['__CACTUS_SITE__'].config
     extra = {
@@ -211,6 +212,7 @@ def preBuildPage(site, page, context, data):
         # TODO: make this more generic!
         "news_json": NEWS_JSON,
         "developer_news_json": DEVELOPER_NEWS_JSON,
+        "DIRECTORY_PATH": directory_path
     }
     context.update(extra)
 
