@@ -30,6 +30,6 @@
     "og_description": "Download Crate. Easy installation of Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext",
     "stable_version": "0.52.4",
     "stable_version_date": "December 7th, 2015",
-    "testing_version": "0.54.1"
+    "testing_version": "0.54.2"
   }
 }
