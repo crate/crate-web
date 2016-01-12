@@ -57,6 +57,8 @@ We also set a path to the Crate config file for fine grained settings changes, a
 
 Docker has more configuration options Crate can leverage, [read about them here](https://docs.docker.com/engine/reference/run/). Any [Crate specific settings](https://crate.io/docs/stable/configuration.html) are set using the `crate -Des.` prefix.
 
+<a id="docker-compose"></a>
+
 ## Docker Compose
 Docker's Compose tool allows developers to configure complex Docker-based applications that can then be started with one `docker-compose up` command.
 
@@ -86,3 +88,9 @@ node:
 ```
 
 Here we create one Crate instance with the ports manually allocated, a shared file system volume, an environment variable set for the heap size and override the default crate command to give the cluster a name and a config file. We then create another instance that joins the other in a cluster and a node.js instance that links to a Crate instance.
+
+<a id="docker-machine"></a>
+<a id="docker-swarm"></a>
+
+## Docker Machine and Swarm
+Crate works with any Docker instances created with the [Machine](https://docs.docker.com/machine/) tool. Combined with Docker's cluster tool, [Swarm](https://www.docker.com/docker-swarm), Crate becomes a powerful companion to Docker. Setting up Crate as part of a Docker Swarm is a little more complicated, but we have [a great blog post](/a/deploying-crate-with-docker-machine-swarm/) to get you started.
