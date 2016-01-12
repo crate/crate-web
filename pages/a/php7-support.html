@@ -1,25 +1,26 @@
-title: PHP 7 Support
+title: Crate Supports PHP 7
 author: Michael Beer
 description: PHP 7 support for Crate PDO driver
 created: 2016/01/12 12:00:00
 tags: php, crate-pdo, performance
 category: news, developernews
 
-We are excited to see that [crate-pdo](https://github.com/crate/crate-pdo) and its ORM Layer [crate-dbal](https://github.com/crate/crate-dbal) are supporting PHP 7.
+We are excited to announce that [crate-pdo](https://github.com/crate/crate-pdo) and its ORM Layer [crate-dbal](https://github.com/crate/crate-dbal) now support PHP 7.
 
-A cool thing is that the current version of crate-pdo is **fully compatible with PHP 7**. Therefore, no adaptions, fixes and **no version upgrade** have been necessary - awesome. However, there are a [lot of things](http://php.net/manual/en/migration70.php) hat have changed since PHP 5 and you might be interested in.  
+The current version of the Crate PDO library is **fully compatible with PHP 7**. No adaptions, fixes or **version upgrades** were necessary, awesome! However, [a lot](http://php.net/manual/en/migration70.php) has changed since PHP 5 that you might be interested in knowing about.  
 
-In this new version the PHP language offers many new and exciting language features, such as **anonymous classes**, **generator delegation** or **return type declarations**. However, the most significant changes lie under-the-hood and additionaly, both performance and inconsistency fixes have been major focuses for this release. As a user you can feel these changes especially on instances with smaller hosts.
+In this new PHP version the language offers new and exciting language features, such as **anonymous classes**, **generator delegation** and **return type declarations**. The most significant changes lie under-the-hood and both performance and inconsistency fixes have been major focuses for this release. Users can especially feel these changes on instances with smaller hosts.
 
-Let`s see how the new PHP version is performing on Crate-PDO unit tests. We compare version 5.6.3 with 7.0.2 of PHP and run test on each.
+Let's see how the new PHP version performs on Crate-PDO unit tests. We'll compare version 5.6.3 with 7.0.2 of PHP and run tests on each.
 
-PHP 5.6.3
-```
+## PHP 5.6.3
+
+```bash
 vagrant@vagrant-ubuntu-trusty-64:/vagrant$ ./vendor/bin/phpunit --coverage-html ./report
 PHPUnit 4.8.21 by Sebastian Bergmann and contributors.
 
-Runtime:	PHP 5.6.3 with Xdebug 2.3.3
-Configuration:	/vagrant/phpunit.xml.dist
+Runtime:    PHP 5.6.3 with Xdebug 2.3.3
+Configuration:    /vagrant/phpunit.xml.dist
 
 ...............................................................  63 / 128 ( 49%)
 ............................................................... 126 / 128 ( 98%)
@@ -32,13 +33,14 @@ OK (128 tests, 223 assertions)
 Generating code coverage report in HTML format ... done
 ```
 
-PHP 7.0.2
-```
+## PHP 7.0.2
+
+```bash
 vagrant@vagrant-ubuntu-trusty-64:/vagrant$ ./vendor/bin/phpunit --coverage-html ./report
 PHPUnit 4.8.21 by Sebastian Bergmann and contributors.
 
-Runtime:	PHP 7.0.2 with Xdebug 2.4.0RC4-dev
-Configuration:	/vagrant/phpunit.xml.dist
+Runtime:    PHP 7.0.2 with Xdebug 2.4.0RC4-dev
+Configuration:    /vagrant/phpunit.xml.dist
 
 ...............................................................  63 / 128 ( 49%)
 ............................................................... 126 / 128 ( 98%)
@@ -51,6 +53,6 @@ OK (128 tests, 223 assertions)
 Generating code coverage report in HTML format ... done
 ```
 
-The test on PHP 7 run up to 30% faster. In addition to performance there are substantial memory savings, as optimization of internal data structures is one of the primary ways in which performance improvements have been achieved.
+The tests on PHP 7 run up to **30%** faster. In addition to performance there are substantial memory savings, as optimization of internal data structures is one of the primary ways in which performance improvements have been achieved.
 
-We are looking forward to hear from your experiences with the Crate PDO driver performed by PHP 7.
+We are looking forward to hear from your experiences with the Crate PDO driver with PHP 7.
