@@ -1,0 +1,106 @@
+/**
+ * Terminal style for /try page
+ *
+ */
+
+.terminal {
+    background-color: #666666;
+    border: 1px solid #e0e0e0;
+    color: #ffffff;
+    border-radius: 8px 8px 4px 4px;
+    overflow: hidden;
+    color: #efefef;
+    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.38);
+    -webkit-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.38);
+    -moz-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.38);
+
+}
+
+.terminal-header {
+    text-align: center;
+    padding: 0;
+    color: #666666;
+    font-size: 13px;
+    border-bottom: 1px solid #e0e0e0;
+    height: 24px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e8e6e8+0,d2d0d2+100 */
+    background: #efefef; /* Old browsers */
+    background: -moz-linear-gradient(top, #efefef 0%, #d2d0d2 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #efefef 0%,#d2d0d2 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #efefef 0%,#d2d0d2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', endColorstr='#d2d0d2',GradientType=0 ); /* IE6-9 */
+}
+
+.terminal-body {
+    background-color: #111111;
+    min-height: 200px;
+}
+
+.terminal pre, .terminal code, .terminal input {
+    font-family: Consolas, Menlo, "Courier New", monospace;
+    font-size: 16px;
+}
+
+pre.terminal-history {
+    margin: 0px;
+    padding: 10px;
+    color: #ffffff;
+    border: 0px none;
+    background-color: transparent;
+    max-height: 480px;
+    word-wrap: normal !important;
+}
+
+.terminal-prompt {
+    padding: 0 10px 10px;
+    color: #98978b;
+}
+
+.terminal-prompt input {
+    border: 0px none;
+    color: #98978b;
+    background-color: transparent;
+    padding: 0px;
+    width: 100%;
+}
+
+.terminal-prompt input:focus {
+    outline: none;
+}
+
+pre.tut {
+    cursor: pointer;
+}
+
+.terminal .text-comment {
+    white-space: normal;
+}
+.terminal .text-muted {
+    color: #c2c5c3;
+}
+.terminal .text-success {
+    color: #c0c86d;
+}
+.terminal .text-danger {
+    color: #c66363;
+}
+
+.terminal-bullet {
+    margin-left: 12px;
+}
+.terminal-bullet span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    margin-right: 2px;
+}
+.terminal-bullet .bullet-red {
+    background-color: #FC635E;
+}
+.terminal-bullet .bullet-yellow {
+    background-color: #FDBE41;
+}
+.terminal-bullet .bullet-green {
+    background-color: #35CD4B;
+}
