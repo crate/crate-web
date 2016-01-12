@@ -11,7 +11,7 @@ h1 {
   margin-top: 0px;
   margin-bottom: 16px;
   font-family: 'Blender Pro', sans-serif;
-  font-size: 38px;
+  font-size: 44px;
   line-height: 44px;
   font-weight: 700;
   text-transform: uppercase;
@@ -96,6 +96,7 @@ blockquote {
 }
 
 .textfield-search {
+  display: none;
   width: 120px;
   margin-bottom: 0px;
   font-size: 16px;
@@ -118,6 +119,10 @@ blockquote {
 .navlink.w--current {
   color: black;
   font-weight: 700;
+}
+
+.navlink.search {
+  height: 65px;
 }
 
 .footer {
@@ -181,6 +186,7 @@ blockquote {
 }
 
 .section.hero-bold.demo {
+  margin-bottom: 32px;
   background-color: #3b3b3b;
   background-image: url('../images/hero-crates.jpg');
   background-position: 0px 0px;
@@ -199,12 +205,13 @@ blockquote {
 }
 
 .section.hero.bg-blue {
+  display: block;
   border-style: none;
   background-color: #55d4f5;
 }
 
 .section.hero.section-job {
-  background-image: url('../images/hero-job.jpg');
+  background-image: url('../images/5645e3972a73124134e9e237_hero-job.jpg');
   background-position: 0px 0px;
   background-size: cover;
 }
@@ -237,9 +244,17 @@ blockquote {
   background-repeat: no-repeat;
 }
 
+.section.hero.bg-home-techcrunch {
+  min-height: 600px;
+  background-image: url('../images/techcrunch-disrupt-winners.jpg');
+  background-position: 50% 0px;
+  background-size: 1000px;
+  background-repeat: no-repeat;
+}
+
 .section.border-bottom {
-  margin-bottom: 0px;
-  padding-bottom: 64px;
+  margin-top: 64px;
+  margin-bottom: 64px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -253,6 +268,14 @@ blockquote {
   padding-top: 64px;
   padding-bottom: 64px;
   background-color: #55d4f5;
+  background-image: url('../images/example-bg.png');
+  background-position: 0px 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.section.bg-blue.hero {
+  background-image: none;
 }
 
 .section.bg-grey {
@@ -270,6 +293,11 @@ blockquote {
   margin-bottom: 0px;
   padding-top: 64px;
   padding-bottom: 64px;
+}
+
+.section.narrow {
+  margin-top: 23px;
+  margin-bottom: 23px;
 }
 
 .row-col {
@@ -296,6 +324,7 @@ blockquote {
 }
 
 .button.bordered-blue {
+  margin-top: 8px;
   border: 2px solid #55d4f5;
   background-color: white;
   color: #1cc8f3;
@@ -394,8 +423,9 @@ blockquote {
 .lead {
   margin-top: 0px;
   margin-bottom: 0px;
-  font-size: 16px;
+  font-size: 24px;
   line-height: 1.4em;
+  text-align: left;
 }
 
 .wrapper-2col {
@@ -496,6 +526,10 @@ blockquote {
 
 .heading.hero.text-blue {
   color: #55d4f5;
+}
+
+.heading.hero.hero-article {
+  font-size: 48px;
 }
 
 .font-blender {
@@ -685,6 +719,188 @@ blockquote {
   color: #55d4f5;
 }
 
+.image.search {
+  position: relative;
+  left: 0px;
+  right: 0px;
+  bottom: -18px;
+}
+
+.trusted-text {
+  display: inline-block;
+  width: 100%;
+  float: none;
+  color: #b8b8b8;
+  font-size: 14px;
+  text-align: center;
+}
+
+.home-customer-logo {
+  max-width: 90px;
+  min-width: 20px;
+  margin-top: -4px;
+}
+
+.home-customers-logos {
+  display: block;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e7e7e7;
+  text-align: center;
+}
+
+.home-customers-slider {
+  background-color: transparent;
+}
+
+.home-slider {
+  height: 400px;
+  background-color: #55d4f5;
+}
+
+.home-slider-div {
+  width: 75%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 120px;
+  color: white;
+}
+
+.home-slider-div.home-slider-clearvoice {
+  padding-top: 100px;
+}
+
+.home-customer-text {
+  width: 80%;
+  padding-left: 16px;
+  float: right;
+}
+
+.home-slider-logo {
+  width: 20%;
+  float: left;
+}
+
+.slider-header-title {
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+.slider-logo-img {
+  float: right;
+}
+
+.home-platform-img {
+  max-height: 80px;
+  padding: 8px 12px;
+}
+
+.home-platform-subtext {
+  margin-top: 8px;
+  border-bottom: 0px none #e7e7e7;
+  color: #868686;
+  font-size: 12px;
+  text-align: center;
+}
+
+.home-platform-imgs {
+  text-align: center;
+}
+
+.home-platform-imgs.docs-platform-imgs {
+  background-color: rgba(0, 0, 0, 0.54);
+}
+
+.home-platform-text {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.home-platform-text.home-platform-heading {
+  font-size: 22px;
+  text-align: left;
+}
+
+.home-crash-img {
+  max-width: 100%;
+  text-align: center;
+}
+
+.home-crash-div {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.docs-heading {
+  color: white;
+}
+
+.slider-bg {
+  background-color: #55d4f5;
+}
+
+.home-hero-slide1 {
+  background-color: #55d4f5;
+  background-image: url('../images/snowsprint_bg.jpg');
+  background-position: 0px 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.home-hero-slider {
+  min-height: 400px;
+}
+
+.home-hero-slide {
+  background-color: #55d4f5;
+  background-image: url('../images/hero_bg_abstract_2.jpg');
+  background-position: 0px 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container-article {
+  display: block;
+  max-width: 600px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.bg-blue {
+  background-color: #55d4f5;
+}
+
+.cta {
+  display: block;
+  max-width: 600px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 32px 16px 16px;
+  text-align: center;
+}
+
+.cta.border-blue {
+  border: 2px solid #55d4f5;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.wrapper-case-study {
+  padding: 16px;
+  border: 1px solid #e7e7e7;
+}
+
+.thumb-case-study {
+  display: block;
+  min-height: 100px;
+  min-width: 100px;
+  background-image: url('../images/example-bg.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 html.w-mod-js *[data-ix="hide-color-logo"] {
   display: none;
 }
@@ -694,7 +910,6 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
     line-height: 30px;
   }
   .wrapper-search {
-    display: none;
     margin-left: 6px;
   }
   .textfield-search {
@@ -736,6 +951,16 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
     width: 100%;
     margin-left: 0px;
   }
+  .heading.hero {
+    font-size: 72px;
+    line-height: 64px;
+  }
+  .wrapper-case-study {
+    background-image: url('../images/example-bg.png');
+    background-position: -150px 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }
 
 @media (max-width: 767px) {
@@ -752,6 +977,10 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
   .navlink {
     padding: 10px 20px;
   }
+  .navlink.search {
+    width: 100%;
+    height: 40px;
+  }
   .footer-link-connect {
     margin-right: 8px;
     margin-left: 8px;
@@ -764,6 +993,9 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
   .brand.w--current {
     padding-top: 12px;
     padding-bottom: 12px;
+  }
+  .brand.footer-brand {
+    padding-left: 0px;
   }
   .section {
     padding-right: 20px;
@@ -789,6 +1021,10 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
   .wrapper-form {
     margin-top: 16px;
   }
+  .lead {
+    font-size: 18px;
+    line-height: 24px;
+  }
   .wrapper-2col {
     width: 100%;
     height: auto;
@@ -807,6 +1043,17 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
   .max-width-200 {
     max-width: 200px;
   }
+  .image.search {
+    position: relative;
+    bottom: 0px;
+    float: left;
+  }
+  .wrapper-case-study {
+    background-image: none;
+  }
+  .thumb-case-study {
+    display: none;
+  }
 }
 
 @media (max-width: 479px) {
@@ -819,12 +1066,29 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
     padding-left: 64px;
   }
   .textfield {
-    padding-bottom: 32px;
     border: 1px solid rgba(0, 0, 0, 0.25);
+  }
+  .lead {
+    text-align: center;
   }
   .heading.hero {
     font-size: 48px;
-    line-height: 36px;
+    line-height: 43px;
+  }
+  .awards-link {
+    margin-bottom: 24px;
+  }
+  .home-hero-slide1 {
+    text-align: center;
+  }
+  .home-hero-slider {
+    min-height: 450px;
+  }
+  .home-hero-slide {
+    text-align: center;
+  }
+  .wrapper-case-study {
+    background-image: none;
   }
 }
 
@@ -833,14 +1097,4 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
   src: url('../fonts/BlenderPro-BoldWeb.woff') format('woff');
   font-weight: 800;
   font-style: normal;
-}
-
-table {
-  Width:100%;
-  text-align: left;
-  margin-bottom: 32px;
-}
-
-thead {
-  border-bottom: 1px solid rgba(0,0,0,.1);
 }
