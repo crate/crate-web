@@ -1,0 +1,18 @@
+<title>{{ title }} | {{ CONFIG.title }}</title>
+<meta charset="utf-8" />
+<meta name="keywords" content="{{ CONFIG.keywords }}" />
+<meta name="description" content="{% if seo_description %}{{ seo_description }}{% elif description %}{{ description }}{% else %}{{ CONFIG.description }}{% endif %}" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="{% if og_title %}{{ og_title }}{% else %}{{ title }}{% endif %}" />
+<meta property="og:description" content="{% if og_description %}{{ og_description }}{% else %}{{ description }}{% endif %}" />
+<meta property="og:image" content="{% if og_image %}{{ og_image }}{% else %}{{ CONFIG.og_image }}{% endif %}" />
+<link rel="stylesheet" type="text/css" href="{% static '/static/css/normalize.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static '/static/css/webflow.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static '/static/css/crateio.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static '/static/css/zenburn-codehilite.css' %}" />
+<style type="text/css">
+.codehilite > pre { padding: 10px; }
+</style>
+<script type="text/javascript" src="{% static '/static/js/modernizr.js' %}"></script>
+<link rel="shortcut icon" type="image/x-icon" href="{% static '/static/images/favicon.png' %}" />
+<link rel="apple-touch-icon" href="{% static '/static/images/apple-touch-icon.png' %}" />
