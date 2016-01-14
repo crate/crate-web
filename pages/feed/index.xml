@@ -7,6 +7,7 @@
      xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
      xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
   <channel>
+    <atom:link href="http://crate.io/rss.xml" rel="self" type="application/rss+xml" />
     <title>Crate.IO Articles</title>
     <description>Crate.IO - Put Data to Work. Simply.</description>
     <link>{{ CONFIG.site }}</link>
