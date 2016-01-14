@@ -24,6 +24,7 @@ __docformat__ = "reStructuredText"
 import os
 import re
 import json
+import time
 
 from datetime import datetime
 from markdown2 import markdown
@@ -34,6 +35,8 @@ from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
 from web.utils import toDict, parseDate, parsePost
+
+from email import utils
 
 COLLECTIONS = dict()
 COLLECTIONS_JSON = dict()
@@ -108,7 +111,8 @@ class Collection(object):
 
     @staticmethod
     def to_datetime(headers):
-        return parseDate(headers.get('date') or headers.get('created'))
+        timestamp_tuple = parseDate(headers.get('date') or headers.get('created')).timetuple()
+        return utils.formatdate(time.mktime(timestamp_tuple))
 
     def filter(self, value, key='tags'):
         return filter(lambda p: value in p.get(key), self.pages)
