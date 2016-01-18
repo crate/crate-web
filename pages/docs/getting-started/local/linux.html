@@ -208,4 +208,28 @@ sudo apt-get update
 sudo apt-get install crate
 ```
 
- **Important:** Crate requires the latest Java 8 (at least u20 or higher). In order to run Crate on Ubuntu releases older than 14.10 you would need to install Java 8 from the [Ubuntu Backports](https://help.ubuntu.com/community/UbuntuBackports) repository.
+**Important:** Crate requires the latest Java 8 (at least u20 or higher). In order to run Crate on Ubuntu releases older than 14.10 you would need to install Java 8 from the [Ubuntu Backports](https://help.ubuntu.com/community/UbuntuBackports) repository.
+
+## Setting Environment Variables
+On Ubuntu, Debian and RHEL systems the Crate startup script sources environment variables, such as `CRATE_HEAP_SIZE` or `CRATE_JAVA_OPTS` that are defined in `/etc/default/crate`.
+
+### Example
+
+```sh
+# Heap Size (defaults to 256m min, 1g max)
+CRATE_HEAP_SIZE=2g
+
+# Maximum number of open files, defaults to 65535.
+#MAX_OPEN_FILES=65535
+
+# Maximum locked memory size. Set to "unlimited" if you use the
+# bootstrap.mlockall option in crate.yml. You must also set
+# CRATE_HEAP_SIZE.
+MAX_LOCKED_MEMORY=unlimited
+
+# Additional Java OPTS
+#CRATE_JAVA_OPTS=
+
+# Force the JVM to use IPv4 stack
+CRATE_USE_IPV4=true
+```
