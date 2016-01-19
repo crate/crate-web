@@ -49,24 +49,7 @@
 <script type="text/javascript" src="{% static '/static/js/webflow.js' %}"></script>
 <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 <script type="text/javascript" src="https://cdn.crate.io/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-{% if console %}
-{% block extra_js %}
-<script type="text/javascript" src="{% static '/js/ascii-table.js' %}"></script>
-<script type="text/javascript" src="{% static '/js/highlight.pack.js' %}"></script>
-<script type="text/javascript" src="{% static '/js/terminal.js' %}"></script>
-<script type="text/javascript">
-  $(document).ready(function(e){
-    var term = new Term(document.querySelector("form.crate-cli"));
-    term.setStatement("{{ consolequery|safe }}");
-  });
-</script>
-{% endblock %}
-{% block extra_css %}
-<link rel="stylesheet" href="{% static '/css/terminal.css' %}" />
-<link rel="stylesheet" href="{% static '/css/zenburn-hljs.css' %}" />
-{% endblock %}
-{% endif %}
-
+<script type="text/javascript" src="{% static '/static/js/bootstrap.min.js' %}"></script>
 
 <!-- Segment -->
 <script async>

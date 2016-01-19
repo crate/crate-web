@@ -7,6 +7,10 @@ body {
   letter-spacing: 0.3px;
 }
 
+.affix {
+  position: fixed;
+}
+
 h1 {
   margin-top: 0px;
   margin-bottom: 16px;
@@ -461,7 +465,7 @@ blockquote {
 
 .wrapper-content-right {
   width: 70%;
-  float: left;
+  float: right;
   font-size: 20px;
   line-height: 28px;
 }
