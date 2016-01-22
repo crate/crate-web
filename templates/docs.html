@@ -16,26 +16,6 @@
 	<li class="navleft-item"><a href="/docs/getting-started/">Getting Started</a>
 		{% if DIRECTORY_PATH.1 == "getting-started" %}
 		<ul class="w-list-unstyled navleft-list-level">
-			<li class="navleft-item"><a href="/docs/getting-started/containers/">Containers</a>
-				{% if DIRECTORY_PATH.2 == "containers" %}
-				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="/docs/getting-started/containers/containership/">Containership</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/containers/coreos/">CoreOS</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/containers/docker/">Docker</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/containers/tutum/">Tutum</a></li>
-				</ul>
-				{% endif %}
-			</li>
-			<li class="navleft-item"><a href="/docs/getting-started/cloud/">Cloud</a>
-				{% if DIRECTORY_PATH.2 == "cloud" %}
-				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="/docs/getting-started/cloud/aws/">AWS</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/cloud/azure/">Azure</a></li>
-					<li class="navleft-item"><a href="https://cloud.google.com/launcher/solution/click-to-deploy-images/crate?q=crate">Google Compute</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/cloud/softlayer/">Softlayer</a></li>
-				</ul>
-				{% endif %}
-			</li>
 			<li class="navleft-item"><a href="/docs/getting-started/local/">Local</a>
 				{% if DIRECTORY_PATH.2 == "local" %}
 				<ul class="w-list-unstyled navleft-list-level">
@@ -54,6 +34,26 @@
 					<li class="navleft-item"><a href="/docs/getting-started/clients/php">PHP</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/clients/erlang">Erlang</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/clients/rest">REST API</a></li>
+				</ul>
+				{% endif %}
+			</li>
+			<li class="navleft-item"><a href="/docs/getting-started/containers/">Containers</a>
+				{% if DIRECTORY_PATH.2 == "containers" %}
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="/docs/getting-started/containers/containership/">Containership</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/containers/coreos/">CoreOS</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/containers/docker/">Docker</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/containers/tutum/">Tutum</a></li>
+				</ul>
+				{% endif %}
+			</li>
+			<li class="navleft-item"><a href="/docs/getting-started/cloud/">Cloud</a>
+				{% if DIRECTORY_PATH.2 == "cloud" %}
+				<ul class="w-list-unstyled navleft-list-level">
+					<li class="navleft-item"><a href="/docs/getting-started/cloud/aws/">AWS</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/cloud/azure/">Azure</a></li>
+					<li class="navleft-item"><a href="https://cloud.google.com/launcher/solution/click-to-deploy-images/crate?q=crate">Google Compute</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/cloud/softlayer/">Softlayer</a></li>
 				</ul>
 				{% endif %}
 			</li>
