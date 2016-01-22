@@ -3,45 +3,51 @@
 {% block getting_started_navbar %}
 {% comment %}
 <ul class="w-list-unstyled">
-	<li class="navleft-item"><a href="#">Main</a></li>
-	<li class="navleft-item">
-		<a href="#">Main</a>
-		<ul class="w-list-unstyled navleft-list-level">
-			<li class="navleft-item"><a href="#">Sub</a></li>
-		</ul>
-	</li>
+<li class="navleft-item"><a href="#">Main</a></li>
+<li class="navleft-item">
+<a href="#">Main</a>
+<ul class="w-list-unstyled navleft-list-level">
+<li class="navleft-item"><a href="#">Sub</a></li>
+</ul>
+</li>
 </ul>
 {% endcomment %}
 <ul id="nav" class="w-list-unstyled">
 	<li class="navleft-item"><a href="/docs/getting-started/">Getting Started</a>
 		{% if DIRECTORY_PATH.1 == "getting-started" %}
 		<ul class="w-list-unstyled navleft-list-level">
-			<li class="navleft-item"><span>Containers</span>
+			<li class="navleft-item"><a href="/docs/getting-started/containers/">Containers</a>
+				{% if DIRECTORY_PATH.2 == "containers" %}
 				<ul class="w-list-unstyled navleft-list-level">
 					<li class="navleft-item"><a href="/docs/getting-started/containers/containership/">Containership</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/containers/coreos/">CoreOS</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/containers/docker/">Docker</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/containers/tutum/">Tutum</a></li>
 				</ul>
+				{% endif %}
 			</li>
-			<li class="navleft-item"><span>Cloud</span>
+			<li class="navleft-item"><a href="/docs/getting-started/cloud/">Cloud</a>
+				{% if DIRECTORY_PATH.2 == "cloud" %}
 				<ul class="w-list-unstyled navleft-list-level">
 					<li class="navleft-item"><a href="/docs/getting-started/cloud/aws/">AWS</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/cloud/azure/">Azure</a></li>
 					<li class="navleft-item"><a href="https://cloud.google.com/launcher/solution/click-to-deploy-images/crate?q=crate">Google Compute</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/cloud/softlayer/">Softlayer</a></li>
 				</ul>
+				{% endif %}
 			</li>
-			<li class="navleft-item">Local
+			<li class="navleft-item"><a href="/docs/getting-started/local/">Local</a>
+				{% if DIRECTORY_PATH.2 == "local" %}
 				<ul class="w-list-unstyled navleft-list-level">
 					<li class="navleft-item"><a href="/docs/getting-started/local/linux/">Linux</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/local/mac/">Mac</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/local/windows/">Windows</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/local/tarball/">Tarball</a></li>
 				</ul>
+				{% endif %}
 			</li>
-			<li class="navleft-item">
-				<span>Clients</span>
+			<li class="navleft-item"><a href="/docs/getting-started/clients/">Clients</a>
+				{% if DIRECTORY_PATH.2 == "clients" %}
 				<ul class="w-list-unstyled navleft-list-level">
 					<li class="navleft-item"><a href="/docs/getting-started/clients/java">Java</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/clients/python">Python</a></li>
@@ -49,6 +55,7 @@
 					<li class="navleft-item"><a href="/docs/getting-started/clients/erlang">Erlang</a></li>
 					<li class="navleft-item"><a href="/docs/getting-started/clients/rest">REST API</a></li>
 				</ul>
+				{% endif %}
 			</li>
 		</ul>
 		{% endif %}
@@ -61,42 +68,42 @@
 		<ul class="w-list-unstyled navleft-list-level">
 			<li class="navleft-item"><a href="#">Crate</a>
 				<!-- <ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-				</ul> -->
-			</li>
-			<li class="navleft-item"><a href="#">Crash</a>
-				<!-- <ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-				</ul> -->
-			</li>
-			<li class="navleft-item"><span>Clients</span>
-				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="#">Java</a></li>
-					<li class="navleft-item"><a href="#">JDBC</a></li>
-					<li class="navleft-item"><a href="#">Python</a></li>
-					<li class="navleft-item"><a href="#">PHP</a></li>
-					<li class="navleft-item"><a href="#">REST API</a></li>
-				</ul>
-			</li>
-			<!-- <li class="navleft-item">
-				<span>Item</span>
-				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-					<li class="navleft-item"><a href="#">Sub Item</a></li>
-				</ul>
-			</li> -->
-		</ul>
-		{% endif %}
+				<li class="navleft-item"><a href="#">Sub Item</a></li>
+				<li class="navleft-item"><a href="#">Sub Item</a></li>
+				<li class="navleft-item"><a href="#">Sub Item</a></li>
+				<li class="navleft-item"><a href="#">Sub Item</a></li>
+			</ul> -->
+		</li>
+		<li class="navleft-item"><a href="#">Crash</a>
+			<!-- <ul class="w-list-unstyled navleft-list-level">
+			<li class="navleft-item"><a href="#">Sub Item</a></li>
+			<li class="navleft-item"><a href="#">Sub Item</a></li>
+			<li class="navleft-item"><a href="#">Sub Item</a></li>
+			<li class="navleft-item"><a href="#">Sub Item</a></li>
+		</ul> -->
 	</li>
-	<li class="navleft-item"><a href="/docs/support/">Support</a></li>
+	<li class="navleft-item"><span>Clients</span>
+		<ul class="w-list-unstyled navleft-list-level">
+			<li class="navleft-item"><a href="#">Java</a></li>
+			<li class="navleft-item"><a href="#">JDBC</a></li>
+			<li class="navleft-item"><a href="#">Python</a></li>
+			<li class="navleft-item"><a href="#">PHP</a></li>
+			<li class="navleft-item"><a href="#">REST API</a></li>
+		</ul>
+	</li>
+	<!-- <li class="navleft-item">
+	<span>Item</span>
+	<ul class="w-list-unstyled navleft-list-level">
+	<li class="navleft-item"><a href="#">Sub Item</a></li>
+	<li class="navleft-item"><a href="#">Sub Item</a></li>
+	<li class="navleft-item"><a href="#">Sub Item</a></li>
+	<li class="navleft-item"><a href="#">Sub Item</a></li>
+	<li class="navleft-item"><a href="#">Sub Item</a></li>
+</ul>
+</li> -->
+</ul>
+{% endif %}
+</li>
+<li class="navleft-item"><a href="/docs/support/">Support</a></li>
 </ul>
 {% endblock %}
