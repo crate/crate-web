@@ -22,7 +22,7 @@
       <description>{{ post.raw_body|markdown|striptags|truncatewords:50 }}</description>
       <link>{{ CONFIG.site }}{{ post.url }}</link>
       <guid isPermaLink="false">{{ post.url }}</guid>
-      <pubDate>{{ post.date|date:"c" }}</pubDate>
+      <pubDate>{{ post.date|date:"D, d M Y H:i:s" }}</pubDate>
     </item>
     {% endfor %}
   </channel>
