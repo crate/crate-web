@@ -47,9 +47,13 @@ body {
   color: #333;
 }
 img {
+  height: auto;
   max-width: 100%;
   vertical-align: middle;
   display: inline-block;
+}
+img.img-lang {
+  max-height: 150px
 }
 html.w-mod-touch * {
   background-attachment: scroll !important;
@@ -335,6 +339,9 @@ textarea.w-select {
 .w-row .w-row {
   margin-left: 0;
   margin-right: 0;
+}
+.lang-col {
+  height: 250px;
 }
 .w-col {
   position: relative;
@@ -1325,19 +1332,19 @@ textarea.w-select {
   }
 }
 /**
- * ## Note
- * Safari (on both iOS and OS X) does not handle viewport units (vh, vw) well.
- * For example percentage units do not work on descendants of elements that
- * have any dimensions expressed in viewport units. It also doesn’t handle them at
- * all in `calc()`.
- */
+* ## Note
+* Safari (on both iOS and OS X) does not handle viewport units (vh, vw) well.
+* For example percentage units do not work on descendants of elements that
+* have any dimensions expressed in viewport units. It also doesn’t handle them at
+* all in `calc()`.
+*/
 /**
- * Wrapper around all lightbox elements
- *
- * 1. Since the lightbox can receive focus, IE also gives it an outline.
- * 2. Fixes flickering on Chrome when a transition is in progress
- *    underneath the lightbox.
- */
+* Wrapper around all lightbox elements
+*
+* 1. Since the lightbox can receive focus, IE also gives it an outline.
+* 2. Fixes flickering on Chrome when a transition is in progress
+*    underneath the lightbox.
+*/
 .w-lightbox-backdrop {
   color: #000;
   cursor: auto;
@@ -1382,9 +1389,9 @@ textarea.w-select {
   /* 2 */
 }
 /**
- * Neat trick to bind the rubberband effect to our canvas instead of the whole
- * document on iOS. It also prevents a bug that causes the document underneath to scroll.
- */
+* Neat trick to bind the rubberband effect to our canvas instead of the whole
+* document on iOS. It also prevents a bug that causes the document underneath to scroll.
+*/
 .w-lightbox-backdrop,
 .w-lightbox-container {
   height: 100%;
@@ -1418,8 +1425,8 @@ textarea.w-select {
   vertical-align: middle;
 }
 /*
- * 1. Remove default margin set by user-agent on the <figure> element.
- */
+* 1. Remove default margin set by user-agent on the <figure> element.
+*/
 .w-lightbox-figure {
   position: relative;
   margin: 0;
@@ -1429,9 +1436,9 @@ textarea.w-select {
   cursor: pointer;
 }
 /**
- * IE adds image dimensions as width and height attributes on the IMG tag,
- * but we need both width and height to be set to auto to enable scaling.
- */
+* IE adds image dimensions as width and height attributes on the IMG tag,
+* but we need both width and height to be set to auto to enable scaling.
+*/
 .w-lightbox-img {
   width: auto;
   height: auto;
@@ -1492,10 +1499,10 @@ textarea.w-select {
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii00IDAgMjQgNDAiIHdpZHRoPSIyNCIgaGVpZ2h0PSI0MCI+PGcgdHJhbnNmb3JtPSJyb3RhdGUoNDUpIj48cGF0aCBkPSJtMC0waDI4djI4aC01di0yM2gtMjN6IiBvcGFjaXR5PSIuNCIvPjxwYXRoIGQ9Im0xIDFoMjZ2MjZoLTN2LTIzaC0yM3oiIGZpbGw9IiNmZmYiLz48L2c+PC9zdmc+");
 }
 /*
- * Without specifying the with and height inside the SVG, all versions of IE render the icon too small.
- * The bug does not seem to manifest itself if the elements are tall enough such as the above arrows.
- * (http://stackoverflow.com/questions/16092114/background-size-differs-in-internet-explorer)
- */
+* Without specifying the with and height inside the SVG, all versions of IE render the icon too small.
+* The bug does not seem to manifest itself if the elements are tall enough such as the above arrows.
+* (http://stackoverflow.com/questions/16092114/background-size-differs-in-internet-explorer)
+*/
 .w-lightbox-close {
   right: 0;
   height: 2.6em;
@@ -1504,8 +1511,8 @@ textarea.w-select {
   background-size: 18px;
 }
 /**
- * 1. All IE versions add extra space at the bottom without this.
- */
+* 1. All IE versions add extra space at the bottom without this.
+*/
 .w-lightbox-strip {
   padding: 0 1vh;
   line-height: 0;
@@ -1515,12 +1522,12 @@ textarea.w-select {
   overflow-y: hidden;
 }
 /*
- * 1. We use content-box to avoid having to do `width: calc(10vh + 2vw)`
- *    which doesn’t work in Safari anyway.
- * 2. Chrome renders images pixelated when switching to GPU. Making sure
- *    the parent is also rendered on the GPU (by setting translate3d for
- *    example) fixes this behavior.
- */
+* 1. We use content-box to avoid having to do `width: calc(10vh + 2vw)`
+*    which doesn’t work in Safari anyway.
+* 2. Chrome renders images pixelated when switching to GPU. Making sure
+*    the parent is also rendered on the GPU (by setting translate3d for
+*    example) fixes this behavior.
+*/
 .w-lightbox-item {
   display: inline-block;
   width: 10vh;
@@ -1560,11 +1567,11 @@ textarea.w-select {
   transform: translate(-50%, 0);
 }
 /*
- * Spinner
- *
- * Absolute pixel values are used to avoid rounding errors that would cause
- * the white spinning element to be misaligned with the track.
- */
+* Spinner
+*
+* Absolute pixel values are used to avoid rounding errors that would cause
+* the white spinning element to be misaligned with the track.
+*/
 .w-lightbox-spinner {
   position: absolute;
   top: 50%;
@@ -1591,8 +1598,8 @@ textarea.w-select {
   border-radius: 50%;
 }
 /*
- * Utility classes
- */
+* Utility classes
+*/
 .w-lightbox-hide {
   display: none;
 }
@@ -1743,11 +1750,11 @@ textarea.w-select {
   clear: none;
 }
 /* The video overlay (prevents interacting with (ie: playing) the video)
-   should only be present when the rich text node can be edited in that context with the RTE.
-   1. In the designer canvas - when not previewing the site
-   2. In the editor canvas for rich text dyn collection fields
-   3. In the editor canvas for static rich text fields made editable (ie: blobs)
-   4. In the data managers (see both RichTextInput.less files) as this file is not used there
+should only be present when the rich text node can be edited in that context with the RTE.
+1. In the designer canvas - when not previewing the site
+2. In the editor canvas for rich text dyn collection fields
+3. In the editor canvas for static rich text fields made editable (ie: blobs)
+4. In the data managers (see both RichTextInput.less files) as this file is not used there
 */
 .wf-design-mode figure[data-rt-type="video"] > div:before,
 .w-editor-mount .w-dyn-list figure[data-rt-type="video"] > div:before,

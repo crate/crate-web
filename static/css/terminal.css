@@ -13,7 +13,7 @@
     box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.38);
     -webkit-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.38);
     -moz-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.38);
-
+    line-height: 24px;
 }
 
 .terminal-header {
@@ -34,11 +34,13 @@
 .terminal-body {
     background-color: #111111;
     min-height: 200px;
+    clear: both;
 }
 
-.terminal pre, .terminal code, .terminal input {
+.terminal pre, .terminal code, .terminal input, .terminal textarea {
     font-family: Consolas, Menlo, "Courier New", monospace;
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 16px;
 }
 
 pre.terminal-history {
@@ -56,15 +58,17 @@ pre.terminal-history {
     color: #98978b;
 }
 
-.terminal-prompt input {
+.terminal-prompt textarea {
     border: 0px none;
     color: #98978b;
     background-color: transparent;
     padding: 0px;
     width: 100%;
+    line-height: 120%;
+    resize: vertical;
 }
 
-.terminal-prompt input:focus {
+.terminal-prompt textarea:focus {
     outline: none;
 }
 
@@ -72,7 +76,8 @@ pre.tut {
     cursor: pointer;
 }
 
-.terminal .text-comment {
+.terminal .text-comment,
+.terminal .text-muted {
     white-space: normal;
 }
 .terminal .text-muted {
@@ -83,6 +88,9 @@ pre.tut {
 }
 .terminal .text-danger {
     color: #c66363;
+}
+.terminal .text-sql {
+    line-height: 100%;
 }
 
 .terminal-bullet {
