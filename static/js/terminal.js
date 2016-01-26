@@ -22,14 +22,23 @@
 var Term = function(elem){
 
   var prefix = "cr>";
-  var pfLen = prefix.length + 1;
+  var statement = "";
+  var pfLen = prefix.length + statement.length + 1;
 
   var _form = elem;
   var form = $(elem);
   var settings = form.data();
 
   var history = $('pre', elem);
-  var prompt = $('input', elem);
+  var prompt = $('textarea', elem);
+
+  var setStatement = function(text) {
+    statement = text;
+    pfLen = prefix.length + statement.length + 1;
+    prompt.val(prefix + ' ' + text);
+    prompt[0].setSelectionRange(pfLen, pfLen);
+    prompt.focus();
+  };
 
   var addComment = function(text) {
     history.append('<div class="text-muted text-comment"><i>' + text + '</i></div>');
@@ -64,6 +73,7 @@ var Term = function(elem){
       type: 'POST',
       url: settings.host + '/_sql',
       headers: {
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Origin': 'play.crate.io'
       },
@@ -84,25 +94,38 @@ var Term = function(elem){
     });
   };
 
-  prompt.focus();
-  prompt[0].value = prefix + ' ';
-  prompt[0].setSelectionRange(pfLen, pfLen);
+  var resize = function(elem) {
+    elem.style.height = 0;
+    elem.style.height = elem.scrollHeight + 'px';
+  };
+
+  prompt.on('focus', function(e){
+    resize(e.target);
+  });
+
   prompt.on('keyup', function(e){
+    resize(e.target);
     var len = e.target.value.length;
     if (len < pfLen) e.target.value = prefix + " ";
     if (e.target.selectionStart < pfLen) {
       e.target.setSelectionRange(pfLen, pfLen);
     }
+    if (e.keyCode === 13) {
+      form.submit();
+    }
   });
 
   form.on('submit', function(e){
     e.preventDefault();
-    var stmt = e.target.input.value.substr(prefix.length+1);
+    var stmt = e.target.stmt.value.substr(prefix.length+1);
+    console.info('EXECUTE:', stmt);
     execute(stmt);
     return false;
   });
 
+
   // Public API
+  this.setStatement = setStatement;
   this.addComment = addComment;
   this.exec = function(stmt){
     $('html, body').animate({

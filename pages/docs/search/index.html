@@ -1,5 +1,7 @@
 title: Search
 author: Chris Ward
+console: true
+consolequery: SELECT date_format('%Y-%m', date_trunc('month', created_at)) AS date, count(*) AS cnt_pos FROM github WHERE match(record_ft, 'hallelujah hurray bingo amused cheerful excited glad proud') AND TYPE = 'PushEvent' AND (created_at >= '2012-01-01' AND created_at <= '2015-09-01') GROUP BY date ORDER BY date ASC
 
 ## Find the Answers you Need, Instantly
 Crate offers a comprehensive selection of tools to suit the needs of many business requirements. From analyzing large data sets and text records in real-time to find the details you need, to storing and retrieving media files, Crate has what you're looking for.
@@ -12,23 +14,20 @@ If you've ever developed an application that used a traditional database for sto
 Crate includes comprehensive built-in full text search features alongside SQL and BLOB storage, available in queries with other fields in the same tables.
 
 ## Full Text Search
-With Crate, full text search and analysis of column values is comprehensive and fast. Let's look at a couple of examples.
+With Crate, full text search and analysis of column values is comprehensive and fast. Let's look at an example.
+
+{% include "includes/interactive_console.html" with query=consolequery %}
 
 ```sql
-SELECT count(*)
-FROM tweets
-WHERE match(source, 'Android iPhone');
+SELECT date_format('%Y-%m', date_trunc('month', created_at)) AS date,
+  count(*) AS cnt_pos
+  FROM github
+  WHERE match(record_ft, 'hallelujah hurray bingo amused cheerful excited glad proud')
+  AND TYPE = 'PushEvent' AND (created_at >= '2012-01-01' AND created_at <= '2015-09-01')
+  GROUP BY date ORDER BY date ASC;
 ```
 
-This query searches the `source` field of a tweet to count how many users were using mobile clients to send their 140 characters.
-
-```sql
-SELECT count(*)
-FROM tweets
-WHERE NOT match(source, 'Twitter');
-```
-
-Whereas this query searches the same field to count how many users were not using official Twitter clients.
+This query searches our GitHub archive data set for commit messages pushed to repositories that contained positive words between the beginning of 2012 and September 2015 and splits them per month. Of course searching for these words doesn't necessarily mean the commit messages were positive, but for example purposes it's perfect.
 
 The `match()` statement is where the magic happens and allows for a [wide variety of analysis](https://crate.io/docs/stable/sql/analyzer.html) options.
 

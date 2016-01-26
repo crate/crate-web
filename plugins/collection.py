@@ -36,8 +36,6 @@ from django.utils.safestring import mark_safe
 
 from web.utils import toDict, parseDate, parsePost
 
-from email import utils
-
 COLLECTIONS = dict()
 COLLECTIONS_JSON = dict()
 # legacy stuff
@@ -111,8 +109,7 @@ class Collection(object):
 
     @staticmethod
     def to_datetime(headers):
-        timestamp_tuple = parseDate(headers.get('date') or headers.get('created')).timetuple()
-        return utils.formatdate(time.mktime(timestamp_tuple))
+        return parseDate(headers.get('date') or headers.get('created'))
 
     def filter(self, value, key='tags'):
         return filter(lambda p: value in p.get(key), self.pages)
