@@ -31,3 +31,7 @@ ClientRef = craterl:new(ClientSpec, Servers, Options).
 In the `Servers` tuple you can specify just one IP address in the Crate cluster, but including more than one will provide fallbacks if nodes become unavailable.
 
 It's possible to create multiple clients on one erlang node, these are registered using a client spec tuple, such as `{local, process_name}`. The process name must be unique on each node.
+
+## Want to Know More?
+- More detailed documentation on the Crate Python client is available [here](https://github.com/crate/craterl/tree/master/doc).
+- The **Crate Sample App** demonstrates features of Crate and [how to use them in an Erlang based application](https://github.com/crate/crate-sample-apps/tree/master/erlang) with an explanation of how the library is used [here](https://github.com/crate/crate-sample-apps/blob/master/erlang/README.md).
