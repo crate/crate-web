@@ -1,17 +1,6 @@
 {% extends "base_docs.html" %}
 
 {% block getting_started_navbar %}
-{% comment %}
-<ul class="w-list-unstyled">
-<li class="navleft-item"><a href="#">Main</a></li>
-<li class="navleft-item">
-<a href="#">Main</a>
-<ul class="w-list-unstyled navleft-list-level">
-<li class="navleft-item"><a href="#">Sub</a></li>
-</ul>
-</li>
-</ul>
-{% endcomment %}
 <ul id="nav" class="bs-sidenav nav toctree" role="complementary">
 	<li class="navleft-item"><a href="/docs/getting-started/">Getting Started</a>
 		{% if DIRECTORY_PATH.1 == "getting-started" %}
@@ -29,11 +18,11 @@
 			<li class="navleft-item"><a href="/docs/getting-started/clients/">Clients</a>
 				{% if DIRECTORY_PATH.2 == "clients" %}
 				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="/docs/getting-started/clients/java">Java</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/clients/python">Python</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/clients/php">PHP</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/clients/erlang">Erlang</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/clients/rest">REST API</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/clients/java/">Java</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/clients/python/">Python</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/clients/php/">PHP</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/clients/erlang/">Erlang</a></li>
+					<li class="navleft-item"><a href="/docs/getting-started/clients/rest/">REST API</a></li>
 				</ul>
 				{% endif %}
 			</li>
@@ -66,13 +55,13 @@
 	<li class="navleft-item"><a href="/docs/reference/overview/">Reference</a>
 		{% if DIRECTORY_PATH.1 == "reference" %}
 		<ul class="w-list-unstyled navleft-list-level">
-			<li class="navleft-item"><a href="/docs/reference/crate">Crate</a></li>
-			<li class="navleft-item"><a href="/docs/reference/crash">Crate Shell</a></li>
-			<li class="navleft-item"><a href="/docs/reference/java">Java</a></li>
-			<li class="navleft-item"><a href="/docs/reference/jdbc">JDBC</a></li>
-			<li class="navleft-item"><a href="/docs/reference/python">Python</a></li>
-			<li class="navleft-item"><a href="/docs/reference/pdo">PHP PDO</a></li>
-			<li class="navleft-item"><a href="/docs/reference/dbal">PHP DBAL</a></li>
+			<li class="navleft-item"><a href="/docs/reference/crate/">Crate</a></li>
+			<li class="navleft-item"><a href="/docs/reference/crash/">Crate Shell</a></li>
+			<li class="navleft-item"><a href="/docs/reference/java/">Java</a></li>
+			<li class="navleft-item"><a href="/docs/reference/jdbc/">JDBC</a></li>
+			<li class="navleft-item"><a href="/docs/reference/python/">Python</a></li>
+			<li class="navleft-item"><a href="/docs/reference/pdo/">PHP PDO</a></li>
+			<li class="navleft-item"><a href="/docs/reference/dbal/">PHP DBAL</a></li>
 		</ul>
 		{% endif %}
 	</li>

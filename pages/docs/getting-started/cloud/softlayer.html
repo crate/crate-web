@@ -9,19 +9,17 @@ We at CrateIO have been using [bare metal servers](https://www.softlayer.com/bar
 
 A balanced instance configuration for a production Crate host could look similar like that:
 
-```
 8x 2.0GHz cores
 = 32 GB memory
 = 100 GB local SSD storage
 1000 Mbps public/private network interface
-```
 
 We used [SaltStack](http://www.saltstack.com/)'s [Salt Cloud](http://docs.saltstack.com/en/latest/topics/cloud/) to launch and provision instances for the test cluster. Salt Cloud provides an abstraction layer for multiple cloud hosting providers, also for [SoftLayer](http://docs.saltstack.com/en/latest/topics/cloud/softlayer.html).
 
 ## Server Provisioning With Salt Cloud
 Example of `/etc/salt/cloud.profiles`:
 
-```
+```yaml
 softlayer:
     provider: crate-softlayer-hw
     domain: crate.io
@@ -42,7 +40,7 @@ softlayer:
 
 Example of `/etc/salt/cloud.map`:
 
-```
+```yaml
 softlayer:
   - sl1
   - sl2
@@ -51,19 +49,19 @@ softlayer:
 
 Launching the instances defined in the cloud.map file is as easy as this command:
 
-```
+```bash
 $ salt-cloud -m /etc/salt/cloud.map -P
 ```
 
 And once the instances are running you will be able to provision them by running the `highstate` on the crate_softlayer role that the instances are associated with.
 
-```
+```bash
 $ salt -G 'role:crate_softlayer' state.highstate
 ```
 
 The `highstate` is defined in the **sls** (Salt State File). Here's an example of our init.sls:
 
-```
+```yaml
 crate_repo:
   pkgrepo.managed:
     - name: crate
@@ -99,7 +97,7 @@ packages:
 {% verbatim %}
 Example of `crate.yml`:
 
-```
+```yaml
 name: {{ grains['host'] }}
 cluster:
   name: crate-softlayer
