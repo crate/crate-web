@@ -1,0 +1,69 @@
+title: Cr8 - A collection of utility scripts for working with clusters
+link: https://crate.io/blog/cr8-utility-scripts
+author: Chris Ward
+description: Fresh from Snow Sprint comes Cr8, a collection of utility scripts to make working with clusters easier
+created: 2016-02-03
+post_name: cr8-utility-scripts
+status: publish
+post_type: post
+tags: snowsprint, tools, testing
+category: developernews
+
+## Introducing Jordi
+![Mathias Fußenegger, aka 'Jordi'](https://cdn.crate.io/media/1602/ss_jordi.jpg)
+
+Meet Mathias Fußenegger, aka 'Jordi', one of Crate's core engineers and a massive Linux fan.
+
+At Snow Sprint, amongst other things, Jordi decided to add a random data generator to his Crate dev tools project.
+
+
+## Introducing Cr8 - Crate Dev Tools
+
+### Installing
+You will need at least Python 3.4, Install with pip.
+
+```bash
+pip install cr8
+```
+
+### Usage
+Cr8 has five tools available, which can be found by typing `cr8 -h` or `cr8 <subcommand> -h`. These are summarized below.
+
+#### SQL Statement Runtime
+Measure the runtime of a specific SQL statement on a cluster:
+
+```bash
+cr8 timeit "select * from tweets limit 100" SERVER_IP:4200
+```
+
+#### Generate an Insert Statement from JSON
+To generate an insert statement from a supplied JSON string, ready for use on a Crate cluster:
+
+```bash
+echo '{"name": "Arthur", "lastname": "Dent"}' | cr8 json2insert mytable
+```
+
+Which will generate:
+
+```bash
+insert into mytable (lastname, name) values (?, ?)
+['Dent', 'Arthur']
+```
+
+#### Upload a File into a BLOB table
+To upload a file from your local file system to a Crate cluster BLOB table:
+
+```bash
+cr8 upload SERVER_IP:4200 blobtable /tmp/screenshot.png
+```
+
+#### Fill a Table with Random Data
+To fill a table with randomly generated data from [faker](https://github.com/joke2k/faker):
+
+```bash
+cr8 fill-table SERVER_IP:4200 mytable 100000
+```
+
+In this example, the `100000` is the amount of records you wish to fill. The script will read the table schema and map these to providers from faker.
+
+For more details on Cr8 - Crate Dev Tools and to keep up to date with the project [visit the GitHub repository](https://github.com/mfussenegger/crate-devtools).
