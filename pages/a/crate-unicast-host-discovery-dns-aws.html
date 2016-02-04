@@ -16,13 +16,13 @@ Until now the options available have been multicast, and when this is unavailabl
 To help with Unicast host discovery we are pleased to announce support for discovery via DNS and the AWS EC2 API.
 
 ## DNS Discovery
-In your _crate.yml_ [configuration file](https://crate.io/docs/stable/configuration.html) set `discovery.type` to `srv`, this setting cannot be set at runtime.
+In your *crate.yml* [configuration file](https://crate.io/docs/stable/configuration.html) set `discovery.type` to `srv`, this setting cannot be set at runtime.
 
 Configure the DNS query that will be used to look up SRV records with the `discovery.srv.query` option, this will be typically be in the format `_service._protocol.fqdn` and it needs to be configured for the service discovery to function.
 
 `discovery.srv.resolver` sets the hostname or IP address of the DNS server used to resolve the DNS records, if nothing is set or is unresolvable, then the default system resolver is used.
 
-Here is an example section of a _crate.yml_ file we use for our own test cluster:
+Here is an example section of a *crate.yml* file we use for our own test cluster:
 
 ```
 discovery:

@@ -9,7 +9,7 @@ tags: docker, weave, weaveworks, networking, multicast
 category: news, developernews
 
 
-_This is a guest post originally published on [all about Weave](http://weaveblog.com/2015/01/07/crate-with-docker-weave/) on Jan 7, 2015._
+*This is a guest post originally published on [all about Weave](http://weaveblog.com/2015/01/07/crate-with-docker-weave/) on Jan 7, 2015.*
 
 
 [Crate](https://crate.io/overview/) is a massively scalable, distributed, and highly available database that leverages the power of Lucene for lighting fast response times, but you access it using familiar SQL. Crate's distributed SQL planner layer analyzes and optimizes your queries for maximum efficiency in a distributed environment.  You can think of it as [SQL for Elasticsearch](https://crate.io/blog/sql-for-elasticsearch/). Because Crate is designed from the ground up for scalability, it is also perfectly suited for containerization, in our case Docker.
@@ -78,7 +78,7 @@ $ gcloud compute ssh weave-1 --zone us-central1-a
 > sudo weave launch
 ```
 
-_Note: You might have to wait a bit after the instance is ready for the startup script to complete.  If you get "command not found" just wait a minute for the instance to catch up. To be sure, you can tail `/var/log/startupscript.log` and watch for the line: `Finished running startup script` to appear._
+*Note: You might have to wait a bit after the instance is ready for the startup script to complete.  If you get "command not found" just wait a minute for the instance to catch up. To be sure, you can tail `/var/log/startupscript.log` and watch for the line: `Finished running startup script` to appear.*
 
 Repeat that for `weave-2` and `weave-3` but add `weave-1` as a launch option.
 
@@ -155,7 +155,7 @@ To verify the cluster, we just need to [expose Weave](http://docs.weave.works/we
 
 The SQL command to list all names of the nodes of a Crate cluster is:
 
-_(For more information about the SQL commands see [Crate's SQL documentation](https://crate.io/docs/stable/sql/index.html).)_
+*(For more information about the SQL commands see [Crate's SQL documentation](https://crate.io/docs/stable/sql/index.html).)*
 
 ```sql
 SELECT name FROM sys.nodes;

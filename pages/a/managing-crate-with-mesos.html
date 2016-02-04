@@ -18,7 +18,7 @@ The integration framework offers a variety of configuration and management optio
 You will need to have a functioning Mesos installation for the rest of this tutorial and it will be assumed that you do. If you don't, then [find full instructions here](https://docs.mesosphere.com/getting-started).
 
 ### Users and Roles
-The Crate Framework runs as the _crate_ user and _*_ role by default. This is configurable using `--framework-user` and `--framework-role` if required.
+The Crate Framework runs as the `crate` user and `*` role by default. This is configurable using `--framework-user` and `--framework-role` if required.
 
 This means that this user needs to be present on all instances, both master and slaves. The user does not need any specific permissions. Add a user with:
 
@@ -27,7 +27,7 @@ useradd crate -s /bin/bash
 ```
 
 ### Persistent Data Paths
-If you want to utilize [Persistent Data Paths](https://github.com/crate/crate-mesos-framework#persistent-data-paths) (recommended), you need to make sure that the user _crate_ (or the user you decided on above) has write permissions to these locations. For example:
+If you want to utilize [Persistent Data Paths](https://github.com/crate/crate-mesos-framework#persistent-data-paths) (recommended), you need to make sure that the user *crate* (or the user you decided on above) has write permissions to these locations. For example:
 
 ```
 chown crate:crate /path/to/persistent/disk
@@ -80,14 +80,14 @@ Replacing the path and version with appropriate values, i.e.
 java -Djava.library.path=/usr/local/lib -jar ./crate-mesos-0.1.0-SNAPSHOT-d589b98.jar --crate-version 0.1.0 [OPTIONS]
 ```
 
-_[OPTIONS] refers to the options that can be set when starting the framework, [find a list of all available here](https://github.com/crate/crate-mesos-framework#command-line-options)._
+*[OPTIONS] refers to the options that can be set when starting the framework, [find a list of all available here](https://github.com/crate/crate-mesos-framework#command-line-options).*
 
-If you now look at the _Active Frameworks_ section of the Mesos console, you should see Crate listed.
+If you now look at the *Active Frameworks* section of the Mesos console, you should see Crate listed.
 
 ![Mesos Console]({% media '/media/1505/mesos-console.png' %})
 
 ### Install Via Marathon (Recommended)
-Marathon is a Mesos framework for long-running applications, Marathon can be thought of as the _init_ or _upstart_ daemon for Mesos.
+Marathon is a Mesos framework for long-running applications, Marathon can be thought of as the *init* or *upstart* daemon for Mesos.
 
 Marathon needs to be installed on the Mesos cluster, [find out how to do that here](https://mesosphere.github.io/marathon/docs/).
 
@@ -119,7 +119,7 @@ To use Mesos with the Crate framework, create and save a Marathon configuration 
 }
 ```
 
-_The options for zookeeper should list the current Mesos Masters._
+*The options for zookeeper should list the current Mesos Masters.*
 
 Then submit the configuration file to the Marathon master:
 
@@ -127,7 +127,7 @@ Then submit the configuration file to the Marathon master:
 curl -s -XPOST http://localhost:8080/v2/apps -d@FileName.json -H "Content-Type: application/json"
 ```
 
-_Replacing localhost with the address of your Mesos master._
+*Replacing localhost with the address of your Mesos master.*
 
 You should now see Crate running in the Marathon dashboard.
 
@@ -152,7 +152,7 @@ And to force shutdown a cluster:
 curl -X POST http://localhost:4040/cluster/shutdown
 ```
 
-_In each case localhost should be replaced with the host that the framework is running on. If you installed manually, this is the Mesos master. If you installed with Marathon, you will will need to check the web UI to find the host._
+*In each case localhost should be replaced with the host that the framework is running on. If you installed manually, this is the Mesos master. If you installed with Marathon, you will will need to check the web UI to find the host.*
 
 ## Next Steps
 We have been working hard on the framework, but it still is an early beta, so we welcome your feedback.

@@ -8,24 +8,24 @@ Crate can be used with SQuirreL thanks to our [JDBC](/docs/reference/jdbc/) driv
 ## Setup
 SQuirreL does not provide a Crate driver with its distribution, so an extra step is required to run Crate with SQuirreL:
 
-1. Copy the latest [JDBC standalone jar](https://bintray.com/crate/crate/crate-jdbc/view/files/io/crate/crate-jdbc-standalone) to the SQuirreL _lib_ folder. When installing SQuirreL with the MaxOS X installer, this is _/Applications/SQuirreLSQL.app/Contents/Resources/Java/lib/_.
+1. Copy the latest [JDBC standalone jar](https://bintray.com/crate/crate/crate-jdbc/view/files/io/crate/crate-jdbc-standalone) to the SQuirreL *lib* folder. When installing SQuirreL with the MaxOS X installer, this is */Applications/SQuirreLSQL.app/Contents/Resources/Java/lib/*.
 2. Start SQuirreL.
-3. Choose the _Drivers_ tab and add a new driver, adding the relevant details and press _ok_.
+3. Choose the *Drivers* tab and add a new driver, adding the relevant details and press *ok*.
 
 ![squirrel add driver dialogue]({% media '/media/1602/squirrel_add_driver.png' %})
 
-4. Choose the _Aliases_ tab and add a new Alias, choose your new driver (_crate_ in our example) and enter the database URL. Username and password are not supported, so leave them blank.
+4. Choose the *Aliases* tab and add a new Alias, choose your new driver (*crate* in our example) and enter the database URL. Username and password are not supported, so leave them blank.
 
 ![squirrel add alias dialogue]({% media '/media/1602/squirrel_add_alias.png' %})
 
 5. Connect your alias to your crate instance.
 
 ## Usage
-You can browse Crate using the _Object Tree Worksheet_, the usual view used for browsing tables and getting schema information.
+You can browse Crate using the *Object Tree Worksheet*, the usual view used for browsing tables and getting schema information.
 
 ![browsing the content and schema of a table using squirrel]({% media '/media/1602/squirrel_view.png' %})
 
-When browsing a table's content using _Content_, it's possible to edit the table contents by _right-clicking_ and choosing _Make Editable_.
+When browsing a table's content using *Content*, it's possible to edit the table contents by *right-clicking* and choosing *Make Editable*.
 
 ![editing the content of a table using squirrel]({% media '/media/1602/squirrel_edit.png' %})
 
