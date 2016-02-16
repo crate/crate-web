@@ -1,0 +1,17 @@
+title: Connecting to Crate with REST
+author: Chris Ward
+
+You can connect to the Crate HTTP endpoint with any standard tool, such as [curl](http://curl.haxx.se/) or [httpie](https://github.com/jkbrzt/httpie), we will be using curl.
+
+## Connect to Crate
+The endpoint expects a SQL statement sent as a value associated with the key `stmt`, i.e.
+
+```bash
+curl -sSXPOST 'CLUSTER_IP:4200/_sql?pretty' -d '{"stmt":"select name from sys.cluster"}'
+```
+
+Will connect to a cluster and return basic information about the cluster.
+
+## Next Steps
+
+- [Scale a Cluster](/docs/scale)

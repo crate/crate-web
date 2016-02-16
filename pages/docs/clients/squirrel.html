@@ -1,0 +1,38 @@
+title: Using Crate with SQuirreL SQL
+author: Chris Ward
+
+[SQuirreL](http://www.squirrelsql.org) is a graphical SQL client that can be used to browse and query JDBC compliant database.
+
+Crate can be used with SQuirreL thanks to our [JDBC](/docs/reference/jdbc/) driver.
+
+## Setup
+SQuirreL does not provide a Crate driver with its distribution, so an extra step is required to run Crate with SQuirreL:
+
+1. Copy the latest [JDBC standalone jar](https://bintray.com/crate/crate/crate-jdbc/view/files/io/crate/crate-jdbc-standalone) to the SQuirreL *lib* folder. When installing SQuirreL with the MaxOS X installer, this is */Applications/SQuirreLSQL.app/Contents/Resources/Java/lib/*.
+2. Start SQuirreL.
+3. Choose the *Drivers* tab and add a new driver, adding the relevant details and press *ok*.
+
+![squirrel add driver dialogue]({% media '/media/1602/squirrel_add_driver.png' %})
+
+4. Choose the *Aliases* tab and add a new Alias, choose your new driver (*crate* in our example) and enter the database URL. Username and password are not supported, so leave them blank.
+
+![squirrel add alias dialogue]({% media '/media/1602/squirrel_add_alias.png' %})
+
+5. Connect your alias to your crate instance.
+
+## Usage
+You can browse Crate using the *Object Tree Worksheet*, the usual view used for browsing tables and getting schema information.
+
+![browsing the content and schema of a table using squirrel]({% media '/media/1602/squirrel_view.png' %})
+
+When browsing a table's content using *Content*, it's possible to edit the table contents by *right-clicking* and choosing *Make Editable*.
+
+![editing the content of a table using squirrel]({% media '/media/1602/squirrel_edit.png' %})
+
+Using the SQuirreL SQL Editor it's possible to execute arbitrary SQL commands and scripts.
+
+![using the squirrel sql editor]({% media '/media/1602/squirrel_sql.png' %})
+
+## Next Steps
+
+- [Scale a Cluster](/docs/scale)
