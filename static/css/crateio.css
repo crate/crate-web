@@ -1147,6 +1147,31 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
   display: none;
 }
 
+/* Benchmark */
+.dygraphDefaultAnnotation {
+  height: 25px !important;
+}
+
+.dygraph-label.dygraph-ylabel {
+  font-size: 12px;
+}
+
+.dygraph-axis-label.dygraph-axis-label-x {
+  font-size: 12px;
+}
+
+.legend {
+  width: 200px;
+  font-size: 14px;
+  line-height: normal;
+  float: right;
+}
+
+.chart {
+  margin-right: 200px;
+  height: 400px;
+}
+
 @media (max-width: 991px) {
   .wrapper-search {
     margin-left: 6px;
