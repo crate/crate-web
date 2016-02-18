@@ -1,0 +1,156 @@
+title: Crate Benchmarks
+
+{% extends  "base.html" %}
+{% block body %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined-dev.js"></script>
+    <script type="text/javascript" src="chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/crateio.css" />
+    <p>This page shows the results of the Crate.IO benchmarks based on the master
+    branch (nightly builds) as of that point in time. The benchmarks are executed
+    as JUnit benchmarks on Microsoft Azure cloud environment Standard_DS12 instances
+    (4 cores 2.4 GHz Intel Xeon&reg; E5-2673 v3 Haswell machine with 28 GB RAM and SSD).</p>
+
+    <p>The benchmark setup is as follows: 2 Crate Nodes, running with default settings
+    (except following) on a single host:
+      <ul>
+        <li><code>index.store.type: memory</code>, ensures that the index is stored in main memory</li>
+        <li><code>CRATE_HEAP_SIZE</code> is set to 10 GB</li>
+      </ul>
+    </p>
+    <div>
+      <h2>
+        <a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/BulkInsertBenchmark.java">BulkInsertBenchmark</a>
+      </h2>
+      <p>Tests bulk operations with <i>insert</i> and <i>delete</i> statements. Bulk operations
+      are executed as single calls on the server. It can be compared to
+      <a href="http://en.wikipedia.org/wiki/Prepared_statement">prepared statement</a>.</p>
+      <div id='BulkInsertBenchmark_labels' class='legend'></div>
+      <div id='BulkInsertBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/BulkDeleteBenchmark.java">BulkDeleteBenchmark</a></h2>
+      <div id='BulkDeleteBenchmark_labels' class='legend'></div>
+      <div id='BulkDeleteBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/InsertBenchmark.java">InsertBenchmark</a></h2>
+      <p>Tests the performance of single and bulk inserts of Crate compared to
+      Elasticsearch API.</p>
+      <div id='InsertBenchmark_labels' class='legend'></div>
+      <div id='InsertBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/CountBenchmark.java">CountBenchmark</a></h2>
+      <p>Tests the performance of <code>COUNT</code> aggregation function of Crate compared to
+      Elasticsearch API.</p>
+      <div id='CountBenchmark_labels' class='legend'></div>
+      <div id='CountBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/GroupByBenchmark.java">GroupByBenchmark</a></h2>
+      <p>Compares different tests with <code>GROUP BY</code> aggregation function on Crate.</p>
+      <div id='GroupByBenchmark_labels' class='legend'></div>
+      <div id='GroupByBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/GroupByArbitraryBenchmark.java">GroupByArbitraryBenchmark</a></h2>
+      <p>Compares test results using standard <code>GROUP BY</code> to
+      <a href="https://crate.io/docs/reference/sql/aggregation.html#arbitrary">ARBITRARY</a>
+      aggregation function.</p>
+      <div id='GroupByArbitraryBenchmark_labels' class='legend'></div>
+      <div id='GroupByArbitraryBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/CrossJoinBenchmark.java">CrossJoinBenchmark</a></h2>
+      <p>Shows results of different test cases which use the <code>CROSS JOIN</code>
+      functionality.</p>
+      <div id='CrossJoinBenchmark_labels' class='legend'></div>
+      <div id='CrossJoinBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/AnyBenchmark.java">AnyBenchmark</a></h2>
+      <p>Shows results of test cases that use the
+      <a href="https://crate.io/docs/reference/sql/queries.html#any-array">ANY</a>
+      operator.</p>
+      <div id='AnyBenchmark_labels' class='legend'></div>
+      <div id='AnyBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/LikeBenchmark.java">LikeBenchmark</a></h2>
+      <p>Tests the performance of
+      <a href="https://crate.io/docs/reference/sql/queries.html#like">LIKE</a>
+      operator of Crate compared to Elasticsearch API.</p>
+      <div id='LikeBenchmark_labels' class='legend'></div>
+      <div id='LikeBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/InStringBenchmark.java">InStringBenchmark</a></h2>
+      <p>Shows test results of queries that use the
+      <a href="https://crate.io/docs/reference/sql/queries.html#in">IN</a>
+      operator on columns of type <code>STRING</code>.</p>
+      <div id='InStringBenchmark_labels' class='legend'></div>
+      <div id='InStringBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/InNumericBenchmark.java">InNumericBenchmark</a></h2>
+      <p>Shows test results of queries that use the
+      <a href="https://crate.io/docs/reference/sql/queries.html#in">IN</a>
+      operator on columns of type <code>NUMBER</code>.</p>
+      <div id='InNumericBenchmark_labels' class='legend'></div>
+      <div id='InNumericBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/ESScrollingBenchmark.java">ESScrollingBenchmark</a></h2>
+      <p>Shows test results of the Elasticsearch
+      <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html">Scroll API</a>.</p>
+      <div id='ESScrollingBenchmark_labels' class='legend'></div>
+      <div id='ESScrollingBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/create/BaseCreateBenchmark.java">BaseCreateBenchmark</a></h2>
+      <p>Tests the query performance of creating a single table in Crate.</p>
+      <div id='BaseCreateBenchmark_labels' class='legend'></div>
+      <div id='BaseCreateBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/create/CreateWith10TablesBenchmark.java">CreateWith10TablesBenchmark</a></h2>
+      <p>Tests the query performance of creating 10 tables in Crate.</p>
+      <div id='CreateWith10TablesBenchmark_labels' class='legend'></div>
+      <div id='CreateWith10TablesBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/create/CreateWith200TablesBenchmark.java">CreateWith200TablesBenchmark</a></h2>
+      <p>Tests the query performance of creating 200 tables in Crate.</p>
+      <div id='CreateWith200TablesBenchmark_labels' class='legend'></div>
+      <div id='CreateWith200TablesBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/InformationSchemaBenchmark.java">InformationSchemaBenchmark</a></h2>
+      <p>Tests the performance for fetching results of the
+      <a href="https://crate.io/docs/reference/sql/partitioned_tables.html#information-schema">INFORMATION_SCHEMA</a>.</p>
+      <div id='InformationSchemaBenchmark_labels' class='legend'></div>
+      <div id='InformationSchemaBenchmark' class='chart'></div>
+    </div>
+    <br /><br />
+    <div>
+      <h2><a href="https://github.com/crate/crate-stresstest/blob/master/src/test/java/io/crate/benchmark/AddingTableColumnsBenchmark.java">AddingTableColumnsBenchmark</a></h2>
+      <p>Show test results of <code>ALTER TABLE</code> statement for different amount of columns.</p>
+      <div id='AddingTableColumnsBenchmark_labels' class='legend'></div>
+      <div id='AddingTableColumnsBenchmark' class='chart'></div>
+    </div>
+{% endblock %}
