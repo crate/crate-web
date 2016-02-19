@@ -6,17 +6,55 @@ UH!&nbsp;This page does not exist.
 
 {% block body %}
 <p class="lead">Nothing to worry about!</p>
-<p>You can either search our site for what you are looking for or go back to our homepage.
-  <br>... or look at this random animated kitten gif for a while ...</p>
-<div class="w-embed">
-  <p>
-    <a href="http://thecatapi.com">
-      <img src="https://thecatapi.com/api/images/get?format=src&type=gif">
-    </a>
-  </p>
-  <p class="small">
-    Powered by <a href="https://thecatapi.com" target="_blank" rel="nofollow">The Cat API</a>.
-  </p>
+<p>
+  You can either search our site for what you are looking for or go back to our homepage.
+  <br>... or look at this random animated kitten gif for a while ...
+</p>
+
+<div class="w-row">
+  <div class="w-col w-col-6">
+    <div class="w-embed">
+      <p>
+        <a href="http://thecatapi.com">
+          <img src="https://thecatapi.com/api/images/get?format=src&type=gif">
+        </a>
+      </p>
+      <p>
+        Powered by <a href="https://thecatapi.com" target="_blank" rel="nofollow">The Cat API</a>.
+      </p>
+    </div>
+  </div>
+  <div class="w-col w-col-6">
+    <div class="w-form">
+      <form id="form-search" name="wf-form-Search" data-name="Search" method="get" action="https://crate.io/search">
+        <input id="search" type="text" placeholder="Search" name="q" data-name="q" autofocus="autofocus" class="w-input">
+        <input type="submit" value="Search" data-wait="Please wait..." class="w-button button">
+      </form>
+      <div class="w-form-done"></div>
+      <div class="w-form-fail"><p>Oops! Something went wrong while submitting the form</p></div>
+    </div>
+    <div class="w-row">
+      <div class="w-col w-col-6 margin-bottom-16">
+        Read articles by Crate.<br/>
+        <a href="https://crate.io/blog">&gt; Blog</a>
+      </div>
+      <div class="w-col w-col-6 margin-bottom-16">
+        Learn about Crate.<br/>
+        <a href="https://crate.io/docs">&gt; Documentation</a>
+      </div>
+    </div>
+    <div class="w-row">
+      <div class="w-col w-col-6 margin-bottom-16">
+        Gain some knowledge.<br/>
+        <a href="https://crate.io/docs/reference/">&gt; Reference</a>
+      </div>
+      <div class="w-col w-col-6 margin-bottom-16">
+        Go through the Code.<br/>
+        <a href="https://github.com/crate">&gt; Github</a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
