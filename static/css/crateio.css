@@ -503,7 +503,7 @@ blockquote {
   border: 1px solid rgba(0, 0, 0, .2);
   border-radius: 2px;
   background-color: #e7e7e7;
-  font-family: "Andale Mono", "Consolas", "Druid", "Courier New";
+  font-family: "Andale Mono", "Consolas", "Druid", "Courier New", monospace;
   color: #000;
   font-size: 16px;
   line-height: 24px;
@@ -1382,7 +1382,13 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
 
 @font-face {
   font-family: 'Blender Pro';
-  src: url('../fonts/BlenderPro-BoldWeb.woff') format('woff');
+  src: url('../fonts/blenderpro-bold-webfont.woff2') format('woff2'), url('../fonts/blenderpro-bold-webfont.eot') format('embedded-opentype'), url('../fonts/blenderpro-bold-webfont.woff') format('woff'), url('../fonts/blenderpro-bold-webfont.ttf') format('truetype'), url('../fonts/blenderpro-bold-webfont.svg') format('svg');
   font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Blender Pro';
+  src: url('../fonts/blenderpro-thin-webfont.woff2') format('woff2'), url('../fonts/blenderpro-thin-webfont.eot') format('embedded-opentype'), url('../fonts/blenderpro-thin-webfont.woff') format('woff'), url('../fonts/blenderpro-thin-webfont.ttf') format('truetype'), url('../fonts/blenderpro-thin-webfont.svg') format('svg');
+  font-weight: 400;
   font-style: normal;
 }
