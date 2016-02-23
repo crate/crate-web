@@ -109,6 +109,7 @@
       var options = {
         labelsDiv: document.getElementById(datatable.header + '_labels'),
         labels: datatable.labels,
+        colors: ["#0074D9", "#FF4136", "#85144b", "#F012BE", "#AAAAAA", "#001F3F", "#FF851B", "#3D9970", "#2ECC40", "#FFDC00"],
         errorBars: false,
         ylabel: 'avg time of a run in seconds',
         digitsAfterDecimal: 4,
