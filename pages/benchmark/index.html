@@ -1,10 +1,14 @@
 title: Crate Benchmarks
+description: This page shows the results of the Crate.IO benchmarks based on the master branch as of that point in time.
 
 {% extends  "base.html" %}
+
+{% block scripts %}
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined-dev.js"></script>
+  <script type="text/javascript" src="{% static 'js/benchmark.js' %}"></script>
+{% endblock %}
+
 {% block body %}
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined-dev.js"></script>
-    <script type="text/javascript" src="chart.js"></script>
-    <link rel="stylesheet" type="text/css" href="/static/css/crateio.css" />
     <p>This page shows the results of the Crate.IO benchmarks based on the master
     branch (nightly builds) as of that point in time. The benchmarks are executed
     as JUnit benchmarks on Microsoft Azure cloud environment Standard_DS12 instances

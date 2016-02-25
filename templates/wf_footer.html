@@ -69,28 +69,30 @@
 
 <!-- TODO: make this only on docs pages as above -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<script>
-   if(!$('#mobile-menu-toggler').is(':visible')) {
-    var $navAffix = $('#nav-affix');
-    $navAffix.width($navAffix.outerWidth(true)-32);
-    $(window).on('resize', function() {
-      $navAffix.width($navAffix.outerWidth(true)-32);
-    });
-    $navAffix.affix({
-      offset: {
-        top: $navAffix.position().top - 20,
-        bottom: $('footer').outerHeight(true) + 40
-      }
-    });
-    if($('.wrapper-content-right').outerHeight(true) < $navAffix.outerHeight(true))
-      $('.wrapper-content-right').height($navAffix.outerHeight(true));
-    $('body').scrollspy();
-  } else {
+<script type="application/javascript">
+   if (!$('#mobile-menu-toggler').is(':visible')) {
+    var navAffix = $('#nav-affix');
+    if (navAffix.length) {
+      navAffix.width(navAffix.outerWidth(true)-32);
+      $(window).on('resize', function() {
+        navAffix.width(navAffix.outerWidth(true)-32);
+      });
+      navAffix.affix({
+        offset: {
+          top: navAffix.position().top - 20,
+          bottom: $('footer').outerHeight(true) + 40
+        }
+      });
+      if($('.wrapper-content-right').outerHeight(true) < navAffix.outerHeight(true))
+        $('.wrapper-content-right').height(navAffix.outerHeight(true));
+      $('body').scrollspy();
+    }
+   } else {
     $('.wrapper-navleft').hide();
     $('#mobile-menu-toggler').click(function() {
       $('.wrapper-navleft').toggle();
-    })
-  }
+    });
+   }
 </script>
 
 <!-- Segment -->
