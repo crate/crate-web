@@ -1,9 +1,26 @@
+(function() {
+
   var labelName = "method";
   var versionName = "version";
   var xSeries = "timestamp";
   var avgSeries = "avg";
   var stddevSeries = "stddev";
   var showDays = 30;
+  var releases = [];
+  /**
+   * Example annotation of a release:
+   *
+    {
+      shortText: '0.54.0',
+      text: 'Released on 2015/12/16',
+      x: 1453860104000,
+      width: 50,
+      clickHandler: function(e) {
+        window.open('https://github.com/crate/crate/blob/0.54.0/CHANGES.txt#L8');
+      }
+    }
+  **/
+  var colorSchema = ["#0074D9", "#FF4136", "#85144b", "#F012BE", "#AAAAAA", "#001F3F", "#FF851B", "#3D9970", "#2ECC40", "#FFDC00"];
 
   var endpoint = '/benchmark/api/';
   var groups = [
@@ -26,27 +43,9 @@
     "AddingTableColumnsBenchmark"
   ];
 
-  function fetchData(url) {
-    return new Promise(function(succeed, fail) {
-      var req = new XMLHttpRequest();
-      req.open("GET", url, true);
-      req.addEventListener("load", function() {
-        if (req.status < 400)
-          succeed(JSON.parse(req.responseText));
-        else
-          fail(new Error("Request failed: " + req.statusText));
-      });
-      req.addEventListener("error", function() {
-        fail(new Error("Network error"));
-      });
-      req.send(null);
-    });
-  };
-
   function transformData(data) {
     var rows = [];
     var labels = [];
-    var annotations = [];
     var header = "";
     if (data && data.length > 0) {
       var datatable = {};
@@ -58,25 +57,10 @@
         return d;
       }, {}));
 
-      var latestVersion = "";
       data.forEach(function(row) {
         var x = row[xSeries];
-
-        if (!(x in datatable))
-          datatable[x] = {};
+        if (!(x in datatable)) datatable[x] = {};
         datatable[x][row[labelName]] = row[avgSeries];
-        if (row[versionName] !== latestVersion) {
-          latestVersion = row[versionName];
-          var annotation = {
-            series: row[labelName],
-            x: row[xSeries],
-            shortText: row[versionName],
-            text: row[versionName],
-            width: 50
-          };
-          annotations.push(annotation);
-        }
-
       });
 
       rows = Object.keys(datatable).sort().map(function(x) {
@@ -95,21 +79,28 @@
     return {
       rows: rows,
       labels: labels,
-      annotations: annotations,
       header: header
     };
   };
 
+  function createAnnotations(options, releases) {
+    return releases.map(function(e){
+      e['series'] = options.labels[1];
+      return e;
+    });
+  };
+
+  function dateFormat(x) {
+    var val = new Date(parseInt(x));
+    return val.toDateString();
+  };
+
   function draw(drawDiv) {
-    function dateFormat(x) {
-      var val = new Date(parseInt(x));
-      return val.toDateString();
-    }
     return function(datatable) {
       var options = {
         labelsDiv: document.getElementById(datatable.header + '_labels'),
         labels: datatable.labels,
-        colors: ["#0074D9", "#FF4136", "#85144b", "#F012BE", "#AAAAAA", "#001F3F", "#FF851B", "#3D9970", "#2ECC40", "#FFDC00"],
+        colors: colorSchema,
         errorBars: false,
         ylabel: 'avg time of a run in seconds',
         digitsAfterDecimal: 4,
@@ -122,20 +113,22 @@
         showRangeSelector: false
       };
       var chart = new Dygraph(drawDiv, datatable.rows, options);
-      chart.setAnnotations(datatable.annotations)
+      chart.setAnnotations(createAnnotations(options, releases));
     };
-  }
+  };
 
-  $(window).load(function(e) {
+  $(document).ready(function(e) {
     var now = new Date();
     now.setDate(now.getDate() + 1);
     var past = new Date();
-    past.setDate(now.getDate() - 30);
+    past.setDate(now.getDate() - showDays);
     var start = past.toISOString().split("T")[0];
     var end = now.toISOString().split("T")[0];
 
     groups.forEach(function(group) {
       var url = endpoint + group + "?from=" + start + "&to=" + end;
-      fetchData(url).then(transformData).then(draw(document.getElementById(group)));
+      $.get(url).then(transformData).then(draw(document.getElementById(group)));
     });
   });
+
+})();
