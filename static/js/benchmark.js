@@ -125,7 +125,8 @@
       chart.setAnnotations(datatable.annotations)
     };
   }
-  window.onload = function() {
+
+  $(window).load(function(e) {
     var now = new Date();
     now.setDate(now.getDate() + 1);
     var past = new Date();
@@ -137,5 +138,4 @@
       var url = endpoint + group + "?from=" + start + "&to=" + end;
       fetchData(url).then(transformData).then(draw(document.getElementById(group)));
     });
-
-  }
+  });
