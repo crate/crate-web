@@ -56,8 +56,10 @@
 <script type="text/javascript" src="{% static '/js/terminal.js' %}"></script>
 <script type="text/javascript">
   $(document).ready(function(e){
-    var term = new Term(document.querySelector("form.crate-cli"));
-    term.setStatement("{{ consolequery|safe }}");
+    $("form.crate-cli").each(function() {
+      var term = new Term(this);
+      term.setStatement($(this).find("div.statement").text());
+    });
   });
 </script>
 {% endblock %}
