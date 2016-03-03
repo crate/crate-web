@@ -51,6 +51,9 @@ img {
   vertical-align: middle;
   display: inline-block;
 }
+.img-responsive {
+  max-height: 100px;
+}
 html.w-mod-touch * {
   background-attachment: scroll !important;
 }
@@ -483,6 +486,7 @@ textarea.w-select {
 .w-col-offset-11 {
   margin-left: 91.66666667%;
 }
+
 .w-hidden-main {
   display: none !important;
 }
