@@ -7,7 +7,7 @@ Getting Crate working on Azure with Linux or Windows is a simple process. You ca
 
 ## Azure & Linux
 ### Create a Virtual Network
-To create a cluster of Crate nodes on cloud hosting we need to rely on unicast for inter-node communcation, as multicast will not be available.
+To create a cluster of Crate nodes on cloud hosting we need to rely on unicast for inter-node communication, as multicast will not be available.
 
 The easiest way to get Unicast communication working with Azure is to create a Virtual Network (*Network Services -> Virtual Network -> Custom Create*) so that all of our nodes exist on the same IP range. Give the network a name, a region and let Azure handle all the remaining settings by clicking the next arrow on each screen.
 
