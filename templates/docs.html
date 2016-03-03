@@ -2,69 +2,92 @@
 
 {% block getting_started_navbar %}
 <ul id="nav" class="bs-sidenav nav toctree" role="complementary">
-	<li class="navleft-item"><a href="/docs/">Getting Started</a>
-		{% if DIRECTORY_PATH.1 == "getting-started" %}
+	<li class="navleft-item"><a href="/docs/install/">Install</a>
+		{% if DIRECTORY_PATH.1 == "install" %}
 		<ul class="w-list-unstyled navleft-list-level">
-			<li class="navleft-item"><a href="/docs/getting-started/local/">Local</a>
+			<li class="navleft-item"><a href="/docs/install/local/">Local</a>
 				{% if DIRECTORY_PATH.2 == "local" %}
 				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="/docs/getting-started/local/linux/">Linux</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/local/mac/">Mac</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/local/windows/">Windows</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/local/tarball/">Tarball</a></li>
+					<li class="navleft-item"><a href="/docs/install/local/linux/">Linux</a></li>
+					<li class="navleft-item"><a href="/docs/install/local/mac/">Mac</a></li>
+					<li class="navleft-item"><a href="/docs/install/local/windows/">Windows</a></li>
+					<li class="navleft-item"><a href="/docs/install/local/tarball/">Tarball</a></li>
 				</ul>
 				{% endif %}
 			</li>
-			<li class="navleft-item"><a href="/docs/getting-started/clients/">Clients</a>
-				{% if DIRECTORY_PATH.2 == "clients" %}
-				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="/docs/getting-started/clients/java/">Java</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/clients/python/">Python</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/clients/php/">PHP</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/clients/erlang/">Erlang</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/clients/rest/">REST API</a></li>
-				</ul>
-				{% endif %}
-			</li>
-			<li class="navleft-item"><a href="/docs/getting-started/containers/">Containers</a>
+			<li class="navleft-item"><a href="/docs/install/containers/">Containers</a>
 				{% if DIRECTORY_PATH.2 == "containers" %}
 				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="/docs/getting-started/containers/containership/">Containership</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/containers/coreos/">CoreOS</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/containers/docker/">Docker</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/containers/tutum/">Tutum</a></li>
+					<li class="navleft-item"><a href="/docs/install/containers/containership/">Containership</a></li>
+					<li class="navleft-item"><a href="/docs/install/containers/coreos/">CoreOS</a></li>
+					<li class="navleft-item"><a href="/docs/install/containers/docker/">Docker</a></li>
+					<li class="navleft-item"><a href="/docs/install/containers/tutum/">Tutum</a></li>
 				</ul>
 				{% endif %}
 			</li>
-			<li class="navleft-item"><a href="/docs/getting-started/cloud/">Cloud</a>
+			<li class="navleft-item"><a href="/docs/install/cloud/">Cloud</a>
 				{% if DIRECTORY_PATH.2 == "cloud" %}
 				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="/docs/getting-started/cloud/aws/">AWS</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/cloud/azure/">Azure</a></li>
+					<li class="navleft-item"><a href="/docs/install/cloud/aws/">AWS</a></li>
+					<li class="navleft-item"><a href="/docs/install/cloud/azure/">Azure</a></li>
 					<li class="navleft-item"><a href="https://cloud.google.com/launcher/solution/click-to-deploy-images/crate?q=crate">Google Compute</a></li>
-					<li class="navleft-item"><a href="/docs/getting-started/cloud/softlayer/">Softlayer</a></li>
+					<li class="navleft-item"><a href="/docs/install/cloud/softlayer/">Softlayer</a></li>
 				</ul>
 				{% endif %}
 			</li>
 		</ul>
 		{% endif %}
 	</li>
-	<li class="navleft-item"><a href="/docs/performance/">Performance</a></li>
-	<li class="navleft-item"><a href="/docs/search/">Search</a></li>
-	<li class="navleft-item"><a href="https://github.com/crate/crate-sample-apps">Sample Applications</a></li>
-	<li class="navleft-item"><a href="/docs/reference/overview/">Reference</a>
-		{% if DIRECTORY_PATH.1 == "reference" %}
+	<li class="navleft-item"><a href="/docs/connect/">Connect to Cluster</a>
+		{% if DIRECTORY_PATH.1 == "connect" %}
 		<ul class="w-list-unstyled navleft-list-level">
-			<li class="navleft-item"><a href="/docs/reference/crate/">Crate</a></li>
-			<li class="navleft-item"><a href="/docs/reference/crash/">Crate Shell</a></li>
-			<li class="navleft-item"><a href="/docs/reference/java/">Java</a></li>
-			<li class="navleft-item"><a href="/docs/reference/jdbc/">JDBC</a></li>
-			<li class="navleft-item"><a href="/docs/reference/python/">Python</a></li>
-			<li class="navleft-item"><a href="/docs/reference/pdo/">PHP PDO</a></li>
-			<li class="navleft-item"><a href="/docs/reference/dbal/">PHP DBAL</a></li>
+			<li class="navleft-item"><a href="/docs/connect/admin_ui/">Admin UI</a></li>
+			<li class="navleft-item"><a href="/docs/connect/crash/">Command Line Interface</a></li>
 		</ul>
 		{% endif %}
 	</li>
-	<li class="navleft-item"><a href="/docs/support/">Support</a></li>
+	<li class="navleft-item"><a href="/docs/import/">Import Data</a>
+		{% if DIRECTORY_PATH.1 == "import" %}
+		<!-- <ul class="w-list-unstyled navleft-list-level">
+		<li class="navleft-item"><a href="/docs/import/migrating_from_mongodb/">Migrating from MongoDB</a></li>
+	</ul> -->
+	{% endif %}
+</li>
+<li class="navleft-item"><a href="/docs/clients/">Client Libraries</a>
+	{% if DIRECTORY_PATH.1 == "clients" %}
+	<ul class="w-list-unstyled navleft-list-level">
+		<li class="navleft-item"><a href="/docs/clients/java/">Java</a></li>
+		<li class="navleft-item"><a href="/docs/clients/jdbc/">JDBC</a></li>
+		<li class="navleft-item"><a href="/docs/clients/python/">Python</a></li>
+		<li class="navleft-item"><a href="/docs/clients/php/">PHP</a></li>
+		<li class="navleft-item"><a href="/docs/clients/erlang/">Erlang</a></li>
+		<li class="navleft-item"><a href="/docs/clients/rest/">REST API</a></li>
+	</ul>
+	{% endif %}
+</li>
+<li class="navleft-item"><a href="/docs/scale/">Scale a Cluster</a>
+	{% if DIRECTORY_PATH.1 == "scale" %}
+	<ul class="w-list-unstyled navleft-list-level">
+		<li class="navleft-item"><a href="/docs/scale/multi_node_setup/">Multi Node Setup</a></li>
+		<li class="navleft-item"><a href="/docs/scale/multi_zone_setup/">Multi Zone Setup</a></li>
+	</ul>
+	{% endif %}
+</li>
+{# <li class="navleft-item"><a href="/docs/search/">Search</a></li>#}
+<li class="navleft-item border-top"><a href="https://github.com/crate/crate-sample-apps">Sample Applications</a></li>
+<li class="navleft-item"><a href="/docs/reference/overview/">Reference</a>
+	{% if DIRECTORY_PATH.1 == "reference" %}
+	<ul class="w-list-unstyled navleft-list-level">
+		<li class="navleft-item"><a href="/docs/reference/crate/">Crate</a></li>
+		<li class="navleft-item"><a href="/docs/reference/crash/">Crate Shell</a></li>
+		<li class="navleft-item"><a href="/docs/reference/java/">Java</a></li>
+		<li class="navleft-item"><a href="/docs/reference/jdbc/">JDBC</a></li>
+		<li class="navleft-item"><a href="/docs/reference/python/">Python</a></li>
+		<li class="navleft-item"><a href="/docs/reference/pdo/">PHP PDO</a></li>
+		<li class="navleft-item"><a href="/docs/reference/dbal/">PHP DBAL</a></li>
+	</ul>
+	{% endif %}
+</li>
+<li class="navleft-item"><a href="/docs/support/">Support</a></li>
 </ul>
 {% endblock %}

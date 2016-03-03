@@ -1,0 +1,36 @@
+title: Connecting to Crate with Python
+author: Chris Ward
+
+## Install
+Use [pip](https://pypi.python.org/pypi/pip) to install the Crate Python package:
+
+```bash
+pip install crate
+```
+
+Import the client module from the `crate` package:
+
+```python
+from crate import client
+```
+
+## Connect to Crate
+Use the `client` module to create a connection:
+
+```python
+connection = client.connect(SERVER_IP)
+```
+
+Open a cursor to the database to enable queries.
+
+```python
+cursor = connection.cursor()
+```
+
+## Want to Know More?
+- More detailed documentation on the Crate Python client is available [here](/docs/reference/python).
+- The **Crate Sample App** demonstrates features of Crate and [how to use them in a Python based application](https://github.com/crate/crate-sample-apps/tree/master/python) with an explanation of how the library is used [here](https://github.com/crate/crate-sample-apps/blob/master/python/documentation.md).
+
+## Next Steps
+
+- [Scale a Cluster](/docs/scale)
