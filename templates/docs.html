@@ -8,7 +8,19 @@
 			<li class="navleft-item"><a href="/docs/install/local/">Local</a>
 				{% if DIRECTORY_PATH.2 == "local" %}
 				<ul class="w-list-unstyled navleft-list-level">
-					<li class="navleft-item"><a href="/docs/install/local/linux/">Linux</a></li>
+					<li class="navleft-item">
+						<a href="/docs/install/local/linux/">Linux</a>
+						{% if DIRECTORY_PATH.2 == "local" %}
+						<ul class="w-list-unstyled navleft-list-level">
+							<li><a href="#arch-linux">Arch Linux</a></li>
+							<li><a href="#debian">Debian</a></li>
+							<li><a href="#debian-wheezy">Debian Wheezy</a></li>
+							<li><a href="#debian-jessie">Debian Jessie</a></li>
+							<li><a href="#redhat">Redhat</a></li>
+							<li><a href="#ubuntu">Ubuntu</a></li>
+						</ul>
+						{% endif %}
+					</li>
 					<li class="navleft-item"><a href="/docs/install/local/mac/">Mac</a></li>
 					<li class="navleft-item"><a href="/docs/install/local/windows/">Windows</a></li>
 					<li class="navleft-item"><a href="/docs/install/local/tarball/">Tarball</a></li>

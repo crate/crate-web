@@ -9,7 +9,7 @@ bash -c "$(curl -L install.crate.io)"
 
 If you like to do things manually, here's how.
 
-## Arch Linux
+## Arch Linux <a href="#arch-linux" id="arch-linux">¶</a>
 Crate publishes build files to [Arch Linux AUR](https://aur4.archlinux.org/packages/crate/). If you have any problems installing packages from the AUR, full instructions are available on the Arch Linux [Wiki](https://wiki.archlinux.org/index.php/AUR_User_Guidelines)). Make sure you have installed `build base-devel` with the `pacman -S --needed base-devel` command.
 
 ### Download the package
@@ -35,7 +35,7 @@ sudo systemctl enable crate.service
 sudo systemctl start crate.service
 ```
 
-## Debian
+## Debian <a href="#debian" id="debian">¶</a>
 We provide Debian packages for the Wheezy (7.x) and Jessie (8.x) distributions. Installing Crate from our repository requires a couple of steps.
 
 ### Testing/Unstable Releases
@@ -46,7 +46,7 @@ deb https://cdn.crate.io/downloads/apt/testing/ jessie main
 deb-src https://cdn.crate.io/downloads/apt/testing/ jessie main
 ```
 
-### Debian Wheezy
+### Debian Wheezy <a href="#debian-wheezy" id="debian-wheezy">¶</a>
 #### Install https support for apt
 
 ```bash
@@ -87,7 +87,7 @@ sudo apt-get install crate
 sudo /etc/init.d/crate start
 ```
 
-### Debian Jessie
+### Debian Jessie <a href="#debian-jessie" id="debian-jessie">¶</a>
 #### Install https support for apt
 
 ```bash
@@ -128,7 +128,7 @@ sudo apt-get install crate
 sudo /etc/init.d/crate start
 ```
 
-## Red Hat
+## Red Hat <a href="#redhat" id="redhat">¶</a>
 The Crate Team maintains the official YUM repositories for RPM-based releases, supporting Linux Distributions such as RedHat Enterprise Linux 6, CentOS 6 and Scientific Linux 6.
 
 ### RHEL6
@@ -178,7 +178,7 @@ sudo yum install crate
 sudo systemctl start crate.service
 ```
 
-## Ubuntu
+## Ubuntu <a href="#ubuntu" id="ubuntu">¶</a> 
 We build packages for the Ubuntu versions Lucid Lync, Saucy Salamander and Precise Pangolin. They are available on our [Launchpad page](https://launchpad.net/~crate). Adding the repository and installing Crate requires the following commands:
 
 ### Install Crate
@@ -212,7 +212,7 @@ sudo apt-get install crate
 
 ## Setting Environment Variables
 On Ubuntu, Debian and RHEL systems the Crate startup script sources environment variables, such as `CRATE_HEAP_SIZE` or `CRATE_JAVA_OPTS` that are defined in `/etc/default/crate`.
-
+ 
 ### Example
 
 ```sh
@@ -233,6 +233,7 @@ MAX_LOCKED_MEMORY=unlimited
 # Force the JVM to use IPv4 stack
 CRATE_USE_IPV4=true
 ```
+
 ## Next Steps
 
 - [Connect to Crate Cluster](/docs/connect)
