@@ -13,6 +13,20 @@ Create a resource group for the Crate cluster by selecting *Resource groups* und
 
 ![Create Virtual Network]({% media '/media/1603/azure_new_resource_group.png' %})
 
+### Create a Network Security Group
+Crate uses two ports, one for inter-node communication (`4300`) and one for it's http endpoint (`4200`), so access to these needs to be opened.
+
+Create a *New Security Group*, giving it a name and assigning it to the 'Resource Group' just created.
+
+![Create New Security Group]({% media '/media/1603/azure_new_nsg.png' %})
+
+Find that security group in your resources list and open it's settings, navigating to the *Inbound security rules* section.
+
+![Create New Security Group]({% media '/media/1603/azure_nsg_inbound.png' %})
+
+Add a rule for each port:
+
+![Create New Security Group]({% media '/media/1603/azure_inbound_rules.png' %})
 
 ### Create a Virtual Network
 To create a cluster of Crate nodes on some cloud hosting providers, Crate relies on unicast for inter-node communication, as multicast may not be available.
@@ -21,24 +35,25 @@ The easiest way to get Unicast communication working with Azure is to create a V
 
 ![Create Virtual Network]({% media '/media/1603/azure_create_vn.png' %})
 
+Once the Virtual Network has been created, find it in your resources list, open the edit screen and the *Subnets* setting. Add the security group created earlier to the subnet.
+
+![Add Security Group]({% media '/media/1603/azure_vn_subnet_sg.png' %})
+
+
+
+
 ### Create Virtual Machines
 Next create virtual machines to act as your Crate nodes. In this tutorial, I chose two low-specification Ubuntu 14.04 servers, but you likely have your own preferred configurations.
 
-The important setting is to make sure you select the Virtual Network created earlier.
-
-![Select Virtual Network]({% media '/media/1512/azure-vn-select.png' %})
-
-And that you open the ports that Crate uses, These are 4300 for inter-node communication and 4200 for http. These are set in the _Network security group settings -> Inbound security rules_ of the VM.
-
-NEW_IMAGES
+Most importantly, make sure you select the Virtual Network created earlier.
 
 ### Install Crate
-*Note that these instructions need to be followed on each VM in your cluster.*
+*Note that these instructions should be followed on each VM in your cluster.*
 
 To Install Crate, ssh into your VMs and follow [the standard process for Linux installation](https://crate.io/install/linux/), this will automatically start an instance of Crate, which we will need to restart after the next step.
 
 ### Configure Crate
-*Note that these instructions need to be followed on each VM in your cluster.*
+*Note that these instructions should be followed on each VM in your cluster.*
 
 To set the Unicast hosts for the Crate cluster we change the default configuration file at */etc/crate/crate.yml*.
 
@@ -52,7 +67,10 @@ discovery.zen.ping.unicast.hosts:
       - internal-ip-address:4300
 ```
 
-*You might want to try DNS based discovery for inter-node documentation, [find more details](/docs/stable/configuration.html#conf-srv-discovery) in our documentation.*
+<span class="admonition note">
+<span class="first admonition-title">Note</span>
+<span>You might want to try DNS based discovery for inter-node documentation, [find more details](/docs/stable/configuration.html#conf-srv-discovery) in our documentation.</span>
+</span>
 
 Uncomment and set the cluster name
 
@@ -63,14 +81,14 @@ cluster.name: crate
 Restart Crate `service crate restart`.
 
 ## Azure & Windows
-### Create a Virtual Network
-Follow the same steps as for Azure and Linux.
+### Initial Setup
+To create a Resource Group, Network security group and virtual network, follow the same steps as for Azure and Linux.
 
 ### Create Virtual Machines
 Similar steps to creating Virtual Machines for Azure and Linux, but create the VM based on the 'Windows Server 2012 R2 Datacenter' image.
 
 ### Install Crate
-*Note that these instructions need to be followed on each VM in your cluster.*
+*Note that these instructions should be followed on each VM in your cluster.*
 
 To install Crate on Windows Server, you will need a [Java JDK installed](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). Ensure that the `JAVA*HOME` environment variable is set.
 
@@ -87,7 +105,7 @@ We need to allow the ports Crate uses through the Windows Firewall
 
 ![Firewall configuration]({% media '/media/1512/azure-port.gif' %})
 
-Finally start crate by running `bin/crate`.
+Start crate by running `bin/crate`.
 
 ## Next Steps
 
