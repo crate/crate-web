@@ -1,0 +1,129 @@
+title: Powers of Ten: Scaling SQL Database Crate to a Thousand and One Nodes
+link: https://crate.io/a/powers-of-ten-scaling-crate-to-a-thousand-and-one-nodes/
+author: Nils Magnus
+description: Crate teams up with Docker and Microsoft to see how well a database scales beyond 1000 nodes
+created: 2016/03/10 12:12:43
+post_name: powers-of-ten-scaling-crate-to-a-thousand-and-one-nodes
+status: publish
+post_type: post
+tags: cluster, azure, docker, swarm, iaas, petabyte, terabyte, import, node, vm, instance, template 
+category: news, developernews
+
+![Create Virtual Network]({% media '/media/1512/azure-vpc.png' %})
+
+Our engineers at Crate wondered what it’s like to build an
+active-active database cluster comprising of a huge number of
+nodes. How would we design such a cluster, how would we deploy it,
+load data to its nodes while keeping a constant eye on its health?
+Facilitating Microsoft Azure and Docker Swarm we’ve been able to set
+up a 1001 node cluster with a Petabyte capacity that is searchable in
+realtime.  While the challenge was easy to define, a number of design
+issues need to be addressed. A cluster of that size was absolutely new
+to everyone in the team. The cluster runs in Microsoft’s IaaS service
+Azure, which abstracts infrastructure components like storage, cpu
+cores, memory, and network into resource groups.
+
+XXXX description of the most important resources and how we configured
+them
+
+XXXX create a new resource group. resource group consists of: multiple
+storage accounts, virtual network, subnet(s), virtual machines,
+network interfaces + network security groups
+
+XXXX using Azure templates that take care of creating resources in the
+right order and in a parallel way. we haven't done anything with
+templates. MS will hopefully translate our temporary bash scripts into
+a scalable deployment template
+
+XXXX useful: By request the Azure templates are able to install a
+Docker swarm cluster automatically
+
+XXXX verifying that the components of the Docker swarm cluster are
+working as expected
+
+XXXX deploying first containers by hand on the swarm. having the
+constraint of single container per host makes it necessary to run the
+docker run command for each host individually :(
+
+Now we had a cluster of XXXX (about 1000) Azure VMs/Docker hosts. Why
+do we use Docker?  How many Docker containers are we able to deploy on
+them? we only deploy a single container on each host.
+
+XXXX We decided to start with a untypical setup: For a start we
+planned to launch about as many containers as we had hosts.
+
+XXXX Crate is able to make use of memory and benefits from fast
+storage, especially from SSDs. it's important to choose the right VM
+type - balance of MEM vs CPUs vs NETWORK
+
+XXXX We used VMs of type "XXXX" which come with XX GByte RAM. 28GB RAM
+(14GB Heap), 8 CPU cores.
+
+XXXX Crate is written in Java and thus can make use of up to 32 GByte
+RAM. For bigger hosts, it makes sense to launch multiple containers
+since the 32 GByte limit applies for one thread pool (or Java
+instance).
+
+XXXX We attached "premium storage" to each VM, which got mounted as
+XXX GByte block devices each. Each device was announced to have XXXX
+IOPS. 2x 512GB + 1x 256GB = 5100IOPS = 400MB/s
+[Some MS link](https://azure.microsoft.com/en-us/documentation/articles/storage-premium-storage-preview-portal/)
+
+With the cluster ready, we had to assign its workload. We had a
+dataset of 70 TByte compressed text data from the public accessible
+Common Crawl project resulting in about 170 TByte text files. Don’t
+underestimate transferring that amounts of data across the
+Internet. We wrote a scheduler for that. there may probably be a
+little bit more to tell about this section. how our strategy was. etc.
+
+XXXX we split the data in consumable chunks. It is important to
+monitor this process closely, as data connections can stall or
+disconnect.
+
+XXXX monitor and restart single jobs if necessary
+
+XXXX There is cheaper, but slower long term storage on spinning disks
+available in Azure. We uploaded our dataset there. block blob storage
+is only available in Standard LRS (locally redundant storage, as
+opposed to georedundant storage). Premium LRS is only for page blobs
+(VHDs, virtual hard discs)
+
+XXXX Since the data set was in a application specific format, we wrote
+a Crate plugin, that allowed us to use our very efficient “COPY FROM”
+command and directly converted the data while ingesting it..
+
+XXXX We fed the data into XXXX nodes in parallel resulting in XXXXXX
+
+XXXX While crate itself uses powerful defaults, details of the storage
+strategy can be tuned for the extra boost.
+
+```yaml
+cluster.name: crate-swarm
+indices.store.throttle.max_bytes_per_sec: 200mb
+indices.memory.index_buffer_size: 15%
+bootstrap.mlockall: true
+index.store.type: mmapfs
+node.master: <>
+node.data: <>
+http.port: 4200
+transport.tcp.port: 4300
+transport.publish_host: <name>
+multicast.enabled: false discovery.zen.minimum_master_nodes: 2
+discovery.type: srv
+discovery.srv.query: azure1k.srv.fir.io
+```
+
+XXXX Since our data set contained timestamps and we are interested in
+how certain metrics developed over time, we decided to partition the
+schema into weeks. Simply put that works like a materialized view.
+
+It was a wild journey, but edging out the tool we were building for
+years is always a very satisfying experience. At least when it’s done
+**in** the *retrospective*. But still, there are moments when things stopped
+working that worked before, new stuff didn’t hit the expectations and
+eyes are just falling shut while hacking the last lines of code in the
+light of rising sun behind the mountains of Dornbirn.
+
+Key takeaways are 1) loading data can take some time. 2)
+unconventional designs sometimes make sense (similar numbers of hosts
+and nodes), 3) proper advance planning affects the query speed.
