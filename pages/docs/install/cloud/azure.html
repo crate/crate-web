@@ -50,7 +50,7 @@ Most importantly, make sure you select the Virtual Network created earlier.
 ### Install Crate
 *Note that these instructions should be followed on each VM in your cluster.*
 
-To Install Crate, ssh into your VMs and follow [the standard process for Linux installation](https://crate.io/install/linux/), this will automatically start an instance of Crate, which we will need to restart after the next step.
+To Install Crate, ssh into your VMs and follow [the standard process for Linux installation](/docs/install/local/linux/), this will automatically start an instance of Crate, which we will need to restart after the next step.
 
 ### Configure Crate
 *Note that these instructions should be followed on each VM in your cluster.*
@@ -69,7 +69,7 @@ discovery.zen.ping.unicast.hosts:
 
 <span class="admonition note">
 <span class="first admonition-title">Note</span>
-<span>You might want to try DNS based discovery for inter-node documentation, [find more details](/docs/stable/configuration.html#conf-srv-discovery) in our documentation.</span>
+<span>You might want to try DNS based discovery for inter-node documentation, [find more details](/docs/reference/configuration.html#discovery-via-dns) in our documentation.</span>
 </span>
 
 Uncomment and set the cluster name
@@ -94,7 +94,7 @@ To install Crate on Windows Server, you will need a [Java JDK installed](http://
 
 ![Environment Variables]({% media '/media/1512/azure-envvar.png' %})
 
-Next [download the Crate Tarball](/install/#tarball), expand it and move to a convenient location.
+Next [download the Crate Tarball](/docs/install/local/tarball/), expand it and move to a convenient location.
 
 ### Configure Crate and Windows
 *Note that these instructions need to be followed on each VM in your cluster.*
