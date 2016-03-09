@@ -14,7 +14,7 @@ Click the *Create* button and Kitematic will download the image file from Docker
 
 ![Downloading image]({% media '/media/1512/kitematic-dl.png' %})
 
-To override settings for a Docker instance, click the *Settings* tab. For example to manually allocate ports and set a shared volume between Docker and the local machine:
+To override settings for a Docker instance, click the *Settings* tab. For example to manually allocate ports and set a shared volume between Docker and the local machine, make the following changes:
 
 ![Assign Ports]({% media '/media/1512/kitematic-ports.png' %})
 
@@ -38,7 +38,7 @@ docker run -P -d crate
 docker run -d -p 4200:4200 -p 4300:4300 crate
 ```
 
-In this example we create three instances. Two set the port allocation between Docker and the host automatically and one sets ports manually. These three instances will discover each other automatically.
+In this example we create three instances. The first two let Docker set the port allocation between Docker and the host automatically and one sets ports manually. These three instances will discover each other automatically.
 
 Then visit your Docker IP address on port 4200, e.g. *http://DOCKER_IP:4200/admin*
 
@@ -51,7 +51,7 @@ docker run -d -p 4200:4200 -p 4300:4300
         -Des.cluster.name=cluster
 ```
 
-This starts a Crate Docker instance that maps the data storage path to a location shared between the Docker container and the host system. This helps data remain consistent and persistent as container instances come and go on a local machine.
+This starts a Crate Docker instance that maps the data storage path to a location shared between the Docker container and the host system (The value of `<data-dir>`). This helps data remain consistent and persistent as container instances come and go on a local machine.
 
 We also set a path to the Crate config file for fine grained settings changes, and give the cluster a name.
 
@@ -60,7 +60,7 @@ Docker has more configuration options Crate can leverage, [read about them here]
 <a id="docker-compose"></a>
 
 ## Docker Compose
-Docker's Compose tool allows developers to configure complex Docker-based applications that can then be started with one `docker-compose up` command.
+Docker's [Compose](https://docs.docker.com/compose/) tool allows developers to configure complex Docker-based applications that can then be started with one `docker-compose up` command.
 
 Read about Docker Compose specifics [here](https://docs.docker.com/compose/). In this example we will start a node.js container that connects to a two instance Crate cluster.
 
@@ -87,7 +87,7 @@ node:
     - crate
 ```
 
-Here we create one Crate instance with the ports manually allocated, a shared file system volume, an environment variable set for the heap size and override the default crate command to give the cluster a name and a config file. We then create another instance that joins the other in a cluster and a node.js instance that links to a Crate instance.
+Here we create one Crate instance with the ports manually allocated, a shared file system volume, an environment variable set for the heap size and override the default Crate command to give the cluster a name and a config file. We then create another instance that joins the other in a cluster and a node.js instance that links to a Crate instance.
 
 <a id="docker-machine"></a>
 <a id="docker-swarm"></a>
