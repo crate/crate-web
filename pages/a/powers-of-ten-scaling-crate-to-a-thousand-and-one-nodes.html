@@ -9,7 +9,7 @@ post_type: post
 tags: cluster, azure, docker, swarm, iaas, petabyte, terabyte, import, node, vm, instance, template 
 category: news, developernews
 
-![Create Virtual Network]({% media '/media/1512/azure-vpc.png' %})
+![Create Virtual Network]({% media '/media/1603/stack-of-crates.png' %})
 
 Our engineers at Crate wondered what it's like to build an
 active-active database cluster comprising of a huge number of
@@ -100,14 +100,63 @@ proof of concept, a somewhat more robust approach is desirable.
 
 # Feeding the monster
 
-XXXX Since the data set was in a application specific format, we wrote
-a Crate plugin, that allowed us to use our very efficient `COPY FROM`
-command and directly converted the data while ingesting it..
+Now we had to deal With roughly 170 TByte of text data in compressed form. The WET format has a couple of key-value-pairs and the text equivalent of lots of actual webpages the spider collected:
 
-XXXX We fed the data into XXXX nodes in parallel resulting in XXXXXX
+```
+WARC/1.0
+WARC-Type: conversion
+WARC-Target-URI: http://0x20.be/smw/index.php?title=Special:WhatLinksHere/CA&hidetrans=1
+WARC-Date: 2015-04-18T03:22:32Z
+WARC-Record-ID: <urn:uuid:535e1598-ed3e-4c4b-8365-6891fd4bfa3e>
+WARC-Refers-To: <urn:uuid:78fdafb7-d7ec-44e8-8d43-85a1662baae3>
+WARC-Block-Digest: sha1:7SBKQMNURN434CZR55HEKV4G5ESKBO6Z
+Content-Type: text/plain
+Content-Length: 1314
 
-While Crate itself uses powerful defaults, details of the storage
-strategy can be tuned for the extra boost:
+Pages that link to "CA" - Whitespace (Hackerspace Gent)
+Pages that link to "CA"
+<- CA
+Jump to:        navigation, search
+What links here
+Page: Namespace: all
+[...]   
+```
+
+We estimated to have more than 30 billion records to load into the
+Crate cluster. In order to do so, instead of transforming it to a
+sequence of `INSERT` statements, we wrote a plugin that uncompresses
+the data on the fly, transforms it into a JSON format and ingests the
+records directly, facilitating our very efficient `COPY FROM`
+command. Importing all records into an otherwise empty cluster took
+XXXXX hours. The import benefits from the partitioning of the data by
+the timestamp:
+
+```sql
+create table if not exists commoncrawl (
+  ssl boolean primary key,       -- http/https - byte/boolean primary key
+  authority string primary key,  -- xyz.hello.com:123 primary key
+  path string primary key,       -- /a?d=1#hello primary key
+  date timestamp primary key,
+  week_partition as date_trunc('week', date) primary key,
+  --
+  ctype string,
+  clen int,
+  content string INDEX using fulltext with (max_token_length = 40)
+) clustered into 3 shards partitioned by (week_partition);
+```
+
+Since our data set contained timestamps and we are interested in how
+certain metrics developed over time, we decided to partition the
+schema into weeks. Simply put that works like a materialized
+view. Once the node had determined the `week_partition` attribute, it
+routes the actual data to its final destination node. In production
+environments you are able to distribute this step to every node.
+   
+# Tuning the cluster
+
+While Crate in general and specifically our Docker container use
+powerful defaults, details of the storage strategy can be tuned for
+the extra boost. We tweaked these settings in the `crate.yml`:
 
 ```yaml
 cluster.name: crate-swarm
@@ -115,27 +164,25 @@ indices.store.throttle.max_bytes_per_sec: 200mb
 indices.memory.index_buffer_size: 15%
 bootstrap.mlockall: true
 index.store.type: mmapfs
-node.master: <>
-node.data: <>
-http.port: 4200
-transport.tcp.port: 4300
+node.master: <master role>
+node.data:   <data node role>
 transport.publish_host: <name>
-multicast.enabled: false discovery.zen.minimum_master_nodes: 2
+multicast.enabled: false
+discovery.zen.minimum_master_nodes: 2
 discovery.type: srv
-discovery.srv.query: azure1k.srv.fir.io
+discovery.srv.query: <discovery url>
 ```
 
-XXXX Since our data set contained timestamps and we are interested in
-how certain metrics developed over time, we decided to partition the
-schema into weeks. Simply put that works like a materialized view.
+The variables like `<master role>` get substituted by the deployment
+script, implementing some basic service discovery. Throttling the
+indices with 200 MByte/s is a very keen value for a real world
+scenario, but since we've had all the hardware we could dream of, we
+decided to go bold here.
 
 It was a wild journey, but edging out the tool we were building for
 years is always a very satisfying experience. At least when it's done
-**in** the *retrospective*. But still, there are moments when things stopped
+in the retrospective. But still, there are moments when things stopped
 working that worked before, new stuff didn't hit the expectations and
 eyes are just falling shut while hacking the last lines of code in the
-light of rising sun behind the mountains of Dornbirn.
-
-Key takeaways are 1) loading data can take some time. 2)
-unconventional designs sometimes make sense (similar numbers of hosts
-and nodes), 3) proper advance planning affects the query speed.
+light of rising sun behind the mountains of Dornbirn. We keep you
+posted. Let us know about your own experience in crossing borders.
