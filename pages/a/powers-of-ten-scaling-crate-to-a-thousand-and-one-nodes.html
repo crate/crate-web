@@ -27,7 +27,7 @@ previous stage we managed to set up Docker Swarm cluster.
 
 Once the infrastructure layer was operational, we designed the
 container layer and decided to start with a somewhat unusual
-configuration: We planned to have only one container per virtual
+configuration: we planned to have only one container per virtual
 machine. We discussed whether having Docker as an extra layer would
 just add more complexity to the setup, but agreed that the easier
 deployment and flexibility for different setups was worth the extra
@@ -40,11 +40,11 @@ on bigger machines it may (or may not) make sense to have more than a
 single instance running. As we decided to utilize 28 GByte or RAM per
 VM, we planned only with a single Crate instance on a host.
 
-To set up the 1001-node-cluster, we split up into several teams: One
+To set up the 1001-node-cluster, we split up into several teams: one
 working on the infrastructure layer, one preparing the orchestration
 and one taking care of the workload. Due to the abstraction the
 orchestration team was able to test Swarm even at a point when the
-infrastructure team did not have all VMs provisioned: As a test they
+infrastructure team did not have all VMs provisioned: as a test they
 dropped the one-container-one-VM rule and could test their scripts.
 
 Starting to deploy the first containers, we ran the docker command
@@ -83,7 +83,7 @@ In order to run different series of imports, we decided to once
 download the complete dataset (extending over a period of more than
 two years) and store it to some Standard LRS blob storage. Eventually
 limitations of the individual data paths of the single VMs became
-obvious: The troughput of a single worker collecting the data (via
+obvious: the troughput of a single worker collecting the data (via
 `wget`) and storing it to the blob storage (via `azure storage XXXXX
 XXXXX`) was too slow. While we first suspected the Internet connection
 between the two data centers of being the bottleneck, we learned that
@@ -179,10 +179,11 @@ indices with 200 MByte/s is a very keen value for a real world
 scenario, but since we've had all the hardware we could dream of, we
 decided to go bold here.
 
-It was a wild journey, but edging out the tool we were building for
-years is always a very satisfying experience. At least when it's done
-in the retrospective. But still, there are moments when things stopped
-working that worked before, new stuff didn't hit the expectations and
-eyes are just falling shut while hacking the last lines of code in the
-light of rising sun behind the mountains of Dornbirn. We keep you
-posted. Let us know about your own experience in crossing borders.
+It was a wild journey, but stress testing the tool we have been
+building for years is always a very satisfying experience. At least
+when it's done in the retrospective. But still, there are moments when
+things stopped working that worked before, new stuff didn't hit the
+expectations and eyes are just falling shut while hacking the last
+lines of code in the light of rising sun behind the mountains of
+Dornbirn. We keep you posted. Let us know about your own experience in
+crossing borders.
