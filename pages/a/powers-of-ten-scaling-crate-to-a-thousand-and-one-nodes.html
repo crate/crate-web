@@ -1,108 +1,43 @@
-title: Powers of Ten: Scaling SQL Database Crate to a Thousand and One Nodes
-link: https://crate.io/a/powers-of-ten-scaling-crate-to-a-thousand-and-one-nodes/
+title: Powers of Ten: Scaling Crate to a Thousand and One Nodes
+link: https://crate.io/a/powers-of-ten-scaling-crate-to-a-thousand-and-one-nodes
 author: Nils Magnus
 description: Crate teams up with Docker and Microsoft to see how well a database scales beyond 1000 nodes
-created: 2016/03/10 12:12:43
+created: 2016/03/11 12:12:43
 post_name: powers-of-ten-scaling-crate-to-a-thousand-and-one-nodes
 status: publish
 post_type: post
-tags: cluster, azure, docker, swarm, iaas, petabyte, terabyte, import, node, vm, instance, template 
+tags: cluster, azure, docker, swarm, iaas, import, virtual machines
 category: news, developernews
 
 ![Create Virtual Network]({% media '/media/1603/stack-of-crates.png' %})
 
-Our engineers at Crate wondered what it's like to build an
-active-active database cluster comprising of a huge number of
-nodes. How would we design such a cluster, how would we deploy it,
-load data to its nodes while keeping a constant eye on its health?
-Facilitating Microsoft Azure and Docker Swarm we've been able to set
-up a 1001 node cluster with a Petabyte capacity that is searchable in
-realtime.  While the challenge was easy to define, a number of design
-issues needed to be addressed. A cluster of that size was absolutely
-new to everyone in the team. The cluster runs in [Microsoft's IaaS
-service Azure](https://crate.io/a/setting-up-azure-for-crate). In a
-previous stage we managed to set up Docker Swarm cluster.
+Our engineers wondered what it would be like to build an active-active database cluster comprising of a huge number of nodes. How would we design such a cluster, how would we deploy it and load data to its nodes while keeping a constant eye on its health? Using Microsoft Azure and Docker Swarm we've been able to set up a 1001 node cluster with a Petabyte capacity that is searchable in realtime. While the challenge was easy to define, design issues needed to be addressed. A cluster of that size was new to everyone in the team. The cluster runs in [Microsoft's IaaS service, Azure](https://crate.io/a/setting-up-azure-for-crate), which was also new to the team. In a previous stage we managed to set up a Docker Swarm cluster.
 
-# A special ratio of containers and VMs
+## A Special Ratio of Containers and VMs
 
-Once the infrastructure layer was operational, we designed the
-container layer and decided to start with a somewhat unusual
-configuration: we planned to have only one container per virtual
-machine. We discussed whether having Docker as an extra layer would
-just add more complexity to the setup, but agreed that the easier
-deployment and flexibility for different setups was worth the extra
-layer.
+Once the infrastructure layer was operational, we designed the container layer and decided to start with an unusual configuration. We planned to have only one container per virtual machine. We discussed whether having Docker as an extra layer would add more complexity to the setup, but agreed that the easier deployment and flexibility for different setups was worth the extra layer.
 
-Crate database instances can make good use of all available ressources
-like memory, CPU cores, and fast storage (preferrable SSDs). Its core
-is multithreaded and the JVM happily uses up to 32 GByte of RAM. Only
-on bigger machines it may (or may not) make sense to have more than a
-single instance running. As we decided to utilize 28 GByte or RAM per
-VM, we planned only with a single Crate instance on a host.
+Crate database instances make good use of all available resources like memory, CPU cores, and fast storage (preferably SSDs). Crate's core is multithreaded and the JVM will happily use up to 32GB of RAM. Only on bigger machines it may (or may not) make sense to have more than a single instance running. As we decided to use 28GB of RAM per VM, we planned a single Crate instance on a host.
 
-To set up the 1001-node-cluster, we split up into several teams: one
-working on the infrastructure layer, one preparing the orchestration
-and one taking care of the workload. Due to the abstraction the
-orchestration team was able to test Swarm even at a point when the
-infrastructure team did not have all VMs provisioned: as a test they
-dropped the one-container-one-VM rule and could test their scripts.
+To set up the 1001-node-cluster, we split into teams. One working on the infrastructure layer, one preparing the orchestration and one taking care of the workload. Due to the abstraction the orchestration team was able to test Swarm even at a point when the infrastructure team did not have all VMs provisioned. As a test they dropped the one-container-one-VM rule and could test their scripts.
 
-Starting to deploy the first containers, we ran the docker command
-manually on the individual hosts. Doing this a couple of times
-unmistakably makes clear that this is not an option. So once the
-Docker Swarm master was up an runnning, the software automatically
-distributed the Docker commands issued on the master node to the
-swarm's nodes. This step is completely transparent for the user, since
-Docker detects this operational mode once the `SWARM_MASTER`
-environment variable is set.
+Deploying the first containers, we ran the docker command on the individual hosts. Doing this a couple of times made it clear that this was not an option. Once the Docker Swarm master was running, it automatically distributes the Docker commands issued across the cluster.
 
-Once that worked, we verified the components of the Docker swarm
-cluster worked as expected. After a while, we had a cluster of almost
-1000 Azure VMs acting as Docker hosts and the same number of Crate
-database instances. We attached two 512 GByte and one additional 256
-GByte SSD powered locally redundant premium storage (LRS) to each VM,
-resulting to more than a Petabyte of gross capacity. Each host had
-nominal 5.100 IOPS and a data bandwidth of 400 MByte/s for the virtual
-hard discs (VHDs) [according to the Azure
-specs](https://azure.microsoft.com/en-us/documentation/articles/storage-premium-storage-preview-portal/).
+Next, we verified that the components of the Docker Swarm cluster worked as expected. Soon, we had a cluster of almost 1000 Azure VMs acting as Docker hosts and the same number of Crate instances. We attached two 512GB and one  256GB SSD locally redundant premium storage (LRS) to each VM, resulting in more than a Petabyte of gross capacity. Each host had nominal 5.100 IOPS and a data bandwidth of 400MB/s for the virtual hard discs (VHDs) [according to the Azure specs](https://azure.microsoft.com/en-us/documentation/articles/storage-premium-storage-preview-portal/).
 
-# Downloading the equivalent of 1.400 Bluray disks
+## Downloading the Equivalent of 1,400 Bluray Disks
 
-With the cluster ready, we had to assign its workload. We had a
-dataset of 70 TByte compressed text data from the public accessible
-Common Crawl project resulting in about 170 TByte text files. Don't
-underestimate transferring that amounts of data across the
-Internet. We wrote a scheduler that parsed file lists of the Open Data
-project and fetched more than half a million files in compressed WET
-format. The project stores the results of a crawl of a substantial
-part of the world wide web in the Web Archive Format. We just used
-only the WET part, that includes metadata and a flattened text version
-of the websites content.
+With the cluster ready, next we had to assign its workload. We had 70TB of compressed text data from the public [Common Crawl](http://commoncrawl.org/) project resulting in about 170TB text files. Don't underestimate transferring that amount of data across the Internet! We wrote a scheduler that parsed file lists of the Open Data project and fetched more than half a million files in the compressed [WARC](http://commoncrawl.org/2014/04/navigating-the-warc-file-format/) format. We used only the WET part of this archive file, that includes metadata and a flattened text version of the websites content.
 
-In order to run different series of imports, we decided to once
-download the complete dataset (extending over a period of more than
-two years) and store it to some Standard LRS blob storage. Eventually
-limitations of the individual data paths of the single VMs became
-obvious: the troughput of a single worker collecting the data (via
-`wget`) and storing it to the blob storage (via `azure storage XXXXX
-XXXXX`) was too slow. While we first suspected the Internet connection
-between the two data centers of being the bottleneck, we learned that
-having more workers in parallel accelerated the download
-significantly. With a slower start, it took roughly XXX hours to
-download nearly 70 TByte compressed data.
+To run a series of different imports, we decided to download the complete dataset (extending over a period of more than two years) and store it to standard LRS blob storage. Limitations of the individual data paths of the single VMs became obvious quickly. The throughput of a single worker collecting the data (via `wget`) and storing it to the blob storage (via `azure storage XXXXX XXXXX`) was too slow. At first we suspected the Internet connection between the two data centers of being the bottleneck, but learned that having more workers in parallel accelerated the download significantly. With a slower start, it took roughly XXX hours to download nearly 70TB compressed data.
 
-With that amount of data, divided up into half a million of 100 MByte
-chunks, connection disruption occurs every now and then. TCP
-connections get out of order, stalls, the routing may change during a
-data transfer or other esoteric situations may happen. We ended up to
-script our own monitoring, but agreed that for anything beyond such a
-proof of concept, a somewhat more robust approach is desirable.
+With that amount of data, divided up into half a million of 100 MB chunks, connection disruption occurs occasionally. TCP connections get out of order or stall, the routing may change during a data transfer or other esoteric situations may happen. We ended up scripting our own monitoring, but agreed that for anything beyond a proof of concept, a more robust approach is desirable.
 
-# Feeding the monster
+## Feeding the Monster
 
-Now we had to deal With roughly 170 TByte of text data in compressed form. The WET format has a couple of key-value-pairs and the text equivalent of lots of actual webpages the spider collected:
+Next we had to deal with about 170TB of compressed text data. The WET format has a couple of key-value-pairs and the text equivalent of lots of webpages the spider collected:
 
-```
+```bash
 WARC/1.0
 WARC-Type: conversion
 WARC-Target-URI: http://0x20.be/smw/index.php?title=Special:WhatLinksHere/CA&hidetrans=1
@@ -119,17 +54,10 @@ Pages that link to "CA"
 Jump to:        navigation, search
 What links here
 Page: Namespace: all
-[...]   
+[...]
 ```
 
-We estimated to have more than 30 billion records to load into the
-Crate cluster. In order to do so, instead of transforming it to a
-sequence of `INSERT` statements, we wrote a plugin that uncompresses
-the data on the fly, transforms it into a JSON format and ingests the
-records directly, facilitating our very efficient `COPY FROM`
-command. Importing all records into an otherwise empty cluster took
-XXXXX hours. The import benefits from the partitioning of the data by
-the timestamp:
+We estimated more than 30 billion records to load into the Crate cluster. Instead of transforming these records into a sequence of `INSERT` statements, we wrote a plugin that uncompresses the data on the fly, transforms it into JSON format and ingests the records directly, using our efficient `COPY FROM` command. Importing all records into an otherwise empty cluster took XXXXX hours. The import benefits from partitioning the data by timestamp:
 
 ```sql
 create table if not exists commoncrawl (
@@ -145,18 +73,11 @@ create table if not exists commoncrawl (
 ) clustered into 3 shards partitioned by (week_partition);
 ```
 
-Since our data set contained timestamps and we are interested in how
-certain metrics developed over time, we decided to partition the
-schema into weeks. Simply put that works like a materialized
-view. Once the node had determined the `week_partition` attribute, it
-routes the actual data to its final destination node. In production
-environments you are able to distribute this step to every node.
-   
-# Tuning the cluster
+Since our data set contained timestamps and we were interested in how certain metrics developed over time, we decided to partition the schema into weeks. Once the node has determined the `week_partition` attribute, it routes the actual data to its final destination node. In production environments you are able to distribute this step to every node.
 
-While Crate in general and specifically our Docker container use
-powerful defaults, details of the storage strategy can be tuned for
-the extra boost. We tweaked these settings in the `crate.yml`:
+## Tuning the Cluster
+
+While Crate and our Docker image use powerful defaults, settings for the storage strategy can be tuned for an extra boost. We tweaked these settings in the _crate.yml_ file:
 
 ```yaml
 cluster.name: crate-swarm
@@ -165,7 +86,7 @@ indices.memory.index_buffer_size: 15%
 bootstrap.mlockall: true
 index.store.type: mmapfs
 node.master: <master role>
-node.data:   <data node role>
+node.data: <data node role>
 transport.publish_host: <name>
 multicast.enabled: false
 discovery.zen.minimum_master_nodes: 2
@@ -173,17 +94,10 @@ discovery.type: srv
 discovery.srv.query: <discovery url>
 ```
 
-The variables like `<master role>` get substituted by the deployment
-script, implementing some basic service discovery. Throttling the
-indices with 200 MByte/s is a very keen value for a real world
-scenario, but since we've had all the hardware we could dream of, we
-decided to go bold here.
+Variables like `<master role>` get substituted by the deployment script, implementing basic service discovery. Throttling the indices with 200MB/s is an unlikely real world value, but since we had all the hardware we could dream of, we decided to go crazy.
 
-It was a wild journey, but stress testing the tool we have been
-building for years is always a very satisfying experience. At least
-when it's done in the retrospective. But still, there are moments when
-things stopped working that worked before, new stuff didn't hit the
-expectations and eyes are just falling shut while hacking the last
-lines of code in the light of rising sun behind the mountains of
-Dornbirn. We keep you posted. Let us know about your own experience in
-crossing borders.
+It was a wild journey. There were moments when things stopped working that worked before, or when things we tried didn't match expectations.
+
+As tired eyes hack at lines of code whilst the sun sets over the mountains of Dornbirn and the grey streets of Berlin, it all seemed worth it. With the benefit of hindsight and the worst behind us, stress testing the tool you have been building for years is always a satisfying experience.
+
+We will keep you posted and let us know about your own experiences and stories when a crazy idea came together.
