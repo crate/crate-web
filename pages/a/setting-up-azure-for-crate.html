@@ -1,0 +1,54 @@
+title: Setting up Azure for Crate
+link: https://crate.io/a/setting-up-azure-for-crate
+author: Nils Magnus
+description: Crate engineers set up an Azure environment to be able to deploy database containers.
+created: 2016/03/08 11:41:43
+post_name: setting-up-azure-for-crate
+status: publish
+post_type: post
+tags: cluster, azure, docker, swarm, iaas, node, vm, ressource group
+category: news, developernews
+
+
+XXXX description of the most important resources and how we configured
+them
+
+XXXX create a new resource group. resource group consists of: multiple
+storage accounts, virtual network, subnet(s), virtual machines,
+network interfaces + network security groups
+
+XXXX using Azure templates that take care of creating resources in the
+right order and in a parallel way. we haven't done anything with
+templates. MS will hopefully translate our temporary bash scripts into
+a scalable deployment template
+
+XXXX useful: By request the Azure templates are able to install a
+Docker swarm cluster automatically
+
+Azure abstracts infrastructure components like storage, cpu cores,
+memory, and network into resource groups.
+
+
+Once we felt familiar with the infrastructure layer, the Azure web
+portal and its CLI toolset, we automated instantiating a couple of
+VMs. Pursuing an agile aproach, we wrote simple bash scripts to spin
+up new VMs associated to ressources, we had defined at the Azure
+portal before. Provisioning a new VM comes in two stages: Spinning up
+the VM itself by means of the Azure tools, and after that installing
+the Linux operating system including the necessary packages for the
+intended container environment.
+
+
+
+XXXX Crate is able to make use of memory and benefits from fast
+storage, especially from SSDs. it's important to choose the right VM
+type - balance of MEM vs CPUs vs NETWORK
+
+XXXX We used VMs of type "XXXX" which come with XX GByte RAM. 28GB RAM
+(14GB Heap), 8 CPU cores.
+
+XXXX Crate is written in Java and thus can make use of up to 32 GByte
+RAM. For bigger hosts, it makes sense to launch multiple containers
+since the 32 GByte limit applies for one thread pool (or Java
+instance).
+
