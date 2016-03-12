@@ -1,0 +1,46 @@
+title: 4 Things You should Know about Databases in a Microservices Environment
+link: https://crate.io/a/databases-in-microservice-environment
+author: Jodok Battlog
+description: Why don’t all databases fit well with the Docker-driven Microservice environment revolution.
+created: 2016/03/12 22:00
+post_name: databases-in-microservice-environment.html
+status: online
+post_type: post
+tags: Docker, Databases, Microservices
+category: news, developernews
+
+Last January, Crate was included in Sequoia Capital’s microservices eco system chart ([created by Matt Miller](https://www.sequoiacap.com/article/build-us-microservices/)). First of all, we’ve honored to be part of the eco-system. Taking part in the transformation of the software industry into microservices is truly exciting: when we started Crate we weren’t aware of how rapid and deep this change would be, how large a change to how developers develop and deploy applications.
+
+In case you haven’t seen the chart, here it is:
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Our updated view of the developing <a href="https://twitter.com/hashtag/microservices?src=hash">#microservices</a> ecosystem. Thank you for sending your ideas. Please continue! <a href="https://t.co/tt9w2Li3Pd">pic.twitter.com/tt9w2Li3Pd</a></p>&mdash; Matt Miller (@mcmiller00) <a href="https://twitter.com/mcmiller00/status/708289773996118016">March 11, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+Within the sequoia microservices ecosystem, Crate was placed in the Database and Data Management section, along with 4 others. This of course, raises the question – in the age of containers – of why don’t all databases or data management systems fit well with the Docker-driven revolution. Or, to put it otherwise, what makes a database a great choice for microservices – for containerized applications?
+
+Here are the 4 things that will drive databases that can work well in a microservices environment:
+
+## 1. Using the same configurations/ports for all containers: shared nothing/masterless architecture.
+
+Deploying a distributed system that builds on different node types comes with an overhead. It means you have to build and maintain different containers/base images, or provide different entry points in your image. Of course, the complexity of supporting multiple configuration options causes additional overhead inside the container. You either expose these configuration options as environment variables or expose configuration files using host-mounted directories.
+Then, when routing requests to these containers you need to keep in mind which requests go to which container endpoint.
+A shared nothing / masterless architecture makes this much easier. It uses the same configuration for all containers and same ports too.
+
+## 2. Resilience and storage:
+
+Containers, by their very nature, aren't built to persist the data inside them. You need to instead expose the host file system so the container can use it as needed.
+However, when a container is stopped and relaunched on another host, that data volume isn't available anymore. Traditional databases often require data replication, or export data from a central storage system. This process is lengthy, expensive and slows performance.
+
+Crate, or any other resilient storage system, addresses this problem on the application level. It maintains a list of replicas for all data, and distributes them across different physical nodes. Each of them can take over the role of a primary shard whenever needed.
+On Crate, if you launch an instance on a previous Crate host, Crate repuposes that disk and data - saving time and reducing network traffic.
+
+## 3. Cluster up-scale and down-scale
+
+You can’t tell, beforehand, how successful your application is going to be or what volume it will require. Modern applications therefore need to be elastic: growing when needed, but also shrinking to avoid idle infrastructure.
+
+Traditional databases require fixed dimensioning: the number of cores, memory, disk i/o and network throughput. This, of course, isn’t elastic. The size of a Crate cluster can be changed easily - even while running in production and handling requests. If you add a data partition and you'll have more shards to store data. Add more nodes, and the data will be rebalanced in the background. Simply tag shards and containers; you even can even optimize the allocation of shards based on your hardware (SSDs, rack awareness,...)
+
+## 4. Networking and data locality:
+
+One of the biggest challenges in modern, virtualized datacenters is scaling the network. In a typical application, load balancers take all inbound traffic in the first run and then distribute it to the traffic to the application containers. The application containers have to communicate with the database, adding more traffic. In many cases, these databases use persistent storage that is exposed over the network and mounted on the machines.
+Crate brings the application and database closer together. The data can live alongside the application container, avoiding unnecessary network traffic and utilizing the local instance store. Replicas ensure that the data is still available if one machine or container dies.
