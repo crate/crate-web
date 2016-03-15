@@ -24,7 +24,7 @@ ExecStart=/usr/bin/docker run \
     --name %p-%i \
     --publish 4200:4200 \
     --publish 4300:4300 \
-    --volumne /data/crate:/data \
+    --volume /data/crate:/data \
     crate/crate \
     /crate/bin/crate \
     -Des.node.name=%p%i \
