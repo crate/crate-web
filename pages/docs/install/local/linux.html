@@ -1,4 +1,4 @@
-title: Installing Crate.IO on Linux
+title: Installing Crate on Linux
 author: Chris Ward
 
 Crate maintains official packages for Arch Linux, Debian, RedHat Enterprise Linux and Ubuntu. We recommend you use our 1-step installer that will configure the appropriate package repository and install Crate for you.
@@ -178,7 +178,7 @@ sudo yum install crate
 sudo systemctl start crate.service
 ```
 
-## Ubuntu <a href="#ubuntu" id="ubuntu">¶</a> 
+## Ubuntu <a href="#ubuntu" id="ubuntu">¶</a>
 We build packages for the Ubuntu versions Lucid Lync, Saucy Salamander and Precise Pangolin. They are available on our [Launchpad page](https://launchpad.net/~crate). Adding the repository and installing Crate requires the following commands:
 
 ### Install Crate
@@ -212,7 +212,7 @@ sudo apt-get install crate
 
 ## Setting Environment Variables
 On Ubuntu, Debian and RHEL systems the Crate startup script sources environment variables, such as `CRATE_HEAP_SIZE` or `CRATE_JAVA_OPTS` that are defined in `/etc/default/crate`.
- 
+
 ### Example
 
 ```sh

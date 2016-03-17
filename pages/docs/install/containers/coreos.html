@@ -1,7 +1,7 @@
-title: Getting started with Crate.IO on CoreOS
+title: Getting started with Crate on CoreOS
 author: Mathias Fußenegger
 
-As a Linux distribution targetted at cloud and cluster based environments, CoreOS is a prefect fit for a Crate.IO cluster.eetctl.
+As a Linux distribution targetted at cloud and cluster based environments, CoreOS is a prefect fit for a Crate cluster.eetctl.
 
 ## Pre-requisites
 We assume you have a CoreOS cluster running and can access the `fleetctl` tool installed on your local system or on a node in the CoreOS cluster.
@@ -24,7 +24,7 @@ ExecStart=/usr/bin/docker run \
     --name %p-%i \
     --publish 4200:4200 \
     --publish 4300:4300 \
-    --volumne /data/crate:/data \
+    --volume /data/crate:/data \
     crate/crate \
     /crate/bin/crate \
     -Des.node.name=%p%i \

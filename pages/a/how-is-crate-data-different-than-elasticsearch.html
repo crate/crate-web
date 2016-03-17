@@ -1,7 +1,7 @@
 title: How is Crate Different from Elasticsearch?
 link: https://crate.io/blog/how-is-crate-data-different-than-elasticsearch/
 author: Sebastian Utz
-description: People ask us whether Crate.IO is a SQL layer on top of Elasticsearch. Although we use Elasticsearch as a framework, Crate is a data store, and as a result has some noticeable differences.
+description: People ask us whether Crate is a SQL layer on top of Elasticsearch. Although we use Elasticsearch as a framework, Crate is a data store, and as a result has some noticeable differences.
 created: 2014/07/09 19:38:34
 post_name: how-is-crate-data-different-than-elasticsearch
 status: publish
@@ -10,7 +10,7 @@ tags: Elasticsearch
 category: news, developernews
 
 
-People ask us whether Crate.IO is "just" a SQL layer on top of Elasticsearch. Although we use Elasticsearch as a framework (eg for cluster management, node discovery & communication, ...) Crate has completely replaced the Elasticsearch query engine with its own distributed SQL query engine. Crate is a database and as a result has some notable differences. Crate is a distributed, highly scalable SQL database that runs on one machine or better a cluster of machines in the cloud or on premise. Crate comes in one complete install package. It includes solid established open source components (Elasticsearch, Lucene, Netty) and extends those with added core functionalities like read/write support, SQL language, dashboard, and query console. Here are some of the differences between Crate.IO, as a database, and using Elasticsearch:
+People ask us whether Crate is "just" a SQL layer on top of Elasticsearch. Although we use Elasticsearch as a framework (eg for cluster management, node discovery & communication, ...) Crate has completely replaced the Elasticsearch query engine with its own distributed SQL query engine. Crate is a database and as a result has some notable differences. Crate is a distributed, highly scalable SQL database that runs on one machine or better a cluster of machines in the cloud or on premise. Crate comes in one complete install package. It includes solid established open source components (Elasticsearch, Lucene, Netty) and extends those with added core functionalities like read/write support, SQL language, dashboard, and query console. Here are some of the differences between Crate.IO, as a database, and using Elasticsearch:
 
 ## Full Array Support
 
@@ -25,7 +25,7 @@ Elasticsearch, on the other hand, doesn’t support blob storage. Typically, it 
 
 ## Distributed Accurate Aggregations
 
-Elasticsearch currently supports the HyperLogLog aggregations, whereas Crate.IO supports accurate aggregations. Also Elasticsearch scatters the queries to all nodes, gathering the responses and doing the aggregations afterwards which results in high memory consumption on the node that is handling the client request (and so doing the aggregation).
+Elasticsearch currently supports the HyperLogLog aggregations, whereas Crate supports accurate aggregations. Also Elasticsearch scatters the queries to all nodes, gathering the responses and doing the aggregations afterwards which results in high memory consumption on the node that is handling the client request (and so doing the aggregation).
 
 Crate distributes the collected results to the whole cluster using a simple modulo based hashing, and as a result uses the complete memory of the cluster for merging. Think of it as some kind of distributed map/reduce.
 
@@ -46,7 +46,7 @@ Elasticsearch supports creating aliases of a table which can be used to achieve 
 
 ## Import/Export
 
-Crate.IO supports `COPY FROM` / `TO` sql statements for exporting or importing data in a JSON form, making it easily processable with common tools if needed.
+Crate supports `COPY FROM` / `TO` sql statements for exporting or importing data in a JSON form, making it easily processable with common tools if needed.
 
 
 ## Update by Query
@@ -57,7 +57,7 @@ Elasticsearch only supports updates of a single document using its `_id` field v
 
 ## Insert by Query
 
-Crate.IO supports data insertion using a query instead of values. Elasticsearch does not support this out-of-the-box. This feature can also be used to restructure the tables data, renaming a field, changing a field's data type or converting a normal table into a partitioned one.
+Crate supports data insertion using a query instead of values. Elasticsearch does not support this out-of-the-box. This feature can also be used to restructure the tables data, renaming a field, changing a field's data type or converting a normal table into a partitioned one.
 
 ## Integrated Admin-UI
 
