@@ -14,12 +14,15 @@ Crate as an Open Source project lives from contributions to its ecosystem from t
 
 In this tutorial post will demonstrate how to integrate [Spring Data Crate](https://github.com/KPTechnologyLab/spring-data-crate) with your Java application based on a very simple Spring Boot REST application that accepts `GET` requests at `http://localhost:8080` and returns a list of users that are stored in Crate.
 
+
 **You can find the complete example of this tutorial also on [Github](https://github.com/chaudum/spring-data-crate-example/)!**
 
 
 ## Let's go!
 
 To get started please clone the code of the `spring-data-crate` project to your local machine and compile the `jar` file. This will require `JDK 1.8` to be installed, but the compile target should be `1.7`, because Crate does not officially support Java 8 yet.
+
+**Update March 2016: Due to a bugfix in Crate, some spring-data-crate tests will now fail. Use ```mvn -Dmaven.test.skip=true clean install``` instead. **
 
 ```console
 $ git clone https://github.com/KPTechnologyLab/spring-data-crate
@@ -456,5 +459,3 @@ You can find the complete example of this tutorial also on <a href="https://gith
 - [Sprint Boot](http://projects.spring.io/spring-boot/)
 - [Spring Data Crate](https://github.com/KPTechnologyLab/spring-data-crate)
 - [Spring Rest Service Guide](https://spring.io/guides/gs/rest-service/)
-
-
