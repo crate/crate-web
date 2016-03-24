@@ -28,8 +28,8 @@
     "description": "Download Crate. Easy installation of Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext",
     "og_image": "https://cdn.crate.io/web/1/img/crate-avatar_400x400.png",
     "keywords": "crate database db distributed cloud docker download",
-    "stable_version": "0.54.8",
-    "stable_version_date": "April 14th, 2016",
-    "testing_version": "0.54.8"
+    "stable_version": "0.54.7",
+    "stable_version_date": "March 14th, 2016",
+    "testing_version": "0.54.7"
   }
 }
