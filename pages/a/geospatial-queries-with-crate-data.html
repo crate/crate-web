@@ -16,13 +16,13 @@ Crate provides a specific data type for scenarios where it is necessary to track
 The **`geo_point` type** can be used to store a latitude and longitude value pair in a single entity.
 Columns with the geo_point are represented and inserted using an array of doubles or WKT string representation:
 
-    [ < lon >, < lat > ]
+    [ <lon>, <lat> ]
 
 or:
 
-    'POINT( lon lat )'
+    'POINT( <lon> <lat> )'
 
-See `GEO_POINT` [documentation](/docs/stable/sql/ddl.html#geo-point).
+See `GEO_POINT` [documentation](/docs/reference/sql/data_types.html#geo-point).
 
 *Note that there is no comma between longitude and latitude in the WKT syntax!*
 
@@ -32,7 +32,7 @@ Let's assume we have an application that stores pings from mobile devices that c
 
 ```sql
 create table ping (
-  device_uuid string primary key,
+  device_id string primary key,
   ts timestamp primary key,
   location geo_point,
   accuracy float,
@@ -51,14 +51,14 @@ In the real world you'd probably want to think about sharding and replication a 
 As mentioned earlier already we can use both WKT literal and array syntax to insert a geo_point. 
 
 ```sql
-insert into ping (device_uuid, ts, location, accuracy, speed)
+insert into ping (device_id, ts, location, accuracy, speed)
 values ('642a57d6-0c30-418c-a4ec-6e10a9454e2e', 1405503872397, 'POINT(9.744417 47.413417)', 100.0, 0.0);
 ```
 
 is the same as:
 
 ```sql
-insert into ping (device_uuid, ts, location, accuracy, speed)
+insert into ping (device_id, ts, location, accuracy, speed)
 values ('642a57d6-0c30-418c-a4ec-6e10a9454e2e', 1405503872397, [9.744417, 47.413417], 100.0, 0.0);
 ```
 
@@ -70,7 +70,7 @@ Let's assume we've inserted thousands of pings from multiple devices over a cert
 
 ### distance(point1, point2)
 
-The distance function can be used to obtain the distance between two geo points on earth. It will return the [orthodromic distance](http://en.wikipedia.org/wiki/Great-circle_distance) of the two coordinates in metres. [See docs](/docs/en/0.40.1/sql/scalar.html#distance-geo-point1-geo-point2-returns-double) Let's take a look at an example using our existing data structure from above. You can get nearby devices by querying pings whose distance to a given point is less than a certain value, e.g. 1,000m within a point in London. 
+The distance function can be used to obtain the distance between two geo points on earth. It will return the [orthodromic distance](http://en.wikipedia.org/wiki/Great-circle_distance) of the two coordinates in metres. [See docs](/docs/reference/sql/scalar.html#distance-geo-point1-geo-point2-returns-double) Let's take a look at an example using our existing data structure from above. You can get nearby devices by querying pings whose distance to a given point is less than a certain value, e.g. 1,000m within a point in London. 
 
 ```sql
 select device_id, distance(location, 'POINT(-0.1275 51.507222)') as distance
@@ -99,7 +99,7 @@ The distance function covers already a lot of use cases, but sometimes you need 
 
 ### within(shape1, shape2)
 
-The within function determines whether a shape or point is located within another shape. [See docs](/docs/en/0.40.1/sql/scalar.html#within-shape1-shape2-returns-boolean) Using our data structure again, we can fetch all pings that happened from devices located within Austria. To do that we first need to know the [geo shape of Austria](https://github.com/johan/world.geo.json/blob/master/countries/AUT.geo.json). Since most data is provided as GeoJSON you'll need to convert it into a WKT polygon so you can use it with Crate. 
+The within function determines whether a shape or point is located within another shape. [See docs](/docs/reference/sql/scalar.html#within-shape1-shape2-returns-boolean) Using our data structure again, we can fetch all pings that happened from devices located within Austria. To do that we first need to know the [geo shape of Austria](https://github.com/johan/world.geo.json/blob/master/countries/AUT.geo.json). Since most data is provided as GeoJSON you'll need to convert it into a WKT polygon so you can use it with Crate. 
 
 **Convert GeoJSON to WKT polygon**
 [https://gist.github.com/chaudum/1bd42ed71647af616676](https://gist.github.com/chaudum/1bd42ed71647af616676)
