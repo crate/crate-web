@@ -1,3 +1,10 @@
 .lang-col {
   min-height: 200px;
 }
+
+.codehilite > pre {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  background: #f0f0f0 none repeat scroll 0 0;
+}
