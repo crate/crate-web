@@ -125,9 +125,9 @@ That's it for the setup!
 ## Installing Crate
 
 However, before you start coding the application,
-you will need to <a href="{% url '/docs/getting-started/index.html' %}">download and install Crate</a> first.
+you will need to download and install Crate first.
 You can either download and extract the tarball or pull the latest Docker image.
-Instructions for both ways can be found in the <a href="{% url '/docs/getting-started/index.html' %}">documentation</a> section on our website.
+Instructions for both ways can be found in the <a href="/docs">documentation</a> section on our website.
 
 **Run Crate after extracting the `tar.gz`**
 
@@ -150,15 +150,15 @@ For our REST application we need a `User` model which will be mapped to a `users
 ### The Model
 
 Our `User` model has an email address as its unique id and a few other attributes.
-Important to mention here is that Crate has built in support for `ARRAY` and `OBJECT` types (see [docs](https://crate.io/docs/en/latest/sql/data_types.html#object)).
+Important to mention here is that Crate has built in support for `ARRAY` and `OBJECT` types (see [docs](/docs/reference/sql/data_types.html#object)).
 In your Java application you can simply use `<Type>[]` and `HashMap<String, Object>`, and Spring Data Crate will take care of the correct conversion to the database types.
 
 The `@Table` annotation wires up the `User` model to the correct database table. The decorator allows various arguments:
 
 - `name`: the name of the table (required)
-- `refreshInterval`: specifies the refresh interval of a shard in milliseconds (optional, defaults to `1000`) - see [docs](https://crate.io/docs/stable/sql/refresh.html)
-- `numberOfReplicas`: number of configured replicas (optional, defaults to `"1"`) - see [docs](https://crate.io/docs/stable/sql/ddl.html#replication)
-- `columnPolicy`: defines whether a table enforces its defined schema (optional, defaults to `DYNAMIC`) - see [docs](https://crate.io/docs/en/latest/sql/ddl.html#column-policy)
+- `refreshInterval`: specifies the refresh interval of a shard in milliseconds (optional, defaults to `1000`) - see [docs](/docs/reference/sql/refresh.html)
+- `numberOfReplicas`: number of configured replicas (optional, defaults to `"1"`) - see [docs](/docs/reference/sql/ddl.html#replication)
+- `columnPolicy`: defines whether a table enforces its defined schema (optional, defaults to `DYNAMIC`) - see [docs](/docs/reference/sql/ddl.html#column-policy)
 
 If you provide one or more constructors for a model - such as we do in our example,
 you need to annotate one of them with `@PersistenceConstructor` or an exception will be thrown at runtime.
@@ -454,7 +454,7 @@ You can find the complete example of this tutorial also on <a href="https://gith
 
 ## Resources
 
-- [Crate](https://crate.io/docs/)
+- [Crate](https://crate.io/docs)
 - [Spring](https://spring.io)
 - [Sprint Boot](http://projects.spring.io/spring-boot/)
 - [Spring Data Crate](https://github.com/KPTechnologyLab/spring-data-crate)
