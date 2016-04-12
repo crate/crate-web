@@ -43,7 +43,7 @@
         <h5 class="no-spacing">Filed under</h5>
         <div class="margin-bottom-8">
           {% for tag in tags %}
-            <a href="/t/{{ tag }}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+            <a href="/t/{{ tag|lower }}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
           {% endfor %}
         </div>
       </div>
