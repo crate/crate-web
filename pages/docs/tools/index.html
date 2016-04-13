@@ -2,66 +2,64 @@ title: Tools Overview
 description: Management tools, utilities and data visualization for Crate
 author: Christian Haudum
 
+There are several tools that play well with Crate, be it development utilities or data visualization tools. Some of them are also heavily in use at Crate.io.
 
-Crate plays well with others - and here are a couple of tools we connected
-Crate with or use ourselves:
-
+This page gives you an overview of what tools are available out there and are tested with the latest version of Crate. If you know other tools that work well with Crate, please [get in contact](mailto:info@crate.io)!
 
 ## Management Utilities
 
 ### SQuirreL SQL
-An open-source, cross-platform Java SQL Client program for any JDBC compliant database.
+SQirreL is an open-source, cross-platform, graphical Java SQL Client (requires Java >= 6.x) that allows you to view the structure of any JDBC compliant database.
 
-* [Download](http://squirrel-sql.sourceforge.net/)
+There is a setup guide about [how to connect to Crate with SQirreL](/docs/tools/squirrel.html).
+
+[Download](http://squirrel-sql.sourceforge.net), [Official documentation](http://squirrel-sql.sourceforge.net/paper/SQuirreL_us.pdf)
 
 ### conZole
-A web-based SQL console for Crate written in Javascript.
+conZole is a web-based SQL console written in NodeJS that also lets you inspect the date in your Crate. It uses the [node-crate](https://github.com/megastef/node-crate) driver and [Zebra UI](http://www.zebkit.com/) as the HTML5 frontend.
 
-* [Github](https://github.com/megastef/crate-conZole)
+[Github](https://github.com/megastef/crate-conZole)
 
 ### Crash
-Officially maintained shell for Crate written in Python.
+The Crate Shell (aka `crash`) is an officially maintained, open-source command line interface (SQL shell) for Crate. It is written in Python (requires Python >= 2.7) and supports multiple output formats such as tabular output, CSV or JSON.
 
-* [Reference](https://crate.io/docs/reference/crash/)
-* [Github](https://github.com/crate/crash)
-* [Download](https://pypi.python.org/pypi/crash)
+You can read about how to connect to Crate with crash [here](https://crate.io/docs/connect/crash/). The full reference can be found [here](https://crate.io/docs/reference/crash/).
+
+[Github](https://github.com/crate/crash), [Download from PyPi](https://pypi.python.org/pypi/crash)
 
 ### cr8 Utilities
-A collection of command line tools for Crate written in Python.
+`cr8` is a collection of command line tools for Crate written in Python. If makes repeating tasks such as filling tables with sample data really easy, thus being a Swiss army knife for Crate developers. It is develped by one of our core developers and has been featured on our blog: [A Collection of Utility Scripts for Working With Clusters](https://crate.io/a/cr8-utility-scripts/)
 
-* Blog: [A Collection of Utility Scripts for Working With Clusters](https://crate.io/a/cr8-utility-scripts/)
-* [Github](https://github.com/mfussenegger/cr8)
-* [Download](https://pypi.python.org/pypi/cr8)
+[Github](https://github.com/mfussenegger/cr8), [Download from PyPi](https://pypi.python.org/pypi/cr8)
 
 ### ctop
-A top/stat tool for Crate written in Python.
+`ctop` is a simple stat/top tool for Crate written in Python and based on [urwid](http://urwid.org/). It can display metrics such as CPU, memory, heap usage, network traffic and disk i/o in a console user interface.
 
-* Blog: [A Tool for Crate Clusters](https://crate.io/a/ctop-top-for-crate-cluster/)
-* [Github](https://github.com/chaudum/crate-top)
+Read about [A Tool for Crate Clusters](https://crate.io/a/ctop-top-for-crate-cluster/) on our blog.
+
+[Github](https://github.com/chaudum/crate-top)
 
 ## Data Visualization
 
 ### Tableau Desktop
-Tableau is a data visualization software that lets you see and understand data in minutes.
+Tableau is a business analytics and data visualization software that lets you see and understand data in minutes.
 
 **Connecting Tableau to a Crate cluster requires our ODBC driver, [contact us](info@crate.io) for more details.**
 
-* [Website](http://www.tableau.com/)
+[Website](http://www.tableau.com/), [How to use Tableau](http://www.tableau.com/learn)
 
 ### Kibana
-Kibana is an open source data visualization platform that allows you to visualize and interact with your data.
+Kibana is an open-source data visualization platform that allows you to visualize and interact with your data.
+Although Kibana is product for Elasticsearch, it seems to work also nicely with Crate. Stefan Thies wrote about [How to use Kibana with Crate](http://techblog.bigdata-analyst.de/2015/06/25/how-to-use-kibana-4-with-crate-io/)
 
-* Blog post: [How to use Kibana with Crate](http://techblog.bigdata-analyst.de/2015/06/25/how-to-use-kibana-4-with-crate-io/)
-* [Website](https://www.elastic.co/products/kibana)
+[Website](https://www.elastic.co/products/kibana)
 
 ### SQLPad
-SQLPad is a web-based SQL editor that can be run in your own private cloud and supports multiple databases.
+SQLPad is a beautiful, web-based SQL editor written in NodeJs that can be run in your own private cloud and supports multiple databases such as Postgres, MySQL, SQL Server, Vertica and recently (since version `1.12.0`) also Crate.
 
-* [Website](http://rickbergfalk.github.io/sqlpad/)
-* [Github](https://github.com/rickbergfalk/sqlpad)
+[Website](http://rickbergfalk.github.io/sqlpad/), [Github](https://github.com/rickbergfalk/sqlpad)
 
 ### Pentaho
 Pentaho data integration prepares and blends data delivering business analytics from any source.
 
-* [Website](http://community.pentaho.com)
-* [Github](https://github.com/pentaho/pentaho-kettle)
+[Website](http://community.pentaho.com), [Github](https://github.com/pentaho/pentaho-kettle)
