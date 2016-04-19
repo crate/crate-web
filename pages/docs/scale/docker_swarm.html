@@ -1,0 +1,164 @@
+title: Docker Swarm
+author: Chris Ward
+description: Combining Crate with Docker Swarm allows for scalable clusters spread across data centers.
+
+This documentation was tested with Docker Machine version `0.7.0` and Docker `1.11.0`. Please let us know if you experience any problems.
+
+Swarm is Docker's native clustering tool, turning a pool of Docker instances into one single abstract host. This makes it perfect for a scalable database like Crate. Generally Swarm uses instances created by Docker machine, but can also be [setup manually](https://docs.docker.com/swarm/install-manual/).
+
+To get a Crate cluster running on Swarm on the same machine you can follow [the Swarm getting started guide](https://docs.docker.com/swarm/install-w-machine/) and replace `docker run hello-world` with Crate commands:
+
+```bash
+docker run -P -d crate
+docker run -P -d crate
+docker run -d -p 4200:4200 -p 4300:4300 crate
+```
+
+Resulting in something like:
+
+![Docker Swarm]({% media '/media/1604/swarm-crate.png' %})
+
+## Production Example
+
+This production-ready example will deploy a swarm cluster to Google Compute Engine.
+
+### Allow Traffic
+
+First open the Firewall ports that the Crate cluster will need:
+
+```bash
+gcloud compute firewall-rules create default-ssh --allow tcp:22,icmp --source-range 0.0.0.0/0
+gcloud compute firewall-rules create default-swarm --allow tcp:2376,tcp:3376 --source-range 0.0.0.0/0
+gcloud compute firewall-rules create default-crate --allow tcp:4200,tcp:4300 --source-range 0.0.0.0/0
+```
+
+### Create Master
+
+Create a bash script called *startup-master.sh* and add the following to it:
+
+```bash
+#!/bin/bash -x
+sudo su -
+yum clean expire-cache
+yum update -y
+yum install -y wget docker bridge-utils
+curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine
+chmod +x /usr/local/bin/docker-machine
+```
+
+Now create the master on GCE, running the script from above on creation:
+
+```bash
+gcloud compute instances create machine-master \
+  --network default \
+  --zone us-central1-a \
+  --boot-disk-size 50GB \
+  --image centos-7 \
+  --machine-type f1-micro \
+  --metadata-from-file startup-script=startup-master.sh
+```
+
+Save the Project ID as an environment variable to avoid repetition:
+
+```bash
+echo "export GCE_PROJECT=PROJECT_ID" >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+### Obtain Cluster Token
+
+Create a Swarm token, a unique token used to identify the Swarm cluster.
+
+Create a remote Docker host first:
+
+```bash
+docker-machine create -d google --google-project ${GCE_PROJECT} swarm-master
+```
+
+Switch to the machine and run `swarm create` which will start a Swarm and the hash of the container is used as the token.
+
+```bash
+eval $(docker-machine env swarm-master)
+docker run swarm create
+```
+
+Note the token for further use or put the token into bash profile, so it's easily available.
+
+```bash
+echo "export TOKEN=TOKEN_VALUE" >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+### Creating Master
+
+The Swarm master is the first instance of the cluster, and all other nodes will connect to that. The master also acts as a regular node in the cluster, meaning that Docker containers can be launched on it.
+
+This time we'll use the `google` driver, `n1-standard-2` instances and a bigger boot disk for a bit more computing power.
+
+The option `--swarm-master` is the key here:
+
+```bash
+docker-machine create -d google --google-project=${GCE_PROJECT} --google-machine-type=n1-standard-2 --google-disk-size=50 --swarm --swarm-master --swarm-discovery token://${TOKEN} crate-swarm
+```
+
+### Create Swarm Nodes
+
+Next create 3 machines for the Swarm nodes, replacing `crate-swarm-node1` with `crate-swarm-node2` etc.
+
+```bash
+docker-machine create -d google --google-project=${GCE_PROJECT} --google-machine-type=n1-standard-2 --google-disk-size=50 --swarm --swarm-discovery token://${TOKEN} crate-swarm-node1
+```
+
+### Creating a Crate Cluster
+
+Now we want to start multiple Crate nodes that form a cluster. Unfortunately, Google Cloud Platform (and other cloud hosting network environments) do not have multicast enabled, so Crate needs to use another method for discovering other Crate nodes.
+
+This is commonly through unicast and Crate will need a list of the hosts in the cluster. Crate has a DNS plugin available that may help with this, and we have [other options available](/docs/reference/en/latest/configuration.html#conf-discovery).
+
+Here's our recommended solution that relies on no other plugins:
+
+- Get a list of all remote Docker hosts
+- Assemble a list of unicast hosts from them
+- Calculate the [`minimum_master_nodes` setting](/docs/reference/configuration.html#discovery) from the amount of available Docker host (`nodes/2+1`)
+- Iterate over all remote Docker hosts and execute `docker run` explicitly on each host
+
+Create a bash script called *cluster-start.sh* and add the following:
+
+```bash
+#!/bin/bash -x
+export LIST=$(docker run -d swarm list token://$TOKEN)
+export REMOTE_DOCKER_HOSTS=$(docker logs $LIST)
+export MIN_MASTER_NODES=$(( $(docker logs $LIST | wc -l) / 2 + 1))
+export UNICAST_HOSTS=$(docker logs $LIST | sed "s/:2376/:4300/" | paste -s -d "," -)
+
+for host in $REMOTE_DOCKER_HOSTS; do
+  pub_host=$(echo $host | sed "s/:2376//")
+  docker -H tcp://$host \
+    run -d -p 4200:4200 -p 4300:4300 \
+    crate:latest \
+    crate -Des.cluster.name=crate-swarm \
+          -Des.multicast.enabled=false \
+          -Des.transport.publish_host=$pub_host \
+          -Des.discovery.zen.ping.unicast.hosts=$UNICAST_HOSTS \
+          -Des.discovery.zen.minimum_master_nodes=$MIN_MASTER_NODES
+  sleep 3
+done
+```
+
+Run the script with:
+
+```bash
+./cluster_start.sh
+```
+
+Use `curl` to verify the cluster, picking any IP address in the cluster:
+
+```bash
+curl -XPOST IP_ADDRESS:4200/_sql?pretty -d '{"stmt":"select id, name, hostname from sys.nodes"}'
+{
+  "cols" : [ "id", "name", "hostname" ],
+  "duration" : 4,
+  "rows" : [ ... ],
+  "rowcount" : 4
+}
+```

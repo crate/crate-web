@@ -6,6 +6,7 @@ tags: docker, docker-swarm, docker-machine
 category: developernews
 youtube_id: WEitDkuzmYg
 
+*You may experience problems following this blog post due to changes with Swarm and Google Compute Engine. We recommend you follow [our official documentation instead](/docs/scale/docker_swarm).*
 
 Docker recently started pushing towards a complete solution for orchestrating distributed applications.
 Machine and Swarm are two projects that let you manage cluster instances and deploy Docker containers onto them.
@@ -247,7 +248,7 @@ $ curl -XPOST 104.197.14.121:4200/_sql?pretty -d '{"stmt":"select id, name, host
 <h3>Launching a Crate Cluster</h3>
 
 So far we've started a single Crate instance that does not need to communicate with any other nodes.
-Not we want to start multiple Crate nodes that form a cluster. Unfortunatelly, we're hitting a problem with Swarm here.
+Not we want to start multiple Crate nodes that form a cluster. Unfortunately, we're hitting a problem with Swarm here.
 
 Google Cloud Platform (and other cloud hosting network environments) do not have multicast enabled, so Crate needs to use unicast discovery,
 and because Crate is running inside a container, the Crate node would need to publish the IP or hostname of its host.
