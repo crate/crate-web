@@ -103,13 +103,13 @@ As a fundamental component of the overall deployment architecture, this resource
 
 It's possible to reference resources by ID from other groups by providing its type and an explicit path to it:
 
-```json
+```text
 resourceId ([resourceGroupName], resourceType, resourceName1, [resourceName2]...)
 ```
 
 For instance, we reference the virtual network from the network resource group in each ARM template like this:
 
-```json
+```text
     ...
     "virtualNetworkName": "vnet1k1",
     "resourceGroupNetworkName": "1k1network",
