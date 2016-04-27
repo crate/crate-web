@@ -184,19 +184,22 @@ sudo systemctl start crate.service
 ```
 
 ## Ubuntu <a href="#ubuntu" id="ubuntu">¶</a>
-We build packages for the Ubuntu versions Lucid Lync, Saucy Salamander and Precise Pangolin. They are available on our [Launchpad page](https://launchpad.net/~crate). Adding the repository and installing Crate requires the following commands:
+We build packages for the Ubuntu versions Xenial Xerus (16.04), Wily Werewolf (15.10),
+Vivid Vervet (15.04), Trusty Tahr (14.04) and Precise Pangolin (12.04). They are available
+on our [Launchpad page](https://launchpad.net/~crate). Adding the repository and
+installing Crate requires the following commands:
 
 ### Install Crate
 Adding a PPA repository requires `python-software-properties` to be installed:
 
 ```bash
-sudo apt-get install python-software-properties software-properties-common
+sudo apt-get install python-software-properties 
 ```
 
-Ubuntu **15.x** also requires `software-properties-common`:
+Ubuntu >= **15.x** additionally requires `software-properties-common`:
 
 ```bash
-sudo apt-get install python-software-properties software-properties-common
+sudo apt-get install software-properties-common
 ```
 
 Then it's possible to add the Crate repository using `add-apt-repository`
