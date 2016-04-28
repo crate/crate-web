@@ -14,7 +14,7 @@ For a multi zone setup, Crate clusters need to fulfill the following 3 requireme
 2. If a zone becomes unavailable, all data still needs to be fully available.
 3. When querying data, all data should only be collected from shards that are inside the same zone as the initial request.
 
-To achieve these requirements, make use of **shard allocation awareness**. If you are new to setting up a multi-node Crate cluster you should read our [multi node setup](multi_node_setup) guide first.
+To achieve these requirements, make use of **shard allocation awareness**. If you are new to setting up a multi-node Crate cluster you should read our [multi node setup](/docs/scale/multi_node_setup) guide first.
 
 ## Assigning Tags
 First, assign a tag containing the zone to the cluster nodes. This enables shard allocation awareness.

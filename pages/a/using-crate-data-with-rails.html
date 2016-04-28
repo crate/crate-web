@@ -18,7 +18,7 @@ In this guide I want to quickly walk you through getting Crate working with Rail
 
 ## Installing Crate
 
-First [Download Crate](/install/index.html) or install it through your favorite package manager or just simply execute the bash script in a terminal.
+First [Download Crate](/download) or install it through your favorite package manager or just simply execute the bash script in a terminal.
 
 ```sh
 bash -c "$(curl -L try.crate.io)"
@@ -38,13 +38,13 @@ Great, now you have Crate up and running we are ready to use it as backend for R
 
 ## Setup Rails
 
-First create your new Rails project 
+First create your new Rails project
 
 ```sh
 rails new crate_rails
 ```
 
-Now lets modify our Gemfile and exchange the sqlite gem with the activerecord-crate-adapter gem 
+Now lets modify our Gemfile and exchange the sqlite gem with the activerecord-crate-adapter gem
 
 ```sh
 # Gemfile
@@ -52,13 +52,13 @@ Now lets modify our Gemfile and exchange the sqlite gem with the activerecord-cr
 gem 'activerecord-crate-adapter'
 ```
 
-Don’t forget to run bundle 
+Don’t forget to run bundle
 
 ```sh
 bundle
 ```
 
-Next modify your database.yml to connect to Crate. Crate does not support different database schemas so you need to have a separate Crate instance running on a different port for running your tests 
+Next modify your database.yml to connect to Crate. Crate does not support different database schemas so you need to have a separate Crate instance running on a different port for running your tests
 
 ```yaml
 default: &default
@@ -82,7 +82,7 @@ Let’s use the scaffold to create our recipe app.
 
 
 ```rails
-rails g scaffold recipe title:string description:string categories:array properties:object ingredients:array 
+rails g scaffold recipe title:string description:string categories:array properties:object ingredients:array
 ```
 
 We then need to modify the created migration and specify the object schema and schema type and the array type. So the migration looks like this
@@ -318,6 +318,3 @@ In a quick recap: Instead of creating a separate table for defining categories w
 ## Code
 
 The working example can be found on Github: <https://github.com/vedanova/crate_rails>
-
-
-
