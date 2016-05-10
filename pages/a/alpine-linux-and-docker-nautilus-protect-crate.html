@@ -1,0 +1,164 @@
+title: Alpine Linux and Docker Nautilus Protect Crate Images
+link: https://crate.io/a/alpine-linux-and-docker-nautilus-protect-crate
+author: Nils Magnus
+description: How the Docker Nautilus project improves security of our Crate images
+created: 2016-05-10
+post_name: alpine-linux-and-docker-nautilus-protect-crate
+status: publish
+post_type: post
+tags: docker, security
+category: news, developernews
+
+![Create Virtual Network]({% media '/media/1605/chambered-nautilus-cc-by-sa-2.0-michael-bentley.jpg' %})
+
+*[CC-BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), Michael Bentley*
+
+Crate is a database, a place where you store your most valuable
+business assets. For this reason, it is important to detect and
+mitigate any vulnerabilities as soon as possible. We value security
+highly. Using open source libraries enables us to closely monitor any
+security advisories disclosed. While building and packaging Crate, we
+only use the latest versions with no known vulnerabilities.
+
+## Base Level Security: Signed and Stamped
+
+Since Crate generally plays well with containers, many users like and
+download our Docker images. As containerization is a new technology,
+many security experts have questioned how to ensure that the code
+running inside containers is untampered with and doesn't include
+backdoors or other malware. This is an excellent question to ask, and
+we have made significant effort to address it.
+
+We already have an [Official
+Image](https://github.com/docker-library/official-images) in the
+Docker Hub, a curated repository of useful software components that is
+actively reviewed by a specialized team at Docker, Inc. To be able to
+provide and maintain Official Images, we adhere to certain standards,
+answer support questions, and update our image whenever necessary. For
+example, Docker's engineers helped us to improve checking the GPG
+signatures of some extra packages we still need to build at the
+moment, since not all of Docker's dependencies are available as
+upstream packages from Alpine at the moment.
+
+As a result of the peer review, our Official Image is digitally
+signed. You can enforce checking this signature when you use `docker
+pull crate` with `export DOCKER_CONTENT_TRUST=1` enabled. This way you
+are guaranteed to download an untampered image.
+
+Nevertheless, we are delighted that Docker takes an extra effort to
+detect even more security issues in containers: As part of the [Docker
+Security Scanning Project, formerly known as
+Nautilus](https://www.docker.com/products/docker-hub) the container
+vendor scans each layer of our Official Image and notifies us on any
+findings. They check shared libraries and other important artifacts,
+calculate a hash value of them and look them up in a known-goods and
+known-bads database. If they find a potential vulnerable component,
+they list it on their website together with some hints and a CVE
+number.
+
+## Extra Level: Layers Scanned by Nautilus
+
+This feature has been available to Official Repo partners like us
+since DockerCon EU in November 2015. For us as a publisher on Docker
+Hub, it is valuable to have this kind of insight. To make our official
+`crate` image a part of the Docker Security Scanning project, we had
+to make a number of changes. We switched from the Java 8 base image
+(derived from Debian) to version 3.3 of Alpine Linux and installed the
+OpenJDK 8 ourselves. Alpine Linux is a recommended foundation of
+thoroughly scanned images with Nautilus. When we started, Docker
+reported 9 critical and 5 major issues in 5 out of 125 scanned
+components. A component is typically an artifact like a shared library
+or binary installed by a package manager:
+
+![Create Virtual Network]({% media '/media/1605/before.png' %})
+
+*Nautilus reported issues in 5 out of 125 scanned components. Luckily
+all of them had been easy to fix.*
+
+All the reported issues came from Debian libraries and Java
+packages. Docker lists their
+[CVE-numbers](https://cve.mitre.org/cgi-bin/cvename.cgi) for
+reference. Though we suspect some of them are false positives, it's
+worth verifying them. For example, Nautilus reported two issues with
+Oracle Java SE, but the image just contained an OpenJDK package:
+
+![Create Virtual Network]({% media '/media/1605/critical.png' %})
+
+*With deep insight from the scan it's easy to single out vulnerable
+libraries and fix them.*
+
+The issues were all resolved as soon as we switched to Alpine Linux
+and applied a few changes to our publicly maintained [Dockerfile on
+GitHub](https://github.com/crate/docker-crate/blob/master/Dockerfile). We
+had to adapt the package names slightly, since we now use the
+[APK](http://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management)
+package manager of Alpine Linux, which feels much like the APT system
+we used before, but has different naming conventions. This was easy
+because Crate just requires a Java 1.8 environment and some extra
+libraries, most available in the APK package manager.
+
+## Build Environment for a Special Library
+
+One exception was the [Sigar
+library](https://support.hyperic.com/display/SIGAR/Home) which we use
+to provide platform independent statistics on system load, pick up
+disk utilization or network throughput from the operating system. We
+feed that information to our
+[sys-tables](https://crate.io/docs/reference/en/latest/sql/system.html)
+for cluster infrastructure management.
+
+The upstream Sigar code expects to be compiled in a glibc-based build
+environment, but Alpine Linux comes with a `libc-musl`, which claims
+to have a [lean footprint and is easier to
+audit](http://www.etalabs.net/compare_libcs.html). Unfortunately the
+upstream `libsigar` doesn't work with `libc-musl` out of the box, nor
+is there a version of `libsigar` in the Alpine Linux APK repositories
+for version 3.3. Building the library required some small, but tricky
+patches, most notably setting up an Ant environment from its source
+since that wasn't available in Alpine 3.3, too.
+
+Thankfully [Natanael Copa](https://github.com/ncopa), an Alpine Linux
+maintainer and Docker employee, got in touch to help us patch the
+Sigar upstream code and compile it with `libc-musl`. Currently we do
+this in several stages. In lines 18 to 39 we download, verify, and
+compile Ant; lines 40 to 42 apply the patch to the upstream libsigar
+and lines 43 to 55 build and package the library into Alpines package
+manager.
+
+The remaining code from line 58 just downloads the platform
+independent Crate code, installs Java (for the Crate core) and Python
+(for Crash, the Crate shell client) and checks the integrity of all
+downloads with a cryptogrphic GPG signature. The Docker folks kindly
+pointed out verifying signatures is more secure if we bake the actual
+GPG fingerprint into the image instead of just using the key ID.
+
+## Two Birds With One Stone
+
+While working on the fixes we discussed with Alpine developers having
+actual APK packages for the upcoming Alpine version 3.4. Both Jakub
+Jirutka and Natanael Copa agreed to have packages for Ant and Sigar,
+respectively. Now we're prepared and once the Alpine team releases
+their new version, we are able to strip our `Dockerfile` even
+more. The result is a 148 MB image down from 181 MB we had before the
+switch. More importantly, all previous issues are gone! But, wait!
+Once we've been down to zero, the nasty CVE-2016-3443 showed up
+(together with some of its ugly siblings). Fortunately the Alpine team
+is already working on the fix for OpenJDK and we'll let you know as
+soon as possible.
+
+![Create Virtual Network]({% media '/media/1605/errorfree.png' %})
+
+*33 MB leaner and (almost) without issues. The Crate Official Image
+with improved security components.*
+
+Docker named its security project originally after the Nautilus, an
+old marine mollusk that lives in a spiral shell. It has up to ninety
+tentacles probing its environment. The shell comprises of a sequence
+of confined chambers that relate to the layered components of a Docker
+image. As Docker announced the service officially to its users, they
+renamed it to Docker Security Scanning.
+
+Switching to Alpine as an base image had several advantages for
+us: It has a smaller memory footprint, we benefit from enhanced
+security thanks to the Nautilus project and reduced the size of the
+image by 33 MB. Pretty amazing for a giant shrimp!
