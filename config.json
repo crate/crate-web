@@ -11,6 +11,15 @@
         "reverse": true
       }
     },
+    "faq": {
+      "title": "FAQs",
+      "path": "faq/",
+      "template": "faq.html",
+      "order": {
+        "key": "weight",
+        "reverse": true
+      }
+    },
     "doc": {
       "title": "Doc",
       "path": "docs/",
