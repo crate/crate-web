@@ -1,0 +1,41 @@
+title: Frequently Asked Questions
+description: Crate is an open source database built with familiar SQL syntax with replication, sharding and Lucene indexes in one complete package.
+{% extends "base.html" %}
+
+{% block header %}
+<div class="wrapper wrapper-bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1>Frequently Asked Questions</h1>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper wrapper-border">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-8">
+        <ul class="list-unstyled">
+          {% for post in faq.pages|slice:":20" %}
+          <li class="row-list-item">
+            <div class="list-header">
+              <h2><a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title}}</a></h2>
+            </div>
+            <p class="excerpt">
+              {{ post.raw_body|markdown|striptags|truncatewords:75 }}
+            </p>
+            <p class="text-right"><a href="{{ post.url }}" title="Read more">Read more &raquo;</a></p>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
