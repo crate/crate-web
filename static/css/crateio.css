@@ -75,6 +75,10 @@ ul {
   padding-left: 1em;
 }
 
+ul.list-unstyled {
+  list-style-type:none;
+}
+
 blockquote {
   margin-bottom: 10px;
   padding: 10px 20px;
