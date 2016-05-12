@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="w-section section hero bg-blue">
+  <div class="w-container">
+    <h1 class="heading hero text-white">{% block title %}{{ title }}{% endblock %}</h1>
+    <p class="lead">{% block subline %}{{ subline }}{% endblock %}</p>
+  </div>
+</div>
+<div class="w-section section narrow">
+  <div class="w-container">
+    <div class="w-row">
+      <div class="w-col w-col-4">
+        <ul class="w-list-unstyled">
+          <li class="list-item-horizontal">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ CONFIG.site|add:url|urlencode }}" target="new" class="w-inline-block"><img width="34" src="{% static 'images/bt-share-facebook.png' %}">
+            </a>
+          </li>
+          <li class="list-item-horizontal">
+            <a href="https://twitter.com/home?status={% filter urlencode %}{{ title }} / @crateio {{ CONFIG.site|add:url }}{% endfilter %}" target="new" class="w-inline-block"><img width="34" src="{% static 'images/bt-share-twitter.png' %}">
+            </a>
+          </li>
+          <li class="list-item-horizontal">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ CONFIG.site|add:url|urlencode }}&title={{ title|urlencode }}&summary=&source=" target="new" class="w-inline-block"><img width="34" src="{% static 'images/bt-share-linkedin.png' %}">
+            </a>
+          </li>
+          <li class="list-item-horizontal">
+            <a href="https://plus.google.com/share?url={{ CONFIG.site|add:url|urlencode }}" target="new" class="w-inline-block"><img width="34" src="{% static 'images/bt-share-google.png' %}">
+            </a>
+          </li>
+          <li class="list-item-horizontal">
+            <a href="mailto:office@crate.io?&subject={{ title|urlencode }}&body={{ CONFIG.site|add:url|urlencode }}" target="new" class="w-inline-block"><img width="34" src="{% static 'images/bt-share-mail.png' %}">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="w-section section border-top">
+  <div class="w-container container-narrow">
+    <div>{% block body %}{{ body }}{% endblock %}</div>
+  </div>
+</div>
+<div class="w-section section">
+  <div class="w-container container-narrow">
+    <a href="javascript:$('html, body').animate({ scrollTop: 0 }, 'slow');">Back to top</a> | <a href="/blog">All posts</a>
+  </div>
+</div>
+{% endblock %}
