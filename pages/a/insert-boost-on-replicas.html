@@ -1,0 +1,40 @@
+title: Insert performance boost on replicated tables
+link: <https://crate.io/a/insert-boost-on-replicas/>
+author: Chris Ward, Nils Magnus, Claus Matzinger
+description: Crate 0.55.0 dramatically speeds up bulk inserts into replicated tables.
+created: 2016/05/17 16:37:43
+post_name: insert-performance-boost-on-replicated-tables
+status: publish
+post_type: post
+tags: performance, speed
+category: news, developernews
+
+![Crate Speeds Up]({% media '/media/1605/speeding-cc-by-sa-2.0-ozzy-delaney.jpg' %})
+
+*[CC-BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), Ozzy Delaney*
+
+Writing data to a database is a task that most developers want to complete as quickly as possible. This is especially true when an application or device is recording time series data at regular intervals. A database needs to keep up or data might become inconsistent.
+
+## Replication in Crate
+
+At the same time, data integrity and availability are equally important. Crate maintains replicas of data to assist with data consistency. When creating a table, you configure this with:
+
+```sql
+CREATE TABLE ... WITH (number_of_replicas = 2);
+```
+
+When inserting data with replicas enabled, Crate inserts the data on the primary node first and then schedules the insert to all configured replicas *in parallel*. The request returns when all replicas are written. This means that inserts with replication will always take longer than inserting into an un-replicated table.
+
+By introducing a smarter handling of [bulk inserts](https://crate.io/docs/reference/sql/rest.html#bulk-operations) we could reduce the amount of internal communication dramatically: Crate previously forwarded each insert to replicas separately, but now utilizes bulk requests to replicate batches of data. With this we were able to greatly increase Crate's performance for replicated tables.
+
+![Bulk inserts boost on replicated data]({% media '/media/1605/insert-speed-b.png' %})
+
+*Huge performance boost: Inserting into replicated tables is now twice as fast on our two node cluster! (Versions 0.54.9 and 0.55.0; 10M bulk inserts; 2 shards, 1 replica)*
+
+We set up a two node cluster that replicated each data shard once. Compared to an earlier version, Crate 0.55.0 completed the ten million bulk inserts operation twice as fast for almost every run! The improvements are in our [testing release](https://crate.io/docs/install/local/tarball/), so we invite you to play with it and tell us what you think.
+
+## Benchmark Setup
+
+The setup was reasonably simple. Two nodes holding a table (1 string column) distributed within two shards, with one replica. Then we issued bulk requests to insert batches of 1000 rows (each with a random 512-byte string) multiple times, and took the duration returned by the server. The goal was to focus on the algorithmic change (contrary to saturating I/O), therefore we could run the benchmark on a single machine and achieve that speedup.
+
+Don't take our word for it. In our [Github repository](https://github.com/crate/crate-version-comparison) you will find all the necessary scripts to reproduce our experiment and try it for yourself.
