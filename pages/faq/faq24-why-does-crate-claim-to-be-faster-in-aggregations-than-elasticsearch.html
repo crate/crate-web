@@ -1,0 +1,11 @@
+title: Why does Crate claim to be faster in aggregations than Elasticsearch?
+link: https://crate.io/faq/faq24-why-does-crate-claim-to-be-faster-in-aggregations-than-elasticsearch.html
+author: Nils Magnus
+description: Answer about frequently asked question about elasticsearch.
+created: 2016-05-17
+post_name: faq24-why-does-crate-claim-to-be-faster-in-aggregations-than-elasticsearch
+status: publish
+post_type: faq
+weight: 1
+
+Crate uses each cluster node to do aggregations in a distributed way. That means that the initial node just needs to combine the preaggregated results.

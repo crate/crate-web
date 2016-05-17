@@ -1,0 +1,11 @@
+title: How does the default mapping for data imported via Crate look like?
+link: https://crate.io/faq/faq19-how-does-the-default-mapping-for-data-imported-via-crate-look-like.html
+author: Nils Magnus
+description: Answer about frequently asked question about insert.
+created: 2016-05-17
+post_name: faq19-how-does-the-default-mapping-for-data-imported-via-crate-look-like
+status: publish
+post_type: faq
+weight: 1
+
+You can import data into Crate either as normal INSERT statements (if you have large amounts of initial data, we have some extra tips how to ingest them), or (even more efficient) via COPY FROM statements, which optionally take JSON as an import format and create, if you wish so, a dynamic schema in the database.

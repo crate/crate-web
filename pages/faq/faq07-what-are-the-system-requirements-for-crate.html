@@ -1,0 +1,11 @@
+title: What are the system requirements for Crate?
+link: https://crate.io/faq/faq07-what-are-the-system-requirements-for-crate.html
+author: Nils Magnus
+description: Answer about frequently asked question about requirements, configuration.
+created: 2016-05-17
+post_name: faq07-what-are-the-system-requirements-for-crate
+status: publish
+post_type: faq
+weight: 2
+
+To make it short: More is better. This both applies to the configuration of the single node Crate runs on as well as the number of nodes. For a useful production environment you should have several GB of RAM, 4 cores, and a decent SSD drive in a node. At least a five node cluster is recommended if you attach importance to resilience and performance. For special needs other values may apply. The technical mimimum are a single core, 40 MB of RAM for the application and a disk, but that makes obviously not much sense for most setups. Although several independent host nodes are recommended, a small Crate cluster easily runs on a single developer notebook for testing purposes.

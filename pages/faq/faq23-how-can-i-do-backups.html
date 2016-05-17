@@ -1,0 +1,11 @@
+title: How can I do backups?
+link: https://crate.io/faq/faq23-how-can-i-do-backups.html
+author: Nils Magnus
+description: Answer about frequently asked question about .
+created: 2016-05-17
+post_name: faq23-how-can-i-do-backups
+status: publish
+post_type: faq
+weight: 1
+
+There is the convenient `CREATE SNAPSHOT` SQL command that stores the current state of one or all tables into a backup store. There are drivers for several stores availbale, including a local file system, an Amazon S3 storage, or HDFS. For more details see our [documentation](https://crate.io/docs/reference/en/latest/sql/snapshot_restore.html).
