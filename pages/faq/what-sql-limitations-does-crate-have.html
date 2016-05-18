@@ -1,0 +1,11 @@
+title: What SQL limitations does Crate have?
+link: https://crate.io/faq/what-sql-limitations-does-crate-have.html
+author: Nils Magnus
+description: Answer about frequently asked question about sql, limits.
+created: 2016-05-17
+post_name: what-sql-limitations-does-crate-have
+status: publish
+post_type: faq
+weight: 1
+
+Crate can't handle transactions, but implements eventual consistency. Not all forms of JOINs are supported due to the potential performance overhead. [Cross and inner joins are supported](/a/sql-for-elasticsearch), and we are adding others in the future. These features will affect INSERT and query performance.

@@ -1,0 +1,13 @@
+title: What is the memory footprint of Crate?
+link: https://crate.io/faq/what-is-the-memory-footprint-of-crate.html
+author: Nils Magnus
+description: Answer about frequently asked question about requirements, configuration.
+created: 2016-05-17
+post_name: what-is-the-memory-footprint-of-crate
+status: publish
+post_type: faq
+weight: 1
+
+You can use up to 32 GB because of Java stack frame limitations, and another 32 GB for Lucene is useful. These are the upper limits and the actual setup depends on your workload.
+
+Crate works with smaller setups, as long as you have enough data nodes available. It benefits from more nodes as aggregations are computed in a distributed fashion. Crate scales horizontally by adding commodity grade hardware nodes.

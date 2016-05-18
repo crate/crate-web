@@ -1,0 +1,11 @@
+title: How do I manage state in a container environment?
+link: https://crate.io/faq/how-do-i-manage-state-in-a-container-environment.html
+author: Nils Magnus
+description: Answer about frequently asked question about container.
+created: 2016-05-17
+post_name: how-do-i-manage-state-in-a-container-environment
+status: publish
+post_type: faq
+weight: 1
+
+We recommend spinning up one Crate container on each container host. That means that each node can use as much local I/O as available as well as providing a network-local connection to the ephemeral data layer, where all ephemeral containers can store their state. If you configure a sensible number of replicas, a single data container can also be used in a ephemeral way.

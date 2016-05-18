@@ -1,0 +1,11 @@
+title: Can I use Crate on top of an existing Elasticsearch instance? Is it a SQL layer?
+link: https://crate.io/faq/can-i-use-crate-on-top-of-an-existing-elasticsearch-instance.html
+author: Nils Magnus
+description: Answer about frequently asked question about elasticsearch, sql.
+created: 2016-05-17
+post_name: can-i-use-crate-on-top-of-an-existing-elasticsearch-instance
+status: publish
+post_type: faq
+weight: 2
+
+By default, no, as Crate uses Lucene indices slightly differently. Crate extends the indices and relies on some extra attributes. There are options though. You can export an Elasticsearch instance and import it into Crate, which is easy and efficient thanks to Crate's dynamic schema update feature. After that you can enable the traditional ES API from Crate and read your data via the ES API. For more details, we recommend reading  this document on the [differences between Elasticsearch and Crate](https://crate.io/a/how-is-crate-data-different-than-elasticsearch/).
