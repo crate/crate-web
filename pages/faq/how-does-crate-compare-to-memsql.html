@@ -1,0 +1,13 @@
+title: How does Crate compare to MemSQL?
+link: https://crate.io/faq/how-does-crate-compare-to-memsql.html
+author: Nils Magnus
+description: Answer about frequently asked question about .
+created: 2016-05-17
+post_name: how-does-crate-compare-to-memsql
+status: publish
+post_type: faq
+weight: 20
+
+MemSQL (as any in-memory DB) is great when your data size will fit into memory. Despite some mechanics to store overflowing data on disk, in reality this will negatively impact the performance and usability. While the raw query performance may be better with MemSql (as long as the data is in memory), Crate is close, but provides an ideal solution for all use cases where datasets will grow over time and a cost effective solution is required for storage as well as querying by adding commodity servers to match data growth.
+
+[Read more detail here](/overview/crate-vs-memsql).

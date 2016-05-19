@@ -1,11 +1,11 @@
-title: Details about the Crate parser (and the use of Presto)
-link: https://crate.io/faq/details-about-the-crate-parser-and-the-use-of-presto.html
+title: What does Crate use for SQL parsing?
+link: https://crate.io/faq/what-does-crate-use-for-SQL-parsing.html
 author: Nils Magnus
-description: Answer about frequently asked question about .
+description: Answer about frequently asked question about what Crate uses for SQL parsing.
 created: 2016-05-17
-post_name: details-about-the-crate-parser-and-the-use-of-presto
+post_name: what-does-crate-use-for-SQL-parsing
 status: publish
 post_type: faq
 weight: 1
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis enim est, qui non videat haec esse in natura rerum tria? Quod cum dixissent, ille contra. Beatus sibi videtur esse moriens. Quamquam id quidem, infinitum est in hac urbe; Bonum valitudo: miser morbus. Alterum significari idem, ut si diceretur, officia media omnia aut pleraque servantem vivere.
+As Crate uses SQL as an interface to the underlying data, we needed a SQL parser and decided it was unnecessary to write our own. After weighing up options, we settled on Facebook Presto, you can read more about our decision process [in this blog post](/a/how-we-chose-the-facebook-presto-sql-parser-for-crate-data/).

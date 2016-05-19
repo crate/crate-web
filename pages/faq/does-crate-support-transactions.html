@@ -1,0 +1,11 @@
+title: Does Crate support transactions?
+link: https://crate.io/faq/does-crate-support-transactions.html
+author: Nils Magnus
+description: Does Crate support transactions?
+created: 2016-05-17
+post_name: does-crate-support-transactions
+status: publish
+post_type: faq
+weight: 1
+
+Crate does not support transactions as it focusses on eventual consistency for high performance. Crate can achieve '[optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control)' through use of the `_version` column, [read more here](/docs/reference/sql/occ.html).
