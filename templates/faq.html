@@ -11,7 +11,7 @@
 <div class="w-section section narrow">
   <div class="w-container">
     <div class="w-row">
-      <div class="w-col w-col-4">
+      <div class="w-col w-col-6">
         <ul class="w-list-unstyled">
           <li class="list-item-horizontal">
             <a href="https://www.facebook.com/sharer/sharer.php?u={{ CONFIG.site|add:url|urlencode }}" target="new" class="w-inline-block"><img width="34" src="{% static 'images/bt-share-facebook.png' %}">
@@ -34,6 +34,14 @@
             </a>
           </li>
         </ul>
+      </div>
+      <div class="w-col w-col-4">
+        <h5 class="no-spacing">Category</h5>
+        <div class="margin-bottom-8">
+          {% for tag in tags %}
+            <a href="/faq/{{ tag|lower }}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>

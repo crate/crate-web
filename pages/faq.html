@@ -17,25 +17,29 @@ description: Crate is an open source database built with familiar SQL syntax wit
 {% block body %}
 <div class="wrapper wrapper-border">
   <div class="container">
-
     <div class="row">
-      <div class="col-sm-8">
+      <div class="w-col w-col-9 wrapper-2col-wide">
         <ul class="list-unstyled">
-          {% for post in faq.pages|slice:":17" %}
+          {% for post in faq.pages|slice:":35" %}
+          {% ifchanged post.tags.0 %}
+          <h3>{{ post.tags.0 }}</h3>
+          {% endifchanged %}
           <li class="row-list-item">
             <div class="list-header">
               <h2><a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title}}</a></h2>
             </div>
             <p class="excerpt">
-              {{ post.raw_body|markdown|striptags|truncatewords:75 }}
+              {{ post.raw_body|markdown|striptags|truncatewords:50 }}
             </p>
             <p class="text-right"><a href="{{ post.url }}" title="Read more">Read more &raquo;</a></p>
           </li>
           {% endfor %}
         </ul>
       </div>
+      <div class="w-col w-col-3 wrapper-2col-narrow">
+        <h3>Topics</h3>
+      </div>
     </div>
-
   </div>
 </div>
 {% endblock %}
