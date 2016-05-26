@@ -6,6 +6,7 @@ created: 2016-05-17
 post_name: how-do-i-manage-state-in-a-container-environment
 status: publish
 post_type: faq
+tags: containers
 weight: 1
 
-We recommend spinning up one Crate container on each container host. That means that each node can use as much local I/O as available as well as providing a network-local connection to the ephemeral data layer, where all ephemeral containers can store their state. If you configure a sensible number of replicas, a single data container can also be used in a ephemeral way.
+Managing state in a container-based Crate cluster involves mounting a volume to connect to the Crate _data_ directory. For more details on how to do this, [read our Docker Hub page](https://hub.docker.com/_/crate/).

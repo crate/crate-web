@@ -6,6 +6,14 @@ created: 2016-05-17
 post_name: what-sql-limitations-does-crate-have
 status: publish
 post_type: faq
+tags: sql, features
 weight: 1
 
-Crate can't handle transactions, but implements eventual consistency. Not all forms of JOINs are supported due to the potential performance overhead. [Cross and inner joins are supported](/a/sql-for-elasticsearch), and we are adding others in the future. These features will affect INSERT and query performance.
+Crate doesn't support:
+
+- Transactions
+- Generators
+- Stored procedures
+- Constraints, other than primary key
+
+Find a full list of what SQL features Crate does support [here](/docs/reference/sql/index.html).
