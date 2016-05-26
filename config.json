@@ -16,8 +16,8 @@
       "path": "faq/",
       "template": "faq.html",
       "order": {
-        "key": "weight",
-        "reverse": true
+        "key": "tags",
+        "reverse": false
       }
     },
     "doc": {
