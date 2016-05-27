@@ -1,0 +1,193 @@
+title: Visualize Crate data with Metabase
+link: <https://crate.io/a/visualize-crate-data-with-metabase>
+author: Chris Ward, Claus Matzinger
+description: Crate and Metabase team up to bring you Big Data visualization.
+created: 2016-05-30
+post_name: visualize-crate-data-with-metabase
+status: publish
+post_type: post
+tags: visualization, analysis
+category: news, developernews
+
+## The Crate Driver
+
+We have discovered that many people use Crate not only directly integrated in their applications, but also for analyzing their existing data. To help our users do this, we created a driver for [Metabase](http://www.metabase.com), an open source database visualization tool focussed on providing you with answers created from your data.
+
+As Metabase is written in Clojure, we created a wrapper for [our JDBC driver](https://crate.io/docs/reference/jdbc/) that [ships with Metabase 0.18.0](https://github.com/metabase/metabase/pull/2428). Currently the driver only works with Crate 0.54.x and later.
+
+## Installation
+
+Metabase is easy to install and offers options including a Mac application, a Docker image, cloud images and a jar file. [Find them all here](http://www.metabase.com/start/). Once you've started Metabase you will be asked for some user information and to select your database, select *Crate* from the list.
+
+## Metabase Concepts
+
+To analyze your data with Metabase, you create **questions**, a sequence of parameters, filters and sorting options. Metabase then returns you **answers** that you can format and visualize in a variety of ways.
+
+You can then combine questions and answers into **dashboards** and layer them on top of each other for comparison.
+
+## Setup and Configuration
+
+First add a database and table source.
+
+![Add a Data Source]({% media '/media/1605/mb-data-source.png' %})
+
+Once configured, you can find settings for the data source in the *Admin panel* under the *Databases* tab. Here you can also force sync the database if new tables are missing in question source lists.
+
+![Database Configuration]({% media '/media/1605/mb-configure-crate.png' %})
+
+You can also view the assumptions Metabase has made about your data schema and manually override them in the *Admin panel* under the *Data Model* tab
+
+![Schema Configuration]({% media '/media/1605/mb-config-schema.png' %})
+
+![Schema Configuration]({% media '/media/1605/mb-config-db.png' %})
+
+With all that setup, let's get started creating some questions.
+
+## Stock Data
+
+Metabase's analysis and visualization tools are aimed primarily at business intelligence professionals, and thus offers parameters and configuration options designed for particular use cases.
+
+For this example, we are using our Stocks data set imported from Yahoo. We will look at the stock price of Exxon petroleum during the 70s and 80s and compare the volume of sales on the average stock price.
+
+We created three questions, one for the average stock price per day in the 1970s, one for the 1980s and then a question to show the volume of sales across both decades. We split the questions into three parts, firstly to show how to layer answers onto one dashboard, and secondly to restrict the number of results each query returns and not overload Metabase.
+
+![Metabase Questions List]({% media '/media/1605/mb-questions.png' %})
+
+### Average Stock Price per decade(s)
+
+This example uses stock data taken from [Yahoo](http://finance.yahoo.com/).
+
+We will create two questions that are almost duplicates of each other to see the change in stock price of Exxon mobil across two decades, the 70s and 80s, i.e. from 01/01/1970 - 12/31/1979 and 01/01/1980 - 12/31/1989.
+
+First, select the stocks table from the Crate datasource.
+
+![Set Datasource]({% media '/media/1605/mb-data-source.png' %})
+
+Add a filter to only show the Exxon stock values by selecting the field you want to filter and how to filter it.
+
+![Filter Stock Value]({% media '/media/1605/mb-filter-data.png' %})
+
+Filtering the date is a similar process, but in this case it should be a range between the start and end of the decade.
+
+![Filter Date Range]({% media '/media/1605/mb-filter-data-range.png' %})
+
+To plot data in Metabase on a chart we need to reduce the amount of columns and the only way to do this is by using the *View* values. For this use case we found the best method was to set the 'view' of the data to an 'average of High' and group by 'Date:Day' to get the results desired, a day and a closing stock price.
+
+![Change Date View]({% media '/media/1605/mb-data-view.png' %})
+
+![Group Data]({% media '/media/1605/mb-group-data.png' %})
+
+Finally make sure the data is sorted correctly by clicking on the *...* icon and setting the sort order to 'Date: Day ascending'
+
+![Sort Data]({% media '/media/1605/mb-sort-data.png' %})
+
+Now you can change the visualization to a line graph.
+
+![Change Visualization]({% media '/media/1605/mb-visual-change.png' %})
+
+### Volume of Sales
+
+Creating this question is a similar process but with some different filters and values, here's what we used:
+
+![Query Values]({% media '/media/1605/mb-vol-settings.png' %})
+
+## Combine Answers
+
+To compare and contrast data from answers, open the volume question on your dashboard and then add the other questions to it:
+
+![Query Values]({% media '/media/1605/mb-complete-dashboard.png' %})
+
+## Github Data and SQL
+
+For times when Metabase's visual filters and queries are not quite enough, you can jump into SQL edit mode by clicking the *View the SQL* icon and then *Convert this question to SQL*. In this example we'll try raw SQL queries with our Github data set.
+
+Earlier this year we created a [demo application](https://github.com/crate/crate-demo/tree/github-archive-web-demo/github-archive-web) for showing off graphs generated from queries in Crate. It features queries for Github's API stored in Crate to find out some interesting facts about Github users. With Metabase this application has become obsolete as by running the queries in Metabase's SQL interface we could create the same results:
+
+### Languages in Pull Requests and Repositories
+
+This query returns the number of pull requests grouped by languages:
+
+```sql
+SELECT payload_pull_request_event['pull_request']['head']['repo']['language'] AS language,
+       COUNT(*) AS num_pull_requests
+FROM github
+WHERE   type = 'PullRequestEvent'
+    AND payload_pull_request_event['pull_request']['head']['repo']['language'] IS NOT NULL
+    AND repo['id'] IS NOT NULL
+GROUP BY 1
+ORDER BY 2
+DESC LIMIT 5
+```
+
+![PR Languages]({% media '/media/1605/mb-gh-pr-languages.png' %})
+
+With this query we retreive the distinct number of repositories grouped by languages:
+
+```sql
+SELECT payload_pull_request_event['pull_request']['head']['repo']['language'] AS language,
+       COUNT(DISTINCT(repo['id'])) AS num_repos
+FROM github
+WHERE   type = 'PullRequestEvent'
+    AND payload_pull_request_event['pull_request']['head']['repo']['language'] IS NOT NULL
+    AND repo['id'] IS NOT NULL
+GROUP BY 1
+ORDER BY 2
+DESC LIMIT 5
+```
+
+![PR Repositories]({% media '/media/1605/mb-gh-pr-repos.png' %})
+
+### Coffee or Tea?
+
+This query utilizes Crate's full text search capabilities to find out whether Github users prefer coffee or tea:
+
+```sql
+SELECT date_format('%Y-%m', date_trunc('month', created_at)) AS date,
+  count(*) AS "Tea" FROM github
+WHERE match(record_ft, 'tea')
+  AND TYPE = 'PushEvent'
+GROUP BY date
+ORDER BY date ASC
+
+SELECT date_format('%Y-%m', date_trunc('month', created_at)) AS date,
+  count(*) AS "Coffee" FROM github
+WHERE match(record_ft, 'coffee')
+  AND TYPE = 'PushEvent'
+GROUP BY date
+ORDER BY date ASC
+```
+
+![Tea]({% media '/media/1605/mb-tea.png' %})
+
+![Coffee]({% media '/media/1605/mb-coffee.png' %})
+
+### Pull Request Delay
+
+To answer the question how long pull requests usually stay open until they are merged, we have the following query:
+
+```sql
+SELECT
+  cast((payload_pull_request_event['pull_request']['merged_at'] - payload_pull_request_event['pull_request']['created_at']) / 1000.0 / 60.0 / 60.0  AS integer) AS hours_to_merge,
+  COUNT(*) / 1000 AS cnt
+FROM github
+WHERE payload_pull_request_event['pull_request']['created_at'] >= '2012-01-01'
+  AND payload_pull_request_event['pull_request']['created_at'] <= '2015-08-31'
+  AND payload_pull_request_event['pull_request']['created_at'] IS NOT NULL
+  AND payload_pull_request_event['pull_request']['merged_at'] IS NOT NULL
+GROUP BY 1
+ORDER BY 1 ASC
+LIMIT 24
+```
+
+From this query, Metabase can construct this nice graphic, and show that most of the PRs are merged within the hour:
+
+![Pull Request Latency]({% media '/media/1605/mb-pr-delay.png' %})
+
+## Get the Answers you're looking for
+
+Metabase is a powerful visualization tool and with access to Crate it can provide great answers about your (big) data.
+
+
+
+
+<div data-w-id="8b709a43-694f-a0c8-adb2-3e32f30f4f4b" class="w-section section bar"><div data-w-id="e60135f9-5174-c30c-13be-8f062bee4ead" class="w-container container"><div data-w-id="aae2d0ca-770a-8b00-c975-4c5ac3bd9b38" class="w-row"><div data-w-id="bbc70d5a-44db-5801-a03f-2771739a8ee0" class="w-col w-col-6 row-col"><h1 data-w-id="4c84fca0-aa1e-8425-1a1f-d7831370c843" class="">SCHEDULE A Metabase DEMO</h1></div><div data-w-id="6c969161-d8ed-509a-6cb5-60497b6c6bdc" class="w-col w-col-6 row-col"><div data-w-id="c3e73a20-4aa7-4b29-a490-4808bd36b8ce" class="w-form"><form data-w-id="742a3b30-e5c4-66d9-268b-533cf56dde20" class="w-clearfix" id="wf-form-Demo-Request" name="wf-form-Demo-Request" data-name="Metabase Demo Request" style="display: block;"><input data-w-id="8c0798bb-f0bc-6bb8-6b7d-21051f4f272b" class="w-input textfield" id="firstName" name="First-Name" data-name="First Name" type="text" placeholder="First name" maxlength="256" required="required" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;"><input data-w-id="785d4d1f-ac61-8475-a5e7-66a8d39b8712" class="w-input textfield" id="lastName" name="Last-Name" data-name="Last Name" type="text" placeholder="Last name" maxlength="256" required="required"><input data-w-id="09a2e5b2-3f53-4cdd-d178-2c3b24d431ce" class="w-input textfield" id="company-2" name="company-2" data-name="Company 2" type="text" placeholder="Your company" maxlength="256"><input data-w-id="a490ed9c-809f-7941-21e4-4b6e5de69d49" class="w-input textfield" id="email" name="E-Mail" data-name="E-Mail" type="email" placeholder="Your email address" maxlength="256" required="required"><input data-w-id="187d8cb1-814c-2e61-7fd3-9bc9b0011d01" class="w-button button black float-left" type="submit" value="Request a Demo" data-wait="Please wait..."></form><div data-w-id="fdb333ea-5425-409f-bf90-1acef33aa95d" class="w-form-done" style="display: none;"><p data-w-id="d94ffc3b-b548-c3ff-71d2-6999b3f493da">Thank you! Your submission has been received!</p></div><div data-w-id="aba286b4-3668-7d27-0e31-18feab568aec" class="w-form-fail" style="display: none;"><p data-w-id="546e1a98-5f80-54f8-49ad-ea5459d3c329">Oops! Something went wrong while submitting the form</p></div></div></div></div></div></div>
