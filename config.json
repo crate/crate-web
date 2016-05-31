@@ -39,6 +39,6 @@
     "keywords": "crate database db distributed cloud docker download",
     "stable_version": "0.54.8",
     "stable_version_date": "April 14th, 2016",
-    "testing_version": "0.54.8"
+    "testing_version": "0.55.0"
   }
 }
