@@ -9,6 +9,7 @@ This page gives an overview of the tools available and tested with the latest ve
 ## Management Utilities
 
 ### SQuirreL SQL
+
 SQirreL is an open-source, cross-platform, graphical Java SQL Client (requires Java >= 6.x) that allows you to view the structure of any JDBC compliant database.
 
 Here is a setup guide about [how to connect to Crate with SQirreL]({% url '/docs/tools/squirrel.html' %}).
@@ -17,11 +18,13 @@ Here is a setup guide about [how to connect to Crate with SQirreL]({% url '/docs
 - [Official documentation](http://squirrel-sql.sourceforge.net/paper/SQuirreL_us.pdf)
 
 ### conZole
+
 conZole is a web-based SQL console written in Node.js that lets you inspect data in a Crate cluster. It uses the [node-crate](https://github.com/megastef/node-crate) driver and [Zebra UI](http://www.zebkit.com/) as the HTML5 front end.
 
 - [Github](https://github.com/megastef/crate-conZole)
 
 ### Crash
+
 The Crate Shell (aka `crash`) is an officially maintained, open-source command line interface (SQL shell) for Crate. It's written in Python (requires Python >= 2.7) and supports multiple output formats such as tabular output, CSV or JSON.
 
 - How to connect to Crate with crash [here](https://crate.io/docs/connect/crash/)
@@ -30,6 +33,7 @@ The Crate Shell (aka `crash`) is an officially maintained, open-source command l
 - [PyPi](https://pypi.python.org/pypi/crash)
 
 ### cr8 Utilities
+
 `cr8` is a collection of command line tools for Crate written in Python and developed by one of our core developers. It reduces repetitive tasks such as filling tables with sample data, a real 'Swiss army knife' for Crate users.
 
 - [Blog post](https://crate.io/a/cr8-utility-scripts/).
@@ -37,6 +41,7 @@ The Crate Shell (aka `crash`) is an officially maintained, open-source command l
 - [PyPi](https://pypi.python.org/pypi/cr8)
 
 ### ctop
+
 `ctop` is a simple stat/top tool for Crate written in Python and based on [urwid](http://urwid.org/). It can display metrics such as CPU, memory, heap usage, network traffic and disk i/o in a console user interface.
 
 - [Blog post](https://crate.io/a/ctop-top-for-crate-cluster/)
@@ -45,6 +50,7 @@ The Crate Shell (aka `crash`) is an officially maintained, open-source command l
 ## Data Visualization
 
 ### Tableau Desktop
+
 Tableau is a business analytics and data visualization software that lets you see and understand data in minutes.
 
 **Connecting Tableau to a Crate cluster requires our ODBC driver, [contact us](info@crate.io) for more details.**
@@ -53,28 +59,34 @@ Tableau is a business analytics and data visualization software that lets you se
 - [How to use Tableau](http://www.tableau.com/learn)
 
 ### Kibana
+
 Kibana is an open-source data visualization platform that allows you to visualize and interact with your data. Although Kibana is product for Elasticsearch, it works well with Crate. Stefan Thies wrote about [How to use Kibana with Crate](http://techblog.bigdata-analyst.de/2015/06/25/how-to-use-kibana-4-with-crate-io/)
 
 - [Website](https://www.elastic.co/products/kibana)
 
 ### SQLPad
+
 SQLPad is a beautiful, web-based SQL editor written in Node.js that can run in your own private cloud and supports multiple databases such as Postgres, MySQL, SQL Server, Vertica and since version `1.12.0`, also Crate.
 
 - [Website](http://rickbergfalk.github.io/sqlpad/)
 - [Github](https://github.com/rickbergfalk/sqlpad)
 
 ### Pentaho
+
 Pentaho prepares and blends data, delivering business analytics from any source. You can connect to Crate clusters by using the standalone version of [our JDBC driver](https://crate.io/docs/reference/jdbc/).
 
 - [Website](http://community.pentaho.com)
 - [Github](https://github.com/pentaho/pentaho-kettle)
 
 ### StreamSets Data Collector
-StreamSets Data Collector is a lightweight, powerful engine that streams data
-in real time. Use Data Collector to route and process data in your data streams.
 
-[Here is the manual]({% url '/docs/tools/streamsets.html' %}) on how to use
-Crate as an origin and destination in a StreamSets pipeline.
+StreamSets Data Collector is a lightweight, powerful engine that streams data in real time. Use Data Collector to route and process data in your data streams. [Here is our manual]({% url '/docs/tools/streamsets.html' %}) on how to use Crate as an origin and destination in a StreamSets pipeline.
 
-[Download](https://streamsets.com/opensource/)
-[Official documentation](https://streamsets.com/documentation/datacollector/latest/help/)
+- [Download](https://streamsets.com/opensource/)
+- [Official documentation](https://streamsets.com/documentation/datacollector/latest/help/)
+
+### Zoomdata
+
+Zoomdata is a SaaS solution for deep analysis of big data sets in a visual interface. Crate is available as a data source connection.
+
+- [Try Zoomdata on our demo cluster](http://demo.crate.io)
