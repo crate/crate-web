@@ -68,7 +68,7 @@ You can use `curl` to submit the file to Marathon:
 curl -sXPOST "http://master.mesos:8080/v2/apps" -d@crate.json -H "Content-Type: application/json" | jq .
 ```
 
-Once deployed you can use the framework [API](/docs/reference/mesos/api.html) to launch a Crate cluster. You will need to find out on which host the framework is scheduled and execute the `resize` command:
+Once deployed you can use the framework [API](/docs/reference/mesos-framework/api.html) to launch a Crate cluster. You will need to find out on which host the framework is scheduled and execute the `resize` command:
 
 ```bash
 curl -sXPOST -H "Content-Type: application/json" $FRAMEWORK_HOST:4040/cluster/resize -d '{"instances": $NUM_INSTANCE}'
@@ -76,4 +76,4 @@ curl -sXPOST -H "Content-Type: application/json" $FRAMEWORK_HOST:4040/cluster/re
 
 ## More Details
 
-Full documentation for this project can be found [here](/docs/reference/mesos/).
+Full documentation for this project can be found [here](/docs/reference/mesos-framework/).
