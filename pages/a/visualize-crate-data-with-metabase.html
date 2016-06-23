@@ -11,7 +11,7 @@ category: news, developernews
 
 ## The Crate Driver
 
-We have discovered that many people use Crate not only directly integrated in their applications, but also for analyzing their existing data. To help our users do this, we created a driver for [Metabase](http://www.metabase.com), an open source database visualization tool focussed on providing you with answers created from your data.
+We have discovered that many people use Crate not only directly integrated in their applications, but also for analyzing their existing data. To help our users do this, we created a driver for [Metabase](http://www.metabase.com), an open source database visualization tool focused on providing you with answers created from your data.
 
 As Metabase is written in Clojure, we created a wrapper for [our JDBC driver](https://crate.io/docs/reference/jdbc/) that [ships with Metabase 0.18.0](https://github.com/metabase/metabase/pull/2428). Currently the driver only works with Crate 0.54.x and later.
 
@@ -21,7 +21,7 @@ Metabase is easy to install and offers options including a Mac application, a Do
 
 ## Metabase Concepts
 
-To analyze your data with Metabase, you create **questions**, a sequence of parameters, filters and sorting options. Metabase then returns you **answers** that you can format and visualize in a variety of ways.
+To analyze your data with Metabase, you create **questions**, a sequence of parameters, filters and sorting options. Metabase then returns **answers** that you can format and visualize in a variety of ways.
 
 You can then combine questions and answers into **dashboards** and layer them on top of each other for comparison.
 
@@ -41,11 +41,11 @@ You can also view the assumptions Metabase has made about your data schema and m
 
 ![Schema Configuration]({% media '/media/1605/mb-config-db.png' %})
 
-With all that setup, let's get started creating some questions.
+With all that set up, let's get started creating some questions.
 
 ## Stock Data
 
-Metabase's analysis and visualization tools are aimed primarily at business intelligence professionals, and thus offers parameters and configuration options designed for particular use cases.
+Metabase's analysis and visualization tools are aimed primarily at business intelligence professionals, and thus offer configuration options designed for particular use cases.
 
 For this example, we are using our Stocks data set imported from Yahoo. We will look at the stock price of Exxon petroleum during the 70s and 80s and compare the volume of sales on the average stock price.
 
@@ -53,7 +53,7 @@ We created three questions, one for the average stock price per day in the 1970s
 
 ![Metabase Questions List]({% media '/media/1605/mb-questions.png' %})
 
-### Average Stock Price per decade(s)
+### Average Stock Price per decade
 
 This example uses stock data taken from [Yahoo](http://finance.yahoo.com/).
 
@@ -101,7 +101,7 @@ To compare and contrast data from answers, open the volume question on your dash
 
 For times when Metabase's visual filters and queries are not quite enough, you can jump into SQL edit mode by clicking the *View the SQL* icon and then *Convert this question to SQL*. In this example we'll try raw SQL queries with our Github data set.
 
-Earlier this year we created a [demo application](https://github.com/crate/crate-demo/tree/github-archive-web-demo/github-archive-web) for showing off graphs generated from queries in Crate. It features queries for Github's API stored in Crate to find out some interesting facts about Github users. With Metabase this application has become obsolete as by running the queries in Metabase's SQL interface we could create the same results:
+Earlier this year we created a [demo application](https://github.com/crate/crate-demo/tree/github-archive-web-demo/github-archive-web) for showing off graphs generated from queries in Crate. It features queries for Github's API stored in Crate to find out some interesting facts about Github users. With Metabase, this application has become obsolete because by running the queries in Metabase's SQL interface we could create the same results:
 
 ### Languages in Pull Requests and Repositories
 
@@ -121,7 +121,7 @@ DESC LIMIT 5
 
 ![PR Languages]({% media '/media/1605/mb-gh-pr-languages.png' %})
 
-With this query we retreive the distinct number of repositories grouped by languages:
+With this query we retrieve the distinct number of repositories grouped by languages:
 
 ```sql
 SELECT payload_pull_request_event['pull_request']['head']['repo']['language'] AS language,
