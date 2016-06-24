@@ -191,6 +191,11 @@ def preBuild(site):
         COLLECTIONS['article'].filter('news', key='category'))
 
     global DEVELOPER_NEWS_JSON
+
+    COLLECTIONS['article'].pages = COLLECTIONS['releasenotes'].pages + COLLECTIONS['article'].pages
+
+    COLLECTIONS['article'].sort('date','None','True')
+
     DEVELOPER_NEWS_JSON = toDict(settings,
         COLLECTIONS['article'].filter('developernews', key='category'))
 

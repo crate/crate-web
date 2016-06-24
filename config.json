@@ -20,6 +20,15 @@
         "reverse": false
       }
     },
+    "releasenotes": {
+      "title": "Release Notes",
+      "path": "releasenotes/",
+      "template": "releasenote.html",
+      "order": {
+        "key": "date",
+        "reverse": true
+      }
+    },
     "doc": {
       "title": "Doc",
       "path": "docs/",
