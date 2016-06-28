@@ -6,17 +6,13 @@ author: Chris Ward
 Crate takes your data seriously and we prioritize any resilience specific issues. Below are a list of the current issues flagged as related to resilience in our [GitHub repo](https://github.com/crate/crate/issues).
 
 <script type="text/javascript">
-var urlToGetAllOpenBugs = &quot;<a href="https://api.github.com/repos/crate/crate/issues?state=open&amp;labels=resilience">https://api.github.com/repos/crate/crate/issues?state=open&amp;labels=resilience</a>&quot;;</p>
-<p>$(document).ready(function () {
+var urlToGetAllOpenBugs = "https://api.github.com/repos/crate/crate/issues?state=open&amp;labels=resilience";
+$(document).ready(function () {
     $.getJSON(urlToGetAllOpenBugs, function (allIssues) {
-        // $(&quot;div&quot;).append(&quot;found &quot; + allIssues.length + &quot; issues</br>&quot;);
         $.each(allIssues, function (i, issue) {
-            $(&quot;.wrapper-content-right div&quot;)
-                .append(&quot;<em>Issue &quot; + issue.number + &quot;</em><br/><h3>&quot; + issue.title + &quot;</h3>&quot;)
-                // .append(&quot;created at: &quot; + issue.created_at)
-                .append(&quot;<a href='" + issue.html_url + "'>Details on issue</a>&quot;)
-                // .append(issue.body + &quot;</br></br></br>&quot;);
-                // .append(&quot;</p>&quot;)
+            $(".wrapper-content-right div")
+                .append("<em>Issue " + issue.number + "</em><br/><h3>" + issue.title + "</h3>")
+                .append("<a href='" + issue.html_url + "'>Details on issue</a>")
         });
     });
 });
