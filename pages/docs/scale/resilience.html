@@ -9,7 +9,7 @@ $(document).ready(function () {
     $.getJSON(urlToGetAllOpenBugs, function (allIssues) {
         $.each(allIssues, function (i, issue) {
             $("#gh-issues-list")
-                .append("<div style='border-bottom:1px solid grey; margin-bottom: 7px'><em>Issue " + issue.number + "</em><br/><h3>" + issue.title + "</h3><a href='" + issue.html_url + "'>Details on issue</a></div>");
+                .append("<div style='border-bottom:1px solid grey; margin-bottom: 15px'><em>Issue " + issue.number + "</em><br/><h3>" + issue.title + "</h3><a href='" + issue.html_url + "'>Details on issue</a></div>");
         });
     });
 });
