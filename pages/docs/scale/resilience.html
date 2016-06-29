@@ -2,25 +2,39 @@ title: Crate Resilience Status
 author: Chris Ward
 
 {% block extra_js %}
-
 <script type="text/javascript">
-var urlToGetAllOpenBugs = "https://api.github.com/repos/crate/crate/issues?state=open&amp;labels=resilience";
+var urlToGetAllOpenBugs =
+"https://api.github.com/repos/crate/crate/issues?state=open&amp;labels=resilience";
 $(document).ready(function () {
     $.getJSON(urlToGetAllOpenBugs, function (allIssues) {
         $.each(allIssues, function (i, issue) {
             $("#gh-issues-list")
-                .append("<div style='border-bottom:1px solid grey; margin-bottom: 15px'><em>Issue " + issue.number + "</em><br/><h3>" + issue.title + "</h3><a href='" + issue.html_url + "'>Details on issue</a></div>");
+                .append("<div style='border-bottom:1px solid grey;
+margin-bottom: 15px'><em>Issue " + issue.number + "</em><br/><h3>" + issue.title
++ "</h3><a href='" + issue.html_url + "'>Details on issue</a></div>");
         });
     });
 });
 </script>
 {% endblock %}
 
-Crate takes your data seriously and we prioritize any resilience specific issues. Below are a list of the current issues flagged as related to resilience in our [GitHub repo](https://github.com/crate/crate/issues):
+Crate takes your data seriously and resolving resilience-specific issues is
+always a top priority for us. This page informs you about Crate resiliency
+issues so you can make informed decisions about its ability to support your use
+case.
+
+To help you follow the status of resilience-related issues we've resolved or
+that are currently in the engineering queue, review the issues list from
+[GitHub](https://github.com/crate/crate/issues) below.
+
+If you’re interested in Crate’s underlying storage, distribution, and
+durability/consistency architecture, you might find the following informative:
+
+- [Crate Storage and Consistency](/docs/reference/storage_consistency.html):
+Understand the Crate approach and design trade offs we make to balance
+consistency and performance for the customer user cases we support.
+- [Crate and Elasticsearch](/a/sql-for-elasticsearch/): Crate's clustering layer
+leverages Elasticsearch libraries, which intertwines Crate and [Elasticsearch
+resilience](https://www.elastic.co/guide/en/elasticsearch/resiliency/current/index.html).
 
 <div id="gh-issues-list"></div>
-
-If you’re interested in Crate’s underlying storage, distribution, and durability/consistency architecture, you might find the following informative:
-
- - [Crate Storage and Consistency](/docs/reference/storage_consistency.html) – from the Crate documentation. Understand the Crate approach and some of the design trade offs we make to balance consistency and performance for the customer user cases we support.
- - [Crate and Elasticsearch](/a/sql-for-elasticsearch/) – Crate's clustering layer leverages Elasticsearch libraries, which intertwines Crate and [Elasticsearch recilience](https://www.elastic.co/guide/en/elasticsearch/resiliency/current/index.html).
