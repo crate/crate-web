@@ -13,7 +13,7 @@ At the moment, Crate does not have a builtin concept of ACL or user permissions,
 
 This post will show you how to achieve this with a few simple steps using Nginx and a few lines of Lua code.
 
-Installing the [HttpLuaModule](http://wiki.nginx.org/HttpLuaModule) for Nginx can be tricky, so we use [OpenResty](http://openresty.org/), a web application server that bundles Nginx's core and lots of 3rd-party Nginx modules.  
+The [HttpLuaModule](http://wiki.nginx.org/HttpLuaModule) for Nginx can be hard to install, so we use [OpenResty](http://openresty.org/), a web application server that bundles Nginx's core and lots of 3rd-party Nginx modules.  
 No matter whether you're using Nginx+HttpLuaModule or Openresty, I will just refer to it as Nginx for now.
 
 Once you successfully set up Nginx, we can take a look at the configuration. Let's create a new `.conf` file that is included by the main `nginx.conf` on your host, and call it `crate-readonly.conf`.
@@ -110,7 +110,7 @@ server {
         if ($request_method !~ ^(POST)$ ) {
             return 403;
         }
-        
+
         # set proxy headers
         proxy_set_header Accept "*/json";
 
@@ -192,7 +192,7 @@ server {
         if ($request_method !~ ^(POST)$ ) {
             return 403;
         }
-        
+
         # request access to POST body
         lua_need_request_body on;
 
@@ -291,4 +291,3 @@ server {
     ...
 }
 ```
-

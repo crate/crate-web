@@ -34,7 +34,7 @@
   "settings": {
     "site": "https://staging.crate.io",
     "title": "Crate.IO",
-    "description": "Download Crate. Easy installation of Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext",
+    "description": "Download Crate. Easily install Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext",
     "og_image": "https://cdn.crate.io/web/1/img/crate-avatar_400x400.png",
     "keywords": "crate database db distributed cloud docker download",
     "id_segment": "qio2kmx6lv",
