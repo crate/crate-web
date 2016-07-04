@@ -1,5 +1,4 @@
-title: Installing Crate on Linux
-author: Chris Ward
+title: Install Crate on Linux author: Chris Ward
 
 Crate maintains official packages for Arch Linux, Debian, RedHat Enterprise Linux and Ubuntu. We recommend you use our 1-step installer that will configure the appropriate package repository and install Crate for you.
 
@@ -9,7 +8,8 @@ bash -c "$(curl -L install.crate.io)"
 
 If you like to do things manually, here's how.
 
-## Arch Linux <a href="#arch-linux" id="arch-linux">¶</a>
+## Arch Linux [¶](#arch-linux)
+
 Crate publishes build files to [Arch Linux AUR](https://aur4.archlinux.org/packages/crate/). If you have any problems installing packages from the AUR, full instructions are available on the Arch Linux [Wiki](https://wiki.archlinux.org/index.php/AUR_User_Guidelines)). Make sure you have installed `build base-devel` with the `pacman -S --needed base-devel` command.
 
 ### Download the package
@@ -35,27 +35,29 @@ sudo systemctl enable crate.service
 sudo systemctl start crate.service
 ```
 
-## Debian <a href="#debian" id="debian">¶</a>
-We provide Debian packages for the Wheezy (7.x) and Jessie (8.x) distributions. Installing Crate from our repository requires a couple of steps.
+## Debian [¶](#debian)
+
+We provide Debian packages for the Wheezy (7.x) and Jessie (8.x) distributions. To install Crate from our repository requires a couple of steps.
 
 The first two steps are identical for both distributions.
 
-#### 1\. Install https support for apt
+### 1\. Install https support for apt
 
 ```bash
 sudo apt-get install apt-transport-https
 ```
 
-#### 2\. Download and install GPG key:
+### 2\. Download and install GPG key:
 
 ```bash
 wget https://cdn.crate.io/downloads/apt/DEB-GPG-KEY-crate
 sudo apt-key add DEB-GPG-KEY-crate
 ```
 
-### Debian Wheezy <a href="#debian-wheezy" id="debian-wheezy">¶</a>
+### Debian Wheezy [¶](#debian-wheezy)
 
 #### 3\. Install Java 8
+
 Wheezy does not officially ship with Java 8, so you have to install it via a 3rd party repository, e.g. provided by **webupd8team**:
 
 ```bash
@@ -67,7 +69,8 @@ sudo apt-get install oracle-java8-installer
 ```
 
 #### 4\. Add Crate repository to sources list
-Next, add the Crate repository to */etc/apt/sources.list*.
+
+Next, add the Crate repository to _/etc/apt/sources.list_.
 
 ##### Stable Releases
 
@@ -90,16 +93,17 @@ sudo apt-get update
 sudo apt-get install crate
 ```
 
-Verify that Crate is installed and running:
+Verify that you have installed Crate and it's running:
 
 ```bash
 sudo service crate status
 ```
 
-### Debian Jessie <a href="#debian-jessie" id="debian-jessie">¶</a>
+### Debian Jessie [¶](#debian-jessie)
 
 #### 3\. Add Backports and Crate repository to sources list
-Next, add the Crate repository to */etc/apt/sources.list*. Also add the `jessie-backports` repository to sources so that the Java 8 dependency can be resolved automatically.
+
+Next, add the Crate repository to _/etc/apt/sources.list_. Also add the `jessie-backports` repository to sources so that the Java 8 dependency can be resolved automatically.
 
 ```bash
 deb http://http.debian.net/debian jessie-backports main
@@ -127,18 +131,21 @@ sudo apt-get install crate
 sudo systemctl enable crate
 ```
 
-Verify that Crate is installed and running:
+Verify that you have installed Crate and it's running:
 
 ```bash
 sudo systemctl status crate
 ```
 
-## Red Hat <a href="#redhat" id="redhat">¶</a>
+## Red Hat [¶](#redhat)
+
 The Crate Team maintains the official YUM repositories for RPM-based releases, supporting Linux Distributions such as RedHat Enterprise Linux 6, CentOS 6 and Scientific Linux 6.
 
 ### RHEL6
+
 #### Enable the Crate YUM repository
-All Crate packages are signed with GPG. To verify packages, the public key must be installed and then install the *.rpm* containing the YUM repository definition.
+
+All Crate packages are signed with GPG. To verify packages, you must install the public key and then install the _.rpm_ containing the YUM repository definition.
 
 ```bash
 sudo rpm --import https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate
@@ -146,7 +153,8 @@ sudo rpm -Uvh https://cdn.crate.io/downloads/yum/6/x86_64/crate-release-6.5-1.no
 ```
 
 ##### Testing and Unstable Releases
-The Crate Testing repository is disabled by default, it contains development builds and is frequently updated. The packages are waiting for feedback from testers on functionality and stability. Packages in this repository will change during development, so it should be disabled on production systems. If you want to enable the Testing repo on your server, set `enabled=1` in */etc/yum.repos.d/crate.repo*.
+
+The Crate Testing repository is disabled by default, it contains development builds and is frequently updated. The packages are waiting for feedback from testers on functionality and stability. Packages in this repository will change during development, so you should disable it on production systems. If you want to enable the Testing repo on your server, set `enabled=1` in _/etc/yum.repos.d/crate.repo_.
 
 #### Install Crate
 
@@ -161,10 +169,12 @@ sudo service crate start
 ```
 
 ### RHEL7
+
 The Crate Team maintains the official YUM repositories for RPM-based releases. It's supported on Linux Distributions such as RedHat Enterprise Linux 7, CentOS 7, or Scientific Linux 7.
 
 #### Enable the Crate YUM repository
-All Crate packages are signed with GPG. To verify packages, the public key must be installed and then you can install the *.rpm* containing the YUM repository definition.
+
+All Crate packages are signed with GPG. To verify packages, you must install the public key and then you can install the _.rpm_ containing the YUM repository definition.
 
 ```bash
 sudo rpm --import https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate
@@ -183,20 +193,20 @@ sudo yum install crate
 sudo systemctl start crate.service
 ```
 
-## Ubuntu <a href="#ubuntu" id="ubuntu">¶</a>
-We build packages for the Ubuntu versions Xenial Xerus (16.04), Wily Werewolf (15.10),
-Vivid Vervet (15.04), Trusty Tahr (14.04) and Precise Pangolin (12.04). They are available
-on our [Launchpad page](https://launchpad.net/~crate). Adding the repository and
-installing Crate requires the following commands:
+## Ubuntu [¶](#ubuntu)
 
-#### Install Java 8
+We build packages for the Ubuntu versions Xenial Xerus (16.04), Wily Werewolf (15.10), Vivid Vervet (15.04), Trusty Tahr (14.04) and Precise Pangolin (12.04). They are available on our [Launchpad page](https://launchpad.net/~crate). Adding the repository and installing Crate requires the following commands:
+
+### Install Java 8
+
 Ubuntu 12.04 and 14.04 do not officially ship with Java 8, so you have to [install it via a 3rd party repository](https://crate.io/docs/install/local/linux/#debian-wheezy)
 
 ### Install Crate
+
 Adding a PPA repository requires `python-software-properties` to be installed:
 
 ```bash
-sudo apt-get install python-software-properties 
+sudo apt-get install python-software-properties
 ```
 
 Ubuntu >= **15.x** additionally requires `software-properties-common`:
@@ -205,8 +215,7 @@ Ubuntu >= **15.x** additionally requires `software-properties-common`:
 sudo apt-get install software-properties-common
 ```
 
-Then it's possible to add the Crate repository using `add-apt-repository`
-and install Crate:
+Then it's possible to add the Crate repository using `add-apt-repository` and install Crate:
 
 ```bash
 sudo add-apt-repository ppa:crate/stable
@@ -215,7 +224,8 @@ sudo apt-get install crate
 ```
 
 ### Start Crate
-Crate should have been started automatically by upstart and can be stopped or restarted with:
+
+Crate should have been started automatically by upstart and you can stop or restart it with:
 
 ```bash
 sudo service crate stop
@@ -223,6 +233,7 @@ sudo service crate restart
 ```
 
 ### Testing and Unstable Releases
+
 The Crate Testing repository is disabled by default, it contains development builds and is frequently updated. The packages are waiting for feedback from testers on functionality and stability. Packages in this repository will change during development, so it should be disabled on production systems. If you want to enable the Testing repo on your server. To enable the Testing Repository on your machine add the PPA:
 
 ```bash
@@ -232,10 +243,11 @@ sudo apt-get update
 sudo apt-get install crate
 ```
 
-**Important:** Crate requires the latest Java 8 (at least u20 or higher). In order to run Crate on Ubuntu releases older than 14.10 you would need to install Java 8 from the [Ubuntu Backports](https://help.ubuntu.com/community/UbuntuBackports) repository.
+**Important:** Crate requires the latest Java 8 (at least u20 or higher). To run Crate on Ubuntu releases older than 14.10 you would need to install Java 8 from the [Ubuntu Backports](https://help.ubuntu.com/community/UbuntuBackports) repository.
 
 ## Setting Environment Variables
-On Ubuntu, Debian and RHEL systems the Crate startup script sources environment variables, such as `CRATE_HEAP_SIZE` or `CRATE_JAVA_OPTS` that are defined in */etc/default/crate*.
+
+On Ubuntu, Debian and RHEL systems the Crate startup script sources environment variables, such as `CRATE_HEAP_SIZE` or `CRATE_JAVA_OPTS` that you define in _/etc/default/crate_.
 
 ### Example
 
@@ -252,7 +264,7 @@ CRATE_HEAP_SIZE=2g
 MAX_LOCKED_MEMORY=unlimited
 
 # Additional Java OPTS
-#CRATE_JAVA_OPTS=
+# CRATE_JAVA_OPTS=
 
 # Force the JVM to use IPv4 stack
 CRATE_USE_IPV4=true
