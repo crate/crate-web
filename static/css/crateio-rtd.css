@@ -107,9 +107,7 @@ blockquote {
 }
 
 .bs-docs-sidenav .toctree li.border-top {
-	border-top: 1px solid #e7e7e7;
 	padding-top: 16px;
-	margin-top: 16px;
 }
 
 .bs-docs-sidenav .toctree li a {
@@ -156,4 +154,10 @@ blockquote {
 .wrapper-content-right li {
 	font-size: 16px;
 	line-height: 1.5em;
+}
+
+.border-top {
+	border-top: 1px solid #e7e7e7;
+	padding-top: 16px;
+	margin-top: 16px;
 }
