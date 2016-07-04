@@ -15,7 +15,7 @@ $(document).ready(function () {
       var day = date.getDate();
       var monthIndex = date.getMonth();
       $("#gh-issues-list")
-      .append("<div class='border-top'><span class='button'>Issue " + issue.number + "</span>&nbsp;<i>" + issue.user.login + "</i> opened this issue on " + day + " " + monthNames[monthIndex] + "<br/><h3>" + issue.title + "</h3><a href='" + issue.html_url + "'>Details on issue</a></div>");
+      .append("<div class='border-top'><span class='button'>Issue " + issue.number + "</span> <i>" + issue.user.login + "</i> opened this issue on " + day + " " + monthNames[monthIndex] + "<br/><h3>" + issue.title + "</h3><a href='" + issue.html_url + "'>Details on issue</a></div>");
     });
   });
 });
