@@ -6,13 +6,26 @@ author: Chris Ward
 var urlToGetAllOpenBugs =
 "https://api.github.com/repos/crate/crate/issues?state=open&amp;labels=resilience";
 $(document).ready(function () {
-    $.getJSON(urlToGetAllOpenBugs, function (allIssues) {
-        $.each(allIssues, function (i, issue) {
-            $("#gh-issues-list")
-                .append("<div style='border-bottom:1px solid grey;margin-bottom: 15px'><em>Issue " + issue.number + "</em><br/><h3>" + issue.title
-+ "</h3><a href='" + issue.html_url + "'>Details on issue</a></div>");
-        });
+
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  $.getJSON(urlToGetAllOpenBugs, function (allIssues) {
+    $.each(allIssues, function (i, issue) {
+
+      var date = new Date(issue.created_at);
+      var day = date.getDate();
+      var monthIndex = date.getMonth();
+      // var year = date.getFullYear();
+      $("#gh-issues-list")
+      .append("<div class='border-top'><span class='button'>Issue " + issue.number + "</span>&nbsp;<i>" + issue.user.login + "</i> opened this issue on " + day + " " + monthNames[monthIndex] + "<br/><h3>" + issue.title
+      + "</h3><a href='" + issue.html_url + "'>Details on issue</a></div>");
     });
+  });
 });
 </script>
 {% endblock %}
