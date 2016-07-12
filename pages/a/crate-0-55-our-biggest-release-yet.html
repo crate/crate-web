@@ -25,7 +25,7 @@ The six basic trigonometric scalar functions (`sin()`, `cos()`, `tan()`, `asin()
 
 ## Speed and Stability Improvements
 
-We have already written in detail about [0.55's speed boost on inserting to replicas](https://crate.io/a/insert-boost-on-replicas/), but we have also improved the speed of aggregation queries across nodes with more than one shard. A new `OPTIMIZE` table statement is available to manually merge smaller data segments into larger ones for faster reads by reducing the amount of segments the operation needs to access.
+We have already written in detail about [0.55's speed boost on inserting to replicas](https://crate.io/a/insert-boost-on-replicas/), but we have also improved the speed of aggregation queries across nodes with more than one shard.
 
 We removed some backward compatibility with older Crate versions to tidy the codebase and have improved validation rules on primary keys and geo-point data.
 
