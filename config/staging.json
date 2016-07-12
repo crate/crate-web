@@ -21,7 +21,7 @@
         "reverse": false
       }
     },
-    "releasenote": {
+    "releasenotes": {
       "title": "Release Notes",
       "path": "releasenotes/",
       "template": "releasenote.html",
