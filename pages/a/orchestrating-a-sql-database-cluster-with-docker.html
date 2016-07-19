@@ -1,0 +1,27 @@
+title: Orchestrating a SQL Database Cluster with Docker 1.12
+link: https://crate.io/a/orchestrating-a-sql-database-cluster-with-docker
+author: Andy Ellicot
+description: Orchestrating a SQL database cluster with Docker Services 1.12
+created: 2016-07-19
+post_name: orchestrating-a-sql-database-cluster-with-docker
+status: publish
+post_type: post
+tags: docker
+category: news, developernews
+
+At [DockerCon 2016](http://2016.dockercon.com/), Docker announced Docker 1.12 with new, integrated support for cluster orchestration and security. The orchestration capabilities make it even easier to launch, scale, and administer clustered software like the Crate SQL database.
+
+Within a day of the announcement, the Crate team at DockerCon had Crate running on the Docker 1.12 beta software.
+
+The following demo, created by Crate.IO co-founder and CTO, Jodok Batlogg, at DockerCon shows how simple it is to launch a a 3-node Crate SQL database demo, start loading it with Twitter data, and then update the database without interrupting the data loading:
+
+<iframe width="640" height="400" src="https://www.youtube.com/embed/VGfqTbXilK4" frameborder="0" allowfullscreen></iframe>
+
+## Simple scaling, the next big thing in SQL...
+Over the last decade, distributed databases have become the de-facto choice among web-scale and big data developers. But you typically need serious database admin chops to know how to distribute and re-balance data across the cluster to make it all work fast, and without failing. And that means time lost to fun stuff like creating new features, or sleep.
+
+Crate's automatic data distribution, distributed SQL query performance, and containerization, combined with Docker 1.12's orchestration facilities make elastic database scalability something that mainstream SQL developers can now do for themselves.
+
+Stay tuned for more in-depth articles and demos on deploying production databases on Docker 1.12.
+
+Go ahead and try it yourself: Get Docker 1.12 [here](https://blog.docker.com/2016/06/docker-1-12-built-in-orchestration/) and [download Crate](/download) to kickstart your own database cluster!
