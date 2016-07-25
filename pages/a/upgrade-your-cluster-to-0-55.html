@@ -1,7 +1,7 @@
 title: Upgrade Your Cluster to 0.55.x
+link: https://crate.io/blog/upgrade-your-cluster-to-0-55
 author: Claus Matzinger, Chris Ward
-description: 0.55 of Crate is a big release and introduces extra steps to
-upgrade.
+description: 0.55 of Crate is a big release and introduces extra steps to upgrade.
 created: 2016-07-25
 post_name: upgrade-your-cluster-to-0-55
 status: publish
@@ -32,7 +32,7 @@ files in a 0.54 cluster will yield an error:
 [2016-07-22 11:58:12,931][ERROR][gateway.local.state.shards] [Brian Braddock]
 failed to read local state (started shards), exiting...
 org.elasticsearch.ElasticsearchException: unexpected field in shard state
-[index_uuid]
+[index*uuid]
 ...
 ```
 
@@ -46,10 +46,10 @@ made for reliability.
 
 You can no longer specify the name or location of the Crate configuration file
 with the `CONF_FILE` environment variable, `-Des.config`, `-Des.default.config`,
-or `-Delasticsearch.config` parameters. You must call it _crate.yml_ and locate
-it in the _config_ directory, or another directory specified by the `CONF_DIR`
+or `-Delasticsearch.config` parameters. You must call it *crate.yml* and locate
+it in the *config* directory, or another directory specified by the `CONF_DIR`
 environmental variable, or by the `-Des.path.home` parameter. The file must be a
-yaml file that ends in the _.yml_ extension.
+yaml file that ends in the *.yml* extension.
 
 
 ### Units Required
@@ -57,7 +57,7 @@ yaml file that ends in the _.yml_ extension.
 You must now define units for time or byte based settings. This affects
 Settings such as `cluster.routing.allocation.disk.watermark.low` for [defining
 the lower disk threshold limit](/docs/reference/configuration.html#disk-based-shard-allocation)
-for shard allocations, or `cluster.graceful_stop.timeout` for [defining the
+for shard allocations, or `cluster.graceful*stop.timeout` for [defining the
 maximum wait in milliseconds for reallocation processes to
 finish](/docs/reference/configuration.html#graceful-stop). Please update your
 configuration accordingly.
