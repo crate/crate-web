@@ -1,0 +1,54 @@
+title: Orchestrating Crate with Docker 1.12
+link: https://crate.io/blog/orchestrating-crate-with-docker-112
+author: Chris Ward
+description: Docker 1.12 brings a lot of changes and new features, how do they affect Crate?
+created: 2016-08-02
+post_name: orchestrating-crate-with-docker-112
+status: publish
+post_type: post
+tags: developernews, features
+category: post
+
+Docker 1.12 brings a lot of changes including native clients for [Mac](https://www.docker.com/products/docker#/mac) and [Windows](https://www.docker.com/products/docker#/windows), but most usefully for Crate users, in-built orchestration with a new Swarm mode.
+
+## Installing Docker 1.12
+
+Now that version 1.12 has been declared stable, upgrading any existing Docker installation should be possible and seamless. [Version 1.12 is available for all platforms](https://www.docker.com/products/overview), but is still in beta for native Azure and AWS images.
+
+For the rest of this post I will be using three Ubuntu machines hosted on Azure, with Docker installed via `apt-get`, one node is a Swarm master, the other two are worker nodes and the instances are networked together.
+
+SSH into the master machine and run the following command to initialize the Swarm cluster:
+
+```bash
+docker swarm init --listen-addr <MANAGER-IP>:2377
+```
+
+*Replace `<MANAGER-IP>` with the internal address of the node*.
+
+![Output of Swarm init command]({% static '/static/images/blogs/swarm_init_result.png' %})
+
+The output will show you what command to run on the worker machines to get them to join the cluster, ssh into each node and run that command.
+
+Docker 1.12's new `service` command allows you to create and scale your various containers with one command. Due to Crate's distributed nature, this command and the Crate process itself needs more information, fortunately we created a bash script that you can run on your master node to handle everything for you:
+
+```bash
+tbc
+```
+
+What does it do? tbc…
+
+A lot of the settings are specific to Crate, but most essential are the `--mode` argument that specifies `global` to run one instance of the service per node and `--publish` to set which ports from the node should be published.
+
+You can now scale the service using the following command:
+
+```bash
+docker service scale crate=5
+```
+
+And use:
+
+```bash
+docker service tasks crate
+```
+
+To inspect the number of instances of the service that are now running.
