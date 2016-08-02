@@ -50,7 +50,9 @@
     "id_segment": "FToR4cE5lXyQziQirvt0kSnFQj0rAgu9",
     "id_facebook": "555421237941538",
     "stable_version": "0.55.2",
+    "es_stable_version": "2.3.3",
     "stable_version_date": "July 11th, 2016",
-    "testing_version": "0.55.2"
+    "testing_version": "0.55.2",
+    "es_testing_version": "2.3.4"
   }
 }
