@@ -9,7 +9,7 @@ bash -c "$(curl -L install.crate.io)"
 
 If you like to do things manually, here's how.
 
-## Arch Linux [¶](#arch-linux)
+## Arch Linux
 
 Crate publishes build files to [Arch Linux AUR](https://aur4.archlinux.org/packages/crate/). If you have any problems installing packages from the AUR, full instructions are available on the Arch Linux [Wiki](https://wiki.archlinux.org/index.php/AUR_User_Guidelines)). Make sure you have installed `build base-devel` with the `pacman -S --needed base-devel` command.
 
@@ -36,7 +36,7 @@ sudo systemctl enable crate.service
 sudo systemctl start crate.service
 ```
 
-## Debian [¶](#debian)
+## Debian
 
 We provide Debian packages for the Wheezy (7.x) and Jessie (8.x) distributions. To install Crate from our repository requires a couple of steps.
 
@@ -55,7 +55,7 @@ wget https://cdn.crate.io/downloads/apt/DEB-GPG-KEY-crate
 sudo apt-key add DEB-GPG-KEY-crate
 ```
 
-### Debian Wheezy [¶](#debian-wheezy)
+### Debian Wheezy
 
 #### 3\. Install Java 8
 
@@ -100,7 +100,7 @@ Verify that you have installed Crate and it's running:
 sudo service crate status
 ```
 
-### Debian Jessie [¶](#debian-jessie)
+### Debian Jessie
 
 #### 3\. Add Backports and Crate repository to sources list
 
@@ -138,7 +138,7 @@ Verify that you have installed Crate and it's running:
 sudo systemctl status crate
 ```
 
-## Red Hat [¶](#redhat)
+## Red Hat
 
 The Crate Team maintains the official YUM repositories for RPM-based releases, supporting Linux Distributions such as RedHat Enterprise Linux 6, CentOS 6 and Scientific Linux 6.
 
@@ -194,7 +194,7 @@ sudo yum install crate
 sudo systemctl start crate.service
 ```
 
-## Ubuntu [¶](#ubuntu)
+## Ubuntu
 
 We build packages for the Ubuntu versions Xenial Xerus (16.04), Wily Werewolf (15.10), Vivid Vervet (15.04), Trusty Tahr (14.04) and Precise Pangolin (12.04). They are available on our [Launchpad page](https://launchpad.net/~crate). Adding the repository and installing Crate requires the following commands:
 
