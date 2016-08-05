@@ -36,10 +36,22 @@ durability/consistency architecture, you might find the following informative:
 
 - [Crate Storage and Consistency](/docs/reference/storage_consistency.html):
 Understand the Crate approach and design trade offs we make to balance
-consistency and performance for the customer user cases we support.
-- [Crate and Elasticsearch](/a/sql-for-elasticsearch/): Crate's clustering layer
+consistency and performance for the customer use cases we support.
+
+## Elasticsearch and Crate
+
+[Crate and Elasticsearch](/a/sql-for-elasticsearch/): Crate's clustering layer
 leverages Elasticsearch libraries, which intertwines Crate and [Elasticsearch
-resilience](https://www.elastic.co/guide/en/elasticsearch/resiliency/current/index.html).
-- **Current Elasticsearch versions**: Stable {{ CONFIG.es_stable_version }}, Testing {{ CONFIG.es_testing_version }}. Any resiliency issues that affect these versions will also affect Crate.
+resilience](https://www.elastic.co/guide/en/elasticsearch/resiliency/current/index.html). In addition to that, you can follow [Elasticsearch's resiliency issues](https://github.com/elastic/elasticsearch/labels/resiliency) since they also might affect Crate (see below).
+
+### Elasticsearch Versions
+**Crate {{ CONFIG.stable_version }} (stable):** {{ CONFIG.es_stable_version }}
+
+**Crate {{ CONFIG.testing_version }} (testing):** {{ CONFIG.es_testing_version }}
+
+Any resiliency issues that affect these versions will also affect Crate.
+<br />
+
+## Github Issues Tagged with Resiliency
 
 <div id="gh-issues-list"></div>
