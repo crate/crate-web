@@ -1,12 +1,12 @@
 title: Kubernetes
 author: Chris Ward, Claus Matzinger
-description: Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications that builds on 15 years of experience running production workflows at Google.
+description: Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications - like Crate. Use Kubernetes to deploy your Crate cluster.
 
 Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications that builds on 15 years of experience running production workflows at Google.
 
 Thanks to [our Docker image](/docs/install/containers/docker), managing your Crate cluster with Kubernetes requires only a few steps.
 
-This guide will assume that you already have [kubectl](http://kubernetes.io/docs/user-guide/prereqs/) and a [Kubernetes cluster](http://kubernetes.io/docs/getting-started-guides/binary_release/) ready to go.
+This guide will assume that you already have [kubectl](http://kubernetes.io/docs/user-guide/prereqs/) and a [Kubernetes cluster](http://kubernetes.io/docs/getting-started-guides/binary_release/) ready to go. All of the commands/templates/etc. provided should be customized to meet your personal requirements!
 
 ## The Crate Template
 
@@ -82,6 +82,8 @@ spec:
 
 ```
 
+### Start Crate
+
 This template utilizes [Kubernetes 1.3's PetSet][1] type that allows to add SRV records for DNS discovery and a proper shutdown when scaling. While Crate would also work as a stateless pod (cattle), this way facilitates a couple of things like storage and shard migration on zero downtime upgrades. To create a cluster based on that template use:
 
 ```bash
@@ -93,6 +95,8 @@ Find out the public IP and the services that have been created with
 ```bash
 kubectl get services
 ```
+
+### Scale Crate
 
 Next you can scale your cluster by editing the PetSet's configuration and setting the 'replicas' field to the desired number of pods. Be aware that currently this is the only mutable value:
 
@@ -115,18 +119,13 @@ SET GLOBAL PERSISTENT discovery.zen.minimum_master_nodes = 5
 Now to monitor the available pods you can use `kubectl proxy` which starts a web server with log outputs and a list of the available pods.
 
 
-### Crate configuration
+### Customize Crate
 
 In this template, Crate is configured using the `-D` parameters for the executable. Every setting in [Crate's YAML config](https://crate.io/docs/reference/configuration.html) is available there and allows for a better flexibility than passing around config files.
 
 ### Storage
 
-Many container hosting services offer only spinning disks as default storage media, which - for Crate - is too slow. In addition to that, replication only makes sense if the data is on separate physical media in order to achieve high availability and to avoid potential bottlenecks when several cluster use the same storage. Since the [Persistent Volume Claims](https://github.com/kubernetes/kubernetes/blob/master/examples/experimental/persistent-volume-provisioning/README.md) depend on the Kubernetes cluster (and if it runs in the cloud), the volume template is currently not included in our template. You can familiarize yourself with them [here][1]. For now, the volumes are explicitly stated and to customize that accordingly, the [volume guide](http://kubernetes.io/docs/user-guide/volumes/) is very helpful.  
-
-### Limitations
-
-The template will spawn two services: A load balancer with external access that manages connections to the cluster and three Crate pods. If everything is properly configured.
-
+Many container hosting services offer spinning disks as default storage media, which - for Crate - is often too slow. In addition to that, replication only makes sense if the data is on separate physical media in order to achieve high availability and to avoid potential bottlenecks when several clusters attach the same storage. Since the [Persistent Volume Claims](https://github.com/kubernetes/kubernetes/blob/master/examples/experimental/persistent-volume-provisioning/README.md) depend on the Kubernetes cluster (and if it runs in the cloud), the volume template is currently not included in our template. You can familiarize yourself with them [here][1]. For now, the volumes are explicitly stated and to customize that accordingly, the [volume guide](http://kubernetes.io/docs/user-guide/volumes/) is very helpful.
 
 ## Manual Approach
 
