@@ -44,9 +44,9 @@
     "id_segment": "FToR4cE5lXyQziQirvt0kSnFQj0rAgu9",
     "id_facebook": "555437424606586",
     "description": "Download Crate. Easily install Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext",
-    "stable_version": "0.55.3",
+    "stable_version": "0.55.4",
     "es_stable_version": "2.3.4",
-    "stable_version_date": "August 12th, 2016",
+    "stable_version_date": "August 17th, 2016",
     "testing_version": "0.55.4",
     "es_testing_version": "2.3.4"
 
