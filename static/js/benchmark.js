@@ -2,7 +2,7 @@
 
   var labelName = "method";
   var versionName = "version";
-  var xSeries = "timestamp";
+  var xSeries = "build_timestamp";
   var avgSeries = "avg";
   var stddevSeries = "stddev";
   var showDays = 30;
@@ -20,27 +20,32 @@
       }
     }
   **/
-  var colorSchema = ["#0074D9", "#FF4136", "#85144b", "#F012BE", "#AAAAAA", "#001F3F", "#FF851B", "#3D9970", "#2ECC40", "#FFDC00"];
+  var colorSchema = [
+    "#0074D9",
+    "#001F3F",
+    "#85144b",
+    "#F012BE",
+    "#FF4136",
+    "#FF851B",
+    "#FFDC00"
+    "#2ECC40",
+    "#3D9970",
+    "#AAAAAA",
+  ];
 
-  var endpoint = '/benchmark/api/';
+  var endpoint = '/benchmark/api';
+  // for local develpment uncomment next line
+  // endpoint = 'http://localhost:8080/result';
   var groups = [
-    "BulkInsertBenchmark",
-    "BulkDeleteBenchmark",
-    "InsertBenchmark",
-    "CountBenchmark",
-    "GroupByBenchmark",
-    "GroupByArbitraryBenchmark",
-    "CrossJoinBenchmark",
-    "AnyBenchmark",
-    "LikeBenchmark",
-    "InStringBenchmark",
-    "InNumericBenchmark",
-    "ESScrollingBenchmark",
-    "BaseCreateBenchmark",
-    "CreateWith10TablesBenchmark",
-    "CreateWith200TablesBenchmark",
-    "InformationSchemaBenchmark",
-    "AddingTableColumnsBenchmark"
+    "insert",
+    "update",
+    "delete",
+    "sequence",
+    "array",
+    "aggregations",
+    "joins",
+    "partitions",
+    "system"
   ];
 
   function transformData(data) {
@@ -126,7 +131,7 @@
     var end = now.toISOString().split("T")[0];
 
     groups.forEach(function(group) {
-      var url = endpoint + group + "?from=" + start + "&to=" + end;
+      var url = endpoint + "/" + group + "?from=" + start + "&to=" + end;
       $.get(url).then(transformData).then(draw(document.getElementById(group)));
     });
   });
