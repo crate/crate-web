@@ -27,10 +27,10 @@
     "#F012BE",
     "#FF4136",
     "#FF851B",
-    "#FFDC00"
+    "#FFDC00",
     "#2ECC40",
     "#3D9970",
-    "#AAAAAA",
+    "#AAAAAA"
   ];
 
   var endpoint = '/benchmark/api';
