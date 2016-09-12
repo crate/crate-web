@@ -161,3 +161,33 @@ blockquote {
 	padding-top: 16px;
 	margin-top: 16px;
 }
+
+/* Benchmark */
+.cr-nav{
+  display: flex;
+  overflow-y: scroll;
+}
+
+.cr-nav.sticky {
+  top:0px;
+  position: fixed;
+  background-color: #fff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  z-index: 11;
+  width: 100%;
+  overflow-y: scroll;
+
+}
+
+.cr-nav-item{
+  padding: 10px 10px 10px 0px;
+  margin: 10px 5px 5px 0px;
+  font-family: "Blender Pro", sans-serif;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.cr-nav-item--active{
+  color: #55d4f5;
+}
