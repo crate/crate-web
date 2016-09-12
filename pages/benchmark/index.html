@@ -19,63 +19,76 @@ description: This page shows the results of the Crate benchmarks based on the ma
   and default settings. <code>CRATE_HEAP_SIZE</code> is set to <code>10GB</code>.
 </p>
 
-<div>
+<div class="cr-nav">
+   <div scroll-to-chart="insert" class="cr-nav-item">INSERT</div> 
+   <div scroll-to-chart="update" class="cr-nav-item">UPDATE</div> 
+   <div scroll-to-chart="delete" class="cr-nav-item">DELETE</div> 
+   <div scroll-to-chart="sequence" class="cr-nav-item">SEQUENCE</div> 
+   <div scroll-to-chart="array" class="cr-nav-item">ARRAY</div> 
+   <div scroll-to-chart="aggregations" class="cr-nav-item">AGGREGATIONS</div> 
+   <div scroll-to-chart="joins" class="cr-nav-item">JOINS</div> 
+   <div scroll-to-chart="partitions" class="cr-nav-item">PARTITIONS</div> 
+   <div scroll-to-chart="system" class="cr-nav-item">SYSTEM</div> 
+
+</div>
+
+<div id="insert_tab">
   <h2>INSERT Benchmarks</h2>
   <div id="insert_labels" class="legend"></div>
   <div id="insert" class="chart"></div>
 </div>
 <br /><br />
 
-<div>
+<div id="update_tab">
   <h2>UPDATE Benchmarks</h2>
   <div id="update_labels" class="legend"></div>
   <div id="update" class="chart"></div>
 </div>
 <br /><br />
 
-<div>
+<div id="delete_tab">
   <h2>DELETE Benchmarks</h2>
   <div id="delete_labels" class="legend"></div>
   <div id="delete" class="chart"></div>
 </div>
 <br /><br />
 
-<div>
+<div id="sequence_tab">
   <h2>SEQUENCE Benchmarks</h2>
   <div id="sequence_labels" class="legend"></div>
   <div id="sequence" class="chart"></div>
 </div>
 <br /><br />
 
-<div>
+<di id="array_tab">
   <h2>ARRAY Benchmarks</h2>
   <div id="array_labels" class="legend"></div>
   <div id="array" class="chart"></div>
 </div>
 <br /><br />
 
-<div>
+<div id="aggregations_tab">
   <h2>AGGREGATIONS Benchmarks</h2>
   <div id="aggregations_labels" class="legend"></div>
   <div id="aggregations" class="chart"></div>
 </div>
 <br /><br />
 
-<div>
+<div id="joins_tab">
   <h2>JOINS Benchmarks</h2>
   <div id="joins_labels" class="legend"></div>
   <div id="joins" class="chart"></div>
 </div>
 <br /><br />
 
-<div>
+<div id="partitions_tab">
   <h2>PARTITIONS Benchmarks</h2>
   <div id="partitions_labels" class="legend"></div>
   <div id="partitions" class="chart"></div>
 </div>
 <br /><br />
 
-<div>
+<div id="system_tab">
   <h2>SYSTEM Benchmarks</h2>
   <div id="system_labels" class="legend"></div>
   <div id="system" class="chart"></div>
