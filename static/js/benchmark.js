@@ -1,10 +1,10 @@
 (function() {
 
-  var labelName = "method";
-  var versionName = "version";
+  var labelName = "statement";
+  var versionName = "build_version";
   var xSeries = "build_timestamp";
-  var avgSeries = "avg";
-  var stddevSeries = "stddev";
+  var avgSeries = "median";
+  var stddevSeries = "stdev";
   var showDays = 30;
   var releases = [];
   var headerPosition = $('.cr-nav').position().top;
@@ -56,7 +56,7 @@
     var header = "";
     if (data && data.length > 0) {
       var datatable = {};
-      header = data[0]["group"];
+      header = data[0]["benchmark_group"];
 
       labels = Object.keys(data.reduce(function(d, cur) {
         var lbl = cur[labelName];
