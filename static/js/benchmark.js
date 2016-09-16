@@ -1,6 +1,6 @@
 (function() {
 
-  var labelName = "method";
+  var labelName = "statement";
   var versionName = "version";
   var xSeries = "build_timestamp";
   var avgSeries = "avg";
@@ -35,7 +35,7 @@
 
   var endpoint = '/benchmark/api';
   // for local develpment uncomment next line
-  // endpoint = 'http://localhost:8080/result';
+  endpoint = 'http://localhost:8080/result';
   var groups = [
     "insert",
     "update",
@@ -54,8 +54,7 @@
     var header = "";
     if (data && data.length > 0) {
       var datatable = {};
-      header = data[0]["group"];
-
+      header = data[0]["benchmark_group"];
       labels = Object.keys(data.reduce(function(d, cur) {
         var lbl = cur[labelName];
         d[lbl] = 0;
@@ -81,6 +80,7 @@
     }
     labels.unshift("date");
 
+    console.log('>>>', rows, labels, header);
     return {
       rows: rows,
       labels: labels,
