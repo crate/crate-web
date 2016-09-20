@@ -38,17 +38,6 @@
   var endpoint = '/benchmark/api';
   // for local develpment uncomment next line
   // endpoint = 'http://localhost:8080/result';
-  var groups = [
-    "insert",
-    "update",
-    "delete",
-    "sequence",
-    "array",
-    "aggregations",
-    "joins",
-    "partitions",
-    "system"
-  ];
 
   function transformData(data) {
     var rows = [];
@@ -109,15 +98,24 @@
         labels: datatable.labels,
         colors: colorSchema,
         errorBars: false,
-        ylabel: 'avg time of a run in seconds',
-        digitsAfterDecimal: 4,
+        ylabel: 'avg time of single iteration in seconds',
         axes: {
           x: {
             valueFormatter: dateFormat,
-            axisLabelFormatter: dateFormat
+            axisLabelFormatter: dateFormat,
+            drawGrid: false
+          },
+          y: {
+            valueRange: [0, null],
+            drawGrid: false
           }
         },
-        showRangeSelector: false
+        showRangeSelector: false,
+        highlightSeriesOpts: {
+          strokeWidth: 3,
+          strokeBorderWidth: 1,
+          highlightCircleSize: 5
+        }
       };
       var chart = new Dygraph(drawDiv, datatable.rows, options);
       chart.setAnnotations(createAnnotations(options, releases));
@@ -158,9 +156,9 @@
     var start = past.toISOString().split("T")[0];
     var end = now.toISOString().split("T")[0];
 
-    groups.forEach(function(group) {
-      var url = endpoint + "/" + group + "?from=" + start + "&to=" + end;
-      $.get(url).then(transformData).then(draw(document.getElementById(group)));
+    $(".chart").each(function(idx, elem) {
+      var url = endpoint + "/" + elem.id + "?from=" + start + "&to=" + end;
+      $.get(url).then(transformData).then(draw(elem));
     });
   });
 

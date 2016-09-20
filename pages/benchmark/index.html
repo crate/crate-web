@@ -20,78 +20,104 @@ description: This page shows the results of the Crate benchmarks based on the ma
 </p>
 
 <div class="cr-nav">
-   <div scroll-to-chart="insert" class="cr-nav-item">INSERT</div> 
-   <div scroll-to-chart="update" class="cr-nav-item">UPDATE</div> 
-   <div scroll-to-chart="delete" class="cr-nav-item">DELETE</div> 
-   <div scroll-to-chart="sequence" class="cr-nav-item">SEQUENCE</div> 
-   <div scroll-to-chart="array" class="cr-nav-item">ARRAY</div> 
-   <div scroll-to-chart="aggregations" class="cr-nav-item">AGGREGATIONS</div> 
-   <div scroll-to-chart="joins" class="cr-nav-item">JOINS</div> 
-   <div scroll-to-chart="partitions" class="cr-nav-item">PARTITIONS</div> 
-   <div scroll-to-chart="system" class="cr-nav-item">SYSTEM</div> 
-
+   <div scroll-to-chart="single_ops" class="cr-nav-item">SINGLE OPS</div>
+   <div scroll-to-chart="bulk_ops" class="cr-nav-item">BULK OPS</div>
+   <div scroll-to-chart="upsert_ops" class="cr-nav-item">UPSERT</div>
+   <div scroll-to-chart="sequence" class="cr-nav-item">SEQUENCE</div>
+   <div scroll-to-chart="array" class="cr-nav-item">ARRAY</div>
+   <div scroll-to-chart="aggregations" class="cr-nav-item">AGGREGATIONS</div>
+   <div scroll-to-chart="joins" class="cr-nav-item">JOINS</div>
+   <div scroll-to-chart="partitions" class="cr-nav-item">PARTITIONS</div>
+   <div scroll-to-chart="system" class="cr-nav-item">SYSTEM</div>
 </div>
 
-<div id="insert_tab">
-  <h2>INSERT Benchmarks</h2>
-  <div id="insert_labels" class="legend"></div>
-  <div id="insert" class="chart"></div>
-</div>
-<br /><br />
-
-<div id="update_tab">
-  <h2>UPDATE Benchmarks</h2>
-  <div id="update_labels" class="legend"></div>
-  <div id="update" class="chart"></div>
+<div id="single_ops_tab">
+  <h2>Single Operation Benchmarks</h2>
+  <div id="single_ops_labels" class="legend"></div>
+  <div id="single_ops" class="chart"></div>
+  <ul>
+    <li>Single INSERT</li>
+    <li>Single UPDATE</li>
+    <li>Single DELETE</li>
+  </ul>
+  <p id="single_ops_description" class="description"></p>
 </div>
 <br /><br />
 
-<div id="delete_tab">
-  <h2>DELETE Benchmarks</h2>
-  <div id="delete_labels" class="legend"></div>
-  <div id="delete" class="chart"></div>
+<div id="bulk_ops_tab">
+  <h2>Bulk Operation Benchmarks</h2>
+  <div id="bulk_ops_labels" class="legend"></div>
+  <div id="bulk_ops" class="chart"></div>
+  <ul>
+    <li>Bulk INSERT</li>
+    <li>Bulk UPDATE</li>
+    <li>Bulk DELETE</li>
+  </ul>
+  <p id="bulk_ops_descripton" class="description"></p>
+</div>
+<br /><br />
+
+<div id="upsert_tab">
+  <h2>Upsert Benchmarks</h2>
+  <div id="upsert_labels" class="legend"></div>
+  <div id="upsert" class="chart"></div>
+  <p id="upsert_descripton" class="description"></p>
 </div>
 <br /><br />
 
 <div id="sequence_tab">
-  <h2>SEQUENCE Benchmarks</h2>
-  <div id="sequence_labels" class="legend"></div>
-  <div id="sequence" class="chart"></div>
+  <h2>Sequence Benchmarks</h2>
+  <h3>IN Numeric Sequence</h3>
+  <div id="in_numeric_labels" class="legend"></div>
+  <div id="in_numeric" class="chart"></div>
+  <h3>IN String Sequence</h3>
+  <div id="in_string_labels" class="legend"></div>
+  <div id="in_string" class="chart"></div>
+  <p id="sequence_description" class="description"></p>
 </div>
 <br /><br />
 
 <div id="array_tab">
-  <h2>ARRAY Benchmarks</h2>
+  <h2>Array Benchmarks</h2>
   <div id="array_labels" class="legend"></div>
   <div id="array" class="chart"></div>
+  <ul>
+    <li>= ANY()</li>
+    <li>!= ANY()</li>
+  </ul>
+  <p id="array_descripton" class="description"></p>
 </div>
 <br /><br />
 
 <div id="aggregations_tab">
-  <h2>AGGREGATIONS Benchmarks</h2>
+  <h2>Aggregation Benchmarks</h2>
   <div id="aggregations_labels" class="legend"></div>
   <div id="aggregations" class="chart"></div>
+  <p id="aggregations_descripton" class="description"></p>
 </div>
 <br /><br />
 
 <div id="joins_tab">
-  <h2>JOINS Benchmarks</h2>
+  <h2>JOIN Benchmarks</h2>
   <div id="joins_labels" class="legend"></div>
   <div id="joins" class="chart"></div>
+  <p id="joins_descripton" class="description"></p>
 </div>
 <br /><br />
 
 <div id="partitions_tab">
-  <h2>PARTITIONS Benchmarks</h2>
+  <h2>Partition Benchmarks</h2>
   <div id="partitions_labels" class="legend"></div>
   <div id="partitions" class="chart"></div>
+  <p id="partitions_descripton" class="description"></p>
 </div>
 <br /><br />
 
 <div id="system_tab">
-  <h2>SYSTEM Benchmarks</h2>
+  <h2>System Table Benchmarks</h2>
   <div id="system_labels" class="legend"></div>
   <div id="system" class="chart"></div>
+  <p id="system_descripton" class="description"></p>
 </div>
 <br /><br />
 
