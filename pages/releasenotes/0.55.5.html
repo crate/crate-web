@@ -1,0 +1,63 @@
+title: Stable Release 0.55.5
+link: https://crate.io/releasenotes/0.55.5.html
+author: Crate.IO
+created: 2016-09-19
+post_name: 0.55.5
+status: publish
+post_type: releasenote
+category: developernews
+description: Official release notes for Crate release 0.55.5.
+
+
+# Crate 0.55.5
+
+19 Sep 2016
+
+
+ - Fix: Dropping a partition while inserting by primary key into same
+    partition should not raise an exception but returns a 0 row count instead.
+    
+
+ - Fix: JAR conflict if HDFS plugin with Hadoop 2.x is used.
+    
+
+ - Fix: Now it is also possible to restore a snapshot of a single partition
+    of a partitioned table in a non-existent table.
+    This requires that the snapshot has been created with version ``0.55.5``
+    or greater!
+    
+
+ - Fix: Join conditions were not properly validated and an expression
+    with a not yet defined relation could be used.
+    
+
+ - Fix: Setting of a default schema was not possible by using the HTTP REST
+    endpoint.
+    
+
+ - Fix: Error was thrown in case of primary key bulk delete statement
+    with null bulk arguments.
+    
+
+ - Fix: Return 0 rows instead of an error when executing select queries
+    that try to match null for primary key columns.
+    eg: select * from t where pk in (null);
+    
+
+ - Fix: Allow select statements on columns of multiple nested object array
+    
+
+ - Fix: do not allow to create tables in read-only system schemas
+    
+
+ - Fix: `COPY FROM` statements fail if null values are inserted into partitioned
+    tables.
+    
+
+ - Fix: type was not set correctly when creating a token filter
+    with default name and no type
+    
+
+ - Fix: prevent creating `char filters` with missing properties
+    
+
