@@ -2,8 +2,8 @@ title: How we orchestrated a SQL database with Docker Swarm Mode
 link: https://crate.io/blog/orchestrating-crate-with-docker-112
 author: Claus Matzinger
 description: Docker 1.12 brings a lot of changes and new features, how do they affect Crate?
-created: 2016-08-02
-post_name: orchestrating-crate-with-docker-112
+created: 2016-09-20
+post_name: a-sql-database-with-docker-swarm-mode
 status: publish
 post_type: post
 tags: developernews, features
@@ -144,7 +144,7 @@ define the endpoint mode to be 'dnsrr' (DNS round robin - the dns entry 'crate' 
     -Des.gateway.recover_after_nodes=2 \
     -Des.network.bind=_eth0:ipv4_
 ```
-This part is the same for many Docker deployments of Crate:  
+This part is the same for many Docker deployments of Crate:
 
   - *Multicast:* disabled since it's not supported on the overlay networks
   - *Unicast hosts:* the Docker DNS record 'crate' (the service name) maps an IP address to the service name and let's the nodes discover each other
@@ -166,5 +166,5 @@ However since the ports are mapped automatically, there are steps to remedy this
 
 Docker's 1.12 release marks a big step forward in unifying orchestration and management tools for a containerized environment, which is also a great place to run Crate and your production microservices. Furthermore the rolling upgrade features of the Docker swarm makes it really easy to keep Crate at the latest version without downtime or risk of data loss.
 
-## Do you run Crate with Docker (1.12)? Tell us!
+### Do you run Crate with Docker (1.12)? Tell us!
 [1]: /docs/scale/multi_node_setup/
