@@ -56,7 +56,7 @@
       data.forEach(function(row) {
         var x = row[xSeries];
         if (!(x in datatable)) datatable[x] = {};
-        datatable[x][row[labelName]] = row[avgSeries];
+        datatable[x][row[labelName]] = [row[avgSeries], row[stddevSeries]];
       });
 
       rows = Object.keys(datatable).sort().map(function(x) {
@@ -99,6 +99,8 @@
         colors: colorSchema,
         errorBars: false,
         ylabel: 'avg time of single iteration in seconds',
+	interactionModel: Dygraph.Interaction.nonInteractiveModel_,
+	errorBars: true,
         axes: {
           x: {
             valueFormatter: dateFormat,
