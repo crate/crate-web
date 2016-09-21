@@ -36,8 +36,10 @@
   ];
 
   var endpoint = '/benchmark/api';
-  // for local develpment uncomment next line
-  // endpoint = 'http://localhost:8080/result';
+  if (['localhost', '127.0.0.1'].indexOf(window.location.hostname) > -1) {
+    // for local develpment we assume the benchmark api is running on localhost:8080
+    endpoint = 'http://localhost:8080/result';
+  };
 
   function transformData(data) {
     var rows = [];
