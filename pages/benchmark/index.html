@@ -22,7 +22,7 @@ description: This page shows the results of the Crate benchmarks based on the ma
 <div class="cr-nav">
    <div scroll-to-chart="single_ops" class="cr-nav-item">SINGLE OPS</div>
    <div scroll-to-chart="bulk_ops" class="cr-nav-item">BULK OPS</div>
-   <div scroll-to-chart="upsert_ops" class="cr-nav-item">UPSERT</div>
+   <div scroll-to-chart="upsert" class="cr-nav-item">UPSERT</div>
    <div scroll-to-chart="sequence" class="cr-nav-item">SEQUENCE</div>
    <div scroll-to-chart="array" class="cr-nav-item">ARRAY</div>
    <div scroll-to-chart="aggregations" class="cr-nav-item">AGGREGATIONS</div>
@@ -33,8 +33,8 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="single_ops_tab">
   <h2>Single Operation Benchmarks</h2>
-  <div id="single_ops_labels" class="legend"></div>
   <div id="single_ops" class="chart"></div>
+  <div id="single_ops_labels" class="cr-legend"></div>
   <p id="single_ops_description" class="description">
     Benchmark for single <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code> operations.
     <br /><code>INSERT</code> inserts 8 different data types
@@ -46,8 +46,8 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="bulk_ops_tab">
   <h2>Bulk Operation Benchmarks</h2>
-  <div id="bulk_ops_labels" class="legend"></div>
   <div id="bulk_ops" class="chart"></div>
+  <div id="bulk_ops_labels" class="cr-legend"></div>
   <p id="bulk_ops_descripton" class="description">
     Benchmark for bulk <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code> operations.
     <br /><code>INSERT</code> inserts integer/string pairs in bulks of 10000
@@ -59,8 +59,8 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="upsert_tab">
   <h2>Upsert Benchmarks</h2>
-  <div id="upsert_labels" class="legend"></div>
   <div id="upsert" class="chart"></div>
+  <div id="upsert_labels" class="cr-legend"></div>
   <p id="upsert_descripton" class="description">
     Benchmark for single and bulk <code>UPSERT</code>.
     <br /><code>UPSERT</code> inserts or updates single rows
@@ -72,11 +72,11 @@ description: This page shows the results of the Crate benchmarks based on the ma
 <div id="sequence_tab">
   <h2>Sequence Benchmarks</h2>
   <h3>IN Numeric Sequence</h3>
-  <div id="in_numeric_labels" class="legend"></div>
   <div id="in_numeric" class="chart"></div>
+  <div id="in_numeric_labels" class="cr-legend"></div>
   <h3>IN String Sequence</h3>
-  <div id="in_string_labels" class="legend"></div>
   <div id="in_string" class="chart"></div>
+  <div id="in_string_labels" class="cr-legend"></div>
   <p id="sequence_description" class="description">
     Benchmark for <code>IN</code> operator.
     <br /><code>IN numeric</code> selects all rows where integer value is present in sequence of 5 integers
@@ -87,8 +87,8 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="array_tab">
   <h2>Array Benchmarks</h2>
-  <div id="array_labels" class="legend"></div>
   <div id="array" class="chart"></div>
+  <div id="array_labels" class="cr-legend"></div>
   <p id="array_descripton" class="description">
     Benchmark for array <code>ANY</code> operator.
     <br /><code>ANY</code> selects all rows where integer value is present integer array of length 500
@@ -99,8 +99,8 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="aggregations_tab">
   <h2>Aggregation Benchmarks</h2>
-  <div id="aggregations_labels" class="legend"></div>
   <div id="aggregations" class="chart"></div>
+  <div id="aggregations_labels" class="cr-legend"></div>
   <p id="aggregations_descripton" class="description">
     Benchmarks for <code>GROUP BY</code> aggregations.
     <br/>Aggregations group by string value:
@@ -111,8 +111,8 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="joins_tab">
   <h2>JOIN Benchmarks</h2>
-  <div id="joins_labels" class="legend"></div>
   <div id="joins" class="chart"></div>
+  <div id="joins_labels" class="cr-legend"></div>
   <p id="joins_descripton" class="description">
     <span style="color:red;">DISABLED</span>
   </p>
@@ -121,8 +121,8 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="partitions_tab">
   <h2>Partition Benchmarks</h2>
-  <div id="partitions_labels" class="legend"></div>
   <div id="partitions" class="chart"></div>
+  <div id="partitions_labels" class="cr-legend"></div>
   <p id="partitions_descripton" class="description">
     Benchmark for partitioned tables.
     <br />Bulk <code>INSERT</code> that creates a new partition for each inserted row
@@ -134,8 +134,8 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="system_tab">
   <h2>System Table Benchmarks</h2>
-  <div id="system_labels" class="legend"></div>
   <div id="system" class="chart"></div>
+  <div id="system_labels" class="cr-legend"></div>
   <p id="system_descripton" class="description">
     Benchmark for system tables.
     <br /><code>SELECT</code> all rows from <code>sys.shards</code> with 1000 available shards
