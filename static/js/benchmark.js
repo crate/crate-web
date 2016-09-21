@@ -122,6 +122,9 @@
         }
       };
       var chart = new Dygraph(drawDiv, datatable.rows, options);
+      if (['single_ops', 'bulk_ops', 'in_string', 'system'].indexOf(datatable.header) > -1) {
+        chart.updateOptions({ sigma: 0.0 });
+      }
       chart.setAnnotations(createAnnotations(options, releases));
     };
   };
