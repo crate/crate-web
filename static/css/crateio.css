@@ -1166,6 +1166,10 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
   height: 400px;
 }
 
+.description {
+  margin: 40px 50px 0;
+}
+
 @media (max-width: 991px) {
   .wrapper-search {
     margin-left: 6px;

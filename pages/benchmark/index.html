@@ -35,12 +35,12 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>Single Operation Benchmarks</h2>
   <div id="single_ops_labels" class="legend"></div>
   <div id="single_ops" class="chart"></div>
-  <ul>
-    <li>Single INSERT</li>
-    <li>Single UPDATE</li>
-    <li>Single DELETE</li>
-  </ul>
-  <p id="single_ops_description" class="description"></p>
+  <p id="single_ops_description" class="description">
+    Benchmark for single <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code> operations.
+    <br /><code>INSERT</code> inserts 8 different data types
+    <br /><code>UPDATE</code> updates a string value by primary key integer
+    <br /><code>DELETE</code> deletes row by primary key integer
+  </p>
 </div>
 <br /><br />
 
@@ -48,12 +48,12 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>Bulk Operation Benchmarks</h2>
   <div id="bulk_ops_labels" class="legend"></div>
   <div id="bulk_ops" class="chart"></div>
-  <ul>
-    <li>Bulk INSERT</li>
-    <li>Bulk UPDATE</li>
-    <li>Bulk DELETE</li>
-  </ul>
-  <p id="bulk_ops_descripton" class="description"></p>
+  <p id="bulk_ops_descripton" class="description">
+    Benchmark for bulk <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code> operations.
+    <br /><code>INSERT</code> inserts integer/string pairs in bulks of 10000
+    <br /><code>UPDATE</code> updates string value by primary key integer in bulks of 1000
+    <br /><code>DELETE</code> deletes row by primary key integer in bulks of 1000
+  </p>
 </div>
 <br /><br />
 
@@ -61,7 +61,11 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>Upsert Benchmarks</h2>
   <div id="upsert_labels" class="legend"></div>
   <div id="upsert" class="chart"></div>
-  <p id="upsert_descripton" class="description"></p>
+  <p id="upsert_descripton" class="description">
+    Benchmark for single and bulk <code>UPSERT</code>.
+    <br /><code>UPSERT</code> inserts or updates single rows
+    <br /><code>UPSERT</code> inserts or updates rows in bulk of 1000
+  </p>
 </div>
 <br /><br />
 
@@ -73,7 +77,11 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h3>IN String Sequence</h3>
   <div id="in_string_labels" class="legend"></div>
   <div id="in_string" class="chart"></div>
-  <p id="sequence_description" class="description"></p>
+  <p id="sequence_description" class="description">
+    Benchmark for <code>IN</code> operator.
+    <br /><code>IN numeric</code> selects all rows where integer value is present in sequence of 5 integers
+    <br /><code>IN string</code> selects all rows where string value is present in sequence of 10 strings
+  </p>
 </div>
 <br /><br />
 
@@ -81,11 +89,11 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>Array Benchmarks</h2>
   <div id="array_labels" class="legend"></div>
   <div id="array" class="chart"></div>
-  <ul>
-    <li>= ANY()</li>
-    <li>!= ANY()</li>
-  </ul>
-  <p id="array_descripton" class="description"></p>
+  <p id="array_descripton" class="description">
+    Benchmark for array <code>ANY</code> operator.
+    <br /><code>ANY</code> selects all rows where integer value is present integer array of length 500
+    <br /><code>NOT ANY</code> select all rows where integer value is not present in integer array of lenth 500
+  </p>
 </div>
 <br /><br />
 
@@ -93,7 +101,11 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>Aggregation Benchmarks</h2>
   <div id="aggregations_labels" class="legend"></div>
   <div id="aggregations" class="chart"></div>
-  <p id="aggregations_descripton" class="description"></p>
+  <p id="aggregations_descripton" class="description">
+    Benchmarks for <code>GROUP BY</code> aggregations.
+    <br/>Aggregations group by string value:
+    <br /><code>COUNT</code>, <code>MIN</code>, <code>MAX</code>, <code>AVG</code>, <code>COUNT DISTINCT</code>, <code>ARBITRARY</code>
+  </p>
 </div>
 <br /><br />
 
@@ -101,7 +113,9 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>JOIN Benchmarks</h2>
   <div id="joins_labels" class="legend"></div>
   <div id="joins" class="chart"></div>
-  <p id="joins_descripton" class="description"></p>
+  <p id="joins_descripton" class="description">
+    <span style="color:red;">DISABLED</span>
+  </p>
 </div>
 <br /><br />
 
@@ -109,7 +123,12 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>Partition Benchmarks</h2>
   <div id="partitions_labels" class="legend"></div>
   <div id="partitions" class="chart"></div>
-  <p id="partitions_descripton" class="description"></p>
+  <p id="partitions_descripton" class="description">
+    Benchmark for partitioned tables.
+    <br />Bulk <code>INSERT</code> that creates a new partition for each inserted row
+    <br /><code>INSERT</code> bulk of 1000 items into 100 different existing partitions of a table
+    <br />
+  </p>
 </div>
 <br /><br />
 
@@ -117,7 +136,11 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>System Table Benchmarks</h2>
   <div id="system_labels" class="legend"></div>
   <div id="system" class="chart"></div>
-  <p id="system_descripton" class="description"></p>
+  <p id="system_descripton" class="description">
+    Benchmark for system tables.
+    <br /><code>SELECT</code> all rows from <code>sys.shards</code> with 1000 available shards
+    <br /><code>SELECT</code> all rows from <code>information_schema.tables</code> with 150 tables
+  </p>
 </div>
 <br /><br />
 
