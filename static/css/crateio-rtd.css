@@ -191,3 +191,9 @@ blockquote {
 .cr-nav-item--active{
   color: #55d4f5;
 }
+
+.cr-legend{
+  margin-top: 10px;
+  max-width: 700px;
+  margin: 40px 50px 0;
+}

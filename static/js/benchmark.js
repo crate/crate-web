@@ -98,11 +98,14 @@
       var options = {
         labelsDiv: document.getElementById(datatable.header + '_labels'),
         labels: datatable.labels,
+        hideOverlayOnMouseOut: false,
+        legend: "always",
+        labelsSeparateLines: true,
         colors: colorSchema,
         errorBars: false,
         ylabel: 'avg time of single iteration in seconds',
-	interactionModel: Dygraph.Interaction.nonInteractiveModel_,
-	errorBars: true,
+        interactionModel: Dygraph.Interaction.nonInteractiveModel_,
+        errorBars: true,
         axes: {
           x: {
             valueFormatter: dateFormat,
