@@ -35,9 +35,9 @@
     "#AAAAAA"
   ];
 
-  // var endpoint = '/benchmark/api';
+  var endpoint = '/benchmark/api';
   // for local develpment uncomment next line
-  endpoint = 'http://localhost:8080/result';
+  // endpoint = 'http://localhost:8080/result';
 
   function transformData(data) {
     var rows = [];
