@@ -103,7 +103,7 @@
         labelsSeparateLines: true,
         colors: colorSchema,
         errorBars: false,
-        ylabel: 'avg time of single iteration in seconds',
+        ylabel: 'single iteration in seconds',
         interactionModel: Dygraph.Interaction.nonInteractiveModel_,
         errorBars: true,
         axes: {
