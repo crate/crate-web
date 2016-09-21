@@ -95,6 +95,7 @@
 
   function draw(drawDiv) {
     return function(datatable) {
+      var valueRange = $(drawDiv).data('value-range') || [0, null];
       var options = {
         labelsDiv: document.getElementById(datatable.header + '_labels'),
         labels: datatable.labels,
@@ -113,7 +114,7 @@
             drawGrid: false
           },
           y: {
-            valueRange: [0, null],
+            valueRange: valueRange,
             drawGrid: false
           }
         },
@@ -149,7 +150,6 @@
     $('.cr-nav .cr-nav-item').each(function() {
       var refElement = $(this).attr('scroll-to-chart');
       if ($('#' + refElement + '_tab').position().top - margin <= scrollPosition && $('#' + refElement + '_tab').position().top + $('#' + refElement + '_tab').height() > scrollPosition + margin) {
-
         $(this).addClass("cr-nav-item--active");
       } else {
         $(this).removeClass("cr-nav-item--active");

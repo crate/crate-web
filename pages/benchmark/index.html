@@ -33,7 +33,7 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="single_ops_tab">
   <h2>Single Operation Benchmarks</h2>
-  <div id="single_ops" class="chart"></div>
+  <div id="single_ops" class="chart" data-value-range="[0.8, 1.6]"></div>
   <div id="single_ops_labels" class="cr-legend"></div>
   <p id="single_ops_description" class="description">
     Benchmark for single <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code> operations.
@@ -59,7 +59,7 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="upsert_tab">
   <h2>Upsert Benchmarks</h2>
-  <div id="upsert" class="chart"></div>
+  <div id="upsert" class="chart" data-value-range="[0, 30]"></div>
   <div id="upsert_labels" class="cr-legend"></div>
   <p id="upsert_descripton" class="description">
     Benchmark for single and bulk <code>UPSERT</code>.
@@ -71,9 +71,11 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="sequence_tab">
   <h2>Sequence Benchmarks</h2>
+  <br /><br />
   <h3>IN Numeric Sequence</h3>
   <div id="in_numeric" class="chart"></div>
   <div id="in_numeric_labels" class="cr-legend"></div>
+  <br /><br />
   <h3>IN String Sequence</h3>
   <div id="in_string" class="chart"></div>
   <div id="in_string_labels" class="cr-legend"></div>
