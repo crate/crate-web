@@ -35,9 +35,9 @@
     "#AAAAAA"
   ];
 
-  var endpoint = '/benchmark/api';
+  // var endpoint = '/benchmark/api';
   // for local develpment uncomment next line
-  // endpoint = 'http://localhost:8080/result';
+  endpoint = 'http://localhost:8080/result';
 
   function transformData(data) {
     var rows = [];
@@ -91,11 +91,167 @@
     return val.toDateString();
   };
 
+  function setLabels(datatable){
+    switch (datatable.header){
+      case 'single_ops':
+        for (i=0; i < datatable.labels.length; i++){
+          if(datatable.labels[i].indexOf('delete') !== -1 ){
+            $('#'+datatable.header + '_single_delete').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> Single Delete: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'Single Delete';
+
+          }
+          if(datatable.labels[i].indexOf('insert') !== -1 ){
+            $('#'+datatable.header + '_single_insert').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> Single INSERT: </span>' + '<span >' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'Single Insert';
+
+          }
+          if(datatable.labels[i].indexOf('update') !== -1 ){
+            $('#'+datatable.header + '_single_update').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> Single UPDATE: </span>' + '<span >' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'Single Update';
+          }
+
+        }
+        break;
+
+      case 'bulk_ops':
+        for (i=0; i < datatable.labels.length; i++){
+          if(datatable.labels[i].indexOf('delete') !== -1 ){
+            $('#'+datatable.header + '_delete').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> Bulk Delete: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'Bulk Delete';
+
+          }
+          if(datatable.labels[i].indexOf('insert') !== -1 ){
+            $('#'+datatable.header + '_insert').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> Bulk INSERT: </span>' + '<span >' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'Bulk Insert';
+
+          }
+          if(datatable.labels[i].indexOf('update') !== -1 ){
+            $('#'+datatable.header + '_update').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> Bulk UPDATE: </span>' + '<span >' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'Bulk Update';
+          }
+
+        }
+        break;
+
+      case 'in_numeric':
+        for (i=0; i < datatable.labels.length; i++){
+          if(datatable.labels[i].indexOf('date') === -1 ){
+            $('#'+datatable.header + '_numeric').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> In Numeric: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'In Numeric';
+          }
+          
+        }
+        break;   
+
+      case 'in_string':
+        for (i=0; i < datatable.labels.length; i++){
+          if(datatable.labels[i].indexOf('date') === -1 ){
+            $('#'+datatable.header + '_string').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> In String: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'In String';
+          }
+          
+        }
+        break;   
+
+      case 'array':
+        for (i=0; i < datatable.labels.length; i++){
+          if(datatable.labels[i].indexOf('!= any') !== -1 ){
+            $('#'+datatable.header + '_not_any').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> != ANY(): </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = '!= ANY()';
+          }
+          if(datatable.labels[i].indexOf('= any') !== -1 ){
+            $('#'+datatable.header + '_any').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> = ANY(): </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = '= ANY()';
+          }
+          
+        }
+        break;   
+
+      case 'aggregations':
+        for (i=0; i < datatable.labels.length; i++){
+          if(datatable.labels[i].indexOf('count("cCode")') !== -1 ){
+            $('#'+datatable.header + '_count_col').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;">count(columnName): </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'count(columnName)';
+          }
+          if(datatable.labels[i].indexOf('select count(*) from uservisits') !== -1 ){
+            $('#'+datatable.header + '_count_all').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;">count(*): </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'count(*)';
+          }
+
+          if(datatable.labels[i].indexOf('select "cCode", count(*) from uservisits group by "cCode"') !== -1 ){
+            $('#'+datatable.header + '_count_all_grp_by').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;">count(*) group by: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'count(*) group by';
+          }
+
+          if(datatable.labels[i].indexOf('arbitrary') !== -1 ){
+            $('#'+datatable.header + '_arbitrary').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;">arbitrary: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'arbitrary';
+          }
+
+          if(datatable.labels[i].indexOf('avg') !== -1 ){
+            $('#'+datatable.header + '_avg').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;">avg: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'avg';
+          }
+
+          if(datatable.labels[i].indexOf('distinct') !== -1 ){
+            $('#'+datatable.header + '_count_distinct').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;">count distinct: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'count distinct';
+          }
+
+          if(datatable.labels[i].indexOf('max') !== -1 ){
+            $('#'+datatable.header + '_max').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;">max: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'max';
+          }
+          
+          if(datatable.labels[i].indexOf('min') !== -1 ){
+            $('#'+datatable.header + '_min').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;">min: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'min';
+          }
+          
+        }
+        break;  
+
+      case 'partitions':
+        for (i=0; i < datatable.labels.length; i++){
+          if(datatable.labels[i].indexOf('insert') !== -1 ){
+            $('#'+datatable.header + '_insert').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> Insert: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'Insert';
+
+          }
+          if(datatable.labels[i].indexOf('select') !== -1 ){
+            $('#'+datatable.header + '_select').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> Select: </span>' + '<span >' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'Select';
+
+          }
+          if(datatable.labels[i].indexOf('update') !== -1 ){
+            $('#'+datatable.header + '_update').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> UPDATE: </span>' + '<span >' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'Update';
+          }
+
+        }
+        break;
+
+      case 'system':
+        for (i=0; i < datatable.labels.length; i++){
+          if(datatable.labels[i].indexOf('date') === -1 ){
+            $('#'+datatable.header + '_select').html('<span style="color:'+colorSchema[i-1]+'; font-weight:600;"> Select: </span> ' + '<span>' + datatable.labels[i] + '</span>');
+            datatable.labels[i] = 'Select';
+          }
+          
+        }
+        break;           
+    }
+
+  };
+
   function draw(drawDiv) {
     return function(datatable) {
+      setLabels(datatable);
       var options = {
         labelsDiv: document.getElementById(datatable.header + '_labels'),
         labels: datatable.labels,
+        hideOverlayOnMouseOut: false,
+        labelsSeparateLines: true,
         colors: colorSchema,
         errorBars: false,
         ylabel: 'avg time of single iteration in seconds',

@@ -168,3 +168,9 @@ blockquote {
 .cr-nav-item--active{
   color: #55d4f5;
 }
+
+.cr-legend_footer{
+  margin-top: 30px;
+  max-width: 740px;
+  padding-left: 52px;
+}

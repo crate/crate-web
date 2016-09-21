@@ -22,7 +22,7 @@ description: This page shows the results of the Crate benchmarks based on the ma
 <div class="cr-nav">
    <div scroll-to-chart="single_ops" class="cr-nav-item">SINGLE OPS</div>
    <div scroll-to-chart="bulk_ops" class="cr-nav-item">BULK OPS</div>
-   <div scroll-to-chart="upsert_ops" class="cr-nav-item">UPSERT</div>
+   <div scroll-to-chart="upsert" class="cr-nav-item">UPSERT</div>
    <div scroll-to-chart="sequence" class="cr-nav-item">SEQUENCE</div>
    <div scroll-to-chart="array" class="cr-nav-item">ARRAY</div>
    <div scroll-to-chart="aggregations" class="cr-nav-item">AGGREGATIONS</div>
@@ -34,13 +34,18 @@ description: This page shows the results of the Crate benchmarks based on the ma
 <div id="single_ops_tab">
   <h2>Single Operation Benchmarks</h2>
   <div id="single_ops_labels" class="legend"></div>
+
   <div id="single_ops" class="chart"></div>
-  <ul>
-    <li>Single INSERT</li>
-    <li>Single UPDATE</li>
-    <li>Single DELETE</li>
-  </ul>
+
+  <div class="cr-legend_footer">
+    <div id="single_ops_single_delete"></div>
+    <div id="single_ops_single_insert"></div>
+    <div id="single_ops_single_update"></div>
+  </div>
+
+
   <p id="single_ops_description" class="description"></p>
+
 </div>
 <br /><br />
 
@@ -48,11 +53,11 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>Bulk Operation Benchmarks</h2>
   <div id="bulk_ops_labels" class="legend"></div>
   <div id="bulk_ops" class="chart"></div>
-  <ul>
-    <li>Bulk INSERT</li>
-    <li>Bulk UPDATE</li>
-    <li>Bulk DELETE</li>
-  </ul>
+  <div class="cr-legend_footer">
+    <div id="bulk_ops_insert"></div>
+    <div id="bulk_ops_update"></div>
+    <div id="bulk_ops_delete"></div>
+  </div>
   <p id="bulk_ops_descripton" class="description"></p>
 </div>
 <br /><br />
@@ -70,9 +75,19 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h3>IN Numeric Sequence</h3>
   <div id="in_numeric_labels" class="legend"></div>
   <div id="in_numeric" class="chart"></div>
+
+  <div class="cr-legend_footer">
+    <div id="in_numeric_numeric"></div>
+  </div>
+
   <h3>IN String Sequence</h3>
   <div id="in_string_labels" class="legend"></div>
   <div id="in_string" class="chart"></div>
+
+  <div class="cr-legend_footer">
+    <div id="in_string_string"></div>
+  </div>
+
   <p id="sequence_description" class="description"></p>
 </div>
 <br /><br />
@@ -81,10 +96,11 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>Array Benchmarks</h2>
   <div id="array_labels" class="legend"></div>
   <div id="array" class="chart"></div>
-  <ul>
-    <li>= ANY()</li>
-    <li>!= ANY()</li>
-  </ul>
+
+  <div class="cr-legend_footer">
+    <div id="array_not_any"></div>
+    <div id="array_any"></div>
+  </div>
   <p id="array_descripton" class="description"></p>
 </div>
 <br /><br />
@@ -93,6 +109,17 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>Aggregation Benchmarks</h2>
   <div id="aggregations_labels" class="legend"></div>
   <div id="aggregations" class="chart"></div>
+
+  <div class="cr-legend_footer">
+    <div id="aggregations_count_col"></div>
+    <div id="aggregations_count_all"></div>
+    <div id="aggregations_count_all_grp_by"></div>
+    <div id="aggregations_arbitrary"></div>
+    <div id="aggregations_avg"></div>
+    <div id="aggregations_count_distinct"></div>
+    <div id="aggregations_max"></div>
+    <div id="aggregations_min"></div>
+  </div>
   <p id="aggregations_descripton" class="description"></p>
 </div>
 <br /><br />
@@ -109,6 +136,12 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>Partition Benchmarks</h2>
   <div id="partitions_labels" class="legend"></div>
   <div id="partitions" class="chart"></div>
+  <div class="cr-legend_footer">
+    <div id="partitions_insert"></div>
+    <div id="partitions_select"></div>
+    <div id="partitions_update"></div>
+  </div>
+
   <p id="partitions_descripton" class="description"></p>
 </div>
 <br /><br />
@@ -117,6 +150,9 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h2>System Table Benchmarks</h2>
   <div id="system_labels" class="legend"></div>
   <div id="system" class="chart"></div>
+  <div class="cr-legend_footer">
+    <div id="system_select"></div>
+  </div>
   <p id="system_descripton" class="description"></p>
 </div>
 <br /><br />
