@@ -1,164 +1,155 @@
 title: Docker Swarm
-author: Chris Ward
+author: Chris Ward, Claus Matzinger
 description: Combining Crate with Docker Swarm allows for scalable clusters spread across data centers.
 
-This documentation was tested with Docker Machine version `0.7.0` and Docker `1.11.0`. Please let us know if you experience any problems.
+Docker Swarm is a great cluster orchestration tool that has been integrated into the Docker engine starting with their 1.12 release. Since this tooling is perfect for creating Crate clusters, we want to show you how to get three nodes of our SQL database working together.
 
-Swarm is Docker's native clustering tool, turning a pool of Docker instances into one single abstract host. This makes it perfect for a scalable database like Crate. Generally Swarm uses instances created by Docker machine, but can also be [setup manually](https://docs.docker.com/swarm/install-manual/).
+## Prerequisites
 
-To get a Crate cluster running on Swarm on the same machine you can follow [the Swarm getting started guide](https://docs.docker.com/swarm/install-w-machine/) and replace `docker run hello-world` with Crate commands:
+ - [Docker machine](https://docs.docker.com/machine/install-machine/)
+ - [A working Docker installation](https://docs.docker.com/engine/installation/)
+ - A couple of nodes (for a development setup virtual machines work as well) with SSH access and Linux
 
-```bash
-docker run -P -d crate
-docker run -P -d crate
-docker run -d -p 4200:4200 -p 4300:4300 crate
-```
+Having that handy will provide a solid starting point for creating a Crate cluster.
 
-Resulting in something like:
+## Setup
 
-![Docker Swarm]({% media '/media/1604/swarm-crate.png' %})
-
-## Production Example
-
-This production-ready example will deploy a swarm cluster to Google Compute Engine.
-
-### Allow Traffic
-
-First open the Firewall ports that the Crate cluster will need:
+We are using 3 type-0 machines from our friends at [Packet.net](https://packet.net). To provision those (CentOS 7) machines, we have `docker-machine` take care of installing the Docker daemon by issuing this command on your development machine (for each of the nodes you want to provision). Be sure to replace <MANAGER-IP> with your actual IPs, `crate-sw-X` is the name of each node.
 
 ```bash
-gcloud compute firewall-rules create default-ssh --allow tcp:22,icmp --source-range 0.0.0.0/0
-gcloud compute firewall-rules create default-swarm --allow tcp:2376,tcp:3376 --source-range 0.0.0.0/0
-gcloud compute firewall-rules create default-crate --allow tcp:4200,tcp:4300 --source-range 0.0.0.0/0
+$ docker-machine create -d generic —generic-ip-address <MANAGER-IP> —generic-ssh-user root crate-sw-1
+Running pre-create checks...
+Creating machine...
+(crate-sw-1) No SSH key specified. Assuming an existing key at the default location.
+Waiting for machine to be running, this may take a few minutes...
+Detecting operating system of created instance...
+Waiting for SSH to be available...
+Detecting the provisioner...
+Provisioning with centos...
+Copying certs to the local machine directory...
+Copying certs to the remote machine...
+Setting Docker configuration on the remote daemon...
+Checking connection to Docker...
+Docker is up and running!
+To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env crate-sw-1
 ```
 
-### Create Master
-
-Create a bash script called *startup-master.sh* and add the following to it:
+With Docker installed on every machine, we now have to join them into a swarm, but first let's check if all the machines are available:
 
 ```bash
-#!/bin/bash -x
-sudo su -
-yum clean expire-cache
-yum update -y
-yum install -y wget docker bridge-utils
-curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine
-chmod +x /usr/local/bin/docker-machine
+$ docker-machine ls
+NAME         ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
+crate-sw-1   -        generic      Running   tcp://<IP1>:2376           v1.12.1
+crate-sw-2   -        generic      Running   tcp://<IP2>:2376           v1.12.1
+crate-sw-3   -        generic      Running   tcp://<IP3>:2376           v1.12.1
 ```
 
-Now create the master on GCE, running the script from above on creation:
+## Gather Your Swarm
+
+For the machines to work together, we can create a swarm with [Docker's Swarm](https://docs.docker.com/engine/swarm/) feature, which works in a Master-Slave configuration. Hence, in order to continue, choose one of these machines to become the master node:
 
 ```bash
-gcloud compute instances create machine-master \
-  --network default \
-  --zone us-central1-a \
-  --boot-disk-size 50GB \
-  --image centos-7 \
-  --machine-type f1-micro \
-  --metadata-from-file startup-script=startup-master.sh
+$ eval $(docker-machine env crate-sw-1) # connect your local docker client to the remote machine
+$ docker swarm init --advertise-addr <MANAGER-IP>:2377
+Swarm initialized: current node (4dbxlrkuxnq7m36p7u8hiwba4) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join \
+    --token <TOKEN> \
+    <MANAGER-IP>:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 
-Save the Project ID as an environment variable to avoid repetition:
+As the output of the previous command already suggests, join the worker nodes like this:
 
 ```bash
-echo "export GCE_PROJECT=PROJECT_ID" >> ~/.bash_profile
-source ~/.bash_profile
+$ eval $(docker-machine env crate-sw-2) # connect the local docker client to one of the worker nodes
+$ docker swarm join --token <TOKEN> <MANAGER-IP>:2377
+This node joined a swarm as a worker.
+$ eval $(docker-machine env crate-sw-3) # connect the local docker client to the other worker node
+$ docker swarm join --token <TOKEN> <MANAGER-IP>:2377
+This node joined a swarm as a worker.
 ```
 
-### Obtain Cluster Token
+Your swarm is now up and running, ready for a deployment.
 
-Create a Swarm token, a unique token used to identify the Swarm cluster.
+## Ready to Serve
 
-Create a remote Docker host first:
+For the Crate cluster to talk to the nodes, we still need a network, which - for now - will be a Docker overlay network. For a production deployment, this should be a more informed choice since a software-emulated network connection might not perform as expected. In order to create the network run the following command:
 
 ```bash
-docker-machine create -d google --google-project ${GCE_PROJECT} swarm-master
+$ docker network create -d overlay crate-network
+6p7nxdurhzw2hcwy3bjm2z2wo
 ```
 
-Switch to the machine and run `swarm create` which will start a Swarm and the hash of the container is used as the token.
+Finally we are able to run Crate on top of the Docker cluster! For this, a `docker service` is required - which is created by this command:
 
 ```bash
-eval $(docker-machine env swarm-master)
-docker run swarm create
+$ eval $(docker-machine env crate-sw-1) # connect your local docker client to the remote machine
+$ docker service create \
+    --name crate \
+    --network crate-network \
+    --mode global \
+    --endpoint-mode dnsrr \
+    --update-parallelism 1 \
+    --update-delay 60s \
+    --mount type=bind,source=/tmp,target=/data \
+  crate:latest \
+    crate \
+    -Des.discovery.zen.ping.multicast.enabled=false \
+    -Des.discovery.zen.ping.unicast.hosts=crate \
+    -Des.gateway.expected_nodes=3 \
+    -Des.discovery.zen.minimum_master_nodes=2 \
+    -Des.gateway.recover_after_nodes=2 \
+    -Des.network.bind=_eth0:ipv4_
 ```
 
-Note the token for further use or put the token into bash profile, so it's easily available.
+There are several things that need explanation in there:
 
 ```bash
-echo "export TOKEN=TOKEN_VALUE" >> ~/.bash_profile
-source ~/.bash_profile
+    --name crate #\
+    --network crate-network \
+    --mode global \
 ```
-
-### Creating Master
-
-The Swarm master is the first instance of the cluster, and all other nodes will connect to that. The master also acts as a regular node in the cluster, meaning that Docker containers can be launched on it.
-
-This time we'll use the `google` driver, `n1-standard-2` instances and a bigger boot disk for a bit more computing power.
-
-The option `--swarm-master` is the key here:
+These lines name the cluster 'crate', add the previously created overlay network to the service and set the scaling mode to "global", which means that there will always one container per node. Next the parameters:
 
 ```bash
-docker-machine create -d google --google-project=${GCE_PROJECT} --google-machine-type=n1-standard-2 --google-disk-size=50 --swarm --swarm-master --swarm-discovery token://${TOKEN} crate-swarm
+    --endpoint-mode dnsrr \
+    --update-parallelism 1 \
+    --update-delay 60s \
+    --mount type=bind,source=/tmp,target=/data \
 ```
 
-### Create Swarm Nodes
-
-Next create 3 machines for the Swarm nodes, replacing `crate-swarm-node1` with `crate-swarm-node2` etc.
+define the endpoint mode to be 'dnsrr' (DNS round robin - the dns entry 'crate' should cycle through the available IP addresses), `update-parallelism` and `update-delay` set how many instances should be updated in parallel and with what delay. Finally there is some volume mapping to ensure Crate is writing data to a persistent volume outside of the container (*don't use /tmp 's tmpfs for storing data. It will be gone after restarting*).
 
 ```bash
-docker-machine create -d google --google-project=${GCE_PROJECT} --google-machine-type=n1-standard-2 --google-disk-size=50 --swarm --swarm-discovery token://${TOKEN} crate-swarm-node1
+  crate:latest \
+    crate \
+    -Des.discovery.zen.ping.multicast.enabled=false \
+    -Des.discovery.zen.ping.unicast.hosts=crate \
+    -Des.gateway.expected_nodes=3 \
+    -Des.discovery.zen.minimum_master_nodes=2 \
+    -Des.gateway.recover_after_nodes=2 \
+    -Des.network.bind=_eth0:ipv4_
 ```
+This part is the same for many Docker deployments of Crate:
 
-### Creating a Crate Cluster
+  - *Multicast:* disabled since it's not supported on the overlay networks
+  - *Unicast hosts:* the Docker DNS record 'crate' (the service name) maps an IP address to the service name and let's the nodes discover each other
+  - *Quorum parameters:*  since we are working with a 3-node cluster, the `expected_nodes`, `minimum_master_nodes`, and `recover_after_nodes` are [set accordingly][1]
+  - *Set Crate's network binding:* the last line tells Crate to explicitly listen and bind to the IPv4 address of `eth0` (check if this is your `crate-network` NIC); required to work around container networking magic
 
-Now we want to start multiple Crate nodes that form a cluster. Unfortunately, Google Cloud Platform (and other cloud hosting network environments) do not have multicast enabled, so Crate needs to use another method for discovering other Crate nodes.
+## Scaling
 
-This is commonly through unicast and Crate will need a list of the hosts in the cluster. Crate has a DNS plugin available that may help with this, and we have [other options available](/docs/reference/en/latest/configuration.html#conf-discovery).
+By running the docker service in 'global mode', it automatically assigns one instance per node only. This means that by changing the number of nodes in a swarm, it will automatically scale up or down (also think of [reconfiguring the quorums][1])). To take control of this behavior, we recommend customizing [service constraints](https://docs.docker.com/engine/reference/commandline/service_create/#/specify-service-constraints-constraint) and labels. Alternatively 'replication mode' would allow for explicit scaling, but will also deploy more than one instance per machine, which is *greatly discouraged* since it gives a false impression about replication and resource availability.
 
-Here's our recommended solution that relies on no other plugins:
+## Next Steps
 
-- Get a list of all remote Docker hosts
-- Assemble a list of unicast hosts from them
-- Calculate the [`minimum_master_nodes` setting](/docs/reference/configuration.html#discovery) from the amount of available Docker host (`nodes/2+1`)
-- Iterate over all remote Docker hosts and execute `docker run` explicitly on each host
+This setup gives you a working cluster but by setting the endpoint-mode to `DNSRR`, Docker disables its included load balancer and does not assign a public IP or port mapping to the cluster. The _other_ setting `VIP` (virtual IP) would provide a load-balanced public endpoint, but prohibits communication between the nodes. While we (and others) [consider this a bug](https://github.com/docker/docker/issues/25016), a fix by Docker has yet (as of mid-September 2016) to be released.
 
-Create a bash script called *cluster-start.sh* and add the following:
+However since the ports are mapped automatically, there are steps to remedy this:
 
-```bash
-#!/bin/bash -x
-export LIST=$(docker run -d swarm list token://$TOKEN)
-export REMOTE_DOCKER_HOSTS=$(docker logs $LIST)
-export MIN_MASTER_NODES=$(( $(docker logs $LIST | wc -l) / 2 + 1))
-export UNICAST_HOSTS=$(docker logs $LIST | sed "s/:2376/:4300/" | paste -s -d "," -)
-
-for host in $REMOTE_DOCKER_HOSTS; do
-  pub_host=$(echo $host | sed "s/:2376//")
-  docker -H tcp://$host \
-    run -d -p 4200:4200 -p 4300:4300 \
-    crate:latest \
-    crate -Des.cluster.name=crate-swarm \
-          -Des.multicast.enabled=false \
-          -Des.transport.publish_host=$pub_host \
-          -Des.discovery.zen.ping.unicast.hosts=$UNICAST_HOSTS \
-          -Des.discovery.zen.minimum_master_nodes=$MIN_MASTER_NODES
-  sleep 3
-done
-```
-
-Run the script with:
-
-```bash
-./cluster_start.sh
-```
-
-Use `curl` to verify the cluster, picking any IP address in the cluster:
-
-```bash
-curl -XPOST IP_ADDRESS:4200/_sql?pretty -d '{"stmt":"select id, name, hostname from sys.nodes"}'
-{
-  "cols" : [ "id", "name", "hostname" ],
-  "duration" : 4,
-  "rows" : [ ... ],
-  "rowcount" : 4
-}
-```
+  - Use NGINX (or any reverse proxy server) to distribute requests among the swarm nodes by enumerating all container IPs in an [upstream section](http://nginx.org/en/docs/http/ngx_http_upstream_module.html)
+  - Use a firewall ([firewalld](https://docs.fedoraproject.org/en-US/Fedora/19/html/Security_Guide/sec-Configure_Port_Forwarding-CLI.html), [IPTables](https://www.digitalocean.com/community/tutorials/how-to-forward-ports-through-a-linux-gateway-with-iptables), [UFW](https://help.ubuntu.com/lts/serverguide/firewall.html) ...) to forward requests to the ports to the containers (but be aware that the overlay network also requires [certain ports](http://stackoverflow.com/questions/37312055/can-firewalld-work-with-the-docker-overlay-network))
