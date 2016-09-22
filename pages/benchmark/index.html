@@ -22,7 +22,6 @@ description: This page shows the results of the Crate benchmarks based on the ma
 <div class="cr-nav">
    <div scroll-to-chart="single_ops" class="cr-nav-item">SINGLE OPS</div>
    <div scroll-to-chart="bulk_ops" class="cr-nav-item">BULK OPS</div>
-   <div scroll-to-chart="upsert" class="cr-nav-item">UPSERT</div>
    <div scroll-to-chart="sequence" class="cr-nav-item">SEQUENCE</div>
    <div scroll-to-chart="array" class="cr-nav-item">ARRAY</div>
    <div scroll-to-chart="aggregations" class="cr-nav-item">AGGREGATIONS</div>
@@ -53,18 +52,6 @@ description: This page shows the results of the Crate benchmarks based on the ma
     <br /><code>INSERT</code> inserts integer/string pairs in bulks of 10000
     <br /><code>UPDATE</code> updates string value by primary key integer in bulks of 1000
     <br /><code>DELETE</code> deletes row by primary key integer in bulks of 1000
-  </p>
-</div>
-<br /><br />
-
-<div id="upsert_tab" class="graph_tab">
-  <h2>Upsert Benchmarks</h2>
-  <div id="upsert" class="chart" data-value-range="[0, 30]"></div>
-  <div id="upsert_labels" class="cr-legend"></div>
-  <p id="upsert_descripton" class="description">
-    Benchmark for single and bulk <code>UPSERT</code>.
-    <br /><code>UPSERT</code> inserts or updates single rows
-    <br /><code>UPSERT</code> inserts or updates rows in bulk of 1000
   </p>
 </div>
 <br /><br />
