@@ -33,32 +33,39 @@ description: This page shows the results of the Crate benchmarks based on the ma
 
 <div id="single_ops_tab" class="graph_tab">
   <h2>Single Operation Benchmarks</h2>
-  <div id="single_ops" class="chart" data-value-range="[0.8, 1.6]"></div>
-  <div id="single_ops_labels" class="cr-legend"></div>
   <p id="single_ops_description" class="description">
-    <b>Benchmark for single <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code> operations</b>
+    <b>Benchmark for single <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> and <code>UPSERT</code> operations</b>
     <br /><code>INSERT</code> inserts 8 different data types
     <br /><code>UPDATE</code> updates a string value by primary key integer
     <br /><code>DELETE</code> deletes row by primary key integer
+    <br /><code>UPSERT</code> inserts/updates single rows
   </p>
+  <div id="single_ops" class="chart" data-value-range="[0.8, 1.6]"></div>
+  <div id="single_ops_labels" class="cr-legend"></div>
 </div>
 <br /><br />
 
 <div id="bulk_ops_tab" class="graph_tab">
   <h2>Bulk Operation Benchmarks</h2>
-  <div id="bulk_ops" class="chart" data-log-scale="true"></div>
-  <div id="bulk_ops_labels" class="cr-legend"></div>
   <p id="bulk_ops_descripton" class="description">
-    <b>Benchmark for bulk <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code> operations</b>
+    <b>Benchmark for bulk <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> and <code>UPSERT</code> operations</b>
     <br /><code>INSERT</code> inserts integer/string pairs in bulks of 10000
     <br /><code>UPDATE</code> updates string value by primary key integer in bulks of 1000
     <br /><code>DELETE</code> deletes row by primary key integer in bulks of 1000
+    <br /><code>UPSERT</code> inserts/updates rows in bulks of 1000
   </p>
+  <div id="bulk_ops" class="chart" data-log-scale="true"></div>
+  <div id="bulk_ops_labels" class="cr-legend"></div>
 </div>
 <br /><br />
 
 <div id="sequence_tab" class="graph_tab">
   <h2>Sequence Benchmarks</h2>
+  <p id="sequence_description" class="description">
+    <b>Benchmark for <code>IN</code> operator</b>
+    <br /><code>IN numeric</code> selects all rows where integer value is present in sequence of 5 integers
+    <br /><code>IN string</code> selects all rows where string value is present in sequence of 10 strings
+  </p>
   <h3>IN Numeric Sequence</h3>
   <div id="in_numeric" class="chart"></div>
   <div id="in_numeric_labels" class="cr-legend"></div>
@@ -66,45 +73,40 @@ description: This page shows the results of the Crate benchmarks based on the ma
   <h3>IN String Sequence</h3>
   <div id="in_string" class="chart"></div>
   <div id="in_string_labels" class="cr-legend"></div>
-  <p id="sequence_description" class="description">
-    <b>Benchmark for <code>IN</code> operator</b>
-    <br /><code>IN numeric</code> selects all rows where integer value is present in sequence of 5 integers
-    <br /><code>IN string</code> selects all rows where string value is present in sequence of 10 strings
-  </p>
 </div>
 <br /><br />
 
 <div id="array_tab" class="graph_tab">
   <h2>Array Benchmarks</h2>
-  <div id="array" class="chart"></div>
-  <div id="array_labels" class="cr-legend"></div>
   <p id="array_descripton" class="description">
     <b>Benchmark for array <code>ANY</code> operator</b>
     <br /><code>ANY</code> selects all rows where integer value is present integer array of length 500
     <br /><code>NOT ANY</code> select all rows where integer value is not present in integer array of lenth 500
   </p>
+  <div id="array" class="chart"></div>
+  <div id="array_labels" class="cr-legend"></div>
 </div>
 <br /><br />
 
 <div id="aggregations_tab" class="graph_tab">
   <h2>Aggregation Benchmarks</h2>
-  <div id="aggregations" class="chart"></div>
-  <div id="aggregations_labels" class="cr-legend"></div>
   <p id="aggregations_descripton" class="description">
     <b>Benchmarks for <code>GROUP BY</code> aggregations</b>
     <br/>Aggregations group by string value:
     <br /><code>COUNT</code>, <code>MIN</code>, <code>MAX</code>, <code>AVG</code>, <code>COUNT DISTINCT</code>, <code>ARBITRARY</code>
   </p>
+  <div id="aggregations" class="chart"></div>
+  <div id="aggregations_labels" class="cr-legend"></div>
 </div>
 <br /><br />
 
 <div id="joins_tab" class="graph_tab">
   <h2>JOIN Benchmarks</h2>
-  <div id="joins" class="chart"></div>
-  <div id="joins_labels" class="cr-legend"></div>
   <p id="joins_descripton" class="description">
     <span style="color:red;">DISABLED</span>
   </p>
+  <div id="joins" class="chart"></div>
+  <div id="joins_labels" class="cr-legend"></div>
 </div>
 <br /><br />
 
@@ -120,10 +122,8 @@ description: This page shows the results of the Crate benchmarks based on the ma
 </div>
 <br /><br />
 
-<div id="generated_cols_tab" class="bench-tab">
+<div id="generated_cols_tab" class="graph_tab">
   <h2>Generated Columns Benchmarks</h2>
-  <div id="generated_cols" class="chart"></div>
-  <div id="generated_cols_labels" class="cr-legend"></div>
   <p id="generated_cols_descripton" class="description">
     <b>Benchmark for generated columns</b>
     <br />The generated column is the sum of 20 integer columns.
@@ -131,18 +131,20 @@ description: This page shows the results of the Crate benchmarks based on the ma
     <br /><code>UPDATE</code> single column which will update the generated column too
     <br />
   </p>
+  <div id="generated_cols" class="chart"></div>
+  <div id="generated_cols_labels" class="cr-legend"></div>
 </div>
 <br /><br />
 
 <div id="system_tab" class="graph_tab">
   <h2>System Table Benchmarks</h2>
-  <div id="system" class="chart"></div>
-  <div id="system_labels" class="cr-legend"></div>
   <p id="system_descripton" class="description">
     <b>Benchmark for system tables</b>
     <br /><code>SELECT</code> all rows from <code>sys.shards</code> with 1000 available shards
     <br /><code>SELECT</code> all rows from <code>information_schema.tables</code> with 150 tables
   </p>
+  <div id="system" class="chart"></div>
+  <div id="system_labels" class="cr-legend"></div>
 </div>
 <br /><br />
 

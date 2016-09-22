@@ -1172,7 +1172,7 @@ html.w-mod-js *[data-ix="hide-color-logo"] {
 }
 
 .description {
-  margin: 40px 50px 0;
+  margin: 40px 50px;
 }
 
 @media (max-width: 991px) {
