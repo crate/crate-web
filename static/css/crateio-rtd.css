@@ -197,3 +197,12 @@ blockquote {
   max-width: 700px;
   margin: 40px 50px 0;
 }
+
+.cr-legend > span{
+  opacity: 0.6;
+}
+
+.cr-legend > span.highlight{
+  opacity: 1.0;
+  font-size: 1em;
+}
