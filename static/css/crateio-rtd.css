@@ -198,6 +198,12 @@ blockquote {
   margin: 40px 50px 0;
 }
 
+.graph_tab{
+  background-color: #F9F9F9;
+  padding: 15px;
+  border: 1px solid #EEEEEE;
+}
+
 .cr-legend > span{
   opacity: 0.6;
 }
