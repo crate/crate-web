@@ -96,6 +96,10 @@
   function draw(drawDiv) {
     return function(datatable) {
       var valueRange = $(drawDiv).data('value-range') || [0, null];
+      var logscale = $(drawDiv).data('log-scale');
+      if(logscale){
+        valueRange = [1, null];
+      }
       var options = {
         labelsDiv: document.getElementById(datatable.header + '_labels'),
         labels: datatable.labels,
@@ -107,6 +111,7 @@
         ylabel: 'single iteration in seconds',
         interactionModel: Dygraph.Interaction.nonInteractiveModel_,
         errorBars: true,
+        logscale: logscale,
         axes: {
           x: {
             valueFormatter: dateFormat,
