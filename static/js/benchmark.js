@@ -58,7 +58,7 @@
       data.forEach(function(row) {
         var x = row[xSeries];
         if (!(x in datatable)) datatable[x] = {};
-        datatable[x][row[labelName]] = [row[avgSeries], row[stddevSeries]];
+        datatable[x][row[labelName]] = [row[avgSeries]];
       });
 
       rows = Object.keys(datatable).sort().map(function(x) {
@@ -107,10 +107,8 @@
         legend: "always",
         labelsSeparateLines: true,
         colors: colorSchema,
-        errorBars: false,
         ylabel: 'single iteration in seconds',
         interactionModel: Dygraph.Interaction.nonInteractiveModel_,
-        errorBars: true,
         logscale: logscale,
         axes: {
           x: {
@@ -131,9 +129,6 @@
         }
       };
       var chart = new Dygraph(drawDiv, datatable.rows, options);
-      if (['single_ops', 'bulk_ops', 'in_string', 'system'].indexOf(datatable.header) > -1) {
-        chart.updateOptions({ sigma: 0.0 });
-      }
       chart.setAnnotations(createAnnotations(options, releases));
     };
   };

@@ -204,6 +204,22 @@ blockquote {
   border: 1px solid #EEEEEE;
 }
 
+.graph_tab > h2{
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  margin-bottom: 24px;
+  font-family: "Blender Pro", sans-serif;
+}
+
+.graph_tab > h3{
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: .005em;
+  margin-bottom: 20px;
+  font-family: "Blender Pro", sans-serif;
+} 
+
 .cr-legend > span{
   opacity: 0.6;
 }
