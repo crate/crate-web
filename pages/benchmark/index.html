@@ -19,17 +19,20 @@ description: This page shows the results of the Crate benchmarks based on the ma
   and default settings. <code>CRATE_HEAP_SIZE</code> is set to <code>10GB</code>.
 </p>
 
-<div class="cr-nav">
-   <div scroll-to-chart="single_ops" class="cr-nav-item">SINGLE OPS</div>
-   <div scroll-to-chart="bulk_ops" class="cr-nav-item">BULK OPS</div>
-   <div scroll-to-chart="sequence" class="cr-nav-item">SEQUENCE</div>
-   <div scroll-to-chart="array" class="cr-nav-item">ARRAY</div>
-   <div scroll-to-chart="aggregations" class="cr-nav-item">AGGREGATIONS</div>
-   <div scroll-to-chart="joins" class="cr-nav-item">JOINS</div>
-   <div scroll-to-chart="partitions" class="cr-nav-item">PARTITIONS</div>
-   <div scroll-to-chart="generated_cols" class="cr-nav-item">GENERATED COLUMNS</div>
-   <div scroll-to-chart="system" class="cr-nav-item">SYSTEM</div>
+<div class="cr-nav-wrapper">
+  <div class="cr-nav">
+     <div scroll-to-chart="single_ops" class="cr-nav-item">SINGLE OPS</div>
+     <div scroll-to-chart="bulk_ops" class="cr-nav-item">BULK OPS</div>
+     <div scroll-to-chart="sequence" class="cr-nav-item">SEQUENCE</div>
+     <div scroll-to-chart="array" class="cr-nav-item">ARRAY</div>
+     <div scroll-to-chart="aggregations" class="cr-nav-item">AGGREGATIONS</div>
+     <div scroll-to-chart="joins" class="cr-nav-item">JOINS</div>
+     <div scroll-to-chart="partitions" class="cr-nav-item">PARTITIONS</div>
+     <div scroll-to-chart="generated_cols" class="cr-nav-item">GENERATED COLUMNS</div>
+     <div scroll-to-chart="system" class="cr-nav-item">SYSTEM</div>
+  </div>
 </div>
+
 
 <div id="single_ops_tab" class="graph_tab">
   <h2>Single Operation Benchmarks</h2>
@@ -40,7 +43,7 @@ description: This page shows the results of the Crate benchmarks based on the ma
     <br /><code>DELETE</code> deletes row by primary key integer
     <br /><code>UPSERT</code> inserts/updates single rows
   </p>
-  <div id="single_ops" class="chart" data-value-range="[0.8, 1.6]"></div>
+  <div id="single_ops" class="chart"></div>
   <div id="single_ops_labels" class="cr-legend"></div>
 </div>
 <br /><br />
@@ -54,7 +57,7 @@ description: This page shows the results of the Crate benchmarks based on the ma
     <br /><code>DELETE</code> deletes row by primary key integer in bulks of 1000
     <br /><code>UPSERT</code> inserts/updates rows in bulks of 1000
   </p>
-  <div id="bulk_ops" class="chart" data-log-scale="true"></div>
+  <div id="bulk_ops" class="chart" data-log-scale="true" data-value-range="[1, 5000]"></div>
   <div id="bulk_ops_labels" class="cr-legend"></div>
 </div>
 <br /><br />
@@ -117,7 +120,7 @@ description: This page shows the results of the Crate benchmarks based on the ma
     <br />Bulk <code>INSERT</code> that creates a new partition for each inserted row
     <br /><code>INSERT</code> bulk of 1000 items into 100 different existing partitions of a table
   </p>
-  <div id="partitions" class="chart"></div>
+  <div id="partitions" class="chart" data-log-scale="true" data-value-range="[1, 8000]"></div>
   <div id="partitions_labels" class="cr-legend"></div>
 </div>
 <br /><br />
@@ -131,7 +134,7 @@ description: This page shows the results of the Crate benchmarks based on the ma
     <br /><code>UPDATE</code> single column which will update the generated column too
     <br />
   </p>
-  <div id="generated_cols" class="chart"></div>
+  <div id="generated_cols" class="chart" data-log-scale="true" data-value-range="[1, 5000]"></div>
   <div id="generated_cols_labels" class="cr-legend"></div>
 </div>
 <br /><br />

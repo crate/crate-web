@@ -95,9 +95,10 @@
 
   function draw(drawDiv) {
     return function(datatable) {
-      var valueRange = $(drawDiv).data('value-range') || [0, null];
-      var logscale = $(drawDiv).data('log-scale');
-      if(logscale){
+      var elem = $(drawDiv);
+      var valueRange = elem.data('value-range') || [0, null];
+      var logscale = elem.data('log-scale');
+      if(logscale && !elem.data('value-range')){
         valueRange = [1, null];
       }
       var options = {
@@ -137,7 +138,7 @@
   $(window).scroll(function() {
 
     var scrollPosition = $(this).scrollTop();
-    var margin = 150;
+    var margin = 250;
 
     // set header to sticky
     if (scrollPosition > headerPosition) {

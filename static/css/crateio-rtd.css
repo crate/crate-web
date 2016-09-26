@@ -166,8 +166,14 @@ blockquote {
 .cr-nav{
   display: flex;
   overflow-y: scroll;
+  width: 100%;
+  font-weight: 600;
+
 }
 
+.cr-nav-wrapper {
+  overflow-y: hidden;
+}
 .cr-nav.sticky {
   top:0px;
   position: fixed;
@@ -175,7 +181,7 @@ blockquote {
   padding-top: 10px;
   padding-bottom: 10px;
   z-index: 11;
-  width: 100%;
+  width: calc(100% - 20px);;
   overflow-y: scroll;
 
 }
@@ -184,6 +190,7 @@ blockquote {
   padding: 10px 10px 10px 0px;
   margin: 10px 5px 5px 0px;
   font-family: "Blender Pro", sans-serif;
+  white-space: nowrap;
   cursor: pointer;
   font-size: 20px;
 }
@@ -206,7 +213,7 @@ blockquote {
 
 .graph_tab > h2{
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 32px;
   margin-bottom: 24px;
   font-family: "Blender Pro", sans-serif;
