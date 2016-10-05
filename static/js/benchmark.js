@@ -108,7 +108,7 @@
         legend: "always",
         labelsSeparateLines: true,
         colors: colorSchema,
-        ylabel: 'single iteration in seconds',
+        ylabel: 'single iteration in milliseconds',
         interactionModel: Dygraph.Interaction.nonInteractiveModel_,
         logscale: logscale,
         axes: {
