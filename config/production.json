@@ -52,7 +52,7 @@
     "stable_version": "0.55.5",
     "es_stable_version": "2.3.4",
     "stable_version_date": "September 20th, 2016",
-    "testing_version": "0.56.0",
+    "testing_version": "0.56.1",
     "es_testing_version": "2.3.4"
   }
 }
