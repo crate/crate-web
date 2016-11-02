@@ -4,13 +4,58 @@ author: Chris Ward
 
 ## Compatibility
 
-Each major version of the Crate JDBC driver is bound to a major version
-of Crate. Find out which drivers are compatible to your Crate version with this [compatibility list](https://github.com/crate/crate-jdbc#compatibility).
+### Crate JDBC driver version 1.x.x:
+
+Crate JDBC driver **1.x.x** requires a Crate version greater or equal than
+**0.38.0** but lower than **0.56.0**. Each major version of the driver is bound
+to the major version of Crate. Below, you can see the compatibility table
+for the JDBC driver version **1.x.x**:
+
+    | Crate JDBC driver | Crate  |
+    |-------------------|--------|
+    | 1.8.X             | 0.49.X |
+    | 1.9.X             | 0.51.X |
+    | 1.10.X            | 0.54.X |
+    | 1.11.X            | 0.54.X |
+    | 1.12.X            | 0.54.X |
+    | 1.13.X            | 0.55.X |
+
+### Crate JDBC driver version 2.x.x
+
+Version **2.x.x** of the Crate JDBC driver uses the
+[PostgreSQL Wire Protocol](https://www.postgresql.org/docs/current/static/protocol.html).
+Therefore, the Crate JDBC driver must use the postgres service port in the
+connection string. For more information, see Crate postgres
+[wire protocol documentation](https://crate.io/docs/reference/en/latest/protocols/postgres.html).
+
+Starting from the Crate version **0.56.0** it is the recommended way to
+connect to Crate server. The Crate JDBC driver version **2.x.x** is currently
+available via [Jitpack](https://jitpack.io/#crate/crate-jdbc). Please, see the
+documentation for the [Crate JDBC driver](https://crate.io/docs/reference/jdbc/en/2.0/).
+
+    | Crate JDBC driver | Crate  | Note                                                                                       |
+    |-------------------|--------|--------------------------------------------------------------------------------------------|
+    | 2.x.x             | 0.56.x | The *psql.enabled* must be set to *true*. The *prepareThreshold* property must be set to 0 |
+    | 2.x.x             | 0.57.x |                                                                                            |
+
+#### Differences to version 1.x.x:
+
+- The [connection string](https://jdbc.postgresql.org/documentation/80/connect.html)
+  changed to the same format as PostgreSQL JDBC, which means that setting the
+  default schema with the connection string is not supported. Use
+  *setDefaultSchema()* instead.
+- Support for the experimental ``showsubcolumns`` parameter has been dropped.
+
 
 ## Add Crate to your Project
-A simple way to configure your project to connect to a Crate cluster is to visit the JDBC driver page on [Bintray](https://bintray.com/crate/crate/crate-jdbc/view) and click the *Set Me Up* button. This will give you a Maven or Gradle configuration that can be pasted into your current project or downloaded for a new project.
+A simple way to configure your project to connect to a Crate cluster is to
+visit the JDBC driver page on [Bintray](https://bintray.com/crate/crate/crate-jdbc/view)
+and click the *Set Me Up* button. This will give you a Maven or Gradle
+configuration that can be pasted into your current project or downloaded for a
+new project.
 
-For manual configuration follow these steps depending on your build system of choice.
+For manual configuration follow these steps depending on your build system
+of choice.
 
 ### Maven
 Add the following to your *pom.xml* file:
@@ -67,7 +112,10 @@ Connection conn = DriverManager.getConnection("crate://SERVER_IP:4300");
 
 ## Want to Know More?
 - More detailed documentation on the Crate JDBC client is available [here](/docs/reference/jdbc).
-- The **Crate Sample App** demonstrates features of Crate and [how to use them in a JDBC based application](https://github.com/crate/crate-sample-apps/tree/master/java) with an explanation of how the library is used [here](https://github.com/crate/crate-sample-apps/blob/master/java/documentation.md).
+- The **Crate Sample App** demonstrates features of Crate and
+[how to use them in a JDBC based application](https://github.com/crate/crate-sample-apps/tree/master/java)
+with an explanation of how the library is used
+[here](https://github.com/crate/crate-sample-apps/blob/master/java/documentation.md).
 
 ## Next Steps
 
