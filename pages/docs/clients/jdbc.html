@@ -61,13 +61,11 @@ Add Crate as a dependency to your Gradle file:
 ```
 
 ## Connect to Crate
-The Crate JDBC driver class is `io.crate.client.jdbc.CrateDriver`.
 
 Connect to Crate Cluster with the Java DriverManager:
 
 ```java
-Class.forName("io.crate.client.jdbc.CrateDriver");
-Connection conn = DriverManager.getConnection("crate://SERVER_IP:5432");
+Connection conn = DriverManager.getConnection("crate://SERVER_IP:5432/");
 ```
 
 ## Want to Know More?
