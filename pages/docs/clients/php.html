@@ -1,7 +1,7 @@
-title: Connecting to Crate with PHP
+title: Connecting to CrateDB with PHP
 author: Chris Ward
 
-Crate supports integration with the [PDO](http://php.net/manual/en/intro.pdo.php) and [DBAL](http://www.doctrine-project.org/projects/dbal.html) data abstraction layers.
+CrateDB supports integration with the [PDO](http://php.net/manual/en/intro.pdo.php) and [DBAL](http://www.doctrine-project.org/projects/dbal.html) data abstraction layers.
 
 ## PDO
 ### Install Driver
@@ -10,14 +10,14 @@ Install the driver by adding a dependency to your *composer.json* file:
 ```json
 {
   "require": {
-    "crate/crate-pdo":"~0.5.1"
+    "crate/crate-pdo":"~0.6.0"
   }
 }
 ```
 
 And install with `composer intall`.
 
-### Connect to Crate
+### Connect to CrateDB
 To connect to your cluster, Crate follows standard PDO syntax to form a data source name string ([dsn](https://en.wikipedia.org/wiki/Data_source_name)) and then connect to it.
 
 ```php
@@ -28,7 +28,7 @@ $dsn = 'crate:SERVER_IP:4200';
 $connection = new PDO($dsn, null, null, null);
 ```
 
-As Crate doesn't support authentication, the other parameters can be left null.
+As CrateDB doesn't support authentication, the other parameters can be left null.
 
 ## DBAL
 ### Install Driver
@@ -37,12 +37,12 @@ Install the driver by adding a dependency to your *composer.json* file:
 ```json
 {
   "require": {
-    "crate/crate-dbal":"~0.2.1"
+    "crate/crate-dbal":"~0.3.0"
   }
 }
 ```
 
-And install with `composer intall`.
+And install with `composer install`.
 
 ### Connect to Crate
 To connect to your cluster, Crate follows standard [DBAL syntax](http://doctrine-orm.readthedocs.org/projects/doctrine-dbal/en/latest/reference/configuration.html) to create an array of parameters and then create a connection.
@@ -64,7 +64,7 @@ If you are using Doctrine's ORM features, then an extra dependency is needed in 
 ```json
 {
   "require": {
-    "crate/crate-dbal":"~0.2.1",
+    "crate/crate-dbal":"~0.3.0",
     "doctrine/orm": "*"
   }
 }
