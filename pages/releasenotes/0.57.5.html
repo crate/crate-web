@@ -1,0 +1,38 @@
+title: Stable Release 0.57.5
+link: https://crate.io/releasenotes/0.57.5.html
+author: Crate.IO
+created: 2016-12-06
+post_name: 0.57.5
+status: publish
+post_type: releasenote
+category: developernews
+description: Official release notes for Crate release 0.57.5.
+
+
+# Crate 0.57.5
+
+06 Dec 2016
+
+
+ - Fixed a rare race condition that could happen on select queries during a
+    shard relocation leading to a `ArrayIndexOutOfBoundsException` or a wrong
+    result.
+    
+
+ - Fix: Creating new partitions could have failed in case the partitioned table
+    was created prior to CrateDB version ``0.55.0`` and the table contained a
+    ``object`` column.
+    
+
+ - Fixed issue in joins with 3 or more tables where limit was applied
+    before `where` clause filtering which produced  wrong results.
+    
+
+ - Fixed runtime error handling which could cause queries to get stuck
+    on failures.
+    
+
+ - Fixed issue which causes ``BETWEEN`` to return a wrong result if
+    ``min`` or ``max`` is null.
+    
+
