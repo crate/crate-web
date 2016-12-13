@@ -48,9 +48,9 @@
     "keywords": "crate database db distributed cloud docker download",
     "id_segment": "qio2kmx6lv",
     "id_facebook": "555437424606586",
-    "stable_version": "0.57.5",
+    "stable_version": "0.57.6",
     "es_stable_version": "2.4.1",
-    "stable_version_date": "December 7th, 2016",
+    "stable_version_date": "December 13th, 2016",
     "testing_version": "1.0.0",
     "es_testing_version": "2.4.2"
   }
