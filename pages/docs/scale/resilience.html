@@ -214,7 +214,13 @@ The risk window depends on your [ping configuration](https://www.elastic.co/guid
 
 #### Scenario
 
-A shard is relocated and then elected as the new primary, as two separate but sequential actions. Relocating a shard means creating a new shard and then deleting the old shard. There is a small risk window during which the new shard can find out it has been elected as the new primary before the old shard notices it is no longer the primary.
+During a primary handover, there is a small risk window when a shard can find out it has been elected as the new primary before the old primary shard notices that it is no longer the primary.
+
+A primary handover can happen in the following scenarios:
+
+- A shard is relocated and then elected as the new primary, as two separate but sequential actions. Relocating a shard means creating a new shard and then deleting the old shard.
+
+- An existing replica shard gets promoted to primary because the primary shard was partitioned from the cluster.
 
 #### Consequence
 
