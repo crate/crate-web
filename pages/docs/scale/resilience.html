@@ -13,7 +13,11 @@ Thankfully, for most use-cases, if you follow best practices, you are extremely 
 
 ![](/static/images/resilience-status.png)
 
-The Admin UI in CrateDB has a status indicator which can be used to determine the stability and health of a cluster. A green status indicates that all shards have been replicated, are available, and are not being relocated. This is the lowest risk status for a cluster. The status will turn yellow when there is an elevated risk of encountering issues, due to a network failure or the failure of a node in the cluster. The status is updated every few seconds (variable on your cluster [ping configuration](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-zen.html)).
+The Admin UI in CrateDB has a status indicator which can be used to determine the stability and health of a cluster.
+
+A green status indicates that all shards have been replicated, are available, and are not being relocated. This is the lowest risk status for a cluster. The status will turn yellow when there is an elevated risk of encountering issues, due to a network failure or the failure of a node in the cluster.
+
+The status is updated every few seconds (variable on your cluster [ping configuration](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-zen.html)).
 
 ### Storage and Consistency
 
@@ -21,7 +25,7 @@ Code that expects the behavior of an [ACID](https://en.wikipedia.org/wiki/ACID) 
 
 CrateDB does not support ACID transactions, but instead has [atomic operations](https://crate.io/docs/reference/architecture/storage_consistency.html#atomic-on-document-level) and [eventual consistency](https://crate.io/docs/reference/architecture/shared_nothing.html) at the row level. Eventual consistency is the trade-off that CrateDB makes in exchange for high-availability that can tolerate most hardware and network failures. So you may observe data from different cluster nodes temporarily falling very briefly out-of-sync with each other, although over time they will become consistent.
 
-For example, you can be sure a row has been written as soon as you get the `INSERT OK` message, but that row might not be read back by a subsequent `SELECT` on a different node in the cluster until after a [table refresh](https://crate.io/docs/reference/sql/refresh.html#refresh-data) (which typically occurs within one second or less).
+For example, you know a row has been written as soon as you get the `INSERT OK` message. But that row might not be read back by a subsequent `SELECT` on a different node until after a [table refresh](https://crate.io/docs/reference/sql/refresh.html#refresh-data) (which typically occurs within one second).
 
 Your applications should be designed to work this storage and consistency model.
 
@@ -37,9 +41,17 @@ Here are some considerations:
 * If availability is a concern, you can add [nodes across multiple zones](https://crate.io/docs/scale/multi_zone_setup/) (e.g. different data centers or geographical regions). The more available your CrateDB cluster is, the more likely it is to withstand external failures like a zone going down.
 * If data durability or read performance is a concern, you can increase the number of [table replicas](https://crate.io/docs/reference/architecture/storage_consistency.html#data-storage). More table replicas means a smaller chance of permanent data loss due to hardware failures, in exchange for the use of more disk space and more intra-cluster network traffic.
 * If disaster recovery is important, you can [take regular snapshots](https://crate.io/docs/reference/en/latest/sql/snapshot_restore.html) and store those snapshots in cold storage. This safeguards data that has already been successfully written and replicated across the cluster.
-* CrateDB works well as part of a [data pipeline](https://crate.io/docs/tools/streamsets/), especially if you’re working with high-volume data. If you have a message queue in front of CrateDB, you can configure it with backups and replay the data flow for a specific timeframe. This can be used to recover from issues that affect your data before it has been successfully written and replicated across the cluster. Indeed, this is the generally recommended way to recover from any of the rare consistency or data-loss issues you might encounter when CrateDB experiences network or hardware failures (see "Known Issues" below).
+* CrateDB works well as part of a [data pipeline](https://crate.io/docs/tools/streamsets/), especially if you’re working with high-volume data. If you have a message queue in front of CrateDB, you can configure it with backups and replay the data flow for a specific timeframe. This can be used to recover from issues that affect your data before it has been successfully written and replicated across the cluster.
+
+  Indeed, this is the generally recommended way to recover from any of the rare consistency or data-loss issues you might encounter when CrateDB experiences network or hardware failures (see next section).
 
 ## Known Issues
+
+CrateDB started of as a fork of Elasticsearch, but over time we have gradually rewritten large parts of it. And while the execution layer is now completely unique to CrateDB, the data distribution and replication is still managed by Elasticsearch.
+
+Most of the known issues that relate to resiliency [exist in the Elasticsearch layer](https://www.elastic.co/guide/en/elasticsearch/resiliency/current/).
+
+Fortunately, most of these issues are fixed in the Elasticsearch 5.x release line. We are working on updating CrateDB to use Elasticsearch 5.x and hope to have it ready in the first quarter of 2017.
 
 ### Repeated Cluster Partitions Can Cause Lost Cluster Updates
 
@@ -65,7 +77,6 @@ Here are some considerations:
     <td>All</td>
   </tr>
 </table>
-
 
 #### Scenario
 
@@ -101,7 +112,6 @@ Cluster state is very important and contains information like shard location, sc
     <td>Non-Idempotent writes</td>
   </tr>
 </table>
-
 
 #### Scenario
 
@@ -142,7 +152,6 @@ For example:
   </tr>
 </table>
 
-
 #### Scenario
 
 A client is writing to a primary shard. The node holding the primary shard is partitioned from the cluster. It usually takes between 30 and 60 seconds (depending on [ping configuration](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-zen.html)) before the master node notices the partition. During this time, the same row is updated on both the primary shard (partitioned) and a replica shard (not partitioned).
@@ -175,7 +184,6 @@ There are two different versions of the same row using the same version number. 
     <td>Writes on replicated table</td>
   </tr>
 </table>
-
 
 #### Scenario
 
@@ -251,7 +259,6 @@ Writes that occur on the new primary during the risk window will not be replicat
   </tr>
 </table>
 
-
 #### Scenario
 
 A node with a primary that contains new data is partitioned from the cluster.
@@ -285,7 +292,6 @@ CrateDB prefers old data over no data, and so promotes an a shard with stale dat
   </tr>
 </table>
 
-
 #### Scenario
 
 If a master has lost quorum (i.e. the number of nodes it is in communication with has fallen below the configured minimum) it should step down as master and stop answering requests to perform cluster updates. There is a small risk window between losing quorum and noticing that quorum has been lost, depending on your [ping configuration](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-zen.html).
@@ -295,11 +301,3 @@ If a master has lost quorum (i.e. the number of nodes it is in communication wit
 If a cluster update request is made to the node between losing quorum and noticing the loss of quorum, that request will be confirmed. However, those updates will be lost because the node will not be able to perform a successful cluster update.
 
 Cluster state is very important and contains information like shard location, schemas, and so on. Lost cluster state updates can cause data loss, reset settings, and problems with table structures.
-
-## CrateDB and Elasticsearch
-
-CrateDB started of as a fork of Elasticsearch, but over time we have gradually rewritten large parts of it. And while the execution layer is now completely unique to CrateDB, the data distribution and replication is still managed by Elasticsearch.
-
-Most of the known issues that relate to resiliency [exist in the Elasticsearch layer](https://www.elastic.co/guide/en/elasticsearch/resiliency/current/).
-
-Fortunately, most of these issues are fixed in the Elasticsearch 5.x release line. We are working on updating CrateDB to use Elasticsearch 5.x and hope to have it ready in the first quarter of 2017.
