@@ -1,9 +1,0 @@
-{% if CONFIG.robots %}
-User-agent: *
-Disallow:
-
-Sitemap: {{ CONFIG.site }}/sitemap-index.xml
-{% else %}
-User-agent: *
-Disallow: /
-{% endif %}
