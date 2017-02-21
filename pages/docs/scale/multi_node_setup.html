@@ -39,16 +39,8 @@ transport.tcp.port: 4350-4360
 Crate binds to a second port, *4200*, that is only used for HTTP communication. Clients connecting to the Crate cluster are using this HTTP port, except the native Java client, which uses the transport port.
 
 ## Node Discovery
-Crate's discovery mechanism uses multicast by default. If you run your cluster on your own network (with multicast enabled), with no further configuration nodes will discover each other automatically and join the cluster.
 
-### Unicast Discovery
-Some environments do **not** support multicast, e.g. Amazon EC2, Google Compute Engine and Docker. If you want to deploy a cluster on these environments, disable multicast and use unicast by setting the `multicast.enabled` parameter to `false`:
-
-```yaml
-discovery.zen.ping.multicast.enabled: false
-```
-
-Then provide the list of hosts that used for unicast, using the FQDN and transport port (assuming the default port of *4300*):
+The simplest way to do node discovery is to provide a list of expected hosts, using the FQDN and transport port:
 
 ```yaml
 discovery.zen.ping.unicast.hosts:
@@ -70,6 +62,10 @@ discovery.zen.ping.unicast.hosts:
 <span class="first admonition-title">Note</span>
 <span>When adding new nodes to the cluster, you do not need to update the list of unicast hosts for existing/running nodes. The cluster will find and add new nodes when they ping existing ones.</span>
 </span>
+
+Providing a list of expected hosts is just one node discovery mechanism.
+
+CrateDB also supports node discovery via DNS as well as discovery via API for clusters running on *Amazon Web Services* (AWS) or Microsoft Azure. See [the documentation](https://crate.io/docs/reference/configuration.html#discovery) for more information.
 
 ## Master Node Election
 Although all Crate nodes in a cluster are equal, one node is elected as master for managing cluster meta data. Like any other peer-to-peer system, nodes communicate with each other directly. The master node is responsible for making changes to, publishing the global cluster state, and delegating redistribution of shards when nodes join or leave the cluster. All nodes are eligible to become master.

@@ -49,7 +49,6 @@ spec:
         command:
           - /docker-entrypoint.sh
           - -Des.cluster.name=${CLUSTER_NAME}
-          - -Des.multicast.enabled=false
           - -Des.discovery.type=srv
           - -Des.discovery.zen.minimum_master_nodes=2
           - -Des.gateway.recover_after_nodes=2

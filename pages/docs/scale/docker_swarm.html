@@ -98,7 +98,6 @@ $ docker service create \
     --mount type=bind,source=/tmp,target=/data \
   crate:latest \
     crate \
-    -Des.discovery.zen.ping.multicast.enabled=false \
     -Des.discovery.zen.ping.unicast.hosts=crate \
     -Des.gateway.expected_nodes=3 \
     -Des.discovery.zen.minimum_master_nodes=2 \
@@ -127,7 +126,6 @@ define the endpoint mode to be 'dnsrr' (DNS round robin - the dns entry 'crate' 
 ```bash
   crate:latest \
     crate \
-    -Des.discovery.zen.ping.multicast.enabled=false \
     -Des.discovery.zen.ping.unicast.hosts=crate \
     -Des.gateway.expected_nodes=3 \
     -Des.discovery.zen.minimum_master_nodes=2 \
@@ -136,7 +134,6 @@ define the endpoint mode to be 'dnsrr' (DNS round robin - the dns entry 'crate' 
 ```
 This part is the same for many Docker deployments of Crate:
 
-  - *Multicast:* disabled since it's not supported on the overlay networks
   - *Unicast hosts:* the Docker DNS record 'crate' (the service name) maps an IP address to the service name and let's the nodes discover each other
   - *Quorum parameters:*  since we are working with a 3-node cluster, the `expected_nodes`, `minimum_master_nodes`, and `recover_after_nodes` are [set accordingly][1]
   - *Set Crate's network binding:* the last line tells Crate to explicitly listen and bind to the IPv4 address of `eth0` (check if this is your `crate-network` NIC); required to work around container networking magic

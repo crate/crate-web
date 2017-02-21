@@ -29,7 +29,7 @@ Add a rule for each port:
 ![Create New Security Group]({% media '/media/1603/azure_inbound_rules.png' %})
 
 ### Create a Virtual Network
-To create a cluster of Crate nodes on some cloud hosting providers, Crate relies on unicast for inter-node communication, as multicast may not be available.
+To create a cluster of Crate nodes on some cloud hosting providers, Crate relies on unicast for inter-node communication.
 
 The easiest way to get Unicast communication working with Azure is to create a Virtual Network (*+ -> Networking -> Virtual Network*) so that all the cluster nodes exist on the same IP range. Give the network a name, a region and let Azure handle all the remaining settings by clicking the next arrow on each screen.
 
@@ -60,8 +60,6 @@ To set the Unicast hosts for the Crate cluster we change the default configurati
 Uncomment / add these lines:
 
 ```yaml
-discovery.zen.ping.multicast.enabled: false
-
 discovery.zen.ping.unicast.hosts:
       - internal-ip-address:4300
       - internal-ip-address:4300
@@ -69,7 +67,7 @@ discovery.zen.ping.unicast.hosts:
 
 <span class="admonition note">
 <span class="first admonition-title">Note</span>
-<span>You might want to try DNS based discovery for inter-node documentation, [find more details](/docs/reference/configuration.html#discovery-via-dns) in our documentation.</span>
+<span>You might want to try DNS based discovery for inter-node communication, [find more details](/docs/reference/configuration.html#discovery-via-dns) in our documentation.</span>
 </span>
 
 Uncomment and set the cluster name

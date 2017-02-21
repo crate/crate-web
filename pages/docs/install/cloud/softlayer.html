@@ -108,7 +108,6 @@ network:
   tcp:
     connect_timeout: 60s
 discovery.zen.minimum_master_nodes: 2
-discovery.zen.ping.multicast.enabled: false
 discovery.zen.ping.unicast.hosts:
 {%- for server, addrs in salt['mine.get']('*', 'network.ip_addrs').items() %}
 {% if server.startswith("sl") %}  - {{ addrs[0] }}:4300{% endif -%}{% endfor %}
