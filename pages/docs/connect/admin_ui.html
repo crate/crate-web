@@ -10,29 +10,23 @@ To Connect to Crate Cluster, open the following url:
 
 `SERVER_IP` is the publicly accessible IP address of any node in the Crate cluster.
 
-![Crate Admin UI]({% media '/media/1512/admin_ui.png' %})
+<img src="/static/images/admin_ui.png">
 
 ## Admin UI Features
 ### Overview Bar and Tab
-![Crate Admin UI Nav Bar]({% media '/media/1512/admin_ui_infobar.png' %})
+<img src="/static/images/status_bar.png">
 
 At the top of the browser window is overview information about the cluster that shows, from left to right:
 
 - The name of the cluster, find out [how to change its value our configuration documentation](https://crate.io/docs/reference/configuration.html#cluster-name)
 - The version of Crate that the cluster is running.
-- The number of nodes in the cluster.
 - The health of the data in the cluster. Green indicates that all data is replicated and available, yellow that there are unreplicated records and red that data is unavailable.
 - Potential configuration problems and recommendations for the cluster.
 - Average cluster load over the past 1, 5 and 15 minutes.
-- Link to Crate documentation.
-- Latest news from Crate.
+- Settings menu that allows you to update the language settings and provides a link to the CrateDB documentation and the latest CrateDB news.
 
 The overview tab displays similar information to the bar but with more details on data availability, cluster load and problems.
-
-On the left hand side of the window you will see four further tabs.
-
-### Get Started Tab
-Provides an easy way to import the latest tweets from Twitters public timeline for a data set to experiment with.
+On the left side of the window there are five further tabs.
 
 ### Console Tab
 An interactive terminal to try querying data sets and view the results.
@@ -42,6 +36,12 @@ Gives an overview of document and blob tables present in the Crate cluster. This
 
 ### Cluster Tab
 Provides an overview of nodes in the cluster including details such as load, CPU usage, shards on the node and hostname.
+
+### Monitoring Tab
+Gives an overview of the average number and speed of CrateDB queries (`SELECT`, `INSERT`, `UPDATE` and `DELETE`). Please note that this feature is only available in the [Enterprise Edition](https://crate.io/pricing/) of CrateDB. 
+
+### Get Started Tab
+Provides an easy way to import the latest tweets from the Twitter public timeline for a data set to experiment with.
 
 ## Next Steps
 
