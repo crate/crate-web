@@ -114,6 +114,12 @@ detail information on how to set the offset value and column see the StreamSets
 [documentation][15].
 ![Configure the Crate JDBC driver]({% media '/media/1605/3-streamsets-source-jdbc.png' %})
 
+**IMPORTANT**
+
+> To avoid unsupported transaction setting queries that may be invoked against
+> CrateDB, it is necessary to uncheck **Enforce Read-only Connection** on the
+> advanced tab of the JDBC consumer.
+
 2. We stream the records from Crate to CSV files. In order to accomplish that
 we provide the path where the files are going to be created and set the output
 file format in the directory origin to *Delimited*.
