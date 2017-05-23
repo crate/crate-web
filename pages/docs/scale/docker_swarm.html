@@ -98,11 +98,11 @@ $ docker service create \
     --mount type=bind,source=/tmp,target=/data \
   crate:latest \
     crate \
-    -Des.discovery.zen.ping.unicast.hosts=crate \
-    -Des.gateway.expected_nodes=3 \
-    -Des.discovery.zen.minimum_master_nodes=2 \
-    -Des.gateway.recover_after_nodes=2 \
-    -Des.network.bind=_eth0:ipv4_
+    -Cdiscovery.zen.ping.unicast.hosts=crate \
+    -Cgateway.expected_nodes=3 \
+    -Cdiscovery.zen.minimum_master_nodes=2 \
+    -Cgateway.recover_after_nodes=2 \
+    -Cnetwork.bind=_eth0:ipv4_
 ```
 
 There are several things that need explanation in there:
@@ -126,11 +126,11 @@ define the endpoint mode to be 'dnsrr' (DNS round robin - the dns entry 'crate' 
 ```bash
   crate:latest \
     crate \
-    -Des.discovery.zen.ping.unicast.hosts=crate \
-    -Des.gateway.expected_nodes=3 \
-    -Des.discovery.zen.minimum_master_nodes=2 \
-    -Des.gateway.recover_after_nodes=2 \
-    -Des.network.bind=_eth0:ipv4_
+    -Cdiscovery.zen.ping.unicast.hosts=crate \
+    -Cgateway.expected_nodes=3 \
+    -Cdiscovery.zen.minimum_master_nodes=2 \
+    -Cgateway.recover_after_nodes=2 \
+    -Cnetwork.bind=_eth0:ipv4_
 ```
 This part is the same for many Docker deployments of Crate:
 

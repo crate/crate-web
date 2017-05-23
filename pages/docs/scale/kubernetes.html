@@ -48,12 +48,12 @@ spec:
         image: crate:latest
         command:
           - /docker-entrypoint.sh
-          - -Des.cluster.name=${CLUSTER_NAME}
-          - -Des.discovery.type=srv
-          - -Des.discovery.zen.minimum_master_nodes=2
-          - -Des.gateway.recover_after_nodes=2
-          - -Des.gateway.expected_nodes=${EXPECTED_NODES}
-          - -Des.discovery.srv.query=_cluster._tcp.crate-discovery.default.svc.cluster.local
+          - -Ccluster.name=${CLUSTER_NAME}
+          - -Cdiscovery.type=srv
+          - -Cdiscovery.zen.minimum_master_nodes=2
+          - -Cgateway.recover_after_nodes=2
+          - -Cgateway.expected_nodes=${EXPECTED_NODES}
+          - -Cdiscovery.srv.query=_cluster._tcp.crate-discovery.default.svc.cluster.local
         volumeMounts:
             - mountPath: /data
               name: data
@@ -120,7 +120,7 @@ Now to monitor the available pods you can use `kubectl proxy` which starts a web
 
 ### Customize Crate
 
-In this template, Crate is configured using the `-D` parameters for the executable. Every setting in [Crate's YAML config](https://crate.io/docs/reference/configuration.html) is available there and allows for a better flexibility than passing around config files.
+In this template, Crate is configured using the `-C` parameters for the executable. Every setting in [Crate's YAML config](https://crate.io/docs/reference/configuration.html) is available there and allows for a better flexibility than passing around config files.
 
 ### Storage
 

@@ -27,7 +27,7 @@ ExecStart=/usr/bin/docker run \
     --volume /data/crate:/data \
     crate/crate \
     /crate/bin/crate \
-    -Des.node.name=%p%i \
+    -Cnode.name=%p%i \
 
 ExecStop=/usr/bin/docker stop %p-%i
 ExecStop=/usr/bin/docker rm %p-%i
