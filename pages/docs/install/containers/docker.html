@@ -47,8 +47,9 @@ The above is a simple example, to make better use of Crate with Docker, we shoul
 ```bash
 docker run -d -p 4200:4200 -p 4300:4300
   -v <data-dir>:/data crate
-  crate -Cconfig=/path/to/crate.yml
+  crate -Cpath.conf=/path/to/crate/conf
         -Ccluster.name=cluster
+        -Cnetwork.bind_host=_site_
 ```
 
 This starts a Crate Docker instance that maps the data storage path to a location shared between the Docker container and the host system (The value of `<data-dir>`). This helps data remain consistent and persistent as container instances come and go on a local machine.
@@ -74,7 +75,7 @@ crate:
     - /mnt/data/crate:/data
   environment:
     CRATE_HEAP_SIZE: 16g
-  command: crate -Cconfig=/path/to/crate.yml -Ccluster.name=cluster
+  command: crate -Cpath.conf=/path/to/crate/conf -Ccluster.name=cluster -Cnetwork.bind_host=_site_
 crate2:
   image: crate
   volumes:
