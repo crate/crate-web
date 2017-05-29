@@ -30,16 +30,16 @@ Click on the *Stacks* tab, then the green *Create your first stack* button. Give
 ```yaml
 crate1:
   image: 'crate:latest'
-  command: 'crate -Cnetwork.bind_host=_site_ -Cnetwork.publish_host=_ethwe:ipv4_'
+  command: 'crate -Cnetwork.bind_host=_eth0:ipv4_ -Cnetwork.publish_host=_ethwe:ipv4_'
   ports:
     - '4200:4200'
     - '4300:4300'
 crate2:
   image: 'crate:latest'
-  command: 'crate -Cnetwork.bind_host=_site_ -Cnetwork.publish_host=_ethwe:ipv4_'
+  command: 'crate -Cnetwork.bind_host=_eth0:ipv4_ -Cnetwork.publish_host=_ethwe:ipv4_'
 crate3:
   image: 'crate:latest'
-  command: 'crate -Cnetwork.bind_host=_site_ -Cnetwork.publish_host=_ethwe:ipv4_'
+  command: 'crate -Cnetwork.bind_host=_eth0:ipv4_ -Cnetwork.publish_host=_ethwe:ipv4_'
 ```
 
 This creates three instances of Crate, all using the 'latest' tagged Docker image. One sets ports manually and the others use dynamic port allocation. Finally, we change the default [publish_host](/docs/stable/configuration.html#conf-hosts). We do this because Docker Cloud has default support for Weave, which allows for seamless cross machine communication through its overlay network. However, Weave requires Crate to publish on a different interface to its default and this is how we accomplish this.
