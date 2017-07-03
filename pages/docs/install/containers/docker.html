@@ -49,7 +49,7 @@ docker run -d -p 4200:4200 -p 4300:4300
   -v <data-dir>:/data crate
   crate -Cpath.conf=/path/to/crate/conf
         -Ccluster.name=cluster
-        -Cnetwork.bind_host=_site_
+        -Cnetwork.host=_site_
 ```
 
 This starts a Crate Docker instance that maps the data storage path to a location shared between the Docker container and the host system (The value of `<data-dir>`). This helps data remain consistent and persistent as container instances come and go on a local machine.
@@ -66,20 +66,27 @@ Docker's [Compose](https://docs.docker.com/compose/) tool allows developers to c
 Read about Docker Compose specifics [here](https://docs.docker.com/compose/). In this example we will start a node.js container that connects to a two instance Crate cluster.
 
 ```yaml
-crate:
+crate01:
   image: crate
   ports:
     - "4200:4200"
     - "4300:4300"
   volumes:
-    - /mnt/data/crate:/data
+    - /mnt/data/crate01:/data
   environment:
     CRATE_HEAP_SIZE: 16g
-  command: crate -Cpath.conf=/path/to/crate/conf -Ccluster.name=cluster -Cnetwork.bind_host=_site_
-crate2:
+  command: crate -Cpath.conf=/path/to/crate/conf -Ccluster.name=cluster -Cnetwork.host=_site_
+crate02:
   image: crate
+  ports:
+    - "4201:4200"
+    - "4301:4300"
   volumes:
-    - /mnt/data/crate:/data
+    - /mnt/data/crate02:/data
+  environment:
+    CRATE_HEAP_SIZE: 16g
+  command: crate -Ccluster.name=cluster -Cnetwork.host=_site_ -Cdiscovery.zen.ping.unicast.hosts=crate01
+
 node:
   build: .
   ports:
