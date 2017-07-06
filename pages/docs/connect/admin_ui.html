@@ -43,6 +43,22 @@ Gives an overview of the average number and speed of CrateDB queries (`SELECT`, 
 ### Get Started Tab
 Provides an easy way to import the latest tweets from the Twitter public timeline for a data set to experiment with.
 
+
+## Admin UI User Privileges
+
+When the [Enterprise Edition](https://crate.io/pricing/), and the [User Management](https://crate.io/docs/reference/en/latest/configuration.html#host-based-authentication) are enabled, the user of the Admin UI which is configured via the `auth.trust.http_default_user` setting, needs to be granted the following [privileges](https://crate.io/docs/reference/en/latest/sql/administration/privileges.html):
+
+- DQL on sys.shards table
+- DQL on sys.nodes table
+- DQL on sys.node_checks table
+- DQL sys.checks table
+- DQL sys.cluster table
+- DQL on information_schema.table_partitions table
+- DQL on information_schema.columns table
+- DDL on doc schema
+- DQL on sys.jobs_log table
+
+
 ## Next Steps
 
 - [Import Data](/docs/import)
